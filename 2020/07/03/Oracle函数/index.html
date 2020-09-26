@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    oracle函数 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  oracle函数
+  ">
+  
+  <meta name="author" content="樊同学">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 62 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 29 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1593768055000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1593768055000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>oracle函数</h1>
+    <p>[TOC]</p>
+<h2 id="1，case-when用法"><a href="#1，case-when用法" class="headerlink" title="1，case when用法"></a>1，case when用法</h2><p>从表中根据时间点不同查询出活动的状态。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> t.*,(<span class="keyword">case</span> <span class="keyword">when</span> (t.start_date &lt;= <span class="keyword">sysdate</span> <span class="keyword">and</span> t.end_date &gt;= <span class="keyword">sysdate</span>)<span class="keyword">then</span> <span class="string">&#x27;报名中&#x27;</span></span><br><span class="line">          <span class="keyword">when</span>  t.fw_date_z &lt; <span class="keyword">sysdate</span> <span class="keyword">then</span> <span class="string">&#x27;已结束&#x27;</span></span><br><span class="line">          <span class="keyword">when</span> (t.fw_date &lt;= <span class="keyword">sysdate</span> <span class="keyword">and</span> t.fw_date_z &gt;= <span class="keyword">sysdate</span>)<span class="keyword">then</span> <span class="string">&#x27;进行中&#x27;</span></span><br><span class="line">          <span class="keyword">when</span> (t.fw_date_z <span class="keyword">is</span> <span class="literal">null</span> <span class="keyword">and</span> t.fw_date &lt; <span class="keyword">sysdate</span>) <span class="keyword">then</span> <span class="string">&#x27;已结束&#x27;</span></span><br><span class="line">          <span class="keyword">else</span> <span class="string">&#x27;进行中&#x27;</span> <span class="keyword">end</span>)<span class="keyword">as</span> hdzt,</span><br><span class="line">        (<span class="keyword">select</span> b.fczs_id <span class="keyword">from</span> zyfw_fczs b <span class="keyword">where</span> b.zyfw_id = t.zyfw_id <span class="keyword">and</span> <span class="keyword">rownum</span>=<span class="number">1</span>) <span class="keyword">as</span> fczs_id</span><br><span class="line">        <span class="keyword">from</span> zyfw_main t,zyfw_zyz a</span><br><span class="line">          <span class="keyword">where</span> t.zyfw_id=a.zyfw_id  <span class="keyword">and</span> t.status=<span class="string">&#x27;2&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="2，trunc函数的用法"><a href="#2，trunc函数的用法" class="headerlink" title="2，trunc函数的用法"></a>2，trunc函数的用法</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span><span class="number">-1</span>) <span class="keyword">from</span> dual t;<span class="comment">--昨天</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>+<span class="number">1</span>) <span class="keyword">from</span> dual t;<span class="comment">--明天</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>, <span class="string">&#x27;yy&#x27;</span>) <span class="keyword">from</span> dual;<span class="comment">--当年第一天</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>, <span class="string">&#x27;year&#x27;</span>) <span class="keyword">from</span> dual;<span class="comment">--当年第一天</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>, <span class="string">&#x27;yyyy&#x27;</span>) <span class="keyword">from</span> dual;<span class="comment">--当年第一天</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>, <span class="string">&#x27;q&#x27;</span>) <span class="keyword">from</span> dual;<span class="comment">--当前时间所在的季度的第一天</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>, <span class="string">&#x27;mm&#x27;</span>) <span class="keyword">from</span> dual;<span class="comment">--当月第一天</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>, <span class="string">&#x27;month&#x27;</span>) <span class="keyword">from</span> dual;<span class="comment">--当月第一天</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>, <span class="string">&#x27;d&#x27;</span>) <span class="keyword">from</span> dual;<span class="comment">--返回本周的第一天（周日为第一天）</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>,<span class="string">&#x27;day&#x27;</span>) <span class="keyword">from</span> dual;<span class="comment">--返回本周的第一天（周日为第一天）</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>, <span class="string">&#x27;iw&#x27;</span>) <span class="keyword">from</span> dual;<span class="comment">--本周第二天（周日为第一天）</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>, <span class="string">&#x27;hh&#x27;</span>) <span class="keyword">from</span> dual; <span class="comment">--当前时间，精确到小时</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>, <span class="string">&#x27;hh24&#x27;</span>) <span class="keyword">from</span> dual;<span class="comment">--当前时间。精确到小时</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>, <span class="string">&#x27;mi&#x27;</span>) <span class="keyword">from</span> dual;<span class="comment">--当前时间。精确到分钟 没有精确到秒的精度</span></span><br></pre></td></tr></table></figure>
+<h2 id="3，substr函数"><a href="#3，substr函数" class="headerlink" title="3，substr函数"></a>3，substr函数</h2><p>substr函数格式   (俗称：字符截取函数)<br>　　格式1： substr(string string, int a, int b);<br>　　格式2：substr(string string, int a) ;<br>解释：<br>    格式1：<br>        1、string 需要截取的字符串<br>        2、a 截取字符串的开始位置（注：当a等于0或1时，都是从第一位开始截取）<br>        3、b 要截取的字符串的长度<br>    格式2：<br>        1、string 需要截取的字符串<br>        2、a 可以理解为从第a个字符开始截取后面所有的字符串。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">substr</span>(<span class="keyword">sysdate</span>,<span class="number">0</span>,<span class="number">10</span>) <span class="keyword">from</span> dual;	//截取当前日期（格式为2019-08-06）</span><br></pre></td></tr></table></figure>
+
+<h2 id="4，extract函数"><a href="#4，extract函数" class="headerlink" title="4，extract函数"></a>4，extract函数</h2><p>要从表格myTable中选取time字段中年份为2018年的所有数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> title,play,<span class="built_in">time</span> <span class="keyword">from</span> myTable <span class="keyword">where</span> <span class="keyword">extract</span>(<span class="keyword">year</span> <span class="keyword">from</span> <span class="built_in">time</span>) = <span class="number">2018</span>;</span><br><span class="line"><span class="keyword">select</span> title,play,to_char(<span class="built_in">time</span>, <span class="string">&#x27;YYYY-MM-DD&#x27;</span>) <span class="keyword">as</span> <span class="built_in">time</span> <span class="keyword">from</span> myTable <span class="keyword">where</span> <span class="keyword">extract</span>(<span class="keyword">year</span> <span class="keyword">from</span> <span class="built_in">time</span>) = <span class="number">2018</span>;</span><br></pre></td></tr></table></figure>
+<p>要从表格myTable中选取time中月份为5的所有数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> title,play,<span class="built_in">time</span> <span class="keyword">from</span> myTable <span class="keyword">extract</span>(<span class="keyword">month</span> <span class="keyword">from</span> <span class="built_in">time</span>) = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">select</span> title,play,to_char(<span class="built_in">time</span>, <span class="string">&#x27;YYYY-MM-DD&#x27;</span>) <span class="keyword">as</span> <span class="built_in">time</span> <span class="keyword">from</span> myTable <span class="keyword">where</span> <span class="keyword">extract</span>(<span class="keyword">month</span> <span class="keyword">from</span> <span class="built_in">time</span>) = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+<p>从表格myTable中选取time中日期为6的所有数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> title,play,<span class="built_in">time</span> <span class="keyword">from</span> myTable <span class="keyword">extract</span>(<span class="keyword">day</span> <span class="keyword">from</span> <span class="built_in">time</span>) = <span class="number">6</span>;</span><br><span class="line">slect title,play,to_char(time, &#x27;YYYY-MM-DD&#x27;) as time from myTable where extract(day from time) = 6;</span><br></pre></td></tr></table></figure>
+
+<p><font color="red"><strong>语法如下：extract(year|month|day|hour|minute|second from column_name) = value</strong></font></p>
+<h2 id="5，NVL-函数"><a href="#5，NVL-函数" class="headerlink" title="5，NVL()函数"></a>5，NVL()函数</h2><h3 id="（1）NVL-X-VALUE"><a href="#（1）NVL-X-VALUE" class="headerlink" title="（1）NVL(X,VALUE)"></a>（1）NVL(X,VALUE)</h3><p>如果X为空，返回value，否则返回X</p>
+<p>该函数的目的是把一个空值（null）转换成一个实际的值。其表达式的值可以是数字型、字符型和日期型。但是表达式1和表达式2的数据类型必须为同一个类型。</p>
+<p>例如：对工资是2000元以下的员工，如果没发奖金，每人奖金100元</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ENAME,JOB,SAL,NVL(COMM,<span class="number">100</span>) <span class="keyword">FROM</span> EMP <span class="keyword">WHERE</span> SAL&lt;<span class="number">2000</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）NVL2-x-value1-value2"><a href="#（2）NVL2-x-value1-value2" class="headerlink" title="（2）NVL2(x,value1,value2)"></a>（2）NVL2(x,value1,value2)</h3><p>如果x非空，返回value1，否则返回value2。</p>
+<p>例如：对EMP表中工资为2000元以下的员工，如果没有奖金，则奖金为200元，如果有奖金，则在原来的奖金基础上加100元</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ENAME,JOB,SAL,NVL2(COMM,comm+<span class="number">100</span>,<span class="number">200</span>) <span class="string">&quot;comm&quot;</span> <span class="keyword">FROM</span> EMP <span class="keyword">WHERE</span> SAL&lt;<span class="number">2000</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6，with-as-用法"><a href="#6，with-as-用法" class="headerlink" title="6，with as 用法"></a>6，with as 用法</h2><p>相当于建了个e临时表。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> e <span class="keyword">as</span> (<span class="keyword">select</span> * <span class="keyword">from</span> scott.emp e <span class="keyword">where</span> e.empno=<span class="number">7499</span>)</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> e;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7，oracle批量插入"><a href="#7，oracle批量插入" class="headerlink" title="7，oracle批量插入"></a>7，oracle批量插入</h2><p>Mapper接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">insterZqyjList</span><span class="params">(List&lt;YzsylgkZqyj&gt; zqyjList)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>Mapper.xml文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insterZqyjList&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;List&quot;</span>&gt;</span></span><br><span class="line">  insert into YZSYLGK_ZQYJ (YJ_ID, ID, YJ_NR,</span><br><span class="line">  TCR_NAME, TCRDW, CREATEDATE,</span><br><span class="line">  MODIFYDATE, USER_ID, ORG_ID</span><br><span class="line">  ) select a.* from(</span><br><span class="line">  <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;list&quot;</span> <span class="attr">item</span>=<span class="string">&quot;item&quot;</span> <span class="attr">index</span>=<span class="string">&quot;index&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;union&quot;</span> <span class="attr">open</span>=<span class="string">&quot;(&quot;</span> <span class="attr">close</span>=<span class="string">&quot;)&quot;</span>&gt;</span></span><br><span class="line">    select #&#123;item.yjId,jdbcType=VARCHAR&#125;, #&#123;item.id,jdbcType=VARCHAR&#125;, #&#123;item.yjNr,jdbcType=VARCHAR&#125;,</span><br><span class="line">    #&#123;item.tcrName,jdbcType=VARCHAR&#125;, #&#123;item.tcrdw,jdbcType=VARCHAR&#125;, #&#123;item.createdate,jdbcType=TIMESTAMP&#125;,</span><br><span class="line">    #&#123;item.modifydate,jdbcType=TIMESTAMP&#125;, #&#123;item.userId,jdbcType=VARCHAR&#125;, #&#123;item.orgId,jdbcType=VARCHAR&#125; from dual</span><br><span class="line">  <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">  )a</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里打断一下，增加一个<code>mysql</code>的批量插入操作。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insertAll&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;List&quot;</span>&gt;</span></span><br><span class="line">    insert into kp_file_services_contend (contend_id, services_id, contend_type,</span><br><span class="line">      model, specification, duration,</span><br><span class="line">      price, num, total_price</span><br><span class="line">      ) values</span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;list&quot;</span> <span class="attr">item</span>=<span class="string">&quot;item&quot;</span> <span class="attr">index</span>=<span class="string">&quot;index&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;,&quot;</span>&gt;</span></span><br><span class="line">      (</span><br><span class="line">      #&#123;item.contendId,jdbcType=VARCHAR&#125;,#&#123;item.servicesId,jdbcType=VARCHAR&#125;,#&#123;item.contendType,jdbcType=VARCHAR&#125;,</span><br><span class="line">      #&#123;item.model,jdbcType=VARCHAR&#125;,#&#123;item.specification,jdbcType=VARCHAR&#125;,#&#123;item.duration,jdbcType=VARCHAR&#125;,</span><br><span class="line">      #&#123;item.price,jdbcType=DECIMAL&#125;,#&#123;item.num,jdbcType=VARCHAR&#125;,#&#123;item.totalPrice,jdbcType=DECIMAL&#125;</span><br><span class="line">      )</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="（1）-oracle批量更新"><a href="#（1）-oracle批量更新" class="headerlink" title="（1） oracle批量更新"></a>（1） oracle批量更新</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;updateBatch&quot;</span>  <span class="attr">parameterType</span>=<span class="string">&quot;java.util.List&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;list&quot;</span> <span class="attr">item</span>=<span class="string">&quot;item&quot;</span> <span class="attr">index</span>=<span class="string">&quot;index&quot;</span> <span class="attr">open</span>=<span class="string">&quot;begin&quot;</span> <span class="attr">close</span>=<span class="string">&quot;;end;&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;;&quot;</span>&gt;</span></span><br><span class="line">        update T_CITY_INDEX t</span><br><span class="line">        set</span><br><span class="line">        t.city_name= #&#123;item.cityName,jdbcType=VARCHAR&#125; ,</span><br><span class="line">        t.district_name= #&#123;item.districtName,jdbcType=VARCHAR&#125; ,</span><br><span class="line">        where t.id = #&#123;item.id,jdbcType=NUMERIC&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="8，字符函数"><a href="#8，字符函数" class="headerlink" title="8，字符函数"></a>8，字符函数</h2><p>字符函数接受字符参数，这些参数可以是表中的列，也可以是一个字符串表达式。</p>
+<p>常用的字符函数有：</p>
+<table><thead><th>函数</th><th>说明</th></thead>
+    <tbody>
+    <tr>
+        <td>concat(x,y)</td>
+        <td>连接字符串x和y</td>
+    </tr>
+        <tr>
+        <td>length(x)</td>
+        <td>返回x的长度</td>
+    </tr>
+        <tr>
+        <td>lower(X)</td>
+        <td>把X变成小写</td>
+    </tr>
+        <tr>
+        <td>upper(x)</td>
+        <td>把x变成大写</td>
+    </tr>
+        <tr>
+        <td>REPLACE(X,old,new)</td>
+        <td>在X中查找old，并替换成new</td>
+    </tr>
+        <tr>
+        <td>concat(x,y)</td>
+        <td>连接字符串x和y</td>
+    </tr>
+    </tbody>
+</table>
+
+<h3 id="（1）-trim（）、ltrim（）、rtrim（）的用法"><a href="#（1）-trim（）、ltrim（）、rtrim（）的用法" class="headerlink" title="（1）  trim（）、ltrim（）、rtrim（）的用法"></a>（1）  trim（）、ltrim（）、rtrim（）的用法</h3><p><strong>trim（string）</strong>：去除指定字符串string的左右空格，当然，string中间有空格的时候是不会被去除。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">trim</span>(<span class="string">&#x27;    aaa  bbb  ccc     &#x27;</span>)  <span class="keyword">trim</span> <span class="keyword">FROM</span> dual;</span><br><span class="line">aaa  bbb  ccc</span><br></pre></td></tr></table></figure>
+
+<p><strong>ltrim（string）、rtrim（string）</strong>：分别去除指定字符串string左侧和右侧的空格。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ltrim</span>(<span class="string">&#x27;    aaa  bbb  ccc     &#x27;</span>) <span class="keyword">ltrim</span> <span class="keyword">FROM</span> dual;</span><br><span class="line">aaa  bbb  ccc     <span class="comment">--（注意，此时返回的字符串右侧是有空格的）</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">rtrim</span>(<span class="string">&#x27;    aaa  bbb  ccc     &#x27;</span>) <span class="keyword">rtrim</span> <span class="keyword">FROM</span> dual;</span><br><span class="line">   aaa  bbb  ccc  <span class="comment">--（显然此时返回的字符串左侧是有空格的）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>trim( leading | trailing | both string1 FROM string2)**：从string2中去除左侧 | 右侧 | 左侧两侧（默认是both，即左右侧都去掉）的string1字符，<font color="red">**注意，string1只能是单个字符。</strong></font></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">trim</span>(<span class="keyword">leading</span>  <span class="string">&#x27;  &#x27;</span>  <span class="keyword">from</span>  <span class="string">&#x27;    aaa  bbb  ccc   &#x27;</span>) leadingtrim <span class="keyword">FROM</span> dual;</span><br><span class="line">aaa  bbb  ccc   <span class="comment">--（注意，此时返回的字符串右侧是有空格的）</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">trim</span>(trailing  <span class="string">&#x27;  &#x27;</span>  <span class="keyword">from</span>  <span class="string">&#x27;    aaa  bbb  ccc   &#x27;</span>) trailingtrim <span class="keyword">FROM</span> dual;</span><br><span class="line">    aaa  bbb  ccc  <span class="comment">--（显然，此时返回的字符串左侧是有空格的）</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">trim</span>(<span class="keyword">both</span> <span class="string">&#x27;  &#x27;</span>  <span class="keyword">from</span>  <span class="string">&#x27;    aaa  bbb  ccc   &#x27;</span>) bothtrim <span class="keyword">FROM</span> dual; </span><br><span class="line">aaa  bbb  ccc  <span class="comment">--（返回的字符串两侧的空格都被去掉）</span></span><br></pre></td></tr></table></figure>
+
+<p>ltrim(string1,string2)，rtrim(string1,string2)：从字符串string1左侧（右侧）开始去除与string2字符集合中单个字符匹配的字符，直到在string1中遇上某个字符，该字符不在string2字符集合中。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ltrim</span>(<span class="string">&#x27;abcxcba&#x27;</span>,<span class="string">&#x27;abc&#x27;</span>) <span class="keyword">ltrim</span> <span class="keyword">FROM</span> dual;</span><br><span class="line">xcba  <span class="comment">--（结果并不是只剩一个“x”，而是包括stirng1中“x”以及右侧的字符）</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">rtrim</span>(<span class="string">&#x27;abcxcba&#x27;</span>,<span class="string">&#x27;abc&#x27;</span>) <span class="keyword">rtrim</span> <span class="keyword">FROM</span> dual;</span><br><span class="line">abcx  <span class="comment">--（结果并不是只剩一个“x”，而是包括stirng1中“x”以及左侧的字符）</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="9，ROUND-X-Y-和-TRUNC-x-y-的用法"><a href="#9，ROUND-X-Y-和-TRUNC-x-y-的用法" class="headerlink" title="9，ROUND(X[,Y])和 TRUNC(x[,y])的用法"></a>9，ROUND(X[,Y])和 TRUNC(x[,y])的用法</h2><ul>
+<li><p>ROUND(X[,Y])，四舍五入。</p>
+<ul>
+<li><p>在缺省 y 时，默认 y=0；比如：ROUND(3.56)=4。</p>
+</li>
+<li><p>y 是正整数，就是四舍五入到小数点后 y 位。ROUND(5.654,2)=5.65。</p>
+</li>
+<li><p>y 是负整数，四舍五入到小数点左边|y|位。ROUND(351.654,-2)=400。</p>
+</li>
+</ul>
+</li>
+<li><p>TRUNC(x[,y])，直接截取，不四舍五入。</p>
+<ul>
+<li><p>在缺省 y 时，默认 y=0；比如：TRUNC (3.56)=3。</p>
+</li>
+<li><p>Y是正整数，就是四舍五入到小数点后 y 位。TRUNC (5.654,2)=5.65。</p>
+</li>
+<li><p>y 是负整数，四舍五入到小数点左边|y|位。TRUNC (351.654,-2)=300。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="10，日期函数"><a href="#10，日期函数" class="headerlink" title="10，日期函数"></a>10，日期函数</h2><h3 id="（1）-ADD-MONTHS-d-n"><a href="#（1）-ADD-MONTHS-d-n" class="headerlink" title="（1） ADD_MONTHS(d,n)"></a>（1） ADD_MONTHS(d,n)</h3><p>在某一个日期 d 上，加上指定的月数 n，返回计算后的新日期。</p>
+<p>d 表示日期，n 表示要加的月数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SYSDATE</span>,add_months(<span class="keyword">SYSDATE</span>,<span class="number">5</span>) <span class="keyword">FROM</span> dual;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）-LAST-DAY-d"><a href="#（2）-LAST-DAY-d" class="headerlink" title="（2） LAST_DAY(d)"></a>（2） LAST_DAY(d)</h3><p>返回指定日期当月的最后一天。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SYSDATE</span>,<span class="keyword">last_day</span>(<span class="keyword">SYSDATE</span>) <span class="keyword">FROM</span> dual;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）EXTRACT-fmt-FROM-d"><a href="#（3）EXTRACT-fmt-FROM-d" class="headerlink" title="（3）EXTRACT(fmt FROM d)"></a>（3）EXTRACT(fmt FROM d)</h3><p>fmt 为：YEAR、MONTH、DAY、HOUR、SECOND。其中 YEAR、MONTH、DAY 可以为 DATA 类型匹配，也可以与 TIMESTAMP 类型匹配；但是 HOUR、MINUTE、SECOND 必须与 TIMESTAMP 类型匹配。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> to_char(<span class="keyword">sysdate</span>,<span class="string">&#x27;yyyy/mm/dd hh24:mi:ss&#x27;</span>) <span class="string">&quot;date&quot;</span>,  </span><br><span class="line">    <span class="keyword">extract</span>(<span class="keyword">YEAR</span> <span class="keyword">FROM</span> <span class="keyword">SYSDATE</span>) <span class="string">&quot;year&quot;</span>,  </span><br><span class="line">    <span class="keyword">extract</span>(<span class="keyword">MONTH</span> <span class="keyword">FROM</span> <span class="keyword">SYSDATE</span>) <span class="string">&quot;month&quot;</span>,  </span><br><span class="line">    <span class="keyword">extract</span>(<span class="keyword">DAY</span> <span class="keyword">FROM</span> <span class="keyword">SYSDATE</span>) <span class="string">&quot;day&quot;</span>,  </span><br><span class="line">    <span class="keyword">extract</span>(<span class="keyword">HOUR</span> <span class="keyword">FROM</span> SYSTIMESTAMP) <span class="string">&quot;hour&quot;</span>,  </span><br><span class="line">    <span class="keyword">extract</span>(<span class="keyword">MINUTE</span> <span class="keyword">FROM</span> SYSTIMESTAMP) <span class="string">&quot;minute&quot;</span>,  </span><br><span class="line">    <span class="keyword">extract</span>(<span class="keyword">SECOND</span> <span class="keyword">FROM</span> SYSTIMESTAMP) <span class="string">&quot;second&quot;</span>  </span><br><span class="line">    <span class="keyword">from</span> dual;  </span><br><span class="line">    </span><br><span class="line">date                      year   month     day    hour  minute     second  </span><br><span class="line"><span class="comment">------------------- ---------- ------- ------- ------- ------- ----------  </span></span><br><span class="line">2012/04/03 18:53:42       2012       4       3   10         53      42.79 </span><br></pre></td></tr></table></figure>
+
+<h3 id="（4）ROUND-d-fmt"><a href="#（4）ROUND-d-fmt" class="headerlink" title="（4）ROUND(d[,fmt])"></a>（4）ROUND(d[,fmt])</h3><p>返回一个以fmt为格式的四舍五入日期值 。如果fmt为“YEAR”则舍入到某年的1月1日，即前半年舍去，后半年作为下 一年</p>
+<p>如果fmt为“MONTH”则舍入到某月的1日，即前月舍去，后半月作为下一 月</p>
+<p>默认为“DDD”，即月中的某一天，最靠近的天，前半天舍去，后半天作为第二天</p>
+<p>如果fmt为“DAY”则舍入到最近的周的周日，即上半周舍去，下半周作为下 一周周日</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">sysdate</span>,<span class="keyword">round</span>(<span class="keyword">sysdate</span>),<span class="keyword">round</span>(<span class="keyword">sysdate</span>,<span class="string">&#x27;ddd&#x27;</span>),</span><br><span class="line"><span class="keyword">round</span>(<span class="keyword">sysdate</span>,<span class="string">&#x27;day&#x27;</span>),<span class="keyword">round</span>(<span class="keyword">sysdate</span>,<span class="string">&#x27;month&#x27;</span>),<span class="keyword">round</span>(<span class="keyword">sysdate</span>,<span class="string">&#x27;year&#x27;</span>) <span class="keyword">from</span> dual; </span><br><span class="line"><span class="comment">-----结果------</span></span><br><span class="line"> 2017-09-13 16:11:13 , 2017-09-14 00:00:00 , 2017-09-14 00:00:00 , </span><br><span class="line"> 2017-09-17 00:00:00 , 2017-09-01 00:00:00 , 2018-01-01 00:00:00</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="11，转换函数"><a href="#11，转换函数" class="headerlink" title="11，转换函数"></a>11，转换函数</h2><h3 id="（1）TO-CHAR-d-n-fmt"><a href="#（1）TO-CHAR-d-n-fmt" class="headerlink" title="（1）TO_CHAR(d|n[,fmt])"></a>（1）TO_CHAR(d|n[,fmt])</h3><p>to_char函数的功能是将数值型或者日期型转化为字符型。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> to_char(ENDTIME,<span class="string">&#x27;YYYY-MM-DD&#x27;</span>) ENDTIME <span class="keyword">FROM</span> tablename;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）TO-DATE-X-fmt"><a href="#（2）TO-DATE-X-fmt" class="headerlink" title="（2）TO_DATE(X,[,fmt])"></a>（2）TO_DATE(X,[,fmt])</h3><p>把一个字符串以fmt格式转换成一个日期类型。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">to_date(sysdate,&#x27;yyyy-MM-dd HH24:mi:ss&#x27;) <span class="comment">--mi是分钟</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="12，聚合函数"><a href="#12，聚合函数" class="headerlink" title="12，聚合函数"></a>12，聚合函数</h2><p>聚合函数同时对一组数据进行操作，返回一行结果，比如计算一组数据的总和，平均值等。</p>
+<table><tr><th>名称</th><th>作用</th></tr>
+<tr><td>AVG</td><td>平均值</td></tr>
+    <tr><td>SUM</td><td>求和</td></tr>
+    <tr><td>MIN/MAX</td><td>最小值/最大值</td></tr>
+    <tr><td>COUNT</td><td>统计</td></tr>
+</table>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--求本月所有员工的基本工资总和</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(sal) <span class="keyword">FROM</span> emp;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--求不同部门的平均工资</span></span><br><span class="line"><span class="keyword">SELECT</span> DEPTNO,<span class="keyword">AVG</span>(SAL) <span class="keyword">FROM</span> EMP <span class="keyword">GROUP</span> <span class="keyword">BY</span> DEPTNO;  </span><br><span class="line"><span class="comment">----结果------</span></span><br><span class="line">30    1566.66666</span><br><span class="line">20     2175</span><br><span class="line">10    2916.66666</span><br></pre></td></tr></table></figure>
+<h2 id="13，Oracle-wm-concat（）函数"><a href="#13，Oracle-wm-concat（）函数" class="headerlink" title="13，Oracle wm_concat（）函数"></a>13，Oracle wm_concat（）函数</h2><p>wm_concat()函数是oracle中独有的,mysql中有一个group_concat()函数。这两个函数的作用是相同的，它们的功能是：<font color="red">实现行转列功能</font>，即将查询出的某一列值使用逗号进行隔开拼接，成为一条数据。</p>
+<p>例如：shopping表</p>
+<p>例如：shopping表</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">u_id		goods		num</span><br><span class="line"><span class="number">1</span>			苹果			<span class="number">2</span></span><br><span class="line"><span class="number">2</span>			梨子			<span class="number">5</span></span><br><span class="line"><span class="number">1</span>			西瓜			<span class="number">4</span></span><br><span class="line"><span class="number">3</span>			葡萄			<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>想要的结果为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">u_id		goodsnum</span><br><span class="line"><span class="number">1</span>			苹果，西瓜</span><br><span class="line"><span class="number">2</span>			梨子</span><br><span class="line"><span class="number">3</span>			葡萄</span><br></pre></td></tr></table></figure>
+
+
+
+<p>就是下面的sql语句</p>
+<p>select u_id, wmsys.wm_concat(goods) goods_sum   from shopping   group by u_id ;</p>
+<p>想要的结果2为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">u_id					goodsnum</span><br><span class="line"><span class="number">1</span>				苹果（<span class="number">2</span>斤），西瓜（<span class="number">4</span>斤）</span><br><span class="line"><span class="number">2</span>						梨子（<span class="number">5</span>斤）</span><br><span class="line"><span class="number">3</span>						葡萄（<span class="number">1</span>斤）</span><br></pre></td></tr></table></figure>
+
+
+
+<p>则是下面的sql语句</p>
+<p>select u_id, wmsys.wm_concat(goods || ‘(‘ || num || ‘斤)’ ) goods_sum   from shopping   group by u_id;</p>
+<h2 id="14，mybatis模糊查询"><a href="#14，mybatis模糊查询" class="headerlink" title="14，mybatis模糊查询"></a>14，mybatis模糊查询</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findzzjf&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;cn.com.qianlong.light.vo.zzjf.ScoreMainOrgVo&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;cn.com.qianlong.light.vo.zzjf.ScoreMainOrgVo&quot;</span>&gt;</span></span><br><span class="line">    select org_id,org_name,scoreyear,score,orgplace from score_main_org</span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;orgName != null and orgName != &#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">            and org_name like &#x27;%&#x27;||#&#123;orgName,jdbcType=VARCHAR&#125;||&#x27;%&#x27;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="15，oracle复制表（把b表的数据复制到a表）"><a href="#15，oracle复制表（把b表的数据复制到a表）" class="headerlink" title="15，oracle复制表（把b表的数据复制到a表）"></a>15，oracle复制表（把b表的数据复制到a表）</h2><p>如果两表字段相同，则可以直接这样用。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> table_a <span class="keyword">select</span> * <span class="keyword">from</span> table_b</span><br></pre></td></tr></table></figure>
+
+<p>如果两表字段不同，a表需要b中的某几个字段即可，则可以如下使用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> table_a(field_a1,field_a2,field_a3) <span class="keyword">select</span> field_b1,field_b2,field_b3) <span class="keyword">from</span> table_b</span><br></pre></td></tr></table></figure>
+
+<p>以上语句前提条件是每个字段对应的字段类型相同或可以自动转换。</p>
+<h2 id="16，find-in-set-函数的使用"><a href="#16，find-in-set-函数的使用" class="headerlink" title="16，find_in_set()函数的使用"></a>16，find_in_set()函数的使用</h2><p>find_in_set的语法如下<br>  FIND_IN_SET(str,strlist);<br>其中str为要查询的目标字符串, strlist为字符串的集合</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span>   tb_test   <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;mike,allen,jack,jay&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span>   tb_test   <span class="keyword">VALUES</span> (<span class="number">2</span>, <span class="string">&#x27;name2&#x27;</span>, <span class="string">&#x27;jay,pojo,jay&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span>   tb_test   <span class="keyword">VALUES</span> (<span class="number">3</span>, <span class="string">&#x27;name3&#x27;</span>, <span class="string">&#x27;allen,mike,yago&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>使用FIND_IN_SET进行查询含有jay的list<br>  SELECT id,name,list from tb_test WHERE FIND_IN_SET(‘jay’,list); </p>
+<h2 id="17，oracle-Extract-函数"><a href="#17，oracle-Extract-函数" class="headerlink" title="17，oracle Extract 函数"></a>17，oracle Extract 函数</h2><p>oracle中extract()函数从oracle 9i中引入,用于从一个    date    或者interval类型中截取到特定的部分   </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//我们只可以从一个date类型中截取year,month,day    (    date    日期的格式为yyyy-mm-dd);   </span><br><span class="line">//我们只可以从一个timestamp <span class="keyword">with</span> <span class="built_in">time</span> zone 的数据类型中截取TIMEZONE_HOUR和<span class="keyword">TIMEZONE_MINUTE</span>;   </span><br><span class="line"><span class="keyword">select</span> <span class="keyword">extract</span>(<span class="keyword">year</span> <span class="keyword">from</span> <span class="built_in">date</span> <span class="string">&#x27;2011-05-17&#x27;</span>) <span class="keyword">year</span> <span class="keyword">from</span> dual;   </span><br><span class="line">          YEAR</span><br><span class="line"><span class="comment">----------   </span></span><br><span class="line">          2011   </span><br><span class="line"><span class="keyword">select</span> <span class="keyword">extract</span>( <span class="keyword">month</span> <span class="keyword">from</span> <span class="built_in">date</span> <span class="string">&#x27;2011-05-17&#x27;</span>) <span class="keyword">month</span> <span class="keyword">from</span> dual;   </span><br><span class="line">         MONTH</span><br><span class="line"><span class="comment">----------   </span></span><br><span class="line">             5   </span><br><span class="line"><span class="keyword">select</span> <span class="keyword">extract</span>(<span class="keyword">day</span> <span class="keyword">from</span> <span class="built_in">date</span> <span class="string">&#x27;2011-05-17&#x27;</span>) <span class="keyword">day</span> <span class="keyword">from</span> dual;   </span><br><span class="line">           DAY</span><br><span class="line"><span class="comment">----------   </span></span><br><span class="line">            17   </span><br></pre></td></tr></table></figure>
+<p>获取两个日期之间的具体时间间隔，extract函数是最好的选择</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">extract</span>(<span class="keyword">day</span> <span class="keyword">from</span> dt2-dt1) <span class="keyword">day</span></span><br><span class="line">          ,<span class="keyword">extract</span>(<span class="keyword">hour</span> <span class="keyword">from</span> dt2-dt1) <span class="keyword">hour</span></span><br><span class="line">          ,<span class="keyword">extract</span>(<span class="keyword">minute</span> <span class="keyword">from</span> dt2-dt1) <span class="keyword">minute</span></span><br><span class="line">          ,<span class="keyword">extract</span>(<span class="keyword">second</span> <span class="keyword">from</span> dt2-dt1) <span class="keyword">second</span></span><br><span class="line"><span class="keyword">from</span> (<span class="keyword">select</span> to_timestamp(<span class="string">&#x27;2011-02-04 15:07:00&#x27;</span>,<span class="string">&#x27;yyyy-mm-dd hh24:mi:ss&#x27;</span>) dt1 ,to_timestamp(<span class="string">&#x27;2011-05-17 19:08:46&#x27;</span>,<span class="string">&#x27;yyyy-mm-dd hh24:mi:ss&#x27;</span>) dt2 <span class="keyword">from</span> dual) </span><br><span class="line"><span class="comment">## 18，oracle中截取字符串</span></span><br><span class="line"><span class="string">`substr(&#x27;ABCDEFG&#x27;,1,4)`</span>		截取字符串前四个  ABCD</span><br></pre></td></tr></table></figure>
+
+<h2 id="18，case-when和聚合函数count、sum的使用"><a href="#18，case-when和聚合函数count、sum的使用" class="headerlink" title="18，case when和聚合函数count、sum的使用"></a>18，case when和聚合函数count、sum的使用</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> </span><br><span class="line">t3.region_id <span class="keyword">as</span> <span class="string">&#x27;regionId&#x27;</span>,</span><br><span class="line">t3.region_name <span class="keyword">as</span> <span class="string">&#x27;regionName&#x27;</span>,</span><br><span class="line"><span class="keyword">count</span>(<span class="keyword">case</span> <span class="keyword">when</span> t1.tricolor = <span class="number">1</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="literal">null</span> <span class="keyword">end</span> ) <span class="keyword">as</span> <span class="string">&#x27;greenTotal&#x27;</span>,</span><br><span class="line"><span class="keyword">count</span>(<span class="keyword">case</span> <span class="keyword">when</span> t1.tricolor = <span class="number">2</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="literal">null</span> <span class="keyword">end</span> ) <span class="keyword">as</span> <span class="string">&#x27;yellowTotal&#x27;</span>,</span><br><span class="line"><span class="keyword">count</span>(<span class="keyword">case</span> <span class="keyword">when</span> t1.tricolor = <span class="number">3</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="literal">null</span> <span class="keyword">end</span> )<span class="keyword">as</span> <span class="string">&#x27;redTotal&#x27;</span></span><br><span class="line"><span class="keyword">from</span> pa_household_member t1</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> pa_household t2 <span class="keyword">on</span> t2.household_id = t1.household_id</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> system_region t3 <span class="keyword">on</span> t3.region_id = t2.area </span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> t2.area</span><br></pre></td></tr></table></figure>
+<h2 id="19，oracle中截取字符串"><a href="#19，oracle中截取字符串" class="headerlink" title="19，oracle中截取字符串"></a>19，oracle中截取字符串</h2><p><code>substr(&#39;ABCDEFG&#39;,1,4)</code>        截取字符串前四个  ABCD</p>
+<h2 id="20，trunc-sysdate-’iw’"><a href="#20，trunc-sysdate-’iw’" class="headerlink" title="20，trunc(sysdate,’iw’)"></a>20，trunc(sysdate,’iw’)</h2><p>trunc是截尾函数    TRUNC(SYSDATE,’iw’)返回该星期中的星期一（本周第二天）</p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

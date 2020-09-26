@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    restTemplate发送远程请求 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  restTemplate
+  ">
+  
+  <meta name="author" content="樊同学">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 62 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 29 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1592385655000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1592385655000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>restTemplate发送远程请求</h1>
+    <p>[TOC]</p>
+<p><code>restTemplate</code>是<code>spring</code>提供的可以提供访问rest服务的客户端工具类，提供多种快捷的访问远程的方法，大大提高了客户端的编程效率。解放了原先<code>HttpClient</code>的复杂提交。</p>
+<p>借助 <code>RestTemplate</code>，<code>Spring</code>应用能够方便地使用REST资源，<code>Spring</code>的 <code>RestTemplate</code>访问使用了模版方法的设计模式。</p>
+<p>模版方法将过程中与特定实现相关的部分委托给接口,而这个接口的不同实现定义了接口的不同行为。</p>
+<!---more-->
+
+
+
+<blockquote>
+<p>RestTemplate定义了36个与REST资源交互的方法，其中的大多数都对应于HTTP的方法。<br>其实，这里面只有11个独立的方法，其中有十个有三种重载形式，而第十一个则重载了六次，这样一共形成了36个方法。<br>delete() 在特定的URL上对资源执行HTTP DELETE操作</p>
+<p>exchange()<br>在URL上执行特定的HTTP方法，返回包含对象的ResponseEntity，这个对象是从响应体中<br>映射得到的</p>
+<p>execute() 在URL上执行特定的HTTP方法，返回一个从响应体映射得到的对象</p>
+<p>getForEntity() 发送一个HTTP GET请求，返回的ResponseEntity包含了响应体所映射成的对象</p>
+<p>getForObject() 发送一个HTTP GET请求，返回的请求体将映射为一个对象</p>
+<p>postForEntity()<br>POST 数据到一个URL，返回包含一个对象的ResponseEntity，这个对象是从响应体中映射得<br>到的</p>
+<p>postForObject() POST 数据到一个URL，返回根据响应体匹配形成的对象</p>
+<p>headForHeaders() 发送HTTP HEAD请求，返回包含特定资源URL的HTTP头</p>
+<p>optionsForAllow() 发送HTTP OPTIONS请求，返回对特定URL的Allow头信息</p>
+<p>postForLocation() POST 数据到一个URL，返回新创建资源的URL</p>
+<p>put() PUT 资源到特定的URL</p>
+</blockquote>
+<p>也就是两种请求，<code>get</code>请求和<code>post</code>请求。</p>
+<h1 id="一，get请求"><a href="#一，get请求" class="headerlink" title="一，get请求"></a>一，<code>get</code>请求</h1><h2 id="1，getForObject用法"><a href="#1，getForObject用法" class="headerlink" title="1，getForObject用法"></a>1，<code>getForObject</code>用法</h2><p>消费者发起请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@title</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span> get请求  getForObject用法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> FanJiangFeng</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@updateTime</span> 2019/12/9 15:32</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/go&quot;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">studyHttp</span><span class="params">()</span></span>&#123;</span><br><span class="line">      String url=<span class="string">&quot;http://127.0.0.1:8082/demoTest?name=&#123;name&#125;&amp;email=&#123;email&#125;&quot;</span>;</span><br><span class="line">        Map&lt;String,String&gt; map=<span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;樊江锋&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;email&quot;</span>,<span class="string">&quot;675361896@qq.com&quot;</span>);</span><br><span class="line">        RestTemplate restTemplate=<span class="keyword">new</span> RestTemplate();</span><br><span class="line">        String response = restTemplate.getForObject(url, String.class, map);</span><br><span class="line">        log.info(<span class="string">&quot;response:&quot;</span>+response);</span><br><span class="line">        <span class="comment">//[nio-8088-exec-1] com.example.controller.HttpController    : response:success</span></span><br><span class="line">        <span class="keyword">return</span> response;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>提供者接收并响应请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@title</span></span></span><br><span class="line"><span class="comment">    * <span class="doctag">@description</span> get请求   getForObject用法</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@author</span> FanJiangFeng</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@updateTime</span> 2019/12/9 15:32</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@throws</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@RequestMapping(value = &quot;demoTest&quot;, produces = MediaType.APPLICATION_JSON_VALUE)</span></span><br><span class="line">   <span class="meta">@ResponseBody</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">demoTest</span><span class="params">(<span class="meta">@RequestParam</span> String name,<span class="meta">@RequestParam</span> String email)</span></span>&#123;</span><br><span class="line">       System.out.println(name);</span><br><span class="line">       System.out.println(email);</span><br><span class="line">       <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2，getForEntity用法"><a href="#2，getForEntity用法" class="headerlink" title="2，getForEntity用法"></a>2，<code>getForEntity</code>用法</h2><p>消费者发起请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@title</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span> get请求  getForEntity用法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> FanJiangFeng</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@updateTime</span> 2019/12/11 16:19</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/getTest&quot;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String url=<span class="string">&quot;http://127.0.0.1:8082/demoTest1?name=&#123;name&#125;&amp;email=&#123;email&#125;&quot;</span>;</span><br><span class="line"><span class="comment">//        HttpHeaders headers=new HttpHeaders();</span></span><br><span class="line"><span class="comment">//        headers.set(&quot;phone&quot;,&quot;123456&quot;);</span></span><br><span class="line">        Map&lt;String,Object&gt; map=<span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;樊江锋&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;email&quot;</span>,<span class="string">&quot;675361896@qq.com&quot;</span>);</span><br><span class="line">        RestTemplate restTemplate = <span class="keyword">new</span> RestTemplate();</span><br><span class="line"><span class="comment">//        HttpEntity httpEntity = new HttpEntity(headers);</span></span><br><span class="line">        ResponseEntity&lt;String&gt; response = restTemplate.getForEntity(url,String.class,map);</span><br><span class="line">        log.info(<span class="string">&quot;response:&quot;</span>+response.getBody());</span><br><span class="line">        String body = response.getBody();</span><br><span class="line">        <span class="keyword">return</span> body;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>提供者接收并响应请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@title</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span> get请求  getForEntity用法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> FanJiangFeng</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@updateTime</span> 2019/12/11 16:19</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping(value = &quot;demoTest1&quot;, produces = MediaType.APPLICATION_JSON_VALUE)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">demoTest1</span><span class="params">(<span class="meta">@RequestParam</span> String name, <span class="meta">@RequestParam</span> String email)</span></span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">        System.out.println(email);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="二，post请求"><a href="#二，post请求" class="headerlink" title="二，post请求"></a>二，<code>post</code>请求</h1><p><font color="red">当所有传递的数据类型为复杂数据类型<code>headers.setContentType(MediaType.MULTIPART_FORM_DATA</code>并且需要接受的参数不再实体类中进行映射。<code>MultiValueMap</code>来进行传递。</font></p>
+<p>消费者发起请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@title</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span> post请求</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> FanJiangFeng</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@updateTime</span> 2019/12/11 16:39</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/getTest1&quot;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTest1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String url=<span class="string">&quot;http://127.0.0.1:8082/demoTest2&quot;</span>;</span><br><span class="line"><span class="comment">//        HttpHeaders headers = new HttpHeaders();</span></span><br><span class="line"><span class="comment">//        headers.setContentType(MediaType.APPLICATION_JSON);</span></span><br><span class="line"><span class="comment">//        headers.set(&quot;phone&quot;, &quot;123456&quot;);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//传参数可以使用map，也可以使用user</span></span><br><span class="line">        <span class="comment">//如果使用map，下面postForEntity要改成Map类型；postForEntity(url, map,String.class);</span></span><br><span class="line"><span class="comment">//        Map&lt;String,Object&gt; map=new HashMap&lt;String, Object&gt;();</span></span><br><span class="line"><span class="comment">//        map.put(&quot;name&quot;,&quot;樊江锋&quot;);</span></span><br><span class="line"><span class="comment">//        map.put(&quot;email&quot;,&quot;675361896@qq.com&quot;);</span></span><br><span class="line">        <span class="comment">// 如果使用user对象，要改成user对象  postForEntity(url, user,String.class);</span></span><br><span class="line"><span class="comment">//        User user=new User();</span></span><br><span class="line"><span class="comment">//        user.setName(&quot;袁梦阳&quot;);</span></span><br><span class="line"><span class="comment">//        user.setEmail(&quot;test@qq.com&quot;);</span></span><br><span class="line">        <span class="comment">//当所有传递的数据类型为复杂数据类型,并且需要接受的参数不再实体类中进行映射。MultiValueMap来进行传递。</span></span><br><span class="line">        MultiValueMap&lt;String, Object&gt; params = <span class="keyword">new</span> LinkedMultiValueMap&lt;&gt;();</span><br><span class="line">        params.add(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;袁梦阳&quot;</span>);</span><br><span class="line">        params.add(<span class="string">&quot;email&quot;</span>, <span class="string">&quot;675361896@qq.com&quot;</span>);</span><br><span class="line">        RestTemplate restTemplate = <span class="keyword">new</span> RestTemplate();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//HttpEntity用来装载请求头或者MultiValueMap集合（参数）</span></span><br><span class="line"><span class="comment">//        HttpEntity httpEntity = new HttpEntity(params,headers);</span></span><br><span class="line">        ResponseEntity&lt;String&gt; request = restTemplate.postForEntity(url,params,String.class);</span><br><span class="line">        System.out.println(request.getBody());</span><br><span class="line">        <span class="keyword">return</span> request.getBody();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>提供者接收并响应请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@title</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span> post请求</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> FanJiangFeng</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@updateTime</span> 2019/12/11 16:39</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span></span></span><br><span class="line"><span class="comment">     * //post请求 如果client参数是MultiValueMap传递，需要去掉consumes = MediaType.APPLICATION_JSON_VALUE</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping(value = &quot;demoTest2&quot;,produces = MediaType.APPLICATION_JSON_VALUE)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span>   <span class="comment">//如果client参数是对象，则括号中为 @RequestBody User user 如果是MultiValueMap，则括号中为 @RequestParam String name,@RequestParam String email</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">demoTest2</span><span class="params">(<span class="meta">@RequestParam</span> String name,<span class="meta">@RequestParam</span> String email)</span></span>&#123;</span><br><span class="line"><span class="comment">//        System.out.println(user.getName());</span></span><br><span class="line"><span class="comment">//        System.out.println(user.getEmail());</span></span><br><span class="line">        System.out.println(name);</span><br><span class="line">        System.out.println(email);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="三，综合示例"><a href="#三，综合示例" class="headerlink" title="三，综合示例"></a>三，综合示例</h1><p>可以参考下方的<code>RestTemplate</code>的例子发送远程请求。</p>
+<p>发送方</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@Description</span>  发送远程请求，进入投标保险首页</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@Date</span> 2019/12/16 15:57</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   * <span class="doctag">@Author</span> FanJiangFeng</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@Version</span>1.0</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@History</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">sendPostReq</span><span class="params">(String requestData)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       RestTemplate restTemplate = <span class="keyword">new</span> RestTemplate();</span><br><span class="line">       String url = <span class="string">&quot;http://127.0.0.1:7000/tbbx/insurance/enter&quot;</span>;</span><br><span class="line">       HttpHeaders headers = <span class="keyword">new</span> HttpHeaders();</span><br><span class="line">       headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);</span><br><span class="line">       MultiValueMap&lt;String, String&gt; map= <span class="keyword">new</span> LinkedMultiValueMap&lt;&gt;();</span><br><span class="line">       map.add(<span class="string">&quot;requestData&quot;</span>,requestData);</span><br><span class="line"></span><br><span class="line">       HttpEntity&lt;MultiValueMap&lt;String, String&gt;&gt; request = <span class="keyword">new</span> HttpEntity&lt;&gt;(map, headers);</span><br><span class="line">       ResponseEntity&lt;String&gt; response = restTemplate.postForEntity( url, request , String.class );</span><br><span class="line">       String responseData = response.getBody();</span><br><span class="line">       <span class="keyword">return</span> responseData;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>接收方</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@title</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span> 招采平台进入本平台入口</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> FanJiangFeng</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@updateTime</span> 2019/12/10 15:59</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping(value = &quot;/enter&quot;,produces = MediaType.APPLICATION_JSON_VALUE)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test</span><span class="params">(<span class="meta">@RequestParam</span> String requestData)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        JSONObject jsonObject = JSONObject.parseObject(requestData);</span><br><span class="line">        String APPID=(String) jsonObject.get(<span class="string">&quot;APPID&quot;</span>);</span><br><span class="line">        String encryptParam=(String) jsonObject.get(<span class="string">&quot;encryptParam&quot;</span>);</span><br><span class="line">        String signature=(String) jsonObject.get(<span class="string">&quot;signature&quot;</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//返回json串数据</span></span><br><span class="line">        JSONObject map=<span class="keyword">new</span> JSONObject();</span><br><span class="line">        map.put(<span class="string">&quot;status&quot;</span>,<span class="number">1000</span>);</span><br><span class="line">        map.put(<span class="string">&quot;message&quot;</span>,<span class="string">&quot;连接成功&quot;</span>);</span><br><span class="line">        String jsonString = JSONObject.toJSONString(map);</span><br><span class="line">        <span class="keyword">return</span> jsonString;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>顺利请求并反馈信息流程成功！</p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

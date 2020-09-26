@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    手把手教你springboot集成消息服务中间件 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  springboot rabbitmq
+  ">
+  
+  <meta name="author" content="樊同学">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 62 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 29 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1592990455000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1592990455000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>手把手教你springboot集成消息服务中间件</h1>
+    <h2 id="一，消息服务中间件的概述"><a href="#一，消息服务中间件的概述" class="headerlink" title="一，消息服务中间件的概述"></a>一，消息服务中间件的概述</h2><blockquote>
+<p>1，大多应用中，可通过消息服务中间件来提升系统异步通信、扩展解耦能力。</p>
+<p>2，消息服务中有两个概念：<font color="red">消息代理和目的地</font></p>
+<p>当消息发送者发送消息以后，将由消息代理接管，消息代理保证消息传递到指定目的地。</p>
+<p>3，消息队列主要由两种形式的目的地。</p>
+<pre><code>（1）队列：点对点消息通信（一对一）
+
+（2）主题：发布/订阅消息通信（一对多）</code></pre>
+</blockquote>
+<h3 id="1，消息队列的应用场景："><a href="#1，消息队列的应用场景：" class="headerlink" title="1，消息队列的应用场景："></a>1，消息队列的应用场景：</h3><p><font color="blue">一个网站，用户需要注册，注册后还需要发送注册邮件，还要发送注册短信，假如每一步都需要花费5秒的话，那么注册使用同步的方式，需要花费15秒，如果使用异步的方式注册，让注册邮件和注册短信同时进行，那么花费10秒。</font></p>
+<p>那么问题来了，哪里用到了消息服务中间件呢？</p>
+<p>用户注册信息之后，花费0.5秒的时间把信息写入消息中间件，然后提示用户注册成功，用户注册就只花费了5.5秒的时间。</p>
+<p>写入消息中间件之后就不用管了，剩下的就交给消息队列自己执行了。</p>
+<h3 id="2，消息服务中间件的作用详述"><a href="#2，消息服务中间件的作用详述" class="headerlink" title="2，消息服务中间件的作用详述"></a>2，消息服务中间件的作用详述</h3><p><font color="blue">应用解耦：</font></p>
+<p>订单系统———库存系统</p>
+<p>订单系统每次减少一个库存，都要访问库存系统，告诉他已经卖了一单了，库存要减少一个。</p>
+<p>订单系统———-消息队列———–库存系统</p>
+<p>订单系统减少一个库存时，写入消息队列，然后库存系统订阅该消息队列，得到订单系统写入的信息，然后库存系统自己减少一个库存。</p>
+<p><font color="blue">流量削峰：</font></p>
+<p>双十一那天会同时有超级多的用户同时抢购某一个东西，比如淘宝，那么如果特别多的用户同时访问服务器，服务器肯定是受不了的，解决办法就是把接到的请求订单信息写入消息队列，然后让服务器订阅该消息队列，自己取信息，如果请求数量超过了消息队列的上限，那么消息队列会拒收，所以减小了服务器的压力。</p>
+<h3 id="3，消息队列的模式"><a href="#3，消息队列的模式" class="headerlink" title="3，消息队列的模式"></a>3，消息队列的模式</h3><p>点对点式：</p>
+<p>消息发送消息，消息代理将其放入一个队列中，消息接收者从队列中获取消息内容，消息读取后被移出队列。</p>
+<p>消息只有唯一的发送者和接受者。</p>
+<p>发布订阅式：</p>
+<p>发送者（发布者）发送消息到主题，多个接收者（订阅者）监听（订阅）这个主题，那么就会在消息到达时同时收到消息。</p>
+<blockquote>
+<p>JMS，JAVA消息服务，基于JVM消息代理的规范，ActiveMQ，HornetMQ是JMS实现。</p>
+<p>AMQP，高级消息队列协议，也是一个消息代理的规范，兼容JMS，RabbitMQ是AMQP的实现。</p>
+</blockquote>
+<h2 id="二，RabbitMQ的安装和使用"><a href="#二，RabbitMQ的安装和使用" class="headerlink" title="二，RabbitMQ的安装和使用"></a>二，<code>RabbitMQ</code>的安装和使用</h2><h3 id="1，下载和安装"><a href="#1，下载和安装" class="headerlink" title="1，下载和安装"></a>1，下载和安装</h3><p>到<code>RabbitMQ</code>官网下载安装包：<a target="_blank" rel="noopener" href="https://www.rabbitmq.com/">https://www.rabbitmq.com/</a></p>
+<p>在安装<code>RabbitMQ</code>之前，首先需要安装<code>ErLang</code>包，因为<code>RabbitMQ</code>是基于<code>ErLang</code>语言的。</p>
+<p><font color="red">下载的<code>RabbitMQ</code>安装包和<code>RabbitMQ</code>安装包的版本要一致，否则环境会搭建失败，出现很多问题。</font></p>
+<p>如果查看对应一致的版本？</p>
+<p>在<code>RabbitMQ</code>官网有和<code>ErLang</code>版本对照表。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191226171652197.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>本次安装选择在<code>Linux</code>虚拟机进行安装，在安装之前要准备三个安装包。</p>
+<p><em>ErLang的 rpm包</em></p>
+<blockquote>
+<p>RabbitMQ是Erlang语言编写，所以Erang环境必须要有，注：Erlang环境一定要与RabbitMQ版本匹配：<a target="_blank" rel="noopener" href="https://www.rabbitmq.com/which-erlang.html">https://www.rabbitmq.com/which-erlang.html</a></p>
+<p>Erlang下载地址：<a target="_blank" rel="noopener" href="https://www.rabbitmq.com/releases/erlang/%EF%BC%88%E6%A0%B9%E6%8D%AE%E8%87%AA%E8%BA%AB%E9%9C%80%E6%B1%82%E5%8F%8A%E5%8C%B9%E9%85%8D%E5%85%B3%E7%B3%BB%EF%BC%8C%E4%B8%8B%E8%BD%BD%E5%AF%B9%E5%BA%94rpm%E5%8C%85%EF%BC%89">https://www.rabbitmq.com/releases/erlang/（根据自身需求及匹配关系，下载对应rpm包）</a></p>
+</blockquote>
+<p><em>RabbitMQ的 rpm包</em></p>
+<blockquote>
+<p>RabbitMQ下载地址：<a target="_blank" rel="noopener" href="https://www.rabbitmq.com/releases/rabbitmq-server/%EF%BC%88%E6%A0%B9%E6%8D%AE%E8%87%AA%E8%BA%AB%E9%9C%80%E6%B1%82%E5%8F%8A%E5%8C%B9%E9%85%8D%E5%85%B3%E7%B3%BB%EF%BC%8C%E4%B8%8B%E8%BD%BD%E5%AF%B9%E5%BA%94rpm%E5%8C%85%EF%BC%89">https://www.rabbitmq.com/releases/rabbitmq-server/（根据自身需求及匹配关系，下载对应rpm包）</a></p>
+</blockquote>
+<p><em>socat的 rpm包</em></p>
+<blockquote>
+<p>　rabbitmq安装依赖于socat，所以需要下载socat。</p>
+<p>　socat下载地址：<a target="_blank" rel="noopener" href="http://repo.iotti.biz/CentOS/6/x86_64/[socat-1.7.3.2-1.el6.lux.x86_64.rpm](http://repo.iotti.biz/CentOS/6/x86_64/socat-1.7.3.2-1.el6.lux.x86_64.rpm)">http://repo.iotti.biz/CentOS/6/x86_64/[socat-1.7.3.2-1.el6.lux.x86_64.rpm](http://repo.iotti.biz/CentOS/6/x86_64/socat-1.7.3.2-1.el6.lux.x86_64.rpm)</a></p>
+<p>　根据自身需求下载对应系统socat依赖：(<a target="_blank" rel="noopener" href="http://repo.iotti.biz/CentOS/">http://repo.iotti.biz/CentOS/</a>)</p>
+</blockquote>
+<p>下载好之后的rpm包</p>
+<p><img src="https://img-blog.csdnimg.cn/20191226171700161.png" alt="在这里插入图片描述"></p>
+<p>打开<code>Linux</code>虚拟机，进入<code>/usr/local/software</code>文件夹，使用<code>xftp</code>工具把<code>rpm</code>安装包上传到该文件夹下。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191226171707442.png" alt="在这里插入图片描述"></p>
+<p><font color="red">安装顺序：1：erlang    2：socat（密钥）  3：rabbitmq   </font></p>
+<p>首先安装<code>erlang</code>的<code>rpm</code>安装包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[fanjiangfeng@localhost software]$ rpm -ivh erlang-18.3-1.el7.centos.x86_64.rpm </span><br></pre></td></tr></table></figure>
+
+<p>注意一点：要切换到<code>root</code>用户才有权限安装，否则没有权限。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191226171713486.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>其次安装<code>socat</code>的<code>rpm</code>安装包（该密钥为<code>RabbitMQ</code>服务所依赖，如果不安装的话，<code>rabbitMQ</code>会安装失败）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost software]# rpm -ivh socat-1.7.3.2-1.el6.lux.x86_64.rpm </span><br></pre></td></tr></table></figure>
+
+<p>最后安装<code>RabbitMQ</code>的<code>rpm</code>安装包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost software]# rpm -ivh rabbitmq-server-3.6.5-1.noarch.rpm </span><br></pre></td></tr></table></figure>
+
+<p>安装到此结束。</p>
+<h3 id="2，修改配置文件"><a href="#2，修改配置文件" class="headerlink" title="2，修改配置文件"></a>2，修改配置文件</h3><p>安装完成后，<code>rabbitmq</code>会默认安装到<code>/usr/lib/rabbitmq/lib</code>路径下。</p>
+<p>进入<code>ebin</code>目录，修改配置文件<code>rabbit.app</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ebin]# pwd</span><br><span class="line">&#x2F;usr&#x2F;lib&#x2F;rabbitmq&#x2F;lib&#x2F;rabbitmq_server-3.6.5&#x2F;ebin</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim rabbit.app</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20191226171719762.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>找到下面这个地方</p>
+<p><img src="https://img-blog.csdnimg.cn/20191226171722663.png" alt="在这里插入图片描述"></p>
+<p>修改为</p>
+<p><img src="https://img-blog.csdnimg.cn/201912261717349.png" alt="在这里插入图片描述"></p>
+<p><code>RabbitMQ</code>安装就完成了。</p>
+<h3 id="3，命令行与管控台-基础操作"><a href="#3，命令行与管控台-基础操作" class="headerlink" title="3，命令行与管控台-基础操作"></a>3，命令行与管控台-基础操作</h3><blockquote>
+<p>rabbitmqctl stop_app   关闭应用</p>
+<p>rabbitmqctl start_app   开启应用</p>
+<p>rabbitmqctl status   节点状态</p>
+<p>rabbitmqctl add_user username password    添加用户</p>
+<p>rabbitmqctl list_users    列出所有用户</p>
+<p>rabbitmqctl delete_user usernmae   删除用户</p>
+<p>rabbitmqctl clear_permissions -p vhostpath username    清除用户权限</p>
+</blockquote>
+<blockquote>
+<p>rabbitmqctl add_vhost vhostpath   创建虚拟主机</p>
+<p>rabbitmqctl list_vhosts    列出所有虚拟主机</p>
+<p>rabbitmqctl list_permissions -p vhostpath   列出虚拟主机上所有权限</p>
+<p>rabbitmqctl delete_vhost vhostpath   删除虚拟主机</p>
+<p>rabbitmqctl list_queues    查看所有队列信息</p>
+<p>rabbitmqctl -p vhostpath purge_queue blue   清除队列里的消息</p>
+</blockquote>
+<h3 id="4，命令行与管控台-高级操作"><a href="#4，命令行与管控台-高级操作" class="headerlink" title="4，命令行与管控台-高级操作"></a>4，命令行与管控台-高级操作</h3><blockquote>
+<p>rabbitmqctl reset   移除所有数据，要在rabbitmqctl stop_app 之后使用</p>
+<p>rabbitmqctl join_cluster <clusternode> [–ram]  组成集群命令</p>
+<p>rabbitmqctl cluster_status   查看集群状态</p>
+</blockquote>
+<h3 id="5，来些基本操作"><a href="#5，来些基本操作" class="headerlink" title="5，来些基本操作"></a>5，来些基本操作</h3><p>首先启动<code>rabbitmq</code>服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost software]# rabbitmqctl start_app</span><br></pre></td></tr></table></figure>
+
+<p><font color="red">异常：Error: unable to connect to node rabbit@localhost: nodedown</font></p>
+<p>如果出现上面的异常的话，解决方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable rabbitmq-server.service</span><br><span class="line">systemctl start rabbitmq-server.service</span><br><span class="line">rabbitmqctl start_app</span><br><span class="line">## 成功启动rabbitmq</span><br><span class="line">## 启动neutrou-server，openstack恢复正常</span><br><span class="line">systemctl start neutron-server.service</span><br></pre></td></tr></table></figure>
+
+<p>基本操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost software]# lsof -i:5672   查看rabbitmq是否启动（此为已启动的状态）</span><br><span class="line">COMMAND  PID     USER   FD   TYPE DEVICE SIZE&#x2F;OFF NODE NAME</span><br><span class="line">beam    6172 rabbitmq   48u  IPv6  73786      0t0  TCP *:amqp (LISTEN)</span><br><span class="line">[root@localhost software]# rabbitmqctl list_queues  查看消息队列（空，因为刚安装的）</span><br><span class="line">Listing queues ...</span><br><span class="line">[root@localhost software]# rabbitmqctl list_vhosts  查看虚拟主机（空）</span><br><span class="line">Listing vhosts ...</span><br><span class="line">&#x2F;</span><br><span class="line">[root@localhost software]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="6，管控台"><a href="#6，管控台" class="headerlink" title="6，管控台"></a>6，管控台</h3><p>啥是管控台？</p>
+<p><font color="blue">说白了，命令行是命令的方式进行管理，而管控台则是可视化视图的方式进行管理，当然管控台更方便了。只要是<code>rabbitmqctl</code>命令行有的，管控台全都有！</font></p>
+<p>进入<code>/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.5/sbin</code>的目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost sbin]# ls</span><br><span class="line">rabbitmqctl  rabbitmq-defaults  rabbitmq-env  rabbitmq-plugins  rabbitmq-server</span><br></pre></td></tr></table></figure>
+
+<p>运行命令查看已安装的插件列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost sbin]# rabbitmq-plugins list</span><br><span class="line"> Configured: E &#x3D; explicitly enabled; e &#x3D; implicitly enabled</span><br><span class="line"> | Status:   * &#x3D; running on rabbit@localhost</span><br><span class="line"> |&#x2F;</span><br><span class="line">[  ] amqp_client                       3.6.5</span><br><span class="line">[  ] cowboy                            1.0.3</span><br><span class="line">[  ] cowlib                            1.0.1</span><br><span class="line">[  ] mochiweb                          2.13.1</span><br><span class="line">[  ] rabbitmq_amqp1_0                  3.6.5</span><br><span class="line">[  ] rabbitmq_auth_backend_ldap        3.6.5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>运行命令启动<code>RabbitMQ</code>的管控台</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost sbin]# rabbitmq-plugins enable rabbitmq_management</span><br></pre></td></tr></table></figure>
+
+<p>然后管控台就启动了，在浏览器的url地址栏输入虚拟机的 ip 和端口号为15672，就进入了管控台。</p>
+<p>默认端口号就是15672。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191226171742219.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>账号密码默认为<code>guest</code>，登录</p>
+<p><img src="https://img-blog.csdnimg.cn/20191226171751570.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="7，消息队列的说明"><a href="#7，消息队列的说明" class="headerlink" title="7，消息队列的说明"></a>7，消息队列的说明</h3><p>下图是一个队列。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200314182351130.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><font color="red">上图队列说明：</font></p>
+<p>1，第一个<code>msg</code>是要发送的消息；</p>
+<p>2，<code>exchange.direct</code>是交换机，<code>direct</code>模式的交换机，它会规定一个<code>Routing Key</code>，如果队列的<code>Routing Key</code>和交换机指定的<code>Routing Key</code>一样，那么会把消息发送给该队列，对不上号的肯定就不会发送了。</p>
+<p>3，<code>exchange.fanout</code>也是交换机，<code>fanout</code>模式的交换机，它不会规定<code>Routing Key</code>，类似广播模式，该交换机将发送消息到每一个队列中去。</p>
+<p>4，中间绿色的当然是四个队列了。</p>
+<p>5，<code>exchange.topic</code>负责从队列中取信息，它和队列的关系和交换机和队列的关系很像，都是相互绑定，但是不同的是，交换机是发送，而它是接收。</p>
+<p><font color="blue">China.#和*.news是模糊匹配原则，绑定可以模糊匹配，可以对应多个队列。</font></p>
+<h2 id="三，springboot集成rabbitmq"><a href="#三，springboot集成rabbitmq" class="headerlink" title="三，springboot集成rabbitmq"></a>三，springboot集成rabbitmq</h2><p>前提是要在管控台添加消息队列完成之后才行。</p>
+<h3 id="1，管控台添加消息队列"><a href="#1，管控台添加消息队列" class="headerlink" title="1，管控台添加消息队列"></a>1，管控台添加消息队列</h3><p>第一步，先添加一个队列</p>
+<p><img src="https://img-blog.csdnimg.cn/20200314182408554.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>第二步，添加一个交换机</p>
+<p><img src="https://img-blog.csdnimg.cn/20200314182417674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>第三步，添加一个消息接收者（<code>topic</code>模式的交换机）</p>
+<p><img src="https://img-blog.csdnimg.cn/20200314182427219.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>第四步，绑定<code>direct</code>交换机和队列</p>
+<p>在管控台点击该交换机，进入然后绑定队列。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200314182438187.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>第五步，绑定<code>topic</code>（接收者）交换机和队列，同上。</p>
+<p><font color="red">测试上面的消息队列是否创建成功？</font></p>
+<p>点击交换机，发送消息</p>
+<p><img src="https://img-blog.csdnimg.cn/20200314182451749.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>然后回到队列，查看消息</p>
+<p><img src="https://img-blog.csdnimg.cn/20200314182506485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>证明队列已经创建成功！</p>
+<p>然后就可以落实到项目中去了！</p>
+<h3 id="2，springboot发送消息到队列"><a href="#2，springboot发送消息到队列" class="headerlink" title="2，springboot发送消息到队列"></a>2，springboot发送消息到队列</h3><p>新建一个<code>springboot</code>项目，导入坐标</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&lt;dependency&gt;</span></span><br><span class="line">          <span class="attr">&lt;groupId&gt;org.springframework.amqp&lt;/groupId&gt;</span></span><br><span class="line">          <span class="attr">&lt;artifactId&gt;spring-rabbit&lt;/artifactId&gt;</span></span><br><span class="line">      <span class="attr">&lt;/dependency&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在<code>application.yml</code>配置文件中配置<code>rabbitmq</code>的主机地址</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">rabbitmq:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.186</span><span class="number">.128</span></span><br></pre></td></tr></table></figure>
+
+<p>在启动类上加上<code>RabbitMQ</code>的注解<code>@EnableRabbit</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">   RabbitTemplate rabbitTemplate;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">           <span class="comment">//第一个参数：交换机名字  第二个参数：Routing Key的值  第三个参数：传递的消息对象</span></span><br><span class="line">      rabbitTemplate.convertAndSend(<span class="string">&quot;test.direct&quot;</span>,<span class="string">&quot;test&quot;</span>,<span class="string">&quot;springboot发来的消息&quot;</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行测试类，回到<code>rabbitmq</code>的管控台，查看名为<code>test</code>的队列收到消息。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200314182531743.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>还可以发送一个对象，前提是该对象必须序列化，不然会抛异常。可是虽然能够发送成功，但拿到的是字节流，因此发送对象可以采用<code>json</code>串的方式。</p>
+<p><font color="red">对象中必须加入无参构造才能保证序列化成功，否则会序列化失败。</font></p>
+<p><img src="https://img-blog.csdnimg.cn/20200314182639921.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>先写一个配置类，该配置类是规定使用<code>json</code>格式发送。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Jackson2JsonMessageConverter <span class="title">messageConverter</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Jackson2JsonMessageConverter();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>User</code>实体类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String address;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(String name, String address)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.address = address;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+<p>发送消息测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">    RabbitTemplate rabbitTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="comment">//第一个参数：交换机名字  第二个参数：Routing Key的值  第三个参数：传递的消息对象</span></span><br><span class="line">     rabbitTemplate.convertAndSend(<span class="string">&quot;test.direct&quot;</span>,<span class="string">&quot;test&quot;</span>,<span class="keyword">new</span> User(<span class="string">&quot;樊江锋&quot;</span>,<span class="string">&quot;河南郑州&quot;</span>));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>查看管控台，已经拿到了该<code>json</code>格式的对象</p>
+<h3 id="3，springboot从队列中接收消息"><a href="#3，springboot从队列中接收消息" class="headerlink" title="3，springboot从队列中接收消息"></a>3，springboot从队列中接收消息</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">receive</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="comment">//指定队列名</span></span><br><span class="line">      Object test = rabbitTemplate.receiveAndConvert(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">      System.err.println(test);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4，springboot监听接收到的消息"><a href="#4，springboot监听接收到的消息" class="headerlink" title="4，springboot监听接收到的消息"></a>4，springboot监听接收到的消息</h3><p>当监听到队列中收到消息时，然后可以做一些处理。下面的监听在项目启动之后会开启，前提是启动类要加<code>@EnableRabbit</code>注解。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//监听接收到的数据（请求体）</span></span><br><span class="line">   <span class="meta">@RabbitListener(queues = &quot;test&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receive</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;收到消息：&quot;</span>+user);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//监听接收到的请求头</span></span><br><span class="line">   <span class="meta">@RabbitListener(queues = &quot;test&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receive2</span><span class="params">(Message message)</span></span>&#123;</span><br><span class="line">       System.out.println(message.getBody());</span><br><span class="line">       System.out.println(message.getMessageProperties());</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试一下监听，给<code>test</code>队列发送一条消息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">   RabbitTemplate rabbitTemplate;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="comment">//第一个参数：交换机名字  第二个参数：Routing Key的值  第三个参数：传递的消息对象</span></span><br><span class="line">   rabbitTemplate.convertAndSend(<span class="string">&quot;test.direct&quot;</span>,<span class="string">&quot;test&quot;</span>,<span class="keyword">new</span> User(<span class="string">&quot;樊江锋&quot;</span>,<span class="string">&quot;河南郑州&quot;</span>));</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后看控制台，会打印</p>
+<blockquote>
+<p>收到消息：User{name=’樊江锋’, address=’河南郑州’}</p>
+</blockquote>
+<p>而且控制台队列显示未读消息是0，显然已经删除了。</p>
+<h3 id="5，amqp管理组件"><a href="#5，amqp管理组件" class="headerlink" title="5，amqp管理组件"></a>5，amqp管理组件</h3><p><code>amqp</code>是用来管理组件的，上面的组件（交换机，队列，以及交换机和队列之间的绑定）都是在管控台操作的，这里使用<code>amqp</code>来管理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">   AmqpAdmin amqpAdmin;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">create</span><span class="params">()</span></span>&#123;</span><br><span class="line">       amqpAdmin.declareExchange(<span class="keyword">new</span> DirectExchange(<span class="string">&quot;test&quot;</span>));<span class="comment">//创建一个名为test的direct模式的交换机</span></span><br><span class="line">       amqpAdmin.declareQueue(<span class="keyword">new</span> Queue(<span class="string">&quot;test&quot;</span>,<span class="keyword">true</span>));<span class="comment">//创建一个名为test的队列</span></span><br><span class="line"></span><br><span class="line">       <span class="comment">//第一个参数：绑定的队列名</span></span><br><span class="line">       <span class="comment">//第二个参数：绑定的类型（选择队列）</span></span><br><span class="line">       <span class="comment">//第三个参数：交换机名</span></span><br><span class="line">       <span class="comment">//第四个参数：Routing Key的值</span></span><br><span class="line">       <span class="comment">//第五个参数：需要传的参数，这里不需要</span></span><br><span class="line">       amqpAdmin.declareBinding(<span class="keyword">new</span> Binding(<span class="string">&quot;test&quot;</span>,Binding.DestinationType.QUEUE,<span class="string">&quot;topic_test&quot;</span>,<span class="string">&quot;routingkey&quot;</span>,<span class="keyword">null</span>));</span><br><span class="line">       amqpAdmin.deleteExchange(<span class="string">&quot;test&quot;</span>);<span class="comment">//删除交换机（参数：交换机名）</span></span><br><span class="line">       amqpAdmin.deleteQueue(<span class="string">&quot;test&quot;</span>);<span class="comment">//删除队列（参数：队列名）</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>到这里结束！</p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    BDP数据库事务的使用 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  BDP数据库事务
+  ">
+  
+  <meta name="author" content="樊同学">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 62 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 29 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1593940855000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1593940855000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>BDP数据库事务的使用</h1>
+    <p>[TOC]</p>
+<h2 id="一、数据库事务简介"><a href="#一、数据库事务简介" class="headerlink" title="一、数据库事务简介"></a>一、数据库事务简介</h2><ol>
+<li>定义</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%BA%93/103728"> 数据库</a>事务( transaction)是访问并可能操作各种<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E9%A1%B9/3227309">数据项</a>的一个数据库操作序列，这些操作要么全部执行,要么全部不执行，是一个不可分割的工作单位。事务由事务开始与事务结束之间执行的全部数据库操作组成。</li>
+</ul>
+<ol start="2">
+<li>理解</li>
+</ol>
+<ul>
+<li>1.数据库事务可以包含一个或多个数据库操作,但这些操作构成一个逻辑上的整体。</li>
+<li>2.构成逻辑整体的这些数据库操作,要么全部执行成功,要么全部不执行。</li>
+<li>3.构成事务的所有操作,要么全都对数据库产生影响,要么全都不产生影响,即不管事务是否执行成功,数据库总能保持一致性状态。</li>
+<li>4.以上即使在数据库出现故障以及并发事务存在的情况下依然成立。</li>
+</ul>
+<h2 id="二、开启数据库事务"><a href="#二、开启数据库事务" class="headerlink" title="二、开启数据库事务"></a>二、开启数据库事务</h2><p>BDP框架使用spring boot开发的，开启数据库事务，需要在spring boot启动上面加上注解**@EnableTransactionManagement<strong>，就可以启用数据库事务。如果在方法 要开启事务，需要在方法上面加上注解</strong>@Transactional(rollbackFor = Exception.class)**，可以控制方法中操作全部执行成功，或者全部执行失败。</p>
+<ol>
+<li>spring boot开启事务支持，核心代码如下。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="comment">//开启事务</span></span><br><span class="line"><span class="meta">@EnableTransactionManagement</span></span><br><span class="line"><span class="meta">@MapperScan(&#123;&quot;com.bdsoft.*.dao&quot;&#125;)</span></span><br><span class="line"><span class="meta">@EnableAsync</span>   <span class="comment">//开启异步注解功能</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BDPWebApplication</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger logger = LoggerFactory.getLogger(BDPWebApplication.class);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ConfigurableApplicationContext applicationContext = SpringApplication.run(BDPWebApplication.class, args);</span><br><span class="line">        printSystemInfo(applicationContext);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li>@Transactional(rollbackFor = Exception.class)，遇到异常触发事务回滚机制</li>
+</ol>
+<ul>
+<li>结合用户授权角色，介绍数据库事务使用。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">assignRoles</span><span class="params">(String userId, String... roleIds)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 新增之前先删除当前人员的角色信息</span></span><br><span class="line">       QueryWrapper&lt;SAuRoleUser&gt; queryWrapper = <span class="keyword">new</span> QueryWrapper&lt;&gt;();</span><br><span class="line">       queryWrapper.eq(<span class="string">&quot;USERID&quot;</span>, userId);</span><br><span class="line">       <span class="comment">//操作数据库，删除该用户当前角色</span></span><br><span class="line">       roleUserMapper.delete(queryWrapper);</span><br><span class="line">       <span class="comment">//再给用户赋予新的权限</span></span><br><span class="line">       List&lt;SAuRoleUser&gt; roleUserList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       <span class="keyword">for</span> (String roleId : roleIds) &#123;</span><br><span class="line">           SAuRoleUser roleUser = <span class="keyword">new</span> SAuRoleUser();</span><br><span class="line">           roleUser.setUserId(userId);</span><br><span class="line">           roleUser.setRoleId(roleId);</span><br><span class="line">           roleUser.setId(UUIDUtil.getUUid());</span><br><span class="line">           roleUser.setCreateTime(<span class="keyword">new</span> Date());</span><br><span class="line">           roleUserList.add(roleUser);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">this</span>.saveBatch(roleUserList);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用户授权功能逻辑，简单说明先删除该用户拥有角色，再给用户添加新的角色。删除用户旧的角色，再添加新的，这两个操作需要同时全部执行成功，全部执行失败，这种业务逻辑，可以选择使用数据事务完成。如果用户赋予角色过程代码抛出异常，会触发事务回滚机制，会撤销对数据库数据修改。</li>
+<li>异常触发事务回滚。代码中异常需要抛出去，才能触发回滚。也可以try捕获异常，再catch中再抛出异常，或者手动在catch中执行执行事务回滚。</li>
+</ul>
+<ol start="3">
+<li>多个表操作，catch中手动回滚事务</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 模拟删除角色用户</span></span><br><span class="line"><span class="comment">    * 手动回滚事务</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> roleId</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@Transactional</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">mockDeleteRoleUser</span><span class="params">(String roleId)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           <span class="keyword">final</span> <span class="keyword">boolean</span> delRole = roleService.deleteRoleId(roleId);</span><br><span class="line">           <span class="keyword">if</span>(!delRole)&#123;</span><br><span class="line">               <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;删除角色失败！&quot;</span>);</span><br><span class="line">           &#125;</span><br><span class="line">           List&lt;String&gt; userIds = roleUserService.getUsersByRoleId(roleId);</span><br><span class="line">           userIds.forEach(userId -&gt; &#123;</span><br><span class="line">               userService.removeById(userId);</span><br><span class="line">           &#125;);</span><br><span class="line">       &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">           <span class="comment">//手动让当前事务回滚</span></span><br><span class="line">           TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在执行复杂业务逻辑，可以主动在失败时候抛出异常，try捕获异常，catch中手动回滚事务。</li>
+</ul>
+<h2 id="三、数据库事务使用注意"><a href="#三、数据库事务使用注意" class="headerlink" title="三、数据库事务使用注意"></a>三、数据库事务使用注意</h2><ul>
+<li>Spring 基于注解的声明式事物 <strong>@Transactional</strong> 默认情况下只会对运行期异常(java.lang.RuntimeException及其子类)和 Error 进行回滚。 **@Transactional(rollbackFor = Exception.class)**可以指定异常回滚类型。</li>
+<li>数据库引擎要支持事物。如果是<strong>MySQL</strong>，需要使用<strong>InnoDB</strong>存储引擎。</li>
+<li>@Transactional 只能被应用到<strong>public</strong>方法上, 对于其它<strong>非public</strong>的方法,如果标记了**@Transactional**也不会报错,但方法没有事务功能.</li>
+</ul>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

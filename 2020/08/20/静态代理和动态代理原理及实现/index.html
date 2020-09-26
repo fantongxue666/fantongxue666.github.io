@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    静态代理和动态代理的实现原理 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  代理模式
+  ">
+  
+  <meta name="author" content="樊同学">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 62 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 29 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1597915255000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1597915255000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>静态代理和动态代理的实现原理</h1>
+    <h1 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h1><p>静态代理要先抽象出一个接口，并且写一个实现类实现这个接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//主业务接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SomeService</span> </span>&#123;</span><br><span class="line"><span class="function">String <span class="title">first</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">String <span class="title">second</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//目标类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SomeServiceImpl</span> <span class="keyword">implements</span> <span class="title">SomeService</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">first</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;I Love You&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">second</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;China&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后写静态代理类，要求静态代理类要求目标类共同实现主业务接口 。这里的代理类实现的是把目标类的某些方法的返回值变成大写。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SomeServiceProxy</span> <span class="keyword">implements</span> <span class="title">SomeService</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> SomeService target;</span><br><span class="line">	<span class="comment">//提供无参构造器和带参构造器传递方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">SomeServiceProxy</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">SomeServiceProxy</span><span class="params">(SomeService target)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.target = target;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">first</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">return</span> target.first();<span class="comment">//正常输出</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">second</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">return</span> target.second().toUpperCase();<span class="comment">//变大写</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>写一个测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">	<span class="comment">//定义目标对象</span></span><br><span class="line">	SomeService target=<span class="keyword">new</span> SomeServiceImpl();</span><br><span class="line">	<span class="comment">//定义目标对象的代理对象，把目标对象传进去</span></span><br><span class="line">	SomeService serviceProxy=<span class="keyword">new</span> SomeServiceProxy(target);</span><br><span class="line">	String result1=serviceProxy.first();</span><br><span class="line">	String result2=serviceProxy.second();</span><br><span class="line">	System.out.println(result1+<span class="string">&quot;,&quot;</span>+result2);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/20190703162255139.png" alt="在这里插入图片描述"><br>执行了代理类之后，second方法的返回值变成了大写。</p>
+<h1 id="jdk动态代理"><a href="#jdk动态代理" class="headerlink" title="jdk动态代理"></a>jdk动态代理</h1><p>首先jdk动态代理和静态代理一样，都需要先抽象出来一个接口并实现这个接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//主业务接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SomeService</span> </span>&#123;</span><br><span class="line"><span class="function">String <span class="title">first</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">String <span class="title">second</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//目标类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SomeServiceImpl</span> <span class="keyword">implements</span> <span class="title">SomeService</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">first</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;I Love You&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">second</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;China&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后写测试类，动态代理在测试类中创建（Proxy类的newProxyInstance方法）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">	<span class="comment">//定义目标对象</span></span><br><span class="line">	<span class="keyword">final</span> SomeService target=<span class="keyword">new</span> SomeServiceImpl();</span><br><span class="line">	<span class="comment">//定义目标对象的代理对象</span></span><br><span class="line">	SomeService serviceProxy=(SomeService)Proxy.newProxyInstance(</span><br><span class="line">			target.getClass().getClassLoader(),<span class="comment">//第一个参数：目标类的类加载器</span></span><br><span class="line">			target.getClass().getInterfaces(),<span class="comment">//第二个参数：目标类所实现的所有接口</span></span><br><span class="line">			<span class="keyword">new</span> InvocationHandler() &#123;		<span class="comment">//第三个参数：内部匿名类</span></span><br><span class="line">				<span class="comment">/**</span></span><br><span class="line"><span class="comment">				 * 增强就在这里完成</span></span><br><span class="line"><span class="comment">				 * proxy:代理对象</span></span><br><span class="line"><span class="comment">				 * method：目标方法</span></span><br><span class="line"><span class="comment">				 * args：目标方法的参数列表</span></span><br><span class="line"><span class="comment">				 */</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></span><br><span class="line"><span class="function">						<span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">					<span class="comment">// 内部类使用外部类的成员变量，外部类的成员变量必须声明为final类型，否则报错</span></span><br><span class="line">					Object result = method.invoke(target, args);</span><br><span class="line">					<span class="comment">//指定操作的是哪个方法</span></span><br><span class="line">					<span class="keyword">if</span> (<span class="string">&quot;second&quot;</span>.equals(method.getName())) &#123;</span><br><span class="line">						result = ((String) result).toUpperCase();</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">return</span> result;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">	String result1=serviceProxy.first();</span><br><span class="line">	String result2=serviceProxy.second();</span><br><span class="line">	System.out.println(result1+<span class="string">&quot;,&quot;</span>+result2);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/20190703162910924.png" alt="在这里插入图片描述"><br>second方法的返回值也变成了大写。</p>
+<h1 id="CGLIB动态代理"><a href="#CGLIB动态代理" class="headerlink" title="CGLIB动态代理"></a>CGLIB动态代理</h1><p><font color=red><strong>使用JDK的Proxy实现代理，要求目标类和代理类实现相同的接口，若目标类不存在接口，则无法使用该方式实现。</strong></font>对于无接口的类，要为其创建动态代理，就要使用CGLIB实现。CGLIB代理的生成原理是生成目标类的子类，而子类是增强过的，这个子类对象就是代理对象。<br>所以，使用CGLIB动态代理，要求目标类必须能够被继承，即不能是final的类。</p>
+<p>CGLIB是一个外部项目，首先要导入jar包<br><img src="https://img-blog.csdnimg.cn/20190703163552522.png" alt="在这里插入图片描述"></p>
+<p>这里不需要抽象一个接口，只写一个主业务类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//主业务类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SomeService</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">first</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;I Love You&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">second</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;China&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后写一个CGLIB动态代理创建工厂</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//要实现MethodInterceptor方法，返回的类型是回调函数，所以cglib_ProxyFactory 类本身也为回调函数对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">cglib_ProxyFactory</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> SomeService target;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">cglib_ProxyFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">cglib_ProxyFactory</span><span class="params">(SomeService target)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.target = target;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//用于创建cglib代理对象</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> SomeService <span class="title">myProxyCreator</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//增强器</span></span><br><span class="line">		Enhancer enhancer=<span class="keyword">new</span> Enhancer();</span><br><span class="line">		<span class="comment">//指定父类，即要增强的目标类</span></span><br><span class="line">		enhancer.setSuperclass(SomeService.class);</span><br><span class="line">		<span class="comment">//指定回调函数对象</span></span><br><span class="line">		enhancer.setCallback(<span class="keyword">this</span>);</span><br><span class="line">		<span class="comment">//创建cglib代理对象</span></span><br><span class="line">		<span class="keyword">return</span> (SomeService) enhancer.create();</span><br><span class="line">	&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object obj, Method method, Object[] args,</span></span></span><br><span class="line"><span class="function"><span class="params">		MethodProxy proxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">	Object result = method.invoke(target, args);</span><br><span class="line">	<span class="keyword">if</span> (<span class="string">&quot;second&quot;</span>.equals(method.getName())) &#123;</span><br><span class="line">		result = ((String) result).toUpperCase();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再写一个测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">	<span class="comment">//定义目标对象</span></span><br><span class="line">	<span class="keyword">final</span> SomeService target=<span class="keyword">new</span> SomeService();</span><br><span class="line">	<span class="comment">//定义目标对象的代理对象</span></span><br><span class="line">	SomeService serviceProxy=<span class="keyword">new</span> cglib_ProxyFactory(target).myProxyCreator();</span><br><span class="line">	String result1=serviceProxy.first();</span><br><span class="line">	String result2=serviceProxy.second();</span><br><span class="line">	System.out.println(result1+<span class="string">&quot;,&quot;</span>+result2);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><img src="https://img-blog.csdnimg.cn/20190703163937565.png" alt="在这里插入图片描述"><br>second方法的返回值也变成了大写。</p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
