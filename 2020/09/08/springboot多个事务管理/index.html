@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    springboot多个事务管理 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  springboot 多事务
+  ">
+  
+  <meta name="author" content="樊同学">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 33 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 29 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 10 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1599556855000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1599556855000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>springboot多个事务管理</h1>
+    <p>参考上篇文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44001965/article/details/94627843">配置多数据源</a><br><em>Springboot使用jta管理多个事务</em>。</p>
+<h1 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- jta 管理多个数据源的事务--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-boot-starter-jta-atomikos&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="在application-properties配置文件中对两个数据库的配置内容稍作修改。"><a href="#在application-properties配置文件中对两个数据库的配置内容稍作修改。" class="headerlink" title="在application.properties配置文件中对两个数据库的配置内容稍作修改。"></a>在application.properties配置文件中对两个数据库的配置内容稍作修改。</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">mysql.datasource.test1.url = jdbc:mysql:<span class="comment">//localhost:3306/test1?useUnicode=true&amp;characterEncoding=utf-8</span></span><br><span class="line">mysql.datasource.test1.username = root</span><br><span class="line">mysql.datasource.test1.password = <span class="number">123456</span></span><br><span class="line"></span><br><span class="line">mysql.datasource.test1.minPoolSize = <span class="number">3</span></span><br><span class="line">mysql.datasource.test1.maxPoolSize = <span class="number">25</span></span><br><span class="line">mysql.datasource.test1.maxLifetime = <span class="number">20000</span></span><br><span class="line">mysql.datasource.test1.borrowConnectionTimeout = <span class="number">30</span></span><br><span class="line">mysql.datasource.test1.loginTimeout = <span class="number">30</span></span><br><span class="line">mysql.datasource.test1.maintenanceInterval = <span class="number">60</span></span><br><span class="line">mysql.datasource.test1.maxIdleTime = <span class="number">60</span></span><br><span class="line"></span><br><span class="line">mysql.datasource.test1.testQuery = select <span class="number">1</span></span><br><span class="line"># Mysql 2</span><br><span class="line">mysql.datasource.test2.url =jdbc:mysql:<span class="comment">//localhost:3306/test2?useUnicode=true&amp;characterEncoding=utf-8</span></span><br><span class="line">mysql.datasource.test2.username =root</span><br><span class="line">mysql.datasource.test2.password =<span class="number">123456</span></span><br><span class="line">mysql.datasource.test2.minPoolSize = <span class="number">3</span></span><br><span class="line">mysql.datasource.test2.maxPoolSize = <span class="number">25</span></span><br><span class="line">mysql.datasource.test2.maxLifetime = <span class="number">20000</span></span><br><span class="line">mysql.datasource.test2.borrowConnectionTimeout = <span class="number">30</span></span><br><span class="line">mysql.datasource.test2.loginTimeout = <span class="number">30</span></span><br><span class="line">mysql.datasource.test2.maintenanceInterval = <span class="number">60</span></span><br><span class="line">mysql.datasource.test2.maxIdleTime = <span class="number">60</span></span><br><span class="line">mysql.datasource.test2.testQuery = select <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h1 id="在java文件夹下新建dbconfig包"><a href="#在java文件夹下新建dbconfig包" class="headerlink" title="在java文件夹下新建dbconfig包"></a>在java文件夹下新建dbconfig包</h1><p>里面分别写两个类和application.properties配置文件的信息相对应，配置文件中共配置了两个数据源，那么dbconfig包中就需要写两个类，分别是DBconfig1和DBconfig2，下面省略了set和get方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties(&quot;mysql.datasource.test1&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBConfig1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> minPoolSize;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxPoolSize;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxLifetime;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> borrowConnectionTimeout;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> loginTimeout;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maintenanceInterval;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxIdleTime;</span><br><span class="line">    <span class="keyword">private</span> String testQuery;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties(&quot;mysql.datasource.test2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBConfig2</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> minPoolSize;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxPoolSize;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxLifetime;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> borrowConnectionTimeout;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> loginTimeout;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maintenanceInterval;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxIdleTime;</span><br><span class="line">    <span class="keyword">private</span> String testQuery;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="在上篇文章中已经配置了数据源的两个配置类，这里需要修改一下。"><a href="#在上篇文章中已经配置了数据源的两个配置类，这里需要修改一下。" class="headerlink" title="在上篇文章中已经配置了数据源的两个配置类，这里需要修改一下。"></a>在上篇文章中已经配置了数据源的两个配置类，这里需要修改一下。</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span><span class="comment">//注解到springboot容器中</span></span><br><span class="line"><span class="meta">@MapperScan(basePackages=&quot;com.gyf.test1.mapper&quot;,sqlSessionFactoryRef=&quot;test1SqlSessionFactory&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataSource01</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置数据源</span></span><br><span class="line">    <span class="meta">@Primary</span></span><br><span class="line">    <span class="meta">@Bean(name = &quot;test1DataSource&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">testDataSource</span><span class="params">(DBConfig1 testConfig)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        MysqlXADataSource mysqlXaDataSource = <span class="keyword">new</span> MysqlXADataSource();</span><br><span class="line">        mysqlXaDataSource.setUrl(testConfig.getUrl());</span><br><span class="line">        mysqlXaDataSource.setPinGlobalTxToPhysicalConnection(<span class="keyword">true</span>);</span><br><span class="line">        mysqlXaDataSource.setPassword(testConfig.getPassword());</span><br><span class="line">        mysqlXaDataSource.setUser(testConfig.getUsername());</span><br><span class="line">        mysqlXaDataSource.setPinGlobalTxToPhysicalConnection(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        AtomikosDataSourceBean xaDataSource = <span class="keyword">new</span> AtomikosDataSourceBean();</span><br><span class="line">        xaDataSource.setXaDataSource(mysqlXaDataSource);</span><br><span class="line">        xaDataSource.setUniqueResourceName(<span class="string">&quot;test1DataSource&quot;</span>);</span><br><span class="line"></span><br><span class="line">        xaDataSource.setMinPoolSize(testConfig.getMinPoolSize());</span><br><span class="line">        xaDataSource.setMaxPoolSize(testConfig.getMaxPoolSize());</span><br><span class="line">        xaDataSource.setMaxLifetime(testConfig.getMaxLifetime());</span><br><span class="line">        xaDataSource.setBorrowConnectionTimeout(testConfig.getBorrowConnectionTimeout());</span><br><span class="line">        xaDataSource.setLoginTimeout(testConfig.getLoginTimeout());</span><br><span class="line">        xaDataSource.setMaintenanceInterval(testConfig.getMaintenanceInterval());</span><br><span class="line">        xaDataSource.setMaxIdleTime(testConfig.getMaxIdleTime());</span><br><span class="line">        xaDataSource.setTestQuery(testConfig.getTestQuery());</span><br><span class="line">        <span class="keyword">return</span> xaDataSource;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean(name = &quot;test1SqlSessionFactory&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SqlSessionFactory <span class="title">testSqlSessionFactory</span><span class="params">(<span class="meta">@Qualifier(&quot;test1DataSource&quot;)</span> DataSource dataSource)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SqlSessionFactoryBean bean = <span class="keyword">new</span> SqlSessionFactoryBean();</span><br><span class="line">        bean.setDataSource(dataSource);</span><br><span class="line">        <span class="keyword">return</span> bean.getObject();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean(name = &quot;test1SqlSessionTemplate&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SqlSessionTemplate <span class="title">testSqlSessionTemplate</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="meta">@Qualifier(&quot;test1SqlSessionFactory&quot;)</span> SqlSessionFactory sqlSessionFactory)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SqlSessionTemplate(sqlSessionFactory);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span><span class="comment">//注解到springboot容器中</span></span><br><span class="line"><span class="meta">@MapperScan(basePackages=&quot;com.gyf.test2.mapper&quot;,sqlSessionFactoryRef=&quot;test2SqlSessionFactory&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataSource02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置数据源</span></span><br><span class="line">    <span class="meta">@Bean(name = &quot;test2DataSource&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">testDataSource</span><span class="params">(DBConfig2 testConfig)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        MysqlXADataSource mysqlXaDataSource = <span class="keyword">new</span> MysqlXADataSource();</span><br><span class="line">        mysqlXaDataSource.setUrl(testConfig.getUrl());</span><br><span class="line">        mysqlXaDataSource.setPinGlobalTxToPhysicalConnection(<span class="keyword">true</span>);</span><br><span class="line">        mysqlXaDataSource.setPassword(testConfig.getPassword());</span><br><span class="line">        mysqlXaDataSource.setUser(testConfig.getUsername());</span><br><span class="line">        mysqlXaDataSource.setPinGlobalTxToPhysicalConnection(<span class="keyword">true</span>);</span><br><span class="line">        AtomikosDataSourceBean xaDataSource = <span class="keyword">new</span> AtomikosDataSourceBean();</span><br><span class="line">        xaDataSource.setXaDataSource(mysqlXaDataSource);</span><br><span class="line">        xaDataSource.setUniqueResourceName(<span class="string">&quot;test2DataSource&quot;</span>);</span><br><span class="line">        xaDataSource.setMinPoolSize(testConfig.getMinPoolSize());</span><br><span class="line">        xaDataSource.setMaxPoolSize(testConfig.getMaxPoolSize());</span><br><span class="line">        xaDataSource.setMaxLifetime(testConfig.getMaxLifetime());</span><br><span class="line">   xaDataSource.setBorrowConnectionTimeout(testConfig.getBorrowConnectionTimeout());</span><br><span class="line">        xaDataSource.setLoginTimeout(testConfig.getLoginTimeout());</span><br><span class="line">        	xaDataSource.setMaintenanceInterval(testConfig.getMaintenanceInterval());</span><br><span class="line">        xaDataSource.setMaxIdleTime(testConfig.getMaxIdleTime());</span><br><span class="line">        xaDataSource.setTestQuery(testConfig.getTestQuery());</span><br><span class="line">        <span class="keyword">return</span> xaDataSource;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean(name = &quot;test2SqlSessionFactory&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SqlSessionFactory <span class="title">testSqlSessionFactory</span><span class="params">(<span class="meta">@Qualifier(&quot;test2DataSource&quot;)</span> DataSource dataSource)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SqlSessionFactoryBean bean = <span class="keyword">new</span> SqlSessionFactoryBean();</span><br><span class="line">        bean.setDataSource(dataSource);</span><br><span class="line">        <span class="keyword">return</span> bean.getObject();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean(name = &quot;test2SqlSessionTemplate&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SqlSessionTemplate <span class="title">testSqlSessionTemplate</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="meta">@Qualifier(&quot;test2SqlSessionFactory&quot;)</span> SqlSessionFactory sqlSessionFactory)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SqlSessionTemplate(sqlSessionFactory);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="启动类加上注解配置"><a href="#启动类加上注解配置" class="headerlink" title="启动类加上注解配置"></a>启动类加上注解配置</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="comment">//@ComponentScan(basePackages = &#123;&quot;com.gyf.dbconfig&quot;,&quot;com.gyf.datasource&quot;,&quot;com.gyf.web&quot;,&quot;com.gyf.test1.service&quot;,&quot;com.gyf.test2.service&quot;&#125;)</span></span><br><span class="line"><span class="meta">@ComponentScan(basePackages = &#123;&quot;com.gyf&quot;&#125;)</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(value = &#123;DBConfig1.class, DBConfig2.class&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] args )</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//启动springboot项目</span></span><br><span class="line">        SpringApplication.run(App.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190704163840482.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

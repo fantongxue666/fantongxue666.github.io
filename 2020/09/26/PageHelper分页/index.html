@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    PageHelper分页 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  Mybatis PageHelper
+  ">
+  
+  <meta name="author" content="樊同学">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 33 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 29 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 10 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1601112055000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1601112055000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>PageHelper分页</h1>
+    <p>我们在任何的系统中，分页功能是必不可少的。然而，对于这个功能如果有一种快速开发的实现方式，当然可以节省我们很多的时间了。接下来，我就给大家基于不同的环境来说说如何使用一个分页插件：<code>pagehelper</code>，它是<code>Mybatis</code>的一个分页插件。<br>这里使用一个简单的<code>springboot</code>的demo项目来实现，前台页面使用的<code>Thymeleaf</code>模板引擎。<br>首先加入<code>pageHelper</code>的依赖。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后在配置文件中加入<code>pageHelper</code>的相关配置。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pageHelper配置</span></span><br><span class="line"><span class="comment"># 指定数据库</span></span><br><span class="line"><span class="string">pagehelper.helper-dialect=mysql</span></span><br><span class="line"><span class="comment"># 页码&lt;=0 查询第一页，页码&gt;=总页数查询最后一页</span></span><br><span class="line"><span class="string">pagehelper.reasonable=true</span></span><br><span class="line"><span class="comment"># 支持通过 Mapper 接口参数来传递分页参数</span></span><br><span class="line"><span class="string">pagehelper.support-methods-arguments=true</span></span><br></pre></td></tr></table></figure>
+<p><code>pageHelper</code>就可以使用了。<br>（基本的<code>springboot</code>的搭建步骤就不说了，之前已经写过文章）<br>简单的去数据库查一张表，达到分页效果。<br><code>dao</code>层</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(value = &quot;select * from address&quot;)</span></span><br><span class="line">    <span class="function">List&lt;Map&gt; <span class="title">pageListss</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p><code>service</code>层和<code>serviceImpl</code>层</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">List&lt;Map&gt; <span class="title">pageListss</span><span class="params">( Integer pn)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Map&gt; <span class="title">pageListss</span><span class="params">(Integer pn)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//判断的目的是前台访问的路径没有pn参数，则pn当前页参数默认为1（第一页）</span></span><br><span class="line">        <span class="keyword">if</span>(pn==<span class="keyword">null</span>)&#123;</span><br><span class="line">            pn=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//参数（当前页，一页展示多少条）</span></span><br><span class="line">        PageHelper.startPage(pn,<span class="number">3</span>);</span><br><span class="line">        <span class="comment">//只有在startPage下面的第一个select动作会被分页</span></span><br><span class="line">        List&lt;Map&gt; pageList=selectMapper.pageListss();</span><br><span class="line">        <span class="comment">//把查到的list列表进行pageInfo处理，返回一个分页列表</span></span><br><span class="line">        PageInfo&lt;Map&gt; pageInfo=<span class="keyword">new</span> PageInfo(pageList);</span><br><span class="line">        <span class="keyword">return</span> pageList;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><code>controller</code>层</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping(value = &quot;/page&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    SelectService selectService;</span><br><span class="line">    <span class="meta">@RequestMapping(&quot;list&quot;)</span><span class="comment">//pn是当前页，页面传给后台</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">list</span><span class="params">(Integer pn,Model model)</span></span>&#123;</span><br><span class="line">		<span class="comment">//这时，从service返回来的列表list已经是被分页后的列表了</span></span><br><span class="line">        List&lt;Map&gt; list=selectService.pageListss(pn);</span><br><span class="line">        <span class="comment">//把分页后的list放到model中，在页面展示信息（thymeleaf模板引擎使用model放置信息）</span></span><br><span class="line">        model.addAttribute(<span class="string">&quot;list&quot;</span>,list);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;test&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>test.html</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns:th</span>=<span class="string">&quot;http://www.thymeleaf.org&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>pageHelper练习<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>ID<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>地址<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>详细地址<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>电话<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>账号<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span> <span class="attr">th:each</span>=<span class="string">&quot;user : $&#123;list&#125;&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 将用户的主键 uId 存在在 name 属性中--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;user.id&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;user.location&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 使用dates对象格式化日期--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;user.detail&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 三运运算判断是否已婚--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;user.phone&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;user.account&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">当前第 <span class="tag">&lt;<span class="name">span</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;list.pageNum&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span> 页.</span><br><span class="line">总共 <span class="tag">&lt;<span class="name">span</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;list.pages&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span> 页.</span><br><span class="line">一共 <span class="tag">&lt;<span class="name">span</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;list.total&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span> 条记录</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">th:href</span>=<span class="string">&quot;@&#123;/page/list?pn=1&#125;&quot;</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">th:href</span>=<span class="string">&quot;@&#123;&#x27;/page/list?pn=&#x27;+$&#123;list.pageNum-1&#125;&#125;&quot;</span>&gt;</span>上一页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">th:href</span>=<span class="string">&quot;@&#123;&#x27;/page/list?pn=&#x27;+$&#123;list.pageNum+1&#125;&#125;&quot;</span>&gt;</span>下一页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">th:href</span>=<span class="string">&quot;@&#123;&#x27;/page/list?pn=&#x27;+$&#123;list.pages&#125;&#125;&quot;</span>&gt;</span>尾页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>访问路径<code>http://localhost:8082/page/list</code> pn参数会默认会1<br>结果<br><img src="https://img-blog.csdnimg.cn/2019092022384645.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>说明：上面的<code>$&#123;list.pageNum&#125;</code>，<code>$&#123;list.pages&#125;</code>，<code>$&#123;list.total&#125;</code>等这些属性都是属于<code>list</code>的，此时这个<code>list</code>是被分页后的列表，是从<code>service</code>层传回来的<code>pageInfo</code>分页列表。<br><img src="https://img-blog.csdnimg.cn/20190920224247618.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>而这个被<code>pageHelper</code>插件处理后的<code>pageInfo</code>列表具有诸多属性。<br><code>pageInfo</code>类说明（源码分析）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageInfo</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line">    <span class="comment">//当前页</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pageNum;</span><br><span class="line">    <span class="comment">//每页的数量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pageSize;</span><br><span class="line">    <span class="comment">//当前页的数量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//由于startRow和endRow不常用，这里说个具体的用法</span></span><br><span class="line">    <span class="comment">//可以在页面中&quot;显示startRow到endRow 共size条数据&quot;</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">//当前页面第一个元素在数据库中的行号</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> startRow;</span><br><span class="line">    <span class="comment">//当前页面最后一个元素在数据库中的行号</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> endRow;</span><br><span class="line">    <span class="comment">//总记录数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> total;</span><br><span class="line">    <span class="comment">//总页数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pages;</span><br><span class="line">    <span class="comment">//结果集</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;T&gt; list;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//前一页</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> prePage;</span><br><span class="line">    <span class="comment">//下一页</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> nextPage;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//是否为第一页</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isFirstPage = <span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">//是否为最后一页</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isLastPage = <span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">//是否有前一页</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> hasPreviousPage = <span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">//是否有下一页</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> hasNextPage = <span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">//导航页码数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> navigatePages;</span><br><span class="line">    <span class="comment">//所有导航页号</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] navigatepageNums;</span><br><span class="line">    <span class="comment">//导航条上的第一页</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> navigateFirstPage;</span><br><span class="line">    <span class="comment">//导航条上的最后一页</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> navigateLastPage;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PageInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 包装Page对象</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> list</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PageInfo</span><span class="params">(List&lt;T&gt; list)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(list, <span class="number">8</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 包装Page对象</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> list          page结果</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> navigatePages 页码数量</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PageInfo</span><span class="params">(List&lt;T&gt; list, <span class="keyword">int</span> navigatePages)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (list <span class="keyword">instanceof</span> Page) &#123;</span><br><span class="line">            Page page = (Page) list;</span><br><span class="line">            <span class="keyword">this</span>.pageNum = page.getPageNum();</span><br><span class="line">            <span class="keyword">this</span>.pageSize = page.getPageSize();</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">this</span>.pages = page.getPages();</span><br><span class="line">            <span class="keyword">this</span>.list = page;</span><br><span class="line">            <span class="keyword">this</span>.size = page.size();</span><br><span class="line">            <span class="keyword">this</span>.total = page.getTotal();</span><br><span class="line">            <span class="comment">//由于结果是&gt;startRow的，所以实际的需要+1</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.size == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">this</span>.startRow = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">this</span>.endRow = <span class="number">0</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.startRow = page.getStartRow() + <span class="number">1</span>;</span><br><span class="line">                <span class="comment">//计算实际的endRow（最后一页的时候特殊）</span></span><br><span class="line">                <span class="keyword">this</span>.endRow = <span class="keyword">this</span>.startRow - <span class="number">1</span> + <span class="keyword">this</span>.size;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (list <span class="keyword">instanceof</span> Collection) &#123;</span><br><span class="line">            <span class="keyword">this</span>.pageNum = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">this</span>.pageSize = list.size();</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">this</span>.pages = <span class="keyword">this</span>.pageSize &gt; <span class="number">0</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">this</span>.list = list;</span><br><span class="line">            <span class="keyword">this</span>.size = list.size();</span><br><span class="line">            <span class="keyword">this</span>.total = list.size();</span><br><span class="line">            <span class="keyword">this</span>.startRow = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">this</span>.endRow = list.size() &gt; <span class="number">0</span> ? list.size() - <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (list <span class="keyword">instanceof</span> Collection) &#123;</span><br><span class="line">            <span class="keyword">this</span>.navigatePages = navigatePages;</span><br><span class="line">            <span class="comment">//计算导航页</span></span><br><span class="line">            calcNavigatepageNums();</span><br><span class="line">            <span class="comment">//计算前后页，第一页，最后一页</span></span><br><span class="line">            calcPage();</span><br><span class="line">            <span class="comment">//判断页面边界</span></span><br><span class="line">            judgePageBoudary();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">.......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里只列出所有属性和构造方法，那么可以清晰的看到一些属性的含义，一些属性是如何初始化，并且初始化值是怎样的，更多详细情况可以自己去查看源码。</p>
+<p>以上的分页需求，可以非常方便的使用。<br>项目经理再也不用担心我的分页了！</p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
