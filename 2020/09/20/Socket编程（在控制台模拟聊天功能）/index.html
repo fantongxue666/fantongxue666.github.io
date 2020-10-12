@@ -1,146 +1,1274 @@
 <!DOCTYPE html>
-<html lang="en">
-
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>
-    socket编程 | 欢迎来到LZ的直播间
-  </title>
-  <meta name="description" content="">
-  
-  <meta name="keywords" content="
-  socket编程
-  ">
-  
-  <meta name="author" content="樊同学">
+  <meta charset="utf-8">
+  <title>socket编程 | 欢迎来到LZ的直播间</title>
+  <meta name="keywords" content=" socket编程 ">
+  <meta name="description" content="socket编程 | 欢迎来到LZ的直播间">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="https://github.com/fantongxue666/categories/index.html">
+<meta property="og:site_name" content="欢迎来到LZ的直播间">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-25T10:03:56.000Z">
+<meta property="article:modified_time" content="2020-09-25T10:05:54.865Z">
+<meta property="article:author" content="樊同学">
+<meta name="twitter:card" content="summary">
 
-  <meta http-equiv="Cache-Control" content="no-transform"/>
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <meta name="theme-color" content="#1e2327">
-  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
 
-  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+<link rel="icon" href="/img/avatar.jpg">
 
-  
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
 <meta name="generator" content="Hexo 5.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
 
-<body id="replica-app">
 
-<nav class="navbar-wrapper">
-  <div class="navbar">
-    <div class="container clearfix">
-      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
 
-      <div class="navbar-search float-left desktop-only">
-        <div class="navbar-search-form">
-          <label for="gsc-i-id1">This website</label>
-          <div id="google-search">
-            <gcse:search></gcse:search>
-          </div>
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>樊同学</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="facebook" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-facebook"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="instagram" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-instagram"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-reddit"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="weibo" href="http://weibo.com/u/2307534817" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/ff56736de7cf" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/jaytp/activities" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="oschina" href="https://my.oschina.net/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-oschina"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=88151013" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active" data-rel="All">All<small>(62)</small></div></li>
+    
+        
+            
+            <li><div data-rel="数据库">数据库<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="activiti工作流">activiti工作流<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="cache">cache<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="java爬虫">java爬虫<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="linux">linux<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Mybatis">Mybatis<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="poi编程">poi编程<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="rabbitmq">rabbitmq<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="socket编程">socket编程<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="spring">spring<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="springboot">springboot<small>(15)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="springmvc">springmvc<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="sso">sso<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="websocket编程">websocket编程<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="代理模式">代理模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="冷知识">冷知识<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="前端框架">前端框架<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="加密与安全">加密与安全<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="图片上传和下载">图片上传和下载<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="微服务">微服务<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="数据源">数据源<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="模板引擎">模板引擎<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="第三方接口">第三方接口<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="购物车">购物车<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="远程调用">远程调用<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="连接池">连接池<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">About</a><a style="width: 50%"  class="friends">Friends</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="62">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
         </div>
-      </div>
-
-      <ul class="navbar-nav float-left">
-        
-        <li><a href="/archives">Archives</a></li>
-        
-        
-        <li><a href="/categories">Categories</a></li>
-        
-        
-        <li><a href="/tags">Tags</a></li>
-        
-        
-        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
-        
-      </ul>
-
-      <ul class="navbar-nav user-nav float-right desktop-only">
-        <li class="user-nav-notification">
-          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
-        </li>
-        <li>
-          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
-        </li>
-        <li class="user-nav-logo">
-          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
-        </li>
-      </ul>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" />
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
     </div>
-  </div>
-</nav>
 
-<div class="main-container">
-  <header class="header-wrapper desktop-only">
-  <div class="container header-site-detail">
-    <ul class="header-toolbar">
-      <li class="clearfix">
-        <a href="/archives" class="header-toolbar-left"><i
-                  class="fa fa-file-text"></i> Posts </a>
-        <a href="/archives"
-           class="header-toolbar-right"> 62 </a>
-      </li>
-      <li>
-        <a href="/tags" class="header-toolbar-left"><i
-                  class="fa fa-tags"></i> Tags </a>
-        <a href="/tags"
-           class="header-toolbar-right"> 50 </a>
-      </li>
-      <li>
-        <a href="/categories" class="header-toolbar-left"><i
-                  class="fa fa-folder-open"></i> Categories </a>
-        <a href="/categories"
-           class="header-toolbar-right"> 27 </a>
-      </li>
-    </ul>
-    <h2 class="header-title">
-      <i class="fa fa-book text-muted"></i>
-      <a href="/">欢迎来到LZ的直播间</a>
-      
-      
-    </h2>
-  </div>
-
-  <div class="container">
-    <div class="header-tab-wrapper clearfix">
-      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
-      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
-      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
-      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
-      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>activiti工作流</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>BDP数据库事务</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>c3p0连接池</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cache</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>freemarker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>httpclient</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>io流 上传 下载</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java爬虫</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>jndi多数据源 springboot</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>jwt token登录</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Linux FastDFS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Linux Gitlab Gogs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Linux Nexus</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Linux Nginx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>linux tomcat mysql nginx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mybatis PageHelper</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mybatis 手写框架</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mysql函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>oracle gbase</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>oracle函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>poi编程</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>redis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>restTemplate</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>socket编程</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>solr</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>spring springioc</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot aop</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot druid oracle mybatis thymeleaf log</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot es</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot log4j</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot rabbitmq</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot starter</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot trueLicense</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot 全局异常 多数据源</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot 多事务</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot 定时任务 异步调用</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springcloud</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springmvc 手写框架</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>sso</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>thymeleaf</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vue-cli脚手架</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>websocket编程</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>上传 下载</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>代理模式</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>冷知识</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分页</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>加密与安全</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>第三方接口</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>购物车 session</a>
+            </li>
+        
     </div>
-  </div>
-</header>
 
+</div>
 
-<div class="post-container container">
-  <h3>
-    <i class="fa fa-user-o"></i>
-    樊同学
+    
+    <nav id="title-list-nav">
+        
+        <a  class="All 数据源 "
+           href="/2020/09/28/springboot%E5%86%85%E7%BD%AEtomcat%E9%9B%86%E6%88%90jndi%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/"
+           data-tag="jndi多数据源 springboot"
+           data-author="" >
+            <span class="post-title" title="springboot内置tomcat集成jndi多数据源">springboot内置tomcat集成jndi多数据源</span>
+            <span class="post-date" title="2020-09-28 17:20:55">2020/09/28</span>
+        </a>
+        
+        <a  class="All Mybatis "
+           href="/2020/09/26/PageHelper%E5%88%86%E9%A1%B5/"
+           data-tag="Mybatis PageHelper"
+           data-author="" >
+            <span class="post-title" title="PageHelper分页">PageHelper分页</span>
+            <span class="post-date" title="2020-09-26 17:20:55">2020/09/26</span>
+        </a>
+        
+        <a  class="All Linux "
+           href="/2020/09/26/nginx%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%AE%8C%E7%BB%93%E7%AF%87/"
+           data-tag="Linux Nginx"
+           data-author="" >
+            <span class="post-title" title="Nginx配置反向代理和负载均衡">Nginx配置反向代理和负载均衡</span>
+            <span class="post-date" title="2020-09-26 17:20:55">2020/09/26</span>
+        </a>
+        
+        <a  class="All Mybatis "
+           href="/2020/09/26/%E6%89%8B%E5%86%99Mybatis%E6%A1%86%E6%9E%B6%EF%BC%8C%E5%89%96%E6%9E%90%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84%E5%8E%9F%E7%90%86/"
+           data-tag="Mybatis 手写框架"
+           data-author="" >
+            <span class="post-title" title="手写mybatis框架，剖析底层结构原理">手写mybatis框架，剖析底层结构原理</span>
+            <span class="post-date" title="2020-09-26 17:20:55">2020/09/26</span>
+        </a>
+        
+        <a  class="All Linux "
+           href="/2020/09/25/Linux%E6%90%AD%E5%BB%BAFastDFS%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E5%AE%9E%E7%8E%B0springboot%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%88%B0FastDFS%E6%9C%8D%E5%8A%A1%E5%99%A8/"
+           data-tag="Linux FastDFS"
+           data-author="" >
+            <span class="post-title" title="Linux搭建FastDFS文件服务器实现springboot上传文件到FastDFS服务器">Linux搭建FastDFS文件服务器实现springboot上传文件到FastDFS服务器</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All Linux "
+           href="/2020/09/25/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85Nexus%E6%9E%84%E5%BB%BAmaven%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%EF%BC%88maven%E7%A7%81%E6%9C%8D%EF%BC%89/"
+           data-tag="Linux Nexus"
+           data-author="" >
+            <span class="post-title" title="Linux安装Nexus构建maven私有仓库">Linux安装Nexus构建maven私有仓库</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All Linux "
+           href="/2020/09/25/Linux%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90GitLab%E5%92%8CGogs%E7%A7%81%E4%BA%BA%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E5%B9%B3%E5%8F%B0/"
+           data-tag="Linux Gitlab Gogs"
+           data-author="" >
+            <span class="post-title" title="Linux持续集成GitLab和Gogs私人代码托管平台">Linux持续集成GitLab和Gogs私人代码托管平台</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All linux "
+           href="/2020/09/25/Xshell%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5Linux%E9%85%8D%E7%BD%AEjdk%E3%80%81tomcat%E3%80%81mysql%E3%80%81redis%E5%92%8Cnginx%EF%BC%88%E5%8F%AA%E7%AE%A1%E9%85%8D%E7%BD%AE%EF%BC%89/"
+           data-tag="linux tomcat mysql nginx"
+           data-author="" >
+            <span class="post-title" title="Linux配置jdk、tomcat、mysql、nginx">Linux配置jdk、tomcat、mysql、nginx</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All 图片上传和下载 "
+           href="/2020/09/25/SpringBoot%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%92%8CIO%E6%B5%81%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"
+           data-tag="io流 上传 下载"
+           data-author="" >
+            <span class="post-title" title="springboot上传图片和IO流的基本操作">springboot上传图片和IO流的基本操作</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All java爬虫 "
+           href="/2020/09/25/WebMagic%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6%EF%BC%88%E7%88%AC%E5%8F%96%E5%89%8D%E7%A8%8B%E6%97%A0%E5%BF%A7%E7%BD%91%E7%AB%99%E7%9A%84%E6%8B%9B%E8%81%98%E4%BF%A1%E6%81%AF%E4%BF%9D%E5%AD%98%E5%88%B0mysql%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%89/"
+           data-tag="java爬虫"
+           data-author="" >
+            <span class="post-title" title="webmagic爬虫框架及其实战">webmagic爬虫框架及其实战</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All 图片上传和下载 "
+           href="/2020/09/25/javaWeb%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%92%8C%E4%B8%8B%E8%BD%BD/"
+           data-tag="上传 下载"
+           data-author="" >
+            <span class="post-title" title="JavaWeb文件上传和下载">JavaWeb文件上传和下载</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All java爬虫 "
+           href="/2020/09/25/Java%E7%88%AC%E8%99%AB%E7%9A%84%E5%BA%95%E5%B1%82%E5%8F%8A%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%EF%BC%88%E5%8F%AF%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E7%88%AC%E5%8F%96%E4%BA%AC%E4%B8%9C%E5%AE%98%E7%BD%91%E7%9A%84%E5%95%86%E5%93%81%E4%BF%A1%E6%81%AF%E6%95%B0%E6%8D%AE%E5%B9%B6%E4%BF%9D%E5%AD%98%E5%88%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%EF%BC%89/"
+           data-tag="java爬虫"
+           data-author="" >
+            <span class="post-title" title="Java爬虫的底层及实现过程">Java爬虫的底层及实现过程</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All poi编程 "
+           href="/2020/09/24/POI%E5%AF%BC%E5%87%BAExcel%E8%A1%A8%E6%A0%BC/"
+           data-tag="poi编程"
+           data-author="" >
+            <span class="post-title" title="poi导出excel表格">poi导出excel表格</span>
+            <span class="post-date" title="2020-09-24 17:20:55">2020/09/24</span>
+        </a>
+        
+        <a  class="All poi编程 "
+           href="/2020/09/23/poi%E6%A0%B9%E6%8D%AEword%E5%92%8Cexcel%E6%A8%A1%E6%9D%BF%EF%BC%88%E4%B9%A6%E7%AD%BE%EF%BC%89%E5%88%9B%E5%BB%BA%E5%AF%BC%E5%87%BAword%E5%92%8Cexcel%E6%96%87%E6%A1%A3/"
+           data-tag="poi编程"
+           data-author="" >
+            <span class="post-title" title="poi根据word和excel模板创建导出word和excel">poi根据word和excel模板创建导出word和excel</span>
+            <span class="post-date" title="2020-09-23 17:20:55">2020/09/23</span>
+        </a>
+        
+        <a  class="All poi编程 "
+           href="/2020/09/22/POI%E8%A7%A3%E6%9E%90Excel%E8%A1%A8%E6%A0%BC/"
+           data-tag="poi编程"
+           data-author="" >
+            <span class="post-title" title="poi解析excel表格">poi解析excel表格</span>
+            <span class="post-date" title="2020-09-22 17:20:55">2020/09/22</span>
+        </a>
+        
+        <a  class="All socket编程 "
+           href="/2020/09/20/Socket%E7%BC%96%E7%A8%8B%EF%BC%88%E5%9C%A8%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%A8%A1%E6%8B%9F%E8%81%8A%E5%A4%A9%E5%8A%9F%E8%83%BD%EF%BC%89/"
+           data-tag="socket编程"
+           data-author="" >
+            <span class="post-title" title="socket编程">socket编程</span>
+            <span class="post-date" title="2020-09-20 17:20:55">2020/09/20</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/18/springboot---%E6%95%B4%E5%90%88druid%E8%BF%9E%E6%8E%A5%E6%B1%A0---%E8%BF%9E%E6%8E%A5oracle%E6%95%B0%E6%8D%AE%E5%BA%93---%E6%95%B4%E5%90%88mybatis---%E6%95%B4%E5%90%88thymeleaf---%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/"
+           data-tag="springboot druid oracle mybatis thymeleaf log"
+           data-author="" >
+            <span class="post-title" title="springboot集成druid、oracle、mybatis、thymeleaf、log">springboot集成druid、oracle、mybatis、thymeleaf、log</span>
+            <span class="post-date" title="2020-09-18 17:20:55">2020/09/18</span>
+        </a>
+        
+        <a  class="All socket编程 "
+           href="/2020/09/18/%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AATomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E7%AE%80%E6%98%93%E7%89%88%EF%BC%89/"
+           data-tag="socket编程"
+           data-author="" >
+            <span class="post-title" title="动手实现一个Tomcat服务器">动手实现一个Tomcat服务器</span>
+            <span class="post-date" title="2020-09-18 17:20:55">2020/09/18</span>
+        </a>
+        
+        <a  class="All 购物车 "
+           href="/2020/09/17/%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE%E8%B4%AD%E7%89%A9%E8%BD%A6%E7%9A%84%E5%AE%9E%E7%8E%B0/"
+           data-tag="购物车 session"
+           data-author="" >
+            <span class="post-title" title="商城项目购物车的实现">商城项目购物车的实现</span>
+            <span class="post-date" title="2020-09-17 17:20:55">2020/09/17</span>
+        </a>
+        
+        <a  class="All spring "
+           href="/2020/09/17/%E6%89%8B%E5%86%99Spring%E4%B9%8Bioc%E5%9F%BA%E4%BA%8Exml%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1/"
+           data-tag="spring springioc"
+           data-author="" >
+            <span class="post-title" title="手写spring之ioc基于xml动态创建对象">手写spring之ioc基于xml动态创建对象</span>
+            <span class="post-date" title="2020-09-17 17:20:55">2020/09/17</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/15/%E6%89%8B%E5%86%99springboot%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84starter%E6%BA%90%E7%A0%81/"
+           data-tag="springboot starter"
+           data-author="" >
+            <span class="post-title" title="手写springboot属于自己的starter源码">手写springboot属于自己的starter源码</span>
+            <span class="post-date" title="2020-09-15 17:20:55">2020/09/15</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/14/Spring%20Boot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8%20TrueLicense%20%E7%94%9F%E6%88%90%E5%92%8C%E9%AA%8C%E8%AF%81License%EF%BC%88%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%B8%E5%8F%AF%EF%BC%89/"
+           data-tag="springboot trueLicense"
+           data-author="" >
+            <span class="post-title" title="springboot集成trueLicense生成和验证license（服务器许可）">springboot集成trueLicense生成和验证license（服务器许可）</span>
+            <span class="post-date" title="2020-09-14 17:20:55">2020/09/14</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/11/springboot%E6%8D%95%E8%8E%B7%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%92%8C%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/"
+           data-tag="springboot 全局异常 多数据源"
+           data-author="" >
+            <span class="post-title" title="springboot捕获全局异常和配置多数据源">springboot捕获全局异常和配置多数据源</span>
+            <span class="post-date" title="2020-09-11 17:20:55">2020/09/11</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/09/springBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BC%82%E6%AD%A5%E8%B0%83%E7%94%A8/"
+           data-tag="springboot 定时任务 异步调用"
+           data-author="" >
+            <span class="post-title" title="springboot定时任务和异步调用">springboot定时任务和异步调用</span>
+            <span class="post-date" title="2020-09-09 17:20:55">2020/09/09</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/08/springboot%E5%A4%9A%E4%B8%AA%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/"
+           data-tag="springboot 多事务"
+           data-author="" >
+            <span class="post-title" title="springboot多个事务管理">springboot多个事务管理</span>
+            <span class="post-date" title="2020-09-08 17:20:55">2020/09/08</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/07/SpringBoot%E5%B7%A5%E7%A8%8B%E9%9B%86%E6%88%90Redis%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="springboot工程集成redis缓存机制">springboot工程集成redis缓存机制</span>
+            <span class="post-date" title="2020-09-07 17:20:55">2020/09/07</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/05/springboot%E9%9B%86%E6%88%90FreeMarker%E4%B8%80%E9%94%AE%E5%BC%8F%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E4%BB%A3%E7%A0%81/"
+           data-tag="freemarker"
+           data-author="" >
+            <span class="post-title" title="springboot集成freemarker一键式自动生成代码">springboot集成freemarker一键式自动生成代码</span>
+            <span class="post-date" title="2020-09-05 17:20:55">2020/09/05</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/03/springboot%E9%9B%86%E6%88%90jwt%E4%BB%A4%E7%89%8C%E3%80%90%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F%E3%80%91/"
+           data-tag="jwt token登录"
+           data-author="" >
+            <span class="post-title" title="springboot集成jwt令牌">springboot集成jwt令牌</span>
+            <span class="post-date" title="2020-09-03 17:20:55">2020/09/03</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/01/springboot%E9%9B%86%E6%88%90solr%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2%E7%B3%BB%E5%88%97/"
+           data-tag="solr"
+           data-author="" >
+            <span class="post-title" title="springboot集成solr实现全局搜索系列">springboot集成solr实现全局搜索系列</span>
+            <span class="post-date" title="2020-09-01 17:20:55">2020/09/01</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/08/30/springboot%E9%85%8D%E7%BD%AELog4j%E6%97%A5%E5%BF%97/"
+           data-tag="springboot log4j"
+           data-author="" >
+            <span class="post-title" title="springboot配置log4j日志">springboot配置log4j日志</span>
+            <span class="post-date" title="2020-08-30 17:20:55">2020/08/30</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/08/30/SpringBoot%E6%A1%86%E6%9E%B6%E7%94%A8%E6%B3%95%E8%A7%A3%E6%9E%90%E5%A4%A7%E5%85%A8/"
+           data-tag="springboot"
+           data-author="" >
+            <span class="post-title" title="springboot框架用法解析大全">springboot框架用法解析大全</span>
+            <span class="post-date" title="2020-08-30 17:20:55">2020/08/30</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/08/29/springboot%E5%AE%9E%E7%8E%B0%E5%88%86%E9%A1%B5/"
+           data-tag="分页"
+           data-author="" >
+            <span class="post-title" title="springboot实现分页">springboot实现分页</span>
+            <span class="post-date" title="2020-08-29 17:20:55">2020/08/29</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/08/27/springboot%E6%B7%BB%E5%8A%A0AOP%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/"
+           data-tag="springboot aop"
+           data-author="" >
+            <span class="post-title" title="springboot添加aop日志配置">springboot添加aop日志配置</span>
+            <span class="post-date" title="2020-08-27 17:20:55">2020/08/27</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/08/25/SpringBoot%E6%95%B4%E5%90%88Elasticsearch+IK+Kibana/"
+           data-tag="springboot es"
+           data-author="" >
+            <span class="post-title" title="springboot集成elasticsearch、ik、kibana">springboot集成elasticsearch、ik、kibana</span>
+            <span class="post-date" title="2020-08-25 17:20:55">2020/08/25</span>
+        </a>
+        
+        <a  class="All springmvc "
+           href="/2020/08/25/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E5%B1%B1%E5%AF%A8%E7%89%88%E7%9A%84springmvc%E6%A1%86%E6%9E%B6/"
+           data-tag="springmvc 手写框架"
+           data-author="" >
+            <span class="post-title" title="手写一个山寨版的springmvc框架">手写一个山寨版的springmvc框架</span>
+            <span class="post-date" title="2020-08-25 17:20:55">2020/08/25</span>
+        </a>
+        
+        <a  class="All websocket编程 "
+           href="/2020/08/23/WebSocket%E5%AE%9E%E7%8E%B0%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%8A%9F%E8%83%BD/"
+           data-tag="websocket编程"
+           data-author="" >
+            <span class="post-title" title="websocket实现多人在线聊天功能">websocket实现多人在线聊天功能</span>
+            <span class="post-date" title="2020-08-23 17:20:55">2020/08/23</span>
+        </a>
+        
+        <a  class="All websocket编程 "
+           href="/2020/08/21/WebSocket%E5%AE%9E%E7%8E%B0%E5%AE%A2%E6%9C%8D%E5%9C%A8%E7%BA%BF%E5%AE%9E%E6%97%B6%E8%81%8A%E5%A4%A9%EF%BC%88%E5%8D%95%E8%81%8A%E6%A8%A1%E5%BC%8F%EF%BC%89/"
+           data-tag="websocket编程"
+           data-author="" >
+            <span class="post-title" title="websocket实现客服在线实时聊天">websocket实现客服在线实时聊天</span>
+            <span class="post-date" title="2020-08-21 17:20:55">2020/08/21</span>
+        </a>
+        
+        <a  class="All 代理模式 "
+           href="/2020/08/20/%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8C%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"
+           data-tag="代理模式"
+           data-author="" >
+            <span class="post-title" title="静态代理和动态代理的实现原理">静态代理和动态代理的实现原理</span>
+            <span class="post-date" title="2020-08-20 17:20:55">2020/08/20</span>
+        </a>
+        
+        <a  class="All sso "
+           href="/2020/08/17/%E6%89%8B%E5%86%99SSO%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/"
+           data-tag="sso"
+           data-author="" >
+            <span class="post-title" title="手写sso单点登录">手写sso单点登录</span>
+            <span class="post-date" title="2020-08-17 17:20:55">2020/08/17</span>
+        </a>
+        
+        <a  class="All 第三方接口 "
+           href="/2020/08/15/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E6%8E%A5%E5%8F%A3/"
+           data-tag="第三方接口"
+           data-author="" >
+            <span class="post-title" title="第三方短信验证接口">第三方短信验证接口</span>
+            <span class="post-date" title="2020-08-15 17:20:55">2020/08/15</span>
+        </a>
+        
+        <a  class="All 第三方接口 "
+           href="/2020/08/13/%E6%94%AF%E4%BB%98%E5%AE%9D%E5%9C%A8%E7%BA%BF%E6%94%AF%E4%BB%98%E6%8E%A5%E5%85%A5/"
+           data-tag="第三方接口"
+           data-author="" >
+            <span class="post-title" title="支付宝在线支付接入">支付宝在线支付接入</span>
+            <span class="post-date" title="2020-08-13 17:20:55">2020/08/13</span>
+        </a>
+        
+        <a  class="All activiti工作流 "
+           href="/2020/08/10/Activiti%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/"
+           data-tag="activiti工作流"
+           data-author="" >
+            <span class="post-title" title="activiti工作流的正确打开方式">activiti工作流的正确打开方式</span>
+            <span class="post-date" title="2020-08-10 17:20:55">2020/08/10</span>
+        </a>
+        
+        <a  class="All cache "
+           href="/2020/08/09/Cache%E7%BC%93%E5%AD%98%E5%AD%97%E5%85%B8%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0/"
+           data-tag="cache"
+           data-author="" >
+            <span class="post-title" title="cache缓存字典的原理和实现">cache缓存字典的原理和实现</span>
+            <span class="post-date" title="2020-08-09 17:20:55">2020/08/09</span>
+        </a>
+        
+        <a  class="All 加密与安全 "
+           href="/2020/08/01/%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AE%89%E5%85%A8/"
+           data-tag="加密与安全"
+           data-author="" >
+            <span class="post-title" title="加密与安全">加密与安全</span>
+            <span class="post-date" title="2020-08-01 17:20:55">2020/08/01</span>
+        </a>
+        
+        <a  class="All 冷知识 "
+           href="/2020/07/31/%EF%BC%88Java%EF%BC%89%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/"
+           data-tag="冷知识"
+           data-author="" >
+            <span class="post-title" title="java链接生成二维码">java链接生成二维码</span>
+            <span class="post-date" title="2020-07-31 17:20:55">2020/07/31</span>
+        </a>
+        
+        <a  class="All 冷知识 "
+           href="/2020/07/30/%E5%8A%A8%E6%89%8B%E5%81%9A%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/"
+           data-tag="冷知识"
+           data-author="" >
+            <span class="post-title" title="动手做一个文件服务器">动手做一个文件服务器</span>
+            <span class="post-date" title="2020-07-30 17:20:55">2020/07/30</span>
+        </a>
+        
+        <a  class="All 冷知识 "
+           href="/2020/07/29/%E4%BB%BFQQ%E5%BC%82%E5%9C%B0%E7%99%BB%E5%BD%95%E8%A2%AB%E8%BF%AB%E4%B8%8B%E7%BA%BF%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0/"
+           data-tag="冷知识"
+           data-author="" >
+            <span class="post-title" title="仿qq异地登录被迫下线功能的实现">仿qq异地登录被迫下线功能的实现</span>
+            <span class="post-date" title="2020-07-29 17:20:55">2020/07/29</span>
+        </a>
+        
+        <a  class="All 冷知识 "
+           href="/2020/07/28/%E5%9B%BE%E7%89%87%E5%9C%A8%E7%BA%BF%E9%A2%84%E8%A7%88%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/"
+           data-tag="冷知识"
+           data-author="" >
+            <span class="post-title" title="图片在线预览的简单实现">图片在线预览的简单实现</span>
+            <span class="post-date" title="2020-07-28 17:20:55">2020/07/28</span>
+        </a>
+        
+        <a  class="All 冷知识 "
+           href="/2020/07/25/java%E5%BC%80%E5%8F%913~5%E5%B9%B4%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%AF%8F%E6%97%A5%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/"
+           data-tag="冷知识"
+           data-author="" >
+            <span class="post-title" title="java开发3-5年工作经验面试题">java开发3-5年工作经验面试题</span>
+            <span class="post-date" title="2020-07-25 17:20:55">2020/07/25</span>
+        </a>
+        
+        <a  class="All 冷知识 "
+           href="/2020/07/24/JavaEmail%E5%8F%91%E9%80%81%E7%BD%91%E6%98%93163%E9%82%AE%E7%AE%B1%E5%92%8CQQ%E9%82%AE%E7%AE%B1/"
+           data-tag="冷知识"
+           data-author="" >
+            <span class="post-title" title="JavaEmail发送网易163邮箱和qq邮箱">JavaEmail发送网易163邮箱和qq邮箱</span>
+            <span class="post-date" title="2020-07-24 17:20:55">2020/07/24</span>
+        </a>
+        
+        <a  class="All 连接池 "
+           href="/2020/07/23/c3p0%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%95%B4%E5%90%88jdbc/"
+           data-tag="c3p0连接池"
+           data-author="" >
+            <span class="post-title" title="c3p0连接池集成jdbc">c3p0连接池集成jdbc</span>
+            <span class="post-date" title="2020-07-23 17:20:55">2020/07/23</span>
+        </a>
+        
+        <a  class="All 前端框架 "
+           href="/2020/07/23/vue-cli%E8%84%9A%E6%89%8B%E6%9E%B6%E6%95%99%E7%A8%8B/"
+           data-tag="vue-cli脚手架"
+           data-author="" >
+            <span class="post-title" title="vue-cli脚手架教程">vue-cli脚手架教程</span>
+            <span class="post-date" title="2020-07-23 17:20:55">2020/07/23</span>
+        </a>
+        
+        <a  class="All 模板引擎 "
+           href="/2020/07/17/thymeleaf%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/"
+           data-tag="thymeleaf"
+           data-author="" >
+            <span class="post-title" title="thymeleaf模板引擎">thymeleaf模板引擎</span>
+            <span class="post-date" title="2020-07-17 17:20:55">2020/07/17</span>
+        </a>
+        
+        <a  class="All 数据库 "
+           href="/2020/07/13/%E9%A1%B9%E7%9B%AE%E4%BB%8EOracle%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E5%88%B0GBase%E6%95%B0%E6%8D%AE%E5%BA%93%E6%97%B6%E8%A7%A3%E5%86%B3%E9%80%82%E9%85%8D%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"
+           data-tag="oracle gbase"
+           data-author="" >
+            <span class="post-title" title="项目从oracle数据库迁移到gbase数据库时解决适配遇到的问题">项目从oracle数据库迁移到gbase数据库时解决适配遇到的问题</span>
+            <span class="post-date" title="2020-07-13 17:20:55">2020/07/13</span>
+        </a>
+        
+        <a  class="All 数据库 "
+           href="/2020/07/05/BDP%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E4%BD%BF%E7%94%A8/"
+           data-tag="BDP数据库事务"
+           data-author="" >
+            <span class="post-title" title="BDP数据库事务的使用">BDP数据库事务的使用</span>
+            <span class="post-date" title="2020-07-05 17:20:55">2020/07/05</span>
+        </a>
+        
+        <a  class="All 数据库 "
+           href="/2020/07/04/Mysql%E5%87%BD%E6%95%B0/"
+           data-tag="mysql函数"
+           data-author="" >
+            <span class="post-title" title="mysql函数">mysql函数</span>
+            <span class="post-date" title="2020-07-04 17:20:55">2020/07/04</span>
+        </a>
+        
+        <a  class="All 数据库 "
+           href="/2020/07/03/Oracle%E5%87%BD%E6%95%B0/"
+           data-tag="oracle函数"
+           data-author="" >
+            <span class="post-title" title="oracle函数">oracle函数</span>
+            <span class="post-date" title="2020-07-03 17:20:55">2020/07/03</span>
+        </a>
+        
+        <a  class="All 微服务 "
+           href="/2020/07/01/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/"
+           data-tag="springcloud"
+           data-author="" >
+            <span class="post-title" title="深入学习springcloud微服务">深入学习springcloud微服务</span>
+            <span class="post-date" title="2020-07-01 17:20:55">2020/07/01</span>
+        </a>
+        
+        <a  class="All rabbitmq "
+           href="/2020/06/28/springboot%E9%9B%86%E6%88%90rabbitmq%E5%95%86%E5%93%81%E7%A7%92%E6%9D%80%E4%B8%9A%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E6%B5%81%E9%87%8F%E5%89%8A%E5%B3%B0%EF%BC%89/"
+           data-tag="springboot rabbitmq"
+           data-author="" >
+            <span class="post-title" title="springboot集成rabbitmq商品秒杀业务实战">springboot集成rabbitmq商品秒杀业务实战</span>
+            <span class="post-date" title="2020-06-28 17:20:55">2020/06/28</span>
+        </a>
+        
+        <a  class="All rabbitmq "
+           href="/2020/06/24/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0SpringBoot%E9%9B%86%E6%88%90%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1%E4%B8%AD%E9%97%B4%E4%BB%B6RabbitMQ/"
+           data-tag="springboot rabbitmq"
+           data-author="" >
+            <span class="post-title" title="手把手教你springboot集成消息服务中间件">手把手教你springboot集成消息服务中间件</span>
+            <span class="post-date" title="2020-06-24 17:20:55">2020/06/24</span>
+        </a>
+        
+        <a  class="All 远程调用 "
+           href="/2020/06/18/HttpClient%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%8E%A5%E5%8F%A3%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/"
+           data-tag="httpclient"
+           data-author="" >
+            <span class="post-title" title="httpclient远程调用另一个项目的接口查询数据">httpclient远程调用另一个项目的接口查询数据</span>
+            <span class="post-date" title="2020-06-18 17:20:55">2020/06/18</span>
+        </a>
+        
+        <a  class="All 远程调用 "
+           href="/2020/06/17/RestTemplate%E5%8F%91%E9%80%81%E8%BF%9C%E7%A8%8B%E8%AF%B7%E6%B1%82/"
+           data-tag="restTemplate"
+           data-author="" >
+            <span class="post-title" title="restTemplate发送远程请求">restTemplate发送远程请求</span>
+            <span class="post-date" title="2020-06-17 17:20:55">2020/06/17</span>
+        </a>
+        
+        <div id="no-item-tips">
 
-    <span class="post-date float-right" title="{{moment(1600593655000).format('MMM DD, YYYY, h:mm:ss A')}}">
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-Socket编程（在控制台模拟聊天功能）" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">socket编程</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="socket编程">socket编程</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">socket编程</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2020-09-26 14:20:40'>2020-09-20 17:20</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B"><span class="toc-text">TCP简单示例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP%E6%A8%A1%E6%8B%9F%E8%81%8A%E5%A4%A9"><span class="toc-text">TCP模拟聊天</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UDP%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B"><span class="toc-text">UDP简单示例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UDP%E6%A8%A1%E6%8B%9F%E8%81%8A%E5%A4%A9"><span class="toc-text">UDP模拟聊天</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
       
-          <i class="fa fa-pencil-square-o"></i>
-      
-      {{moment(1600593655000).fromNow()}}
-    </span>
-  </h3>
-
-  <article class="post-content">
-    <h1>socket编程</h1>
-    <p>服务器端<br>(1) 创建ServerSocket对象，绑定监听端口；<br>(2) 通过accept()方法监听客户端请求；<br>(3) 连接建立后，通过输入流读取客户端发送的请求信息；<br>(4) 通过输出流向客户端发送相应信息；<br>(5) 关闭响应资源。<br>客户端<br>(1) 创建Socket对象，指明需要连接的服务器地址和端口；<br>(2) 连接建立后，通过输出流向服务器端发送请求信息；<br>(3) 通过输入流获取服务器端返回的响应信息；<br>(4) 关闭响应资源。<br>具体代码实现：</p>
+        <p>服务器端<br>(1) 创建ServerSocket对象，绑定监听端口；<br>(2) 通过accept()方法监听客户端请求；<br>(3) 连接建立后，通过输入流读取客户端发送的请求信息；<br>(4) 通过输出流向客户端发送相应信息；<br>(5) 关闭响应资源。<br>客户端<br>(1) 创建Socket对象，指明需要连接的服务器地址和端口；<br>(2) 连接建立后，通过输出流向服务器端发送请求信息；<br>(3) 通过输入流获取服务器端返回的响应信息；<br>(4) 关闭响应资源。<br>具体代码实现：</p>
 <h1 id="TCP简单示例"><a href="#TCP简单示例" class="headerlink" title="TCP简单示例"></a>TCP简单示例</h1><p><strong>服务器：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SocketServerOne</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ServerSocket serverSocket = <span class="keyword">null</span>;</span><br><span class="line">        Socket socket = <span class="keyword">null</span>;</span><br><span class="line">        BufferedReader bufferedReader = <span class="keyword">null</span>;</span><br><span class="line">        PrintWriter printWriter = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//实例化ServerSocket</span></span><br><span class="line">            serverSocket=<span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">            <span class="comment">//调用accept方法，启动监听，该方法在客户端发送信息之前，一直阻塞（一直等待）</span></span><br><span class="line">            System.out.println(<span class="string">&quot;服务器端已经启动。。。&quot;</span>);</span><br><span class="line">            socket = serverSocket.accept();</span><br><span class="line">            <span class="comment">//服务器接收信息</span></span><br><span class="line">            <span class="comment">//返回此套接字的输入流，输入流里面放的就是客户端发送过来的信息</span></span><br><span class="line">            <span class="comment">//InputStreamReader的作用把字节流转换为字符流</span></span><br><span class="line">            <span class="comment">//BufferedReader套接缓冲流，目的用来提高读写效率</span></span><br><span class="line">            bufferedReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line">            <span class="comment">//调用readLine()方法得到字符串</span></span><br><span class="line">            String s = bufferedReader.readLine();</span><br><span class="line">            <span class="comment">//打印</span></span><br><span class="line">            System.out.println(<span class="string">&quot;客户端说：&quot;</span>+s);</span><br><span class="line">            <span class="comment">//服务器发送信息</span></span><br><span class="line">            printWriter = <span class="keyword">new</span> PrintWriter(socket.getOutputStream());</span><br><span class="line">            printWriter.println(<span class="string">&quot;你好客户端，你发送的信息我收到了&quot;</span>);</span><br><span class="line">            <span class="comment">//清空管道</span></span><br><span class="line">            printWriter.flush();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                bufferedReader.close();</span><br><span class="line">                socket.close();</span><br><span class="line">                serverSocket.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>客户端：</strong></p>
@@ -180,41 +1308,194 @@
 
 <p>TCP和UDP是Java网络编程中的传输方式。TCP提供两台计算机之间可靠无差错的数据传输，但资源消耗较大,性能和效率较低；UDP不保证可靠数据的传输，但资源消耗小，性能和效率较高。在实际网络编程中建议根据系统的特点和需要，具体选择合适的方式</p>
 
-  </article>
-</div>
-
-
-    
-
-
-
-
-</div>
-
-<div class="footer-wrapper container">
-  <footer class="footer clearfix">
-    <div class="clearfix">
-    <a href="https://github.com/fantongxue666" class="footer-logo">
-      <i class="fa fa-github"></i>
-    </a>
-    <ul class="footer-social-link">
-      <li>© 2019 樊同学</li>
-      <li><a href="https://github.com/fantongxue666">Home</a></li>
       
-    </ul>
-    <div class="footer-theme-info">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
     </div>
-    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
     
-  </footer>
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2020 Yelog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
 </div>
 
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
 
-
-
-<script src="/js/main.js"></script>
 
 </body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
 </html>
