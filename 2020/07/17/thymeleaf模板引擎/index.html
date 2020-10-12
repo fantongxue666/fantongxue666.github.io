@@ -1,37 +1,207 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    thymeleaf模板引擎 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  thymeleaf
+  ">
+  
+  <meta name="author" content="樊同学">
 
-{% block page_class %}page-post-detail{% endblock %}
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
 
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
     </div>
   </div>
+</nav>
 
-{% endblock %}
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 62 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 27 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1594977655000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1594977655000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>thymeleaf模板引擎</h1>
+    <h1 id="1-springboot直接引入"><a href="#1-springboot直接引入" class="headerlink" title="1.springboot直接引入"></a>1.springboot直接引入</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;&lt;br&gt;&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>非springboot项目使用如下依赖：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;thymeleaf&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.1.4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>默认的模板映射路径是：src/main/resources/templates</p>
+<p><strong>springboot1.4之后，可以使用thymeleaf3来提高效率，并且解决标签闭合问题，配置方式：</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;properties&gt;</span><br><span class="line">    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">    &lt;!-- set thymeleaf version --&gt;</span><br><span class="line">    &lt;thymeleaf.version&gt;3.0.0.RELEASE&lt;/thymeleaf.version&gt;</span><br><span class="line">    &lt;thymeleaf-layout-dialect.version&gt;2.0.0&lt;/thymeleaf-layout-dialect.version&gt;</span><br><span class="line">    &lt;!--set java version--&gt;</span><br><span class="line">    &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">&lt;/properties&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="2-配置thymeleaf视图解析器"><a href="#2-配置thymeleaf视图解析器" class="headerlink" title="2.配置thymeleaf视图解析器"></a>2.配置thymeleaf视图解析器</h1><p>这点与springMVC是相类似的：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#thymeleaf start</span><br><span class="line">spring.thymeleaf.mode=HTML5</span><br><span class="line">spring.thymeleaf.encoding=UTF-<span class="number">8</span></span><br><span class="line">spring.thymeleaf.content-type=text/html</span><br><span class="line">#开发时关闭缓存,不然没法看到实时页面</span><br><span class="line">spring.thymeleaf.cache=<span class="keyword">false</span></span><br><span class="line">#thymeleaf end</span><br></pre></td></tr></table></figure>
+<h1 id="3-编写模板html"><a href="#3-编写模板html" class="headerlink" title="3.编写模板html"></a>3.编写模板html</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html xmlns:th=<span class="string">&quot;http://www.thymeleaf.org&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;hello&lt;/title&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">&quot;Content-Type&quot;</span> content=<span class="string">&quot;text/html; charset=UTF-8&quot;</span>/&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!--<span class="comment">/*@thymesVar id=&quot;name&quot; type=&quot;java.lang.String&quot;*/</span>--&gt;</span><br><span class="line">    &lt;p th:text=&quot;&#x27;Hello！, &#x27; + $&#123;name&#125; + &#x27;!&#x27;&quot;&gt;3333&lt;/p&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="选择变量表达式"><a href="#选择变量表达式" class="headerlink" title="选择变量表达式"></a>选择变量表达式</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div th:object=<span class="string">&quot;$&#123;session.user&#125;&quot;</span>&gt;</span><br><span class="line">    &lt;p&gt;Name: &lt;span th:text=&quot;*&#123;firstName&#125;&quot;&gt;Sebastian&lt;/span&gt;.&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;Surname: &lt;span th:text=&quot;*&#123;lastName&#125;&quot;&gt;Pepper&lt;/span&gt;.&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;Nationality: &lt;span th:text=&#123;nationality&#125;<span class="string">&quot;&gt;Saturn&lt;/span&gt;.&lt;/p&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">等价于</span></span><br><span class="line"><span class="string">&lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;p&gt;Name: &lt;span th:text=&quot;</span>$&#123;session.user.firstName&#125;<span class="string">&quot;&gt;Sebastian&lt;/span&gt;.&lt;/p&gt;</span></span><br><span class="line"><span class="string">    &lt;p&gt;Surname: &lt;span th:text=&quot;</span>$&#123;session.user.lastName&#125;<span class="string">&quot;&gt;Pepper&lt;/span&gt;.&lt;/p&gt;</span></span><br><span class="line"><span class="string">    &lt;p&gt;Nationality: &lt;span th:text=&quot;</span>$&#123;session.user.nationality&#125;<span class="string">&quot;&gt;Saturn&lt;/span&gt;.&lt;/p&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="链接表达式"><a href="#链接表达式" class="headerlink" title="链接表达式"></a>链接表达式</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Will produce <span class="string">&#x27;http://localhost:8080/gtvg/order/details?orderId=3&#x27;</span> (plus rewriting) --&gt;</span><br><span class="line">&lt;a href=&quot;details.html&quot; th:href=&quot;@&#123;http://localhost:8080/gtvg/order/details(orderId=$&#123;o.id&#125;)&#125;&quot;&gt;view&lt;/a&gt; &lt;!-- Will produce &#x27;/gtvg/order/details?orderId=3&#x27; (plus rewriting) --&gt;</span><br><span class="line">&lt;a href=&quot;details.html&quot; th:href=&quot;@&#123;/order/details(orderId=$&#123;o.id&#125;)&#125;&quot;&gt;view&lt;/a&gt;</span><br><span class="line">&lt;a href=&quot;details.html&quot; th:href=&quot;@&#123;order/&#123;orderId&#125;/details(orderId=$&#123;o.id&#125;)&#125;&quot;&gt;Content路径,默认访问static下的order文件夹&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p>条件 　if/unless 　　<br>使用th:if和th:unless属性进行条件判断，th:unless于th:if恰好相反，只有表达式中的条件不成立，才会显示其内容。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;a th:href=&quot;@&#123;/login&#125;&quot; th:unless=$&#123;session.user != null&#125;&gt;Login&lt;/a&gt;</span><br><span class="line">　　　<span class="keyword">switch</span></span><br><span class="line">&lt;div th:<span class="keyword">switch</span>=<span class="string">&quot;$&#123;user.role&#125;&quot;</span>&gt;</span><br><span class="line">  &lt;p th:case=&quot;&#x27;admin&#x27;&quot;&gt;User is an administrator&lt;/p&gt;</span><br><span class="line">  &lt;p th:case=&quot;#&#123;roles.manager&#125;&quot;&gt;User is a manager&lt;/p&gt;</span><br><span class="line">  &lt;p th:case=&quot;*&quot;&gt;User is some other thing&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>循环    通过th:each</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html xmlns:th=<span class="string">&quot;http://www.thymeleaf.org&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;hello&lt;/title&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">&quot;Content-Type&quot;</span> content=<span class="string">&quot;text/html; charset=UTF-8&quot;</span>/&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!-- 不存在则忽略，显示hello <span class="keyword">null</span>!(可以通过默认值进行设置)--&gt;</span><br><span class="line">    &lt;p th:text=&quot;&#x27;Hello &#x27; + ($&#123;name&#125;?:&#x27;admin&#x27;)&quot;&gt;3333&lt;/p&gt;</span><br><span class="line">    &lt;table&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;ID&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;NAME&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;AGE&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr th:each=<span class="string">&quot;emp : $&#123;empList&#125;&quot;</span>&gt;</span><br><span class="line">            &lt;td th:text=&quot;$&#123;emp.id&#125;&quot;&gt;1&lt;/td&gt;</span><br><span class="line">            &lt;td th:text=&quot;$&#123;emp.name&#125;&quot;&gt;海&lt;/td&gt;</span><br><span class="line">            &lt;td th:text=&quot;$&#123;emp.age&#125;&quot;&gt;18&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="下面是我在商城项目中遇到的thymeleaf的冷知识点，主要是thymeleaf，还有几点其他的，顺便总结一下"><a href="#下面是我在商城项目中遇到的thymeleaf的冷知识点，主要是thymeleaf，还有几点其他的，顺便总结一下" class="headerlink" title="下面是我在商城项目中遇到的thymeleaf的冷知识点，主要是thymeleaf，还有几点其他的，顺便总结一下"></a>下面是我在商城项目中遇到的thymeleaf的冷知识点，主要是thymeleaf，还有几点其他的，顺便总结一下</h1><p>使用thymeleaf前提是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html xmlns:th=<span class="string">&quot;www.thymeleaf.org&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>Thymeleaf  th:each 遍历格式如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;table border=<span class="string">&quot;1&quot;</span>&gt;</span><br><span class="line">    &lt;thead&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;th&gt;工号&lt;/th&gt;</span><br><span class="line">        &lt;th&gt;姓名&lt;/th&gt;</span><br><span class="line">        &lt;th&gt;生日&lt;/th&gt;</span><br><span class="line">        &lt;th&gt;是否已婚&lt;/th&gt;</span><br><span class="line">        &lt;th&gt;工资&lt;/th&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;/thead&gt;</span><br><span class="line">    &lt;tbody&gt;</span><br><span class="line">	</span><br><span class="line">	一定要谨记！！！！下面的userList一定得是后台controller通过把查到的list集合存储到了model中然后才转发到html页面的。</span><br><span class="line">    &lt;!-- 遍历集合，如果被遍历的变量 userList 为 <span class="keyword">null</span> 或者不存在，则不会进行遍历，也不报错--&gt;</span><br><span class="line">    &lt;tr th:each=<span class="string">&quot;user : $&#123;userList&#125;&quot;</span>&gt;</span><br><span class="line">        &lt;!-- 将用户的主键 uId 存在在 name 属性中--&gt;</span><br><span class="line">        &lt;td th:text=&quot;$&#123;user.uId&#125;&quot; th:name=&quot;$&#123;user.uId&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td th:text=&quot;$&#123;user.uName&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;!-- 使用dates对象格式化日期--&gt;</span><br><span class="line">        &lt;td th:text=&quot;$&#123;#dates.format(user.birthday, &#x27;yyyy-MM-dd HH:mm&#x27;)&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;!-- 三运运算判断是否已婚--&gt;</span><br><span class="line">        &lt;td th:text=&quot;$&#123;user.isMarry&#125;?&#x27;是&#x27;:&#x27;否&#x27;&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td th:text=&quot;$&#123;user.price&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;/tbody&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<p>通过thymeleaf模板遍历Controller层传递来的数组对象，并通过超链接将对象的某个属性当作参数再传到Controller层，<strong>重点是后面的删除链接拿到参数</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;!-- 引用thymeleaf模板--&gt;</span><br><span class="line">&lt;html xmlns:th=<span class="string">&quot;http://www.thymeleaf.org&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;table&gt;</span><br><span class="line">  &lt;tr th:each=<span class="string">&quot;user : $&#123;users&#125;&quot;</span>&gt;</span><br><span class="line">       &lt;td th:text=&quot;$&#123;user.userId&#125;&quot;&gt;1&lt;/td&gt;</span><br><span class="line">      &lt;td th:text=&quot;$&#123;user.userName&#125;&quot;&gt;yxc&lt;/td&gt;</span><br><span class="line">      &lt;td th:text=&quot;$&#123;user.userPwd&#125;&quot;&gt;123456&lt;/td&gt;</span><br><span class="line">      &lt;td th:text=&quot;$&#123;user.userEmail&#125;&quot;&gt;yes&lt;/td&gt;</span><br><span class="line">        &lt;!-- 用 / 打头, 会自动把上下文路径(比如 http:<span class="comment">//localhost:8888/demo) 路径加上去. --&gt;</span></span><br><span class="line">     &lt;td style=&quot;text-align: center&quot; width=&quot;100px&quot;&gt;&lt;intput type=&quot;button&quot; th:onclick=&quot;del([[$&#123;user.id&#125;]]);&quot;&gt;删除&lt;/intput&gt;&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>上传的图片回显<br>把图片上传的文件夹设置为静态资源，然后进行访问，这里的picpath我添加的信息其实是图片的名字，并不是路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">                url:<span class="string">&quot;/demo/getPic&quot;</span>,</span><br><span class="line">                data:&#123;<span class="string">&quot;kind&quot;</span>:<span class="string">&quot;男装&quot;</span>&#125;,</span><br><span class="line">                type:<span class="string">&quot;post&quot;</span>,</span><br><span class="line">                dataType:<span class="string">&quot;json&quot;</span>,</span><br><span class="line">                success:function (data) &#123;</span><br><span class="line">                    alert(JSON.stringify(data));</span><br><span class="line">                    <span class="keyword">var</span> path=<span class="string">&quot;D:/tempFiles/files/&quot;</span>;</span><br><span class="line">                    <span class="keyword">var</span> str = <span class="string">&quot;&quot;</span>;</span><br><span class="line">                    <span class="keyword">if</span> (data != <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</span><br><span class="line">                            str+= <span class="string">&#x27;&lt;a href=&quot;/demo/buy&quot; class=&quot;floor-item&quot;&gt;&lt;div class=&quot;item-img hot-img&quot;&gt;[外链图片转存失败(img-HtyDtpRY-1562144284695)(https://mp.csdn.net/mdeditor/images/&#x27;</span>+data[i].picpath+<span class="string">&#x27;)]&lt;/div&gt; &lt;div class=&quot;price clearfix&quot;&gt;&lt;span class=&quot;pull-left cr fz16&quot;&gt;&#x27;</span> + data[i].price + <span class="string">&#x27;&lt;/span&gt; &lt;span class=&quot;pull-right c6&quot;&gt;进货价&lt;/span&gt;&lt;/div&gt; &lt;div class=&quot;name ep&quot; title=&quot;&#x27;</span>+data[i].name+<span class="string">&#x27;&quot;&gt;&#x27;</span> + data[i].name + <span class="string">&#x27;&lt;/div&gt;&lt;/a&gt;&#x27;</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        $(<span class="string">&quot;#nanzhuang&quot;</span>).append(str);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                &#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>thymeleaf标签之th:href的使用</strong><br> 如果是需要从model中取值的话，写法为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> th:href=<span class="string">&quot;@&#123;$&#123;model中的name值&#125;&#125;&quot;</span></span><br><span class="line">​```java</span><br><span class="line">有的时候我们不止需要从model中进行取值，还需写字符串与model中的值进行拼接，写法为</span><br><span class="line"></span><br><span class="line">​```java</span><br><span class="line"> th:href=<span class="string">&quot;@&#123;&#x27;字符串&#x27;+$&#123;model中的nam值&#125;&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>获取到url路径的参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=location.href;<span class="comment">//获取url整条路径</span></span><br><span class="line">            <span class="keyword">var</span> num=str.indexOf(<span class="string">&quot;=&quot;</span>);<span class="comment">//获取“=”之前的字符个数</span></span><br><span class="line">            <span class="keyword">var</span> slice=str.slice(num+<span class="number">1</span>);<span class="comment">//截取多少个字符之后的字符串，从多少个开始截取</span></span><br><span class="line">            alert(slice);<span class="comment">//获取到参数</span></span><br></pre></td></tr></table></figure>
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

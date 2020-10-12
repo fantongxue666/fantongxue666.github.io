@@ -1,37 +1,207 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    springboot集成rabbitmq商品秒杀业务实战 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  springboot rabbitmq
+  ">
+  
+  <meta name="author" content="樊同学">
 
-{% block page_class %}page-post-detail{% endblock %}
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
 
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
     </div>
   </div>
+</nav>
 
-{% endblock %}
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 62 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 27 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1593336055000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1593336055000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>springboot集成rabbitmq商品秒杀业务实战</h1>
+    <p><em>消息队列如何实现流量削峰？</em></p>
+<p>要对流量进行削峰，最容易想到的解决方案就是用消息队列来缓冲瞬时流量，把同步的直接调用转换成异步的间接推送，中间通过一个队列在一端承接瞬时的流量洪峰，在另一端平滑地将消息推送出去。<br><img src="https://img-blog.csdnimg.cn/20200416153653415.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>这里就不讲<code>springboot</code>和<code>rabbitmq</code>如何集成了，参考文章<a target="_blank" rel="noopener" href="https://www.cnblogs.com/fantongxue/p/12493497.html">https://www.cnblogs.com/fantongxue/p/12493497.html</a></p>
+<h2 id="一，准备工作："><a href="#一，准备工作：" class="headerlink" title="一，准备工作："></a>一，准备工作：</h2><p>数据库有一张商品表，库存量是100。现在有1000个消费者准备开抢这100个库存。<br> <code> t_product</code>表维护商品编号与商品库存剩余数量。编号No123321的这种商品的库存量有100个。<br>  <img src="https://img-blog.csdnimg.cn/20200416143645828.png" alt="在这里插入图片描述"><br> <code> t_product_record</code>维护抢到商品的用户ID。理论上<code>t_product</code>表开抢后的 记录数量应该是100条(共有100个人抢到了商品)。<br>  <img src="https://img-blog.csdnimg.cn/20200416143703771.png" alt="在这里插入图片描述"><br>  我们使用压力测试工具<code>jweter</code>对其进行并发性测试。</p>
+<h2 id="二，springboot开始集成rabbitmq"><a href="#二，springboot开始集成rabbitmq" class="headerlink" title="二，springboot开始集成rabbitmq"></a>二，springboot开始集成rabbitmq</h2><h3 id="1，加入amqp的依赖"><a href="#1，加入amqp的依赖" class="headerlink" title="1，加入amqp的依赖"></a>1，加入amqp的依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.amqp<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-rabbit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2，配置application-yml配置文件"><a href="#2，配置application-yml配置文件" class="headerlink" title="2，配置application.yml配置文件"></a>2，配置application.yml配置文件</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true&amp;serverTimezone=UTC</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">1234</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">rabbitmq:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">101.201</span><span class="number">.101</span><span class="number">.206</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">guest</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">guest</span></span><br><span class="line">    <span class="attr">publisher-confirms:</span> <span class="literal">true</span>  <span class="comment"># 开启Rabbitmq发送消息确认机制，发送消息到队列并触发回调方法</span></span><br><span class="line">    <span class="attr">publisher-returns:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">listener:</span></span><br><span class="line">      <span class="attr">simple:</span></span><br><span class="line">        <span class="attr">concurrency:</span> <span class="number">10</span> <span class="comment">#消费者数量</span></span><br><span class="line">        <span class="attr">max-concurrency:</span> <span class="number">10</span> <span class="comment">#最大消费者数量</span></span><br><span class="line">        <span class="attr">prefetch:</span> <span class="number">1</span> <span class="comment">#限流（消费者每次从队列获取的消息数量）</span></span><br><span class="line">        <span class="attr">auto-startup:</span> <span class="literal">true</span>  <span class="comment">#启动时自动启动容器</span></span><br><span class="line">        <span class="attr">acknowledge-mode:</span> <span class="string">manual</span> <span class="comment">#开启ACK手动确认模式</span></span><br></pre></td></tr></table></figure>
+<h3 id="3，RabbitConfig配置类"><a href="#3，RabbitConfig配置类" class="headerlink" title="3，RabbitConfig配置类"></a>3，RabbitConfig配置类</h3><p>1，  定义消息转换实例 ，转化成 <code>JSON</code>传输<br>2 ， 配置启用<code>rabbitmq</code>事务</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.aaa.springredis.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.connection.CachingConnectionFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.transaction.RabbitTransactionManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.support.converter.MessageConverter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RabbitConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定义消息转换实例 ，转化成 JSON传输</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Jackson2JsonMessageConverter</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MessageConverter <span class="title">integrationEventMessageConverter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Jackson2JsonMessageConverter();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 配置启用rabbitmq事务</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> connectionFactory connectionFactory</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> RabbitTransactionManager</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RabbitTransactionManager <span class="title">rabbitTransactionManager</span><span class="params">(CachingConnectionFactory connectionFactory)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RabbitTransactionManager(connectionFactory);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4，初始化rabbitmq的回调函数"><a href="#4，初始化rabbitmq的回调函数" class="headerlink" title="4，初始化rabbitmq的回调函数"></a>4，初始化rabbitmq的回调函数</h3><p><font color="red">说明：被<code>@PostConstruct</code>修饰的方法会在服务器加载<code>Servlet</code>的时候运行，并且只会被服务器执行一次。如果想在生成对象时完成某些初始化操作，而偏偏这些初始化操作又依赖于依赖注入，那么久无法在构造函数中实现。为此，可以使用<code>@PostConstruct</code>注解一个方法来完成初始化，<code>@PostConstruct</code>注解的方法将会在依赖注入完成后被自动调用。</font></p>
+<p>回调函数的使用前提是配置文件中开启了<code>rabitmq</code>消息确认机制<br><img src="https://img-blog.csdnimg.cn/20200416145836925.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><em>Constructor &gt;&gt; @Autowired &gt;&gt; @PostConstruct</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">    RabbitTemplate rabbitTemplate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(RabbitController.class);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@PostConstruct</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 消息发送到交换器Exchange后触发回调。</span></span><br><span class="line"><span class="comment">     * 使用该功能需要开启确认，spring-boot中配置如下：</span></span><br><span class="line"><span class="comment">     * spring.rabbitmq.publisher-confirms = true</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">rabbitTemplate.setConfirmCallback(<span class="keyword">new</span> RabbitTemplate.ConfirmCallback() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">confirm</span><span class="params">(CorrelationData correlationData, <span class="keyword">boolean</span> b, String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (b) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;消息已确认 cause:&#123;&quot;</span>+s+<span class="string">&quot;&#125; - &#123;&quot;</span>+correlationData+<span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;消息未确认 cause:&#123;&quot;</span>+s+<span class="string">&quot;&#125; - &#123;&quot;</span>+correlationData+<span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过实现ReturnCallback接口，</span></span><br><span class="line"><span class="comment">     * 如果消息从交换器发送到对应队列失败时触发</span></span><br><span class="line"><span class="comment">     * 比如根据发送消息时指定的routingKey找不到队列时会触发</span></span><br><span class="line"><span class="comment">     * 使用该功能需要开启确认，spring-boot中配置如下：</span></span><br><span class="line"><span class="comment">     * spring.rabbitmq.publisher-returns = true</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    rabbitTemplate.setReturnCallback(<span class="keyword">new</span> RabbitTemplate.ReturnCallback() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">returnedMessage</span><span class="params">(Message message, <span class="keyword">int</span> replyCode, String replyText, String exchange, String routingKey)</span> </span>&#123;</span><br><span class="line">            LOGGER.error(<span class="string">&quot;消息被退回:&#123;&#125;&quot;</span>, message);</span><br><span class="line">            LOGGER.error(<span class="string">&quot;消息使用的交换机:&#123;&#125;&quot;</span>, exchange);</span><br><span class="line">            LOGGER.error(<span class="string">&quot;消息使用的路由键:&#123;&#125;&quot;</span>, routingKey);</span><br><span class="line">            LOGGER.error(<span class="string">&quot;描述:&#123;&#125;&quot;</span>, replyText);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="三，开始测试"><a href="#三，开始测试" class="headerlink" title="三，开始测试"></a>三，开始测试</h2><h3 id="1，写抢单测试类"><a href="#1，写抢单测试类" class="headerlink" title="1，写抢单测试类"></a>1，写抢单测试类</h3><p>写抢单测试类，我们使用<code>jweter</code>压力测试工具开启1000个线程进行测试（开启多线程并发测试），所以为了区别每一个模拟的用户，使用<code>userId</code>累加的方式进行区分。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> userId=<span class="number">0</span>;</span><br><span class="line">      <span class="comment">//开始抢单</span></span><br><span class="line">      <span class="meta">@RequestMapping(&quot;/begin&quot;)</span></span><br><span class="line">      <span class="meta">@ResponseBody</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">begin</span><span class="params">()</span></span>&#123;</span><br><span class="line">         userId++;</span><br><span class="line">         <span class="keyword">this</span>.send(userId);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<p>而上面的<code>send</code>方法就是把接收到的用户请求发送到<code>rabbitmq</code>消息中间件中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/send&quot;)</span></span><br><span class="line">      <span class="meta">@ResponseBody</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> String <span class="title">send</span><span class="params">(Integer messge)</span></span>&#123;</span><br><span class="line">              <span class="comment">//第一个参数：交换机名字  第二个参数：Routing Key的值  第三个参数：传递的消息对象</span></span><br><span class="line">              rabbitTemplate.convertAndSend(<span class="string">&quot;test.direct&quot;</span>,<span class="string">&quot;test&quot;</span>,messge);</span><br><span class="line">              <span class="keyword">return</span> <span class="string">&quot;发送消息成功&quot;</span>;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2，配置rabbitmq监听方法"><a href="#2，配置rabbitmq监听方法" class="headerlink" title="2，配置rabbitmq监听方法"></a>2，配置rabbitmq监听方法</h3><p><code>rabbitmq</code>监听上篇文章也说过了，作用就是监听指定队列中收到来自交换机的消息，来一条收一条，收完为止！<br>通过<code> ACK</code> 确认是否被正确接收，每个<code>Message</code>都要被确认，可以手动去 <code>ACK </code>或自动<code> ACK</code>，如果信息消费失败的话会拒绝当前消息，并把消息返回原队列。</p>
+<p>从队列中收到用户的<code>userId</code>，然后进行购买商品模拟操作（减少一个库存，新增一条购买记录）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"> 	<span class="meta">@Autowired</span></span><br><span class="line">    RabbitController controller;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@RabbitListener</span> 可以标注在类上面，需配合 <span class="doctag">@RabbitHandler</span> 注解一起使用</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@RabbitListener</span> 标注在类上面表示当有收到消息的时候，就交给 <span class="doctag">@RabbitHandler</span> 的方法处理，具体使用哪个方法处理，</span></span><br><span class="line"><span class="comment">     * 根据 MessageConverter 转换后的参数类型</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 使用 <span class="doctag">@Payload</span> 和 <span class="doctag">@Headers</span> 注解可以消息中的 body 与 headers 信息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 通过 ACK 确认是否被正确接收，每个 Message 都要被确认（acknowledged），可以手动去 ACK 或自动 ACK</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RabbitListener(queues = &quot;test&quot;)</span> <span class="comment">//指定监听的队列名</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receiver</span><span class="params">(<span class="meta">@Payload</span> Integer userId, <span class="meta">@Headers</span> Channel channel, Message message)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        LOGGER.info(<span class="string">&quot;用户&#123;&#125;开始抢单&quot;</span>, userId);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//处理消息</span></span><br><span class="line">            controller.robbingProduct(userId);</span><br><span class="line"><span class="comment">//             确认消息已经消费成功</span></span><br><span class="line">            channel.basicAck(message.getMessageProperties().getDeliveryTag(), <span class="keyword">false</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            LOGGER.error(<span class="string">&quot;消费处理异常:&#123;&#125; - &#123;&#125;&quot;</span>, userId, e);</span><br><span class="line"><span class="comment">//             拒绝当前消息，并把消息返回原队列</span></span><br><span class="line">            channel.basicNack(message.getMessageProperties().getDeliveryTag(), <span class="keyword">false</span>, <span class="keyword">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>购买商品的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">robbingProduct</span><span class="params">(Integer userId)</span></span>&#123;</span><br><span class="line">               Product product = testDao.selectProductByNo(<span class="string">&quot;No123321&quot;</span>);</span><br><span class="line">               <span class="keyword">if</span> (product != <span class="keyword">null</span> &amp;&amp; product.getTotal() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                   <span class="comment">//更新库存表，库存量减少1。返回1说明更新成功。返回0说明库存已经为0</span></span><br><span class="line">                   <span class="keyword">int</span> i = testDao.updateProduct(<span class="string">&quot;No123321&quot;</span>);</span><br><span class="line">                   <span class="keyword">if</span>(i&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                       <span class="comment">//插入记录</span></span><br><span class="line">                       testDao.insertProductRecord(<span class="keyword">new</span> ProductRecord(<span class="string">&quot;No123321&quot;</span>, userId));</span><br><span class="line">                       <span class="comment">//发送短信</span></span><br><span class="line">                       LOGGER.info(<span class="string">&quot;用户&#123;&#125;抢单成功&quot;</span>, userId);</span><br><span class="line">                   &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                       LOGGER.error(<span class="string">&quot;用户&#123;&#125;抢单失败&quot;</span>, userId);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                   LOGGER.error(<span class="string">&quot;用户&#123;&#125;抢单失败&quot;</span>, userId);</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3，jweter工具测试并发"><a href="#3，jweter工具测试并发" class="headerlink" title="3，jweter工具测试并发"></a>3，jweter工具测试并发</h3><p><code>jweter</code>压力测试工具如何使用百度吧，这里忽略！<br>控制台打印<br><img src="https://img-blog.csdnimg.cn/20200416152505231.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200416152534767.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>而数据库中的库存变成了0<br><img src="https://img-blog.csdnimg.cn/20200416152606174.png" alt="在这里插入图片描述"><br>购买记录中存放了抢单成功的用户<code>id</code>（100条记录）<br><img src="https://img-blog.csdnimg.cn/20200416152645699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>当然，剩下的900个用户都抢单失败了！</p>
+<p><font color="blur"><code>rabbitmq</code>队列是先进先出的顺序，先来后到，1000个请求你也得给我排队，前100个请求抢单成功之后就注定了后900个请求是抢单失败的！</font></p>
+<p><font color="red">使用<code>RabbitMQ</code>的最主要变化就是：以前抢单操作请求直接由我们抢单应用程序执行，现在请求被转移到了<code>RabbitMQ</code>服务器中。<code>RabbitMQ</code>服务器把接收到的抢单请求进行排队，最后由<code>RabbitMQ</code>服务器把抢单请求转发到我们的抢单应用程序，这样的好处就是避免我们的抢单应用程序短时间直接处理大量请求。<code>RabbitMQ</code>服务器主要作用是减缓抢单应用程序的并发压力，相当于在我们的抢单程序之前加了一道请求缓冲区。</font></p>
+<p>实战结束！<br>工程地址：<a href="https://github.com/fantongxue666/rabbitmq-seckill">https://github.com/fantongxue666/rabbitmq-seckill</a></p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

@@ -1,37 +1,202 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    springboot上传图片和IO流的基本操作 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  io流 上传 下载
+  ">
+  
+  <meta name="author" content="樊同学">
 
-{% block page_class %}page-post-detail{% endblock %}
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
 
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
     </div>
   </div>
+</nav>
 
-{% endblock %}
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 62 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 27 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1601025655000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1601025655000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>springboot上传图片和IO流的基本操作</h1>
+    <p><strong>浅谈</strong><br>我一直都觉得上传图片好复杂，除了本地上传，还有局域网上传，公网上传乱七八糟的，不仅看不懂，还不想学，因为老是觉得本地上传没啥大用处，直到今天，我才看透，什么本地不本地的，统统都是一个套路！<br>在springboot2.×版本以后，上传时就不需要任何配置了，什么配置文件也不需要，啥也不讲了，上来就是干！</p>
+<p><strong>首先来一波<code>IO</code>流的基本操作</strong><br>本地创建一个文件  向里面写入内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"> <span class="comment">/** 在本地新建一个文件夹  里面创建一个文件  向里面写入内容 */</span></span><br><span class="line">            <span class="comment">//1. 文件夹的路径  文件名</span></span><br><span class="line">            String directory = <span class="string">&quot;E:\\test&quot;</span>;</span><br><span class="line">            String filename = <span class="string">&quot;test.txt&quot;</span>;</span><br><span class="line"> </span><br><span class="line">            <span class="comment">//2.  创建文件夹对象     创建文件对象</span></span><br><span class="line">            File file = <span class="keyword">new</span> File(directory);</span><br><span class="line">            <span class="comment">//如果文件夹不存在  就创建一个空的文件夹</span></span><br><span class="line">            <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">                file.mkdirs();</span><br><span class="line">            &#125;</span><br><span class="line">            File file2 = <span class="keyword">new</span> File(directory, filename);</span><br><span class="line">            <span class="comment">//如果文件不存在  就创建一个空的文件</span></span><br><span class="line">            <span class="keyword">if</span> (!file2.exists()) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    file2.createNewFile();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//3.写入数据</span></span><br><span class="line">            <span class="comment">//创建文件字节输出流</span></span><br><span class="line">            FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(directory + <span class="string">&quot;\\&quot;</span> + filename);</span><br><span class="line">            <span class="comment">//开始写</span></span><br><span class="line">            String str = <span class="string">&quot;测试数据&quot;</span>;</span><br><span class="line">            <span class="keyword">byte</span>[] bytes = str.getBytes();</span><br><span class="line">            <span class="comment">//将byte数组中的所有数据全部写入</span></span><br><span class="line">            fos.write(bytes);</span><br><span class="line">            <span class="comment">//关闭流</span></span><br><span class="line">            fos.close();</span><br></pre></td></tr></table></figure>
+<p>读取本地一个文件中的内容 写入另一个文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="comment">/** 读取本地一个文件中的内容  写入另一个文件 */</span></span><br><span class="line">            <span class="comment">//创建文件字节输入流  这个路径下的文件必须存在</span></span><br><span class="line">            FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">&quot;E:\\test\\test.txt&quot;</span>);</span><br><span class="line">            <span class="comment">//创建文件字节输出流   如果这个文件不存在  会自动创建一个</span></span><br><span class="line">            FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">&quot;E:\\test\\test01.txt&quot;</span>);</span><br><span class="line">            <span class="comment">//一边读一边写</span></span><br><span class="line">            <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((temp = fis.read(bytes)) != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">//将byte数组中内容直接写入</span></span><br><span class="line">                fos.write(bytes, <span class="number">0</span>, temp);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//刷新</span></span><br><span class="line">            fos.flush();</span><br><span class="line">            <span class="comment">//关闭</span></span><br><span class="line">            fis.close();</span><br><span class="line">            fos.close();</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>下面是我自己做个一个商城项目上传图片的demo<br>首先是数据库表<br><img src="https://img-blog.csdnimg.cn/20190619155004874.png" alt="在这里插入图片描述"><br><strong>这个项目使用的是springboot，mybatis，thymeleaf</strong><br>前台html页面代码</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;div&quot;</span>&gt;</span><br><span class="line">		&lt;form action=<span class="string">&quot;/demo/upload&quot;</span> method=<span class="string">&quot;post&quot;</span> enctype=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span><br><span class="line">			上架的商品名称：&lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;input&quot;</span> type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">			商品尺寸：&lt;select <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;input&quot;</span> name=<span class="string">&quot;size&quot;</span>&gt;</span><br><span class="line">			&lt;option value=&quot;M&quot;&gt;M&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;L&quot;&gt;L&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;XL&quot;&gt;XL&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;XXL&quot;&gt;XXL&lt;/option&gt;</span><br><span class="line">		&lt;/select&gt;&lt;br&gt;</span><br><span class="line">			商品价格：&lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;input&quot;</span> type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;price&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">			上架商品数量：&lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;input&quot;</span> type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;number&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">			商品颜色：&lt;select <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;input&quot;</span> name=<span class="string">&quot;color&quot;</span>&gt;</span><br><span class="line">			&lt;option value=&quot;蓝色&quot;&gt;蓝色&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;白色&quot;&gt;白色&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;黑色&quot;&gt;黑色&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;灰色&quot;&gt;灰色&lt;/option&gt;</span><br><span class="line">		&lt;/select&gt;&lt;br&gt;</span><br><span class="line">			商品类型：&lt;select <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;input&quot;</span> name=<span class="string">&quot;kind&quot;</span>&gt;</span><br><span class="line">			&lt;option value=&quot;男装&quot;&gt;男装&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;女装&quot;&gt;女装&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;童装&quot;&gt;童装&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;时尚包包&quot;&gt;时尚包包&lt;/option&gt;</span><br><span class="line">		&lt;/select&gt;&lt;br&gt;</span><br><span class="line">			原价：&lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;input&quot;</span> type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;preprice&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">			商品图片：&lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;input&quot;</span> type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;pic&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">			上架日期：&lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;input&quot;</span> type=<span class="string">&quot;date&quot;</span> name=<span class="string">&quot;time&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">			&lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;确认上架&quot;</span>&gt;</span><br><span class="line">		&lt;/form&gt;</span><br><span class="line">	&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>controller层代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 商品图片上传</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/upload&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">upload</span><span class="params">(<span class="meta">@RequestParam(value = &quot;pic&quot;)</span> MultipartFile pic,<span class="meta">@RequestParam</span> Map param,Model model)</span> <span class="keyword">throws</span> ParseException </span>&#123;</span><br><span class="line">    System.err.println(<span class="string">&quot;传过来的值&quot;</span>+param);</span><br><span class="line">    <span class="keyword">if</span>(pic.isEmpty())&#123;</span><br><span class="line">        System.err.println(<span class="string">&quot;上传文件不可为空&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    String fileName=pic.getOriginalFilename();<span class="comment">//得到文件名</span></span><br><span class="line">    String suffixName=fileName.substring(fileName.lastIndexOf(<span class="string">&quot;.&quot;</span>));<span class="comment">//得到后缀名</span></span><br><span class="line">    System.err.println(<span class="string">&quot;suffixName:&quot;</span>+suffixName);</span><br><span class="line">    String filepath=<span class="string">&quot;D:/tempFiles/files/&quot;</span>;<span class="comment">//指定图片上传到哪个文件夹的路径</span></span><br><span class="line">    fileName= UUID.randomUUID()+suffixName;<span class="comment">//重新命名图片，变成随机的名字</span></span><br><span class="line">    System.err.println(<span class="string">&quot;fileName:&quot;</span>+fileName);</span><br><span class="line">    File dest=<span class="keyword">new</span> File(filepath+fileName);<span class="comment">//在上传的文件夹处创建文件</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        pic.transferTo(dest);<span class="comment">//把上传的图片写入磁盘中</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//到这里为止，下面的都不用再看了，跟上传没关系，都是实体类传值竟然麻烦成这个样子</span></span><br><span class="line">    Shangpin shangpin=<span class="keyword">new</span> Shangpin();</span><br><span class="line">    <span class="comment">//这里就不想改了，把fileName当成picpath传过去算了</span></span><br><span class="line">    String picpath=fileName;</span><br><span class="line">   shangpin.setPicpath(picpath);</span><br><span class="line">    shangpin.setName((String) param.get(<span class="string">&quot;name&quot;</span>));</span><br><span class="line">    shangpin.setSize((String) param.get(<span class="string">&quot;size&quot;</span>));</span><br><span class="line">    <span class="keyword">double</span> price=Double.parseDouble(param.get(<span class="string">&quot;price&quot;</span>).toString());</span><br><span class="line">    shangpin.setPrice(price);</span><br><span class="line">    shangpin.setNumber(Integer.valueOf(param.get(<span class="string">&quot;number&quot;</span>).toString()));</span><br><span class="line">    shangpin.setColor((String) param.get(<span class="string">&quot;color&quot;</span>));</span><br><span class="line">    <span class="keyword">double</span> preprice=Double.parseDouble(param.get(<span class="string">&quot;preprice&quot;</span>).toString());</span><br><span class="line">    shangpin.setPreprice(preprice);</span><br><span class="line">    shangpin.setKind((String) param.get(<span class="string">&quot;kind&quot;</span>));</span><br><span class="line">    String sellerAccount=phone;</span><br><span class="line">    shangpin.setSellerAccount(sellerAccount);</span><br><span class="line">    SimpleDateFormat simpleDateFormat=<span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd&quot;</span>);</span><br><span class="line">    shangpin.setTime(simpleDateFormat.parse((String) param.get(<span class="string">&quot;time&quot;</span>)));</span><br><span class="line">    <span class="keyword">int</span> i=selectService.insertSP(shangpin);</span><br><span class="line">    <span class="keyword">if</span>(i&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        model.addAttribute(<span class="string">&quot;info&quot;</span>,<span class="string">&quot;商品上传成功!&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;forward:getSP&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    model.addAttribute(<span class="string">&quot;info&quot;</span>,<span class="string">&quot;商品上传失败!&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;forward:getSP&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对了，千万不能忘记实体类，就和上边那张表的字段相对应，一个也不能错，错了它也会错。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.qianlong.entity;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Shangpin</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String size;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> price;</span><br><span class="line">    <span class="keyword">private</span> String sellerAccount;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">private</span> String color;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> preprice;</span><br><span class="line">    <span class="keyword">private</span> String picpath;</span><br><span class="line">    <span class="keyword">private</span> Date time;</span><br><span class="line">    <span class="keyword">private</span> String kind;</span><br><span class="line">    <span class="comment">//set和get方法省略</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>service层忽略，来看dao层，也就是mapper文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 上架商品（上传商品图片）</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="meta">@Insert(value = &quot;insert into shangpin(name,size,price,sellerAccount,number,color,&quot; +</span></span><br><span class="line"><span class="meta">          &quot;preprice,picpath,time,kind) values(#&#123;name&#125;,#&#123;size&#125;,#&#123;price&#125;,&quot; +</span></span><br><span class="line"><span class="meta">          &quot;#&#123;sellerAccount&#125;,#&#123;number&#125;,#&#123;color&#125;,#&#123;preprice&#125;,#&#123;picpath&#125;,#&#123;time&#125;,#&#123;kind&#125;)&quot;)</span></span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">insertSP</span><span class="params">(Shangpin shangpin)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>然后就完成上传了，上传成功之后跳转到列表页面，使用thymeleaf提示上传成功</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html xmlns:th=<span class="string">&quot;www.thymeleaf.org&quot;</span>&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">&quot;utf-8&quot;</span> /&gt;</span><br><span class="line">		&lt;title&gt;商品管理&lt;/title&gt;</span><br><span class="line">		&lt;script th:src=&quot;@&#123;/js/jquery.1.12.4.min.js&#125;&quot; charset=&quot;UTF-8&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">	&lt;a style=&quot;margin-left: 440px&quot; href=&quot;/demo/backAddSP&quot;&gt;商品上架&lt;/a&gt;&lt;span style=&quot;color: red;&quot; th:text=&quot;$&#123;info&#125;&quot;&gt;&lt;/span&gt;</span><br><span class="line">		&lt;table border=<span class="string">&quot;4&quot;</span>&gt;</span><br><span class="line">			&lt;thead&gt;</span><br><span class="line">			&lt;tr&gt;</span><br><span class="line">				&lt;th width=&quot;100px&quot;&gt;序号&lt;/th&gt;</span><br><span class="line">				&lt;th width=&quot;100px&quot;&gt;商品名称&lt;/th&gt;</span><br><span class="line">				&lt;th width=&quot;100px&quot;&gt;尺寸&lt;/th&gt;</span><br><span class="line">				&lt;th width=&quot;100px&quot;&gt;价格&lt;/th&gt;</span><br><span class="line">				&lt;th width=&quot;100px&quot;&gt;数量&lt;/th&gt;</span><br><span class="line">				&lt;th width=&quot;100px&quot;&gt;颜色&lt;/th&gt;</span><br><span class="line">				&lt;th width=&quot;100px&quot;&gt;原价&lt;/th&gt;</span><br><span class="line">				&lt;th width=&quot;100px&quot;&gt;商品类型&lt;/th&gt;</span><br><span class="line">				&lt;th width=&quot;100px&quot;&gt;图片路径&lt;/th&gt;</span><br><span class="line">				&lt;th width=&quot;100px&quot;&gt;添加时间&lt;/th&gt;</span><br><span class="line">				&lt;th width=&quot;100px&quot;&gt;操作&lt;/th&gt;</span><br><span class="line">			&lt;/tr&gt;</span><br><span class="line">			&lt;/thead&gt;</span><br><span class="line">			&lt;tbody&gt;</span><br><span class="line">			&lt;!-- 遍历集合，如果被遍历的变量 userList 为 <span class="keyword">null</span> 或者不存在，则不会进行遍历，也不报错--&gt;</span><br><span class="line">			&lt;tr th:each=<span class="string">&quot;user : $&#123;list&#125;&quot;</span>&gt;</span><br><span class="line">				&lt;!-- 将用户的主键 uId 存在在 name 属性中--&gt;</span><br><span class="line">				&lt;td width=&quot;100px&quot; th:text=&quot;$&#123;user.id&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td width=&quot;100px&quot; th:text=&quot;$&#123;user.name&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td width=&quot;100px&quot; th:text=&quot;$&#123;user.size&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td width=&quot;100px&quot; th:text=&quot;$&#123;user.price&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td width=&quot;100px&quot; th:text=&quot;$&#123;user.number&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td width=&quot;100px&quot; th:text=&quot;$&#123;user.color&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td width=&quot;100px&quot; th:text=&quot;$&#123;user.preprice&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td width=&quot;100px&quot; th:text=&quot;$&#123;user.kind&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td width=&quot;100px&quot; th:text=&quot;$&#123;user.picpath&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">				&lt;!-- 使用dates对象格式化日期--&gt;</span><br><span class="line">				&lt;td width=&quot;100px&quot; th:text=&quot;$&#123;#dates.format(user.time, &#x27;yyyy-MM-dd&#x27;)&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td style=&quot;text-align: center&quot; width=&quot;100px&quot;&gt;&lt;intput type=&quot;button&quot; th:onclick=&quot;del([[$&#123;user.id&#125;]]);&quot;&gt;删除&lt;/intput&gt;&lt;/td&gt;</span><br><span class="line">			&lt;/tr&gt;</span><br><span class="line">			&lt;/tbody&gt;</span><br><span class="line">		&lt;/table&gt;</span><br><span class="line">		&lt;script&gt;</span><br><span class="line">			<span class="function">function <span class="title">del</span><span class="params">(id)</span> </span>&#123;</span><br><span class="line">				alert(id);</span><br><span class="line">            &#125;</span><br><span class="line">		&lt;/script&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190619160654594.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>图片上传到这里就结束啦，有问题欢迎留言！</p>
+<p>项目地址：<font color="red">链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1DRr1Y9h0T7nvOfEL0oGvyw">https://pan.baidu.com/s/1DRr1Y9h0T7nvOfEL0oGvyw</a> 提取码：w6dt</font></p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

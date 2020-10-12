@@ -1,37 +1,248 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    项目从oracle数据库迁移到gbase数据库时解决适配遇到的问题 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  oracle gbase
+  ">
+  
+  <meta name="author" content="樊同学">
 
-{% block page_class %}page-post-detail{% endblock %}
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
 
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
     </div>
   </div>
+</nav>
 
-{% endblock %}
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 62 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 27 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1594632055000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1594632055000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>项目从oracle数据库迁移到gbase数据库时解决适配遇到的问题</h1>
+    <p>[TOC]</p>
+<h2 id="一，oracle中nvl-函数"><a href="#一，oracle中nvl-函数" class="headerlink" title="一，oracle中nvl()函数"></a>一，oracle中nvl()函数</h2><p>NVL（表达式1，表达式2）<br>如果表达式1为空值，NVL返回值为表达式2的值，否则返回表达式1的值。该函数的目的是把一个空值（null）转换成一个实际的值。其表达式的值可以是数字型、字符型和日期型。但是表达式1和表达式2的数据类型必须为同一个类型。</p>
+<h2 id="二，oracle数据库中sql语句中with-as-的用法"><a href="#二，oracle数据库中sql语句中with-as-的用法" class="headerlink" title="二，oracle数据库中sql语句中with as 的用法"></a>二，oracle数据库中sql语句中with as 的用法</h2><p>相当于建了个e临时表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> e <span class="keyword">as</span> (<span class="keyword">select</span> * <span class="keyword">from</span> scott.emp e <span class="keyword">where</span> e.empno=<span class="number">7499</span>)</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> e;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三，Oracle中的group-by问题"><a href="#三，Oracle中的group-by问题" class="headerlink" title="三，Oracle中的group by问题"></a>三，Oracle中的group by问题</h2><p><img src="https://img-blog.csdnimg.cn/20190803182745123.png" alt="在这里插入图片描述"><br>这条查询语句最后的group by在oracle数据库中可以那样写，但是在gbase中不可以，因为上面已经把happen_time这个时间起了别名了，oracle数据库中，group by后面不能跟别名，gbase只能写别名，gbase只认识上面已经起了别名的名字。</p>
+<p>适配gbase正确语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> to_char(happen_time,<span class="string">&#x27;yyyy-MM-dd&#x27;</span>) <span class="keyword">as</span> happen_date,<span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">as</span> cn <span class="keyword">from</span> dy_work_reminder a </span><br><span class="line">      <span class="keyword">where</span> a.dm_entry_person = <span class="string">&#x27;1&#x27;</span></span><br><span class="line">      <span class="keyword">and</span> to_char(a.happen_time,<span class="string">&#x27;yyyy-MM&#x27;</span>)=<span class="string">&#x27;2019-06&#x27;</span></span><br><span class="line">      <span class="keyword">and</span> a.yxbz=<span class="string">&#x27;Y&#x27;</span> <span class="keyword">group</span> <span class="keyword">by</span> happen_date</span><br></pre></td></tr></table></figure>
+
+<h2 id="四，trunc-的用法"><a href="#四，trunc-的用法" class="headerlink" title="四，trunc()的用法"></a>四，trunc()的用法</h2><p>在oracle中，trunc()的用法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.select trunc(sysdate) from dual <span class="comment">--2011-3-18 今天的日期为2011-3-18</span></span><br><span class="line">2.select trunc(sysdate, &#x27;mm&#x27;)  from  dual <span class="comment">--2011-3-1  返回当月第一天.</span></span><br><span class="line">3.select trunc(sysdate,&#x27;yy&#x27;) from dual <span class="comment">--2011-1-1    返回当年第一天</span></span><br><span class="line">4.select trunc(sysdate,&#x27;dd&#x27;) from dual <span class="comment">--2011-3-18  返回当前年月日</span></span><br><span class="line">5.select trunc(sysdate,&#x27;yyyy&#x27;) from dual <span class="comment">--2011-1-1  返回当年第一天</span></span><br><span class="line">6.select trunc(sysdate,&#x27;d&#x27;) from dual <span class="comment">--2011-3-13 (星期天)返回当前星期的第一天</span></span><br><span class="line">7.select trunc(sysdate, &#x27;hh&#x27;) from dual  <span class="comment">--2011-3-18 14:00:00  当前时间为14:41  </span></span><br><span class="line">8.select trunc(sysdate, &#x27;mi&#x27;) from dual <span class="comment">--2011-3-18 14:41:00  TRUNC()函数没有秒的精确</span></span><br></pre></td></tr></table></figure>
+<p>Oracle获取当前月份的第一天的sql语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>, <span class="string">&#x27;mm&#x27;</span>) <span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure>
+<p>Gbase获取当前月份的第一天的sql语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">current</span>,<span class="string">&#x27;month&#x27;</span>) <span class="keyword">from</span> sysmaster:sysdual;</span><br></pre></td></tr></table></figure>
+<p><font color="red">注意：oracle中的dual是虚拟表，而gbase中的sysmaster:sysdual表同样是gbase的虚表。</font></p>
+<h2 id="五，批量插入"><a href="#五，批量插入" class="headerlink" title="五，批量插入"></a>五，批量插入</h2><p><strong>oracle批量插入</strong><br>接口</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int insterZqyjList(List<span class="tag">&lt;<span class="name">YzsylgkZqyj</span>&gt;</span> zqyjList);</span><br></pre></td></tr></table></figure>
+<p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insterZqyjList&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;List&quot;</span>&gt;</span></span><br><span class="line">  insert into YZSYLGK_ZQYJ (YJ_ID, ID, YJ_NR,</span><br><span class="line">  TCR_NAME, TCRDW, CREATEDATE,</span><br><span class="line">  MODIFYDATE, USER_ID, ORG_ID</span><br><span class="line">  ) select a.* from(</span><br><span class="line">  <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;list&quot;</span> <span class="attr">item</span>=<span class="string">&quot;item&quot;</span> <span class="attr">index</span>=<span class="string">&quot;index&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;union&quot;</span> <span class="attr">open</span>=<span class="string">&quot;(&quot;</span> <span class="attr">close</span>=<span class="string">&quot;)&quot;</span>&gt;</span></span><br><span class="line">    select #&#123;item.yjId,jdbcType=VARCHAR&#125;, #&#123;item.id,jdbcType=VARCHAR&#125;, #&#123;item.yjNr,jdbcType=VARCHAR&#125;,</span><br><span class="line">    #&#123;item.tcrName,jdbcType=VARCHAR&#125;, #&#123;item.tcrdw,jdbcType=VARCHAR&#125;, #&#123;item.createdate,jdbcType=TIMESTAMP&#125;,</span><br><span class="line">    #&#123;item.modifydate,jdbcType=TIMESTAMP&#125;, #&#123;item.userId,jdbcType=VARCHAR&#125;, #&#123;item.orgId,jdbcType=VARCHAR&#125; from dual</span><br><span class="line">  <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">  )a</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>适配GBase写法</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insterZqyjList&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;List&quot;</span> <span class="attr">databaseId</span>=<span class="string">&quot;gbase&quot;</span>&gt;</span></span><br><span class="line">  insert into YZSYLGK_ZQYJ (YJ_ID, ID, YJ_NR,</span><br><span class="line">  TCR_NAME, TCRDW, CREATEDATE,</span><br><span class="line">  MODIFYDATE, USER_ID, ORG_ID</span><br><span class="line">  ) select a.* from(</span><br><span class="line">  <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;list&quot;</span> <span class="attr">item</span>=<span class="string">&quot;item&quot;</span> <span class="attr">index</span>=<span class="string">&quot;index&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;union&quot;</span>&gt;</span></span><br><span class="line">    select &#x27;$&#123;item.yjId&#125;&#x27; as YJ_ID, &#x27;$&#123;item.id&#125;&#x27; as ID, &#x27;$&#123;item.yjNr&#125;&#x27; as YJ_NR,</span><br><span class="line">    &#x27;$&#123;item.tcrName&#125;&#x27;as TCR_NAME, &#x27;$&#123;item.tcrdw&#125;&#x27; as TCRDW,</span><br><span class="line">    <span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">when</span>  <span class="attr">test</span>=<span class="string">&quot;item.createdate =&#x27;&#x27; or item.createdate=null&quot;</span>&gt;</span></span><br><span class="line">        get_datetime(&#x27;$&#123;item.createdate&#125;&#x27;) as CREATEDATE</span><br><span class="line">      <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">otherwise</span>&gt;</span></span><br><span class="line">        &#x27;&#x27; as CREATEDATE,</span><br><span class="line">      <span class="tag">&lt;/<span class="name">otherwise</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">when</span>  <span class="attr">test</span>=<span class="string">&quot;item.modifydate =&#x27;&#x27; or item.modifydate=null&quot;</span>&gt;</span></span><br><span class="line">        get_datetime(&#x27;$&#123;item.modifydate&#125;&#x27;) as MODIFYDATE,</span><br><span class="line">      <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">otherwise</span>&gt;</span></span><br><span class="line">        &#x27;&#x27; as MODIFYDATE,</span><br><span class="line">      <span class="tag">&lt;/<span class="name">otherwise</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line">    &#x27;$&#123;item.userId&#125;&#x27; as USER_ID, &#x27;$&#123;item.orgId&#125;&#x27; as ORG_ID  from dual</span><br><span class="line">  <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">  )a</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Choose / when / otherwise是为了保证入参不为空，如果为空则前后插入的数量不匹配报错，如果为空则返回空字符串。</p>
+<h1 id="（知识点）Oracle批量更新"><a href="#（知识点）Oracle批量更新" class="headerlink" title="（知识点）Oracle批量更新"></a>（知识点）Oracle批量更新</h1><p>xml写法如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;updateBatch&quot;</span>  <span class="attr">parameterType</span>=<span class="string">&quot;java.util.List&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;list&quot;</span> <span class="attr">item</span>=<span class="string">&quot;item&quot;</span> <span class="attr">index</span>=<span class="string">&quot;index&quot;</span> <span class="attr">open</span>=<span class="string">&quot;begin&quot;</span> <span class="attr">close</span>=<span class="string">&quot;;end;&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;;&quot;</span>&gt;</span></span><br><span class="line">        update T_CITY_INDEX t</span><br><span class="line">        set</span><br><span class="line">        t.city_name= #&#123;item.cityName,jdbcType=VARCHAR&#125; ,</span><br><span class="line">        t.district_name= #&#123;item.districtName,jdbcType=VARCHAR&#125; ,</span><br><span class="line">        where t.id = #&#123;item.id,jdbcType=NUMERIC&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="六，Oracle数据库和GBase数据库的差异"><a href="#六，Oracle数据库和GBase数据库的差异" class="headerlink" title="六，Oracle数据库和GBase数据库的差异"></a>六，Oracle数据库和GBase数据库的差异</h2><p>Oracle数据库和GBase数据库的差异如下：</p>
+<h3 id="6-1-lt"><a href="#6-1-lt" class="headerlink" title="6.1  &lt;="></a>6.1  &lt;=</h3><p>Oracle：#{starttime}&lt;=t.audit<br>Gbase：#{starttime}year to function(5)&lt;=t.audit</p>
+<h3 id="6-2、groupby"><a href="#6-2、groupby" class="headerlink" title="6.2、groupby"></a>6.2、groupby</h3><p>Oracle：group by to_char(sysdate,’yyyy-MM’)<br>Gbase：group by 后面不能直接跟to_char(sysdate,’yyyy-MM’)，需要先给<br>to_char起一个别名例如a，然后group b ya</p>
+<h3 id="6-3、with别名as"><a href="#6-3、with别名as" class="headerlink" title="6.3、with别名as"></a>6.3、with别名as</h3><p>Oracle：在oracle数据库中可以使用with别名as的用法，相当于建了一张临时<br>表，例如<br>with tmp as(select * from test)<br>Selecta.test1,b.test2 from try a,tmp b where a.id=b.id<br>GBase：在GBase中不可以使用with别名as的用法，只能这样写<br>Selecta.test1,b.test2 from try a,(select * from test) b where a.id=b.id</p>
+<h3 id="6-4、to-char"><a href="#6-4、to-char" class="headerlink" title="6.4、to_char()"></a>6.4、to_char()</h3><p>Oracle：select  to_char(a.id) id from…<br>GBase：select ‘a.id’ id from…</p>
+<h3 id="6-5、批量插入"><a href="#6-5、批量插入" class="headerlink" title="6.5、批量插入"></a>6.5、批量插入</h3><p>Oracle：在foreach标签中接收yjId参数时是这样接收的<br>#{item.yjId,jdbcType=VARCHAR}<br>GBase：在foreach标签中接受yjId参数时是这样接收的<br>‘${item.yjId}’ as YJ_ID<br>注意：这里有一对单引号</p>
+<h3 id="6-6、sysdate和current"><a href="#6-6、sysdate和current" class="headerlink" title="6.6、sysdate和current"></a>6.6、sysdate和current</h3><p>Oracle：查询当前时间使用sysdate Select sysdate from dual;<br>GBase：查询当前时间使用current Select current from sysmaster:sysdual;<br>（sysmaster:sysdual是GBase的虚表）</p>
+<h3 id="6-7、多表连接"><a href="#6-7、多表连接" class="headerlink" title="6.7、多表连接"></a>6.7、多表连接</h3><p>Oracle：可以使用（+）来连接各个表<br>GBase：不支持（+）用法，可以使用左连接leftjoin..on..来作连接查询。</p>
+<h3 id="6-8、当前时间now-和current"><a href="#6-8、当前时间now-和current" class="headerlink" title="6.8、当前时间now()和current"></a>6.8、当前时间now()和current</h3><p>Oracle：小于当前时间的写法：&lt;=now()<br>GBase：小于当前时间的写法：&lt;=current</p>
+<h3 id="6-9、trunc-函数"><a href="#6-9、trunc-函数" class="headerlink" title="6.9、trunc()函数"></a>6.9、trunc()函数</h3><p>Oracle：trunc(sysdate)获取当前的日期<br>GBase：trunc(current year to fraction(5))</p>
+<h2 id="七，多表连接"><a href="#七，多表连接" class="headerlink" title="七，多表连接"></a>七，多表连接</h2><p>oracle的写法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.title,a.begintime,<span class="literal">null</span> <span class="keyword">as</span> END_DATE ,a.compere,a.org_id,a.typeid,a.id,a.xindeandbiji,a.meeting_type,c.org_name,le.STATE,</span><br><span class="line">    le.xdbgid,bj.STATE bjzt,bj.xdbgid bjid,d.ztdrlx,d.themetype,</span><br><span class="line">    b.user_id,a.recuserid,a.hyjy_state,<span class="literal">null</span> <span class="keyword">as</span> bmzt,<span class="literal">null</span> <span class="keyword">as</span> fczs_id</span><br><span class="line">    <span class="keyword">from</span> meeting_main a,meeting_user b,g_organ c,meeting_ztdr d,LEARNING_NOTES le,LEARNING_NOTES bj</span><br><span class="line">    <span class="keyword">where</span> a.org_id=c.org_id</span><br><span class="line">    <span class="keyword">and</span> a.id = b.mainid</span><br><span class="line">    <span class="keyword">and</span> a.id = d.id</span><br><span class="line">    <span class="keyword">and</span> a.id = le.PROJECTID(+)</span><br><span class="line">    <span class="keyword">and</span> a.id = bj.PROJECTID(+)</span><br><span class="line">    <span class="keyword">and</span> le.type(+) = <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    <span class="keyword">and</span> bj.type(+) = <span class="string">&#x27;1&#x27;</span></span><br><span class="line">    <span class="keyword">and</span> b.user_id = <span class="comment">#&#123;userId,jdbcType=VARCHAR&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>gbase的（+）不适配，需要统统都改成left join  表名  on   条件 </p>
+<p>gbase的写法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.title,a.begintime,<span class="literal">null</span> <span class="keyword">as</span> END_DATE ,a.compere,a.org_id,a.typeid,a.id,a.xindeandbiji,a.meeting_type,c.org_name,le.STATE,</span><br><span class="line">    le.xdbgid,bj.STATE bjzt,bj.xdbgid bjid,d.ztdrlx,d.themetype,</span><br><span class="line">    b.user_id,a.recuserid,a.hyjy_state,<span class="literal">null</span> <span class="keyword">as</span> bmzt,<span class="literal">null</span> <span class="keyword">as</span> fczs_id</span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">    meeting_main a <span class="keyword">left</span> <span class="keyword">join</span> meeting_user b <span class="keyword">on</span></span><br><span class="line">    a.id = b.mainid <span class="keyword">left</span> <span class="keyword">join</span> g_organ c <span class="keyword">on</span></span><br><span class="line">    a.org_id = c.org_id <span class="keyword">left</span> <span class="keyword">join</span> meeting_ztdr d <span class="keyword">on</span></span><br><span class="line">    a.id = d.id <span class="keyword">left</span> <span class="keyword">join</span> LEARNING_NOTES le <span class="keyword">on</span></span><br><span class="line">    a.id = le.PROJECTID <span class="keyword">left</span> <span class="keyword">join</span> LEARNING_NOTES bj <span class="keyword">on</span></span><br><span class="line">    a.id = bj.PROJECTID</span><br><span class="line">    <span class="keyword">where</span></span><br><span class="line">    b.user_id = <span class="string">&#x27;1&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="八，XMLAGG函数"><a href="#八，XMLAGG函数" class="headerlink" title="八，XMLAGG函数"></a>八，XMLAGG函数</h2><p>oracle的写法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">substr</span>(aorgid,<span class="number">0</span>,<span class="keyword">length</span>(aorgid)<span class="number">-1</span>) aorgid,<span class="keyword">substr</span>(aorg_name,<span class="number">0</span>,<span class="keyword">length</span>(aorg_name)<span class="number">-1</span>) aorg_name <span class="keyword">from</span> (</span><br><span class="line">  	  <span class="keyword">select</span> <span class="keyword">XMLAGG</span>(<span class="keyword">XMLELEMENT</span>(E,orgid || <span class="string">&#x27;,&#x27;</span>)).EXTRACT(<span class="string">&#x27;//text()&#x27;</span>).getclobval() aorgid,</span><br><span class="line">  	         <span class="keyword">XMLAGG</span>(<span class="keyword">XMLELEMENT</span>(E,org.org_name || <span class="string">&#x27;,&#x27;</span>)).EXTRACT(<span class="string">&#x27;//text()&#x27;</span>).getclobval() aorg_name </span><br><span class="line">  	         <span class="keyword">from</span> exam_exam_org b,g_organ org <span class="keyword">where</span> b.orgid=org.org_id</span><br><span class="line">  	   <span class="keyword">and</span> b.exid=<span class="comment">#&#123;exid,jdbcType=VARCHAR&#125;</span></span><br><span class="line">  	) a   </span><br></pre></td></tr></table></figure>
+
+<p>gbase的写法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">substr</span>(aorgid,<span class="number">0</span>,<span class="keyword">length</span>(aorgid)<span class="number">-1</span>) aorgid,<span class="keyword">substr</span>(aorg_name,<span class="number">0</span>,<span class="keyword">length</span>(aorg_name)<span class="number">-1</span>) aorg_name <span class="keyword">from</span> (</span><br><span class="line">      <span class="keyword">select</span> WM_concat(orgid) aorgid,</span><br><span class="line">             WM_concat(org.org_name) aorg_name</span><br><span class="line">             <span class="keyword">from</span> exam_exam_org b,g_organ org <span class="keyword">where</span> b.orgid=org.org_id</span><br><span class="line">       <span class="keyword">and</span> b.exid=<span class="comment">#&#123;exid,jdbcType=VARCHAR&#125;</span></span><br><span class="line">    ) a</span><br></pre></td></tr></table></figure>
+<h2 id="九，to-char-用法"><a href="#九，to-char-用法" class="headerlink" title="九，to_char()用法"></a>九，to_char()用法</h2><p>oracle的写法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">            to_char(a.id) <span class="keyword">id</span>,</span><br><span class="line">            a.SCOREPROJECT,</span><br><span class="line">            b.USERID,</span><br><span class="line">            to_char(b.score) score,</span><br><span class="line">            to_char(a.SCORESUM) scoresum</span><br><span class="line">        <span class="keyword">FROM</span></span><br><span class="line">            score_ruler a,</span><br><span class="line">            ( <span class="keyword">SELECT</span> USERID, SCOREPROJECTID, <span class="keyword">sum</span>( score ) score <span class="keyword">FROM</span> SCORE_LOG <span class="keyword">WHERE</span> USERID = <span class="comment">#&#123;userid,jdbcType=VARCHAR&#125; GROUP BY USERID, SCOREPROJECTID ) b</span></span><br><span class="line">        <span class="keyword">WHERE</span></span><br><span class="line">            a.ID = b.SCOREPROJECTID ( + )</span><br></pre></td></tr></table></figure>
+
+<p>gbase的写法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">            <span class="string">&#x27;a.id&#x27;</span> <span class="keyword">id</span>,</span><br><span class="line">            a.SCOREPROJECT,</span><br><span class="line">            b.USERID,</span><br><span class="line">            <span class="string">&#x27;b.score&#x27;</span> score,</span><br><span class="line">            <span class="string">&#x27;a.SCORESUM&#x27;</span> scoresum</span><br><span class="line">        <span class="keyword">FROM</span></span><br><span class="line">            score_ruler a,</span><br><span class="line">            ( <span class="keyword">SELECT</span> USERID, SCOREPROJECTID, <span class="keyword">sum</span>( score ) score <span class="keyword">FROM</span> SCORE_LOG <span class="keyword">WHERE</span> USERID = <span class="comment">#&#123;userid,jdbcType=VARCHAR&#125; GROUP BY USERID, SCOREPROJECTID ) b</span></span><br><span class="line">        <span class="keyword">WHERE</span></span><br><span class="line">            a.ID = b.SCOREPROJECTID ( + )</span><br></pre></td></tr></table></figure>
+<h2 id="十，查看当前月份trunc-函数"><a href="#十，查看当前月份trunc-函数" class="headerlink" title="十，查看当前月份trunc( )函数"></a>十，查看当前月份trunc( )函数</h2><p>oracle的写法</p>
+<p><code>select trunc(sysdate,&#39;mm&#39;) from dual;</code></p>
+<p>gbase的写法</p>
+<p><code>select trunc(current year to fraction(5),&#39;month&#39;) from dual;</code></p>
+<h2 id="十一，group-by"><a href="#十一，group-by" class="headerlink" title="十一，group by"></a>十一，group by</h2><p>oracle写法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;selectPartyAge&quot; parameterType=&quot;java.lang.String&quot;</span><br><span class="line">            resultType=&quot;cn.com.qianlong.light.vo.dy.DyTjCxVo&quot;&gt;</span><br><span class="line">        <span class="keyword">SELECT</span> BB.name,nvl(AA.value,<span class="string">&#x27;0&#x27;</span>)<span class="keyword">value</span></span><br><span class="line">        <span class="keyword">FROM</span></span><br><span class="line">        (<span class="keyword">SELECT</span></span><br><span class="line">        <span class="keyword">CASE</span></span><br><span class="line">        <span class="keyword">WHEN</span> TO_CHAR(z.ybdybeginDate,<span class="string">&#x27;YYYYMMDD&#x27;</span>) &amp;lt;= &#x27;19490930&#x27; THEN &#x27;1949之前&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;19491001&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;19660430&#x27; THEN &#x27;1949~1966&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;19660501&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;19761031&#x27; THEN &#x27;1966~1976&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;19761101&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;19781231&#x27; THEN &#x27;1976~1978&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;19790101&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;20021031&#x27; THEN &#x27;1979~2002&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;20021101&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;20121031&#x27; THEN &#x27;2002~2012&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;20121101&#x27; THEN &#x27;2012之后&#x27;</span><br><span class="line">        <span class="keyword">END</span> <span class="keyword">as</span> <span class="keyword">name</span> , <span class="keyword">COUNT</span>(z.ybdybeginDate) <span class="keyword">AS</span> <span class="keyword">value</span></span><br><span class="line">        <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> a.user_id, a.ybdybeginDate, a.partyorganId <span class="keyword">FROM</span> DY_INFO a,G_ORGAN b</span><br><span class="line">        <span class="keyword">where</span></span><br><span class="line">        a.PARTYORGANID <span class="keyword">like</span>  <span class="keyword">CONCAT</span>(<span class="string">&#x27;%&#x27;</span>,<span class="keyword">CONCAT</span>(<span class="comment">#&#123;partyorganid,jdbcType=VARCHAR&#125;,&#x27;%&#x27;))</span></span><br><span class="line">        <span class="keyword">and</span> a.status  <span class="keyword">IN</span> (<span class="number">1</span>,<span class="number">4</span>)</span><br><span class="line">        <span class="keyword">AND</span> a.userType <span class="keyword">IN</span> (<span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line">        <span class="keyword">AND</span></span><br><span class="line">        a.PARTYORGANID=b.ORG_ID</span><br><span class="line">        <span class="keyword">and</span></span><br><span class="line">        b.VALIDFLAG = <span class="number">1</span></span><br><span class="line">        ) z</span><br><span class="line">        <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">CASE</span></span><br><span class="line">        <span class="keyword">WHEN</span> TO_CHAR(z.ybdybeginDate,<span class="string">&#x27;YYYYMMDD&#x27;</span>) &amp;lt;= &#x27;19490930&#x27; THEN &#x27;1949之前&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;19491001&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;19660430&#x27; THEN &#x27;1949~1966&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;19660501&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;19761031&#x27; THEN &#x27;1966~1976&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;19761101&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;19781231&#x27; THEN &#x27;1976~1978&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;19790101&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;20021031&#x27; THEN &#x27;1979~2002&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;20021101&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;20121031&#x27; THEN &#x27;2002~2012&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;20121101&#x27; THEN &#x27;2012之后&#x27;</span><br><span class="line">        <span class="keyword">END</span></span><br><span class="line">        )AA <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> (</span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;1949之前&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;1&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        <span class="keyword">union</span></span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;1949~1966&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;2&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        <span class="keyword">union</span></span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;1966~1976&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;3&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        <span class="keyword">union</span></span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;1976~1978&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;4&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        <span class="keyword">union</span></span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;1979~2002&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;5&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        <span class="keyword">union</span></span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;2002~2012&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;6&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        <span class="keyword">union</span></span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;2012之后&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;7&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        )BB <span class="keyword">on</span> AA.name=BB.name</span><br><span class="line">        <span class="keyword">ORDER</span> <span class="keyword">BY</span> BB.xh</span><br><span class="line">    &lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>gbase写法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;selectPartyAge&quot; parameterType=&quot;java.lang.String&quot;</span><br><span class="line">            resultType=&quot;cn.com.qianlong.light.vo.dy.DyTjCxVo&quot;&gt;</span><br><span class="line">        <span class="keyword">SELECT</span> BB.name,nvl(AA.value,<span class="string">&#x27;0&#x27;</span>)<span class="keyword">value</span></span><br><span class="line">        <span class="keyword">FROM</span></span><br><span class="line">        (<span class="keyword">SELECT</span></span><br><span class="line">        <span class="keyword">CASE</span></span><br><span class="line">        <span class="keyword">WHEN</span> TO_CHAR(z.ybdybeginDate,<span class="string">&#x27;YYYYMMDD&#x27;</span>) &amp;lt;= &#x27;19490930&#x27; THEN &#x27;1949之前&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;19491001&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;19660430&#x27; THEN &#x27;1949~1966&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;19660501&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;19761031&#x27; THEN &#x27;1966~1976&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;19761101&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;19781231&#x27; THEN &#x27;1976~1978&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;19790101&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;20021031&#x27; THEN &#x27;1979~2002&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;20021101&#x27;</span><br><span class="line">        AND TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;)  &amp;lt;= &#x27;20121031&#x27; THEN &#x27;2002~2012&#x27;</span><br><span class="line">        WHEN TO_CHAR(z.ybdybeginDate,&#x27;YYYYMMDD&#x27;) &gt;= &#x27;20121101&#x27; THEN &#x27;2012之后&#x27;</span><br><span class="line">        <span class="keyword">END</span> <span class="keyword">as</span> dd , <span class="keyword">COUNT</span>(z.ybdybeginDate) <span class="keyword">AS</span> <span class="keyword">value</span></span><br><span class="line">        <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> a.user_id, a.ybdybeginDate, a.partyorganId <span class="keyword">FROM</span> DY_INFO a,G_ORGAN b</span><br><span class="line">        <span class="keyword">where</span></span><br><span class="line">        a.PARTYORGANID <span class="keyword">like</span>  <span class="keyword">CONCAT</span>(<span class="string">&#x27;%&#x27;</span>,<span class="keyword">CONCAT</span>(<span class="comment">#&#123;partyorganid,jdbcType=VARCHAR&#125;,&#x27;%&#x27;))</span></span><br><span class="line">        <span class="keyword">and</span> a.status  <span class="keyword">IN</span> (<span class="number">1</span>,<span class="number">4</span>)</span><br><span class="line">        <span class="keyword">AND</span> a.userType <span class="keyword">IN</span> (<span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line">        <span class="keyword">AND</span></span><br><span class="line">        a.PARTYORGANID=b.ORG_ID</span><br><span class="line">        <span class="keyword">and</span></span><br><span class="line">        b.VALIDFLAG = <span class="number">1</span></span><br><span class="line">        ) z</span><br><span class="line">        <span class="keyword">GROUP</span> <span class="keyword">BY</span> dd</span><br><span class="line">        )AA <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> (</span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;1949之前&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;1&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        <span class="keyword">union</span></span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;1949~1966&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;2&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        <span class="keyword">union</span></span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;1966~1976&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;3&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        <span class="keyword">union</span></span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;1976~1978&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;4&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        <span class="keyword">union</span></span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;1979~2002&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;5&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        <span class="keyword">union</span></span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;2002~2012&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;6&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        <span class="keyword">union</span></span><br><span class="line">        <span class="keyword">select</span> <span class="string">&#x27;2012之后&#x27;</span> <span class="keyword">as</span> <span class="keyword">name</span>, <span class="string">&#x27;7&#x27;</span> <span class="keyword">as</span> xh <span class="keyword">from</span> dual</span><br><span class="line">        )BB <span class="keyword">on</span> AA.name=BB.name</span><br><span class="line">        <span class="keyword">ORDER</span> <span class="keyword">BY</span> BB.xh</span><br><span class="line">    &lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="十二，查看当前星期的星期一的日期"><a href="#十二，查看当前星期的星期一的日期" class="headerlink" title="十二，查看当前星期的星期一的日期"></a>十二，查看当前星期的星期一的日期</h2><p>oracle写法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">sysdate</span>,<span class="string">&#x27;iw&#x27;</span>) <span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure>
+
+<p>gbase写法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> trunc(<span class="keyword">current</span>,<span class="string">&#x27;day&#x27;</span>)+<span class="number">1</span> <span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure>
+
+<p>参考gbase官方文档<br><img src="https://img-blog.csdnimg.cn/20190903194559187.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

@@ -1,37 +1,259 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    Linux持续集成GitLab和Gogs私人代码托管平台 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  Linux Gitlab Gogs
+  ">
+  
+  <meta name="author" content="樊同学">
 
-{% block page_class %}page-post-detail{% endblock %}
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
 
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
     </div>
   </div>
+</nav>
 
-{% endblock %}
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 62 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 27 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1601025655000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1601025655000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>Linux持续集成GitLab和Gogs私人代码托管平台</h1>
+    <h2 id="一，GitLab介绍"><a href="#一，GitLab介绍" class="headerlink" title="一，GitLab介绍"></a>一，GitLab介绍</h2><p><code>GitLab</code>和<code>GitHub</code>的不同之处：</p>
+<p><font color="blue"><code>GitHub</code>是开源的代码托管平台，是公开的，私人仓库也支持，不过是收费的，而<code>GitLab</code>是自己搭建的代码托管平台，并不是开源的，一般是公司内部搭建一个属于自己的代码托管平台，只允许内部员工进行使用，而且权限控制方面做的也很全面，可以对不同用户展示不同的代码片段！</font></p>
+<h2 id="二，GitLab软件包下载和安装"><a href="#二，GitLab软件包下载和安装" class="headerlink" title="二，GitLab软件包下载和安装"></a>二，GitLab软件包下载和安装</h2><p><code>GitLab</code>可以到清华大学镜像库中进行下载</p>
+<p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/">https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/</a></p>
+<p>中文汉化包下载地址</p>
+<p><a target="_blank" rel="noopener" href="https://gitlab.com/xhang/gitlab/-/tree/12-0-stable-zh">https://gitlab.com/xhang/gitlab/-/tree/12-0-stable-zh</a></p>
+<p>只需要这两个就可以部署了！</p>
+<p>首先使用<code>xftp</code>文件传输工具把上面两个包上传到<code>linux</code>服务器上</p>
+<p><img src="https://img-blog.csdnimg.cn/20200417150843644.png#pic_center" alt="在这里插入图片描述"></p>
+<p>然后安装<code>gitlab</code>所需要的依赖包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y curl postfix policycoreutils-python openssh-server wget</span><br></pre></td></tr></table></figure>
+
+<p>安装<code>gitlab</code>安装包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum localinstall gitlab-ce-12.0.3-ce.0.el7.x86_64.rpm -y</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后会提示成功信息（<code>gitlab</code>的标志以及欢迎语）</p>
+<p>配置<code>gitlab</code>服务、访问域名以及邮箱</p>
+<p><font color="red">配置邮箱的用途：1，账号注册时，邮箱验证。2，修改密码时，通过邮箱修改。</font></p>
+<p><img src="https://img-blog.csdnimg.cn/20200417150906464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>进入配置文件进行配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;gitlab&#x2F;gitlab.rb</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200417150924519.png#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200417150933836.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><font color="red">一个细节问题，暂时把上面的邮箱地址配置成qq邮箱，另外把访问路径改为<code>http://ip地址</code>，没有域名嘛！</font></p>
+<p>另外再找到<code>smtp</code>配置修改为下面内容（<code>smtp</code>相关配置）</p>
+<p><code>smtp_password</code>项先填为空，后续再说！</p>
+<p><img src="https://img-blog.csdnimg.cn/20200417150952371.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>登录<code>qq</code>邮箱，进入设置&gt;账户，生产授权码</p>
+<p><img src="https://img-blog.csdnimg.cn/20200417151006328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>然后把生产的授权码配置到上面的<code>smtp_password</code>的地方。</p>
+<p>然后关闭<code>prometheus</code>，一共两处地方需要改为<code>false</code>。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200417151020201.png#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200417151028771.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>因为系统的80端口已经被<code>httpd</code>服务给占用了，所以配置端口改为8082。</p>
+<p>监听<code>ip</code>要改成<code>linux</code>服务器的<code>ip</code>地址</p>
+<p><img src="https://img-blog.csdnimg.cn/20200417151042868.png#pic_center" alt="在这里插入图片描述"></p>
+<p>改完配置以后，初始化<code>gitlab</code>服务，启动<code>gitlab</code>服务</p>
+<p><font color="red">注意：每次修改<code>/etc/gitlab/gitlab.rb</code>配置文件都需要<code>reconfigure</code>初始化！</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 初始化gitlab服务</span><br><span class="line">gitlab-ctl reconfigure</span><br><span class="line"># 启动gitlab服务</span><br><span class="line">gitlab-ctl start | restart | status | stop</span><br></pre></td></tr></table></figure>
+
+<p>启动成功</p>
+<p><img src="https://img-blog.csdnimg.cn/20200417151100631.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><font color="red">安装<code>gitlab</code>时，它会自带好多服务并会自动安装，例如<code>redis</code>，<code>nginx</code>等，如果服务器上已经装了<code>nginx</code>，那么不好意思，两个<code>nginx</code>配置会有冲突。</font></p>
+<p>安装<code>gitlab</code>之后，它会把自带的服务安装到<code>/var/opt/gitlab/</code>文件夹下，在这里面配置<code>nginx</code>转发到<code>gitlab</code>的地址，还会有<code>gitlab-rails</code>中的配置文件，也要修改监听地址和端口为<code>gitlab</code>的地址和端口。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200417151113544.png#pic_center" alt="在这里插入图片描述"></p>
+<p>重新启动<code>gitlab</code>服务，在浏览器中输入<code>nginx</code>的ip地址和监听端口进行访问。</p>
+<p>下面的情况完全是因为服务器的内存不足造成的，我百度之后，才后知后觉，<code>gitlab</code>对服务器的性能要求挺高的，对不住兄弟萌了，在下告辞了！<br><img src="https://img-blog.csdnimg.cn/20200417171436465.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="三，Gogs介绍"><a href="#三，Gogs介绍" class="headerlink" title="三，Gogs介绍"></a>三，Gogs介绍</h2><p><code>Gogs </code>是一款极易搭建的自助 <code>Git </code>服务，<code>Gogs </code>的目标是打造一个最简单、最快速和最轻松的方式搭建自助 <code>Git </code>服务。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMub3NjaGluYS5uZXQvdXBsb2Fkcy9zcGFjZS8yMDE3LzAyMjYvMTAxODM2X29mNTNfODUyODI2LnBuZw?x-oss-process=image/format,png" alt="img"></p>
+<p>既然是因为服务器的性能原因，那就使用<code>Gogs</code>来取代<code>GitLab</code>了。</p>
+<p><font color="red">进<code>Gogs</code>官网，点击下载安装，可以选择<code>Gogs</code>的安装版本。</font></p>
+<p><a target="_blank" rel="noopener" href="https://dl.gogs.io/">https://dl.gogs.io/</a></p>
+<h3 id="1，下载并安装Gogs"><a href="#1，下载并安装Gogs" class="headerlink" title="1，下载并安装Gogs"></a>1，下载并安装Gogs</h3><p><em>开始下载安装</em></p>
+<p>在<code>/usr/local</code>下新建文件夹<code>gogs</code>，进入文件夹，下载<code>gogs</code>安装包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;dl.gogs.io&#x2F;0.11.91&#x2F;gogs_0.11.91_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf gogs_0.11.91_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压之后，创建三个文件夹<code>data</code>、<code>log</code>、<code>repositories</code>，分别存放用户数据，日志和仓库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ2ze9ipfjhle3cz3cgb0rZ gogs]# ls</span><br><span class="line">gogs  gogs_0.11.91_linux_amd64.tar.gz</span><br><span class="line">[root@iZ2ze9ipfjhle3cz3cgb0rZ gogs]# cd gogs</span><br><span class="line">[root@iZ2ze9ipfjhle3cz3cgb0rZ gogs]# ls</span><br><span class="line">gogs  LICENSE  public  README.md  README_ZH.md  scripts  templates</span><br><span class="line">[root@iZ2ze9ipfjhle3cz3cgb0rZ gogs]# mkdir data</span><br><span class="line">[root@iZ2ze9ipfjhle3cz3cgb0rZ gogs]# mkdir log</span><br><span class="line">[root@iZ2ze9ipfjhle3cz3cgb0rZ gogs]# mkdir repositories</span><br><span class="line">[root@iZ2ze9ipfjhle3cz3cgb0rZ gogs]# ls</span><br><span class="line">data  gogs  LICENSE  log  public  README.md  README_ZH.md  repositories  scripts  templates</span><br></pre></td></tr></table></figure>
+
+<p>然后命令启动<code>gogs</code>服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;gogs web</span><br></pre></td></tr></table></figure>
+
+<p>启动端口为3000</p>
+<p><img src="https://img-blog.csdnimg.cn/20200417171509266.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>然后从浏览器进入<a target="_blank" rel="noopener" href="http://101.201.101.206:3000/">http://101.201.101.206:3000/</a></p>
+<p>第一次进来需要配置数据库信息（选择<code>SQLite3</code>，不用连接<code>mysql</code>啥的，因为<code>Gogs</code>自身内置了该数据库）</p>
+<p><img src="https://img-blog.csdnimg.cn/2020041717152541.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200417171537565.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>创建管理员账号，然后点击立即安装即可。</p>
+<p><img src="https://img-blog.csdnimg.cn/2020041717155385.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>然后完成！</p>
+<p><img src="https://img-blog.csdnimg.cn/20200417171603213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><font color="red"><code>./gogs web</code>并不是后台启动，转后台启动可以 <code>nohop ./gogs web &amp;</code></font></p>
+<p>挺简单的，很轻量级的<code>Git</code>代码托管平台，适合小型团队（5到6人），操作也很直白，和<code>github</code>的操作一样一样的，经理再也不用担心我没有私人代码托管平台了！</p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

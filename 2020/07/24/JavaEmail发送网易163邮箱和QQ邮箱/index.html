@@ -1,37 +1,182 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    JavaEmail发送网易163邮箱和qq邮箱 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  冷知识
+  ">
+  
+  <meta name="author" content="樊同学">
 
-{% block page_class %}page-post-detail{% endblock %}
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
 
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
     </div>
   </div>
+</nav>
 
-{% endblock %}
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 62 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 27 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1595582455000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1595582455000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>JavaEmail发送网易163邮箱和qq邮箱</h1>
+    <p>引入<code>javamail</code>的坐标依赖！省略！直接展示中心思想！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EmailUtil</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * todo 发送QQ邮箱</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendQQEmail</span><span class="params">(String emailAddress)</span></span>&#123;</span><br><span class="line">        <span class="comment">//做链接前的准备工作  也就是参数初始化</span></span><br><span class="line">        Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line">        properties.setProperty(<span class="string">&quot;mail.smtp.host&quot;</span>,<span class="string">&quot;smtp.qq.com&quot;</span>);<span class="comment">//发送邮箱服务器</span></span><br><span class="line">        properties.setProperty(<span class="string">&quot;mail.smtp.port&quot;</span>,<span class="string">&quot;465&quot;</span>);<span class="comment">//发送端口</span></span><br><span class="line">        properties.setProperty(<span class="string">&quot;mail.smtp.auth&quot;</span>,<span class="string">&quot;true&quot;</span>);<span class="comment">//是否开启权限控制</span></span><br><span class="line">        properties.setProperty(<span class="string">&quot;mail.debug&quot;</span>,<span class="string">&quot;true&quot;</span>);<span class="comment">//true 打印信息到控制台</span></span><br><span class="line">        properties.setProperty(<span class="string">&quot;mail.transport&quot;</span>,<span class="string">&quot;smtp&quot;</span>);<span class="comment">//发送的协议是简单的邮件传输协议</span></span><br><span class="line">        properties.setProperty(<span class="string">&quot;mail.smtp.ssl.enable&quot;</span>,<span class="string">&quot;true&quot;</span>);</span><br><span class="line">        <span class="comment">//建立两点之间的链接</span></span><br><span class="line">        Session session = Session.getInstance(properties, <span class="keyword">new</span> Authenticator() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">protected</span> PasswordAuthentication <span class="title">getPasswordAuthentication</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> PasswordAuthentication(<span class="string">&quot;675361896@qq.com&quot;</span>,<span class="string">&quot;wbomvmxtifjybcbb&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//创建邮件对象</span></span><br><span class="line">        Message message = <span class="keyword">new</span> MimeMessage(session);</span><br><span class="line">        <span class="comment">//设置发件人</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            message.setFrom(<span class="keyword">new</span> InternetAddress(<span class="string">&quot;675361896@qq.com&quot;</span>));</span><br><span class="line"></span><br><span class="line">            <span class="comment">//设置收件人</span></span><br><span class="line">            message.setRecipient(Message.RecipientType.TO,<span class="keyword">new</span> InternetAddress(emailAddress));<span class="comment">//收件人</span></span><br><span class="line">            <span class="comment">//设置主题</span></span><br><span class="line">            message.setSubject(<span class="string">&quot;Activiti工作流审核结果通知&quot;</span>);</span><br><span class="line">            <span class="comment">//设置邮件正文  第二个参数是邮件发送的类型</span></span><br><span class="line">            message.setContent(<span class="string">&quot;尊敬的用户您好，您的请假申请已通过，请知悉！&quot;</span>,<span class="string">&quot;text/html;charset=UTF-8&quot;</span>);</span><br><span class="line">            <span class="comment">//发送一封邮件</span></span><br><span class="line">            Transport transport = session.getTransport();</span><br><span class="line">            transport.connect(<span class="string">&quot;675361896@qq.com&quot;</span>,<span class="string">&quot;wbomvmxtifjybcbb&quot;</span>);</span><br><span class="line">            Transport.send(message);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MessagingException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * todo 发送网易163邮箱</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">// 发件人 账号和密码</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String MY_EMAIL_ACCOUNT = <span class="string">&quot;fantongxue666@163.com&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String MY_EMAIL_PASSWORD = <span class="string">&quot;PCRAVAFQNZVIJDOI&quot;</span>;<span class="comment">// 密码,是你自己的设置的授权码</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// SMTP服务器(这里用的163 SMTP服务器)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String MEAIL_163_SMTP_HOST = <span class="string">&quot;smtp.163.com&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String SMTP_163_PORT = <span class="string">&quot;25&quot;</span>;<span class="comment">// 端口号,这个是163使用到的;QQ的应该是465或者875</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 收件人</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String RECEIVE_EMAIL_ACCOUNT = <span class="string">&quot;fantongxue666@163.com&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendWY163Email</span><span class="params">(String emailAddress)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        Properties p = <span class="keyword">new</span> Properties();</span><br><span class="line">        p.setProperty(<span class="string">&quot;mail.smtp.host&quot;</span>, MEAIL_163_SMTP_HOST);</span><br><span class="line">        p.setProperty(<span class="string">&quot;mail.smtp.port&quot;</span>, SMTP_163_PORT);</span><br><span class="line">        p.setProperty(<span class="string">&quot;mail.smtp.socketFactory.port&quot;</span>, SMTP_163_PORT);</span><br><span class="line">        p.setProperty(<span class="string">&quot;mail.smtp.auth&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line">        p.setProperty(<span class="string">&quot;mail.smtp.socketFactory.class&quot;</span>, <span class="string">&quot;SSL_FACTORY&quot;</span>);</span><br><span class="line"></span><br><span class="line">        Session session = Session.getInstance(p, <span class="keyword">new</span> Authenticator() &#123;</span><br><span class="line">            <span class="comment">// 设置认证账户信息</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">protected</span> PasswordAuthentication <span class="title">getPasswordAuthentication</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> PasswordAuthentication(MY_EMAIL_ACCOUNT, MY_EMAIL_PASSWORD);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        session.setDebug(<span class="keyword">true</span>);</span><br><span class="line">        MimeMessage message = <span class="keyword">new</span> MimeMessage(session);</span><br><span class="line">        <span class="comment">// 发件人</span></span><br><span class="line">        message.setFrom(<span class="keyword">new</span> InternetAddress(MY_EMAIL_ACCOUNT));</span><br><span class="line">        <span class="comment">// 收件人和抄送人</span></span><br><span class="line">        message.setRecipients(Message.RecipientType.TO, RECEIVE_EMAIL_ACCOUNT);</span><br><span class="line"><span class="comment">//		message.setRecipients(Message.RecipientType.CC, MY_EMAIL_ACCOUNT);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 内容(这个内容还不能乱写,有可能会被SMTP拒绝掉;多试几次吧)</span></span><br><span class="line">        message.setSubject(<span class="string">&quot;Activiti工作流审核结果通知&quot;</span>);</span><br><span class="line">        message.setContent(<span class="string">&quot;尊敬的用户您好，您的请假申请已通过，请知悉！&quot;</span>, <span class="string">&quot;text/html;charset=UTF-8&quot;</span>);</span><br><span class="line">        message.setSentDate(<span class="keyword">new</span> Date());</span><br><span class="line">        message.saveChanges();</span><br><span class="line">        Transport.send(message);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

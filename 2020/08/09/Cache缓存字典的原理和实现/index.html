@@ -1,37 +1,197 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    cache缓存字典的原理和实现 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  cache
+  ">
+  
+  <meta name="author" content="樊同学">
 
-{% block page_class %}page-post-detail{% endblock %}
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
 
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
     </div>
   </div>
+</nav>
 
-{% endblock %}
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 62 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 27 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1596964855000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1596964855000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>cache缓存字典的原理和实现</h1>
+    <p>引入场景：<code>select</code>下拉框每次都要向后台发送请求，性能方面你们都懂，如何优化？<br><em>在数据库设计一个字典表，用于存放常用的下拉框选项内容，项目启动时查询字典表，并把查询结果存入内存，然后下拉框会到内存中找选项内容。</em></p>
+<p>数据不同步问题：可以设置定时任务，刷新缓存即可。</p>
+<h2 id="一，要实现的效果描述"><a href="#一，要实现的效果描述" class="headerlink" title="一，要实现的效果描述"></a>一，要实现的效果描述</h2><p>在<code>html</code>页面的所有<code>select</code>标签，如果你加上一个指定好的自定义属性，那么会到缓存中读取下拉选项内容并自动渲染。<br><code>html</code>内容<br><img src="https://img-blog.csdnimg.cn/20200604182242128.png" alt="在这里插入图片描述"><br>效果<br><img src="https://img-blog.csdnimg.cn/20200604182323971.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>字典表<br><code>value</code>是下拉选项的值，<code>text</code>是下拉选项的显示内容，<code>name</code>是<code>cache</code>属性对应的值，如果需要其他的，直接在表中添加即可，就是那么潇洒！<br><img src="https://img-blog.csdnimg.cn/20200604182355217.png" alt="在这里插入图片描述"></p>
+<h2 id="二，设计步骤"><a href="#二，设计步骤" class="headerlink" title="二，设计步骤"></a>二，设计步骤</h2><ol>
+<li>项目启动的同时要读取字典表，并把读取到字典表的内容存储到内存中</li>
+<li>前端页面检索所有的<code>select</code>标签且带有<code>cache</code>属性的对象，<code>js</code>发送<code>ajax</code>到后台缓存器中读取，并渲染到<code>select</code>标签中。<h2 id="三，开始表演"><a href="#三，开始表演" class="headerlink" title="三，开始表演"></a>三，开始表演</h2><h3 id="1，准备一个缓存管理器"><a href="#1，准备一个缓存管理器" class="headerlink" title="1，准备一个缓存管理器"></a>1，准备一个缓存管理器</h3></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.Ctrl;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> org.thymeleaf.expression.Maps;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ConcurrentHashMap;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> FanJiangFeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 1.0.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ClassName</span> CacheManager.java</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span> TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@createTime</span> 2020年06月04日 17:22:00</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CacheManager</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, T&gt; cache =<span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">(String key)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span>  cache.get(key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addOrUpdateCache</span><span class="params">(String key,T value)</span> </span>&#123;</span><br><span class="line">        cache.put(key, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 依据 key 来删除缓存中的一条记录</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">evictCache</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(cache.containsKey(key)) &#123;</span><br><span class="line">            cache.remove(key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 清空缓存中的全部记录</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">evictCache</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        cache.clear();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2，写查询SQL"><a href="#2，写查询SQL" class="headerlink" title="2，写查询SQL"></a>2，写查询SQL</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TestMapper</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Select(value = &quot;select * from cache_dict&quot;)</span></span><br><span class="line">    <span class="function">List&lt;Map&gt; <span class="title">getCacheDictData</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3，启动项目时初始化"><a href="#3，启动项目时初始化" class="headerlink" title="3，启动项目时初始化"></a>3，启动项目时初始化</h3><p>项目启动时去数据库中取字典表数据并存入缓存管理器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.Ctrl;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.ApplicationArguments;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.ApplicationRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> FanJiangFeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 1.0.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ClassName</span> InitProject.java</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span> TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@createTime</span> 2020年06月04日 17:31:00</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 该类需要继承ApplicationRunner接口并实现里面的run方法，并将该类通过<span class="doctag">@Component</span> 注入到spring里</span></span><br><span class="line"><span class="comment"> * 随着项目启动而执行，用于初始化内容</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InitProject</span> <span class="keyword">implements</span> <span class="title">ApplicationRunner</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    TestMapper testMapper;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    CacheManager cacheManager;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;#####################################&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;           初始化缓存管理器           &quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;#####################################&quot;</span>);</span><br><span class="line">        <span class="comment">//刷新缓存字典，重新把缓存字典表的数据刷新到缓存管理器中</span></span><br><span class="line">        List&lt;Map&gt; cacheDictData = testMapper.getCacheDictData();</span><br><span class="line">        System.out.println(<span class="string">&quot;查到的缓存表数据：&quot;</span>+cacheDictData);</span><br><span class="line">           cacheManager.addOrUpdateCache(<span class="string">&quot;cacheDict&quot;</span>,cacheDictData);</span><br><span class="line">           System.out.println(<span class="string">&quot;#########缓存字典表已刷新存入缓存管理器###########&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="4，准备ajax读取缓存的方法"><a href="#4，准备ajax读取缓存的方法" class="headerlink" title="4，准备ajax读取缓存的方法"></a>4，准备ajax读取缓存的方法</h3><p>参数是<code>select</code>标签的<code>cache</code>属性的值，通过值查询对应的下拉框选项内容。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;queryCache&quot;)</span></span><br><span class="line">   <span class="meta">@ResponseBody</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> List&lt;Map&gt; <span class="title">queryCache</span><span class="params">(String cacheName)</span></span>&#123;</span><br><span class="line">       List&lt;Map&gt; cacheDict = (List&lt;Map&gt;)cacheManager.get(<span class="string">&quot;cacheDict&quot;</span>);</span><br><span class="line">       List&lt;Map&gt; tempList=<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       <span class="keyword">for</span>(Map map:cacheDict)&#123;</span><br><span class="line">           <span class="keyword">if</span>(cacheName.equals(map.get(<span class="string">&quot;name&quot;</span>)))&#123;</span><br><span class="line">               tempList.add(map);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> tempList;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5，写一个公用的-js"><a href="#5，写一个公用的-js" class="headerlink" title="5，写一个公用的 js"></a>5，写一个公用的 js</h3><p>该<code>js</code>负责从<code>html</code>中扫描所有带有<code>cache</code>属性的<code>select</code>标签，并对其进行渲染</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">               $(<span class="string">&quot;select&quot;</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                   <span class="keyword">var</span> _this=$(<span class="built_in">this</span>);</span></span><br><span class="line"><span class="javascript">                   <span class="keyword">var</span> isHas=_this.attr(<span class="string">&#x27;cache&#x27;</span>);</span></span><br><span class="line"><span class="javascript">                   <span class="keyword">if</span>(isHas!=<span class="literal">undefined</span>)&#123;</span></span><br><span class="line"><span class="javascript">                       <span class="keyword">var</span> temp=<span class="string">&#x27;&#x27;</span>;</span></span><br><span class="line"><span class="javascript">                       $.ajax(&#123;</span></span><br><span class="line"><span class="javascript">                           url:<span class="string">&quot;/test/queryCache&quot;</span>,</span></span><br><span class="line">                           data:&#123;cacheName:isHas&#125;,</span><br><span class="line"><span class="javascript">                           type:<span class="string">&quot;post&quot;</span>,</span></span><br><span class="line"><span class="javascript">                           <span class="keyword">async</span>:<span class="literal">false</span>,</span></span><br><span class="line"><span class="javascript">                           success:<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                               <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;data.length;i++)&#123;</span></span><br><span class="line"><span class="javascript">                                   temp+=<span class="string">&#x27;&lt;option value=&quot;&#x27;</span>+data[i].value+<span class="string">&#x27;&quot;&gt;&#x27;</span>+data[i].text+<span class="string">&#x27;&lt;/option&gt;&#x27;</span>;</span></span><br><span class="line">                               &#125;</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125;);</span><br><span class="line">                       _this.html(temp);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="6，大结局"><a href="#6，大结局" class="headerlink" title="6，大结局"></a>6，大结局</h3><p>在<code>html</code>页面测试，写一个<code>select</code>标签，加上指定属性<code>cache</code>，值为字典表的<code>name</code>字段，效果如上，成功渲染！<br>写一个定时任务，定时刷新缓存，不然缓存和字典表的数据不同步！</p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

@@ -1,37 +1,197 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    websocket实现多人在线聊天功能 | 欢迎来到LZ的直播间
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  websocket编程
+  ">
+  
+  <meta name="author" content="樊同学">
 
-{% block page_class %}page-post-detail{% endblock %}
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
 
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
     </div>
   </div>
+</nav>
 
-{% endblock %}
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 62 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 27 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">欢迎来到LZ的直播间</a>
+      
+      
+    </h2>
+  </div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    樊同学
+
+    <span class="post-date float-right" title="{{moment(1598174455000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1598174455000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>websocket实现多人在线聊天功能</h1>
+    <p><code>WebSocket</code>是现在最流行的实现多人在线聊或者私聊的技术，它可以实现客户端到客户端的通信，和以往的<code>TCP</code>和<code>UDP</code>不一样，它俩是客户端到服务端的通信，而且服务端不能直接给客户端发送消息，但是<code>WebSocket</code>不仅可以客户端和客户端之间通信，服务端也可以直接发送消息给客户端。<br>下面实现的一个多人的在线聊天室，前台聊天框是在网上找的模板，该聊天室具有的功能如下</p>
+<ol>
+<li>当一个客户端进入之后，其他客户端会看到系统消息提示（某某某进入了聊天室）</li>
+<li>客户端发送消息，每个客户端都可以收到消息</li>
+<li>当一个客户端退出或者关闭聊天室网页时，其他客户端会看到系统消息提示（某某某退出了聊天室）</li>
+</ol>
+<p>下面是代码，这里说明一点<br><font color="red">里面的注解像<code>@ServerEndpoint</code>，<code>@OnMessage</code>，<code>@OnClose</code>，<code>@OnOpen</code>等都是<code>javax</code>支持的，还有下面的<code>Session</code>不是<code>HTTP</code>的<code>Session</code>,都是属于<code>javax.websocket</code>的。</font></p>
+<p>项目是一个简单的<code>Web</code>项目，什么框架也没用，只是复制了一个<code>html</code>页面到<code>WebContent</code>文件夹。<br><img src="https://img-blog.csdnimg.cn/20190913211128728.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>因为<code>web.xml</code>文件的配置，所以把项目部署到<code>Tomcat</code>上面直接运行，输入路径<code>localhost:8080/chatroom</code>即可，默认跳转到<code>index.html</code>页面，也就是聊天框的页面。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">welcome-file-list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.html<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">welcome-file-list</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>至于<code>html</code>页面也不用我给你们了吧，自己可以在网上面找聊天模板，太多了。<br>直接讲<code>js</code>吧？要模板的到最下面给你们链接去下载好啦，记得好评兄弟盟，如果帮到你们的话就给宝宝扣个1可否？</p>
+<p><code>js</code>代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">	<span class="comment">//webSocket实现聊天，客户端需要做的事情，总结起来，其实就是一下几件</span></span><br><span class="line">	<span class="comment">//1，获取连接，new WebSocket()</span></span><br><span class="line">	<span class="comment">//服务端地址和请求类型</span></span><br><span class="line">	<span class="keyword">var</span> wsUrl=<span class="string">&quot;ws://localhost:8080/chatroom/charRoomServer&quot;</span>;</span><br><span class="line">	<span class="comment">//客户端与服务端建立连接，建立连接以后，它会发出一个ws.open事件</span></span><br><span class="line">	<span class="keyword">var</span> ws=<span class="keyword">new</span> WebSocket(wsUrl);</span><br><span class="line">	<span class="comment">//连接成功后，提示浏览器客户端输入名称</span></span><br><span class="line">	ws.onopen=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> userName=prompt(<span class="string">&quot;请给自己取一个名字&quot;</span>);</span><br><span class="line">		ws.send(userName);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//客户端收到服务端发送的消息</span></span><br><span class="line">	ws.onmessage=<span class="function"><span class="keyword">function</span>(<span class="params">message</span>)</span>&#123;</span><br><span class="line">		<span class="comment">//获取以后，在客户端显示,messages是聊天内容的框的id</span></span><br><span class="line">		messages.innerHTML+=message.data;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//获取某个用户输入的聊天内容，并发送到服务端，让服务端广播给所有人</span></span><br><span class="line">	 <span class="function"><span class="keyword">function</span> <span class="title">getMessage</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> inputMessage=<span class="built_in">document</span>.getElementById(<span class="string">&quot;inputMessage&quot;</span>).value;</span><br><span class="line">		<span class="comment">//alert(inputMessage);</span></span><br><span class="line">		<span class="comment">//获取消息以后，要发送给服务端，然后广播给所有用户</span></span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">typeof</span>(inputMessage)==<span class="string">&#x27;undefined&#x27;</span>)&#123;</span><br><span class="line">			alert(<span class="string">&quot;请输入您要发送的消息！&quot;</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			ws.send(inputMessage);</span><br><span class="line">			<span class="comment">//输入框消息清空</span></span><br><span class="line">			inputMessage.value=<span class="string">&quot;&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="comment">//当关闭页面或者用户退出时，会执行一个ws.close()方法</span></span><br><span class="line">	<span class="built_in">window</span>.onbeforeunload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		ws.close();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//按回车发送信息</span></span><br><span class="line">	<span class="built_in">document</span>.onkeyup=<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(e.keyCode==<span class="number">13</span>)&#123;</span><br><span class="line">			getMessage();</span><br><span class="line">			inputMessage.value=<span class="string">&quot;&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>Java</code>代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.fjf.chat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> javax.websocket.OnClose;</span><br><span class="line"><span class="keyword">import</span> javax.websocket.OnMessage;</span><br><span class="line"><span class="keyword">import</span> javax.websocket.OnOpen;</span><br><span class="line"><span class="keyword">import</span> javax.websocket.Session;</span><br><span class="line"><span class="keyword">import</span> javax.websocket.server.ServerEndpoint;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 聊天室的服务端程序</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Administrator</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//声明websocket某个服务端的地址</span></span><br><span class="line"><span class="meta">@ServerEndpoint(&quot;/charRoomServer&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChatRoomServer</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> firstFlag=<span class="keyword">true</span>;</span><br><span class="line">	<span class="keyword">private</span> Session session;</span><br><span class="line">	<span class="keyword">private</span> String userName;</span><br><span class="line">	<span class="comment">//记录此次聊天室的服务端有多少个连接</span></span><br><span class="line">	<span class="comment">//key代表此次客户端的session的id，value代表此次连接对象</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> HashMap&lt;String, Object&gt; connectMap=<span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">	<span class="comment">//保存所有用户昵称信息</span></span><br><span class="line">	<span class="comment">//key是session的id，value是用户昵称</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> HashMap&lt;String, String&gt; userMap=<span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//服务端收到客户端的连接请求，连接成功后会执行此方法</span></span><br><span class="line">	<span class="meta">@OnOpen</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(Session session)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.session=session;</span><br><span class="line">		connectMap.put(session.getId(), <span class="keyword">this</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//客户端发来的信息，服务端接收</span></span><br><span class="line">	<span class="meta">@OnMessage</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">chat</span><span class="params">(String clientMessage,Session session)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//firstFlag为true是第一次进入，第二次进入之后设为false</span></span><br><span class="line">		ChatRoomServer client=<span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">if</span>(firstFlag) &#123;	</span><br><span class="line">			<span class="keyword">this</span>.userName=clientMessage;</span><br><span class="line">			<span class="comment">//将新进来的用户保存到用户map</span></span><br><span class="line">			userMap.put(session.getId(), userName);</span><br><span class="line">			<span class="comment">//构造发送给客户端的提示信息</span></span><br><span class="line">			String message=htmlMessage(<span class="string">&quot;系统消息：&quot;</span>,userName+<span class="string">&quot;进入聊天室&quot;</span>);</span><br><span class="line">			<span class="comment">//将消息广播给给所有的用户</span></span><br><span class="line">			<span class="comment">//Map.keySet()方法是获取到Map集合的所有的key值</span></span><br><span class="line">			<span class="keyword">for</span>(String connectKey:connectMap.keySet()) &#123;</span><br><span class="line">				client=(ChatRoomServer) connectMap.get(connectKey);</span><br><span class="line">				<span class="comment">//给对应的web端发送一个文本信息</span></span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					client.session.getBasicRemote().sendText(message);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">					<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">				firstFlag=<span class="keyword">false</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">//构造发送给客户端的提示信息</span></span><br><span class="line">				String message=htmlMessage(userMap.get(session.getId()),clientMessage);</span><br><span class="line">				<span class="comment">//将消息广播给给所有的用户</span></span><br><span class="line">				<span class="comment">//Map.keySet()方法是获取到Map集合的所有的key值</span></span><br><span class="line">				<span class="keyword">for</span>(String connectKey:connectMap.keySet()) &#123;</span><br><span class="line">					client=(ChatRoomServer) connectMap.get(connectKey);</span><br><span class="line">					<span class="comment">//给对应的web端发送一个文本信息</span></span><br><span class="line">					<span class="keyword">try</span> &#123;</span><br><span class="line">						client.session.getBasicRemote().sendText(message);</span><br><span class="line">					&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">						<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">						e.printStackTrace();</span><br><span class="line">					&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 前台js的ws.close事件，会触发后台的标注onClose的方法</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@OnClose</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(Session session)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//当某个用户退出时，对其他用户进行广播</span></span><br><span class="line">		String message=htmlMessage(<span class="string">&quot;系统消息&quot;</span>, userMap.get(session.getId())+<span class="string">&quot;退出了聊天室&quot;</span>);</span><br><span class="line">		userMap.remove(session.getId());</span><br><span class="line">		connectMap.remove(session.getId());</span><br><span class="line">		<span class="comment">//将消息广播给给所有的用户</span></span><br><span class="line">		<span class="comment">//Map.keySet()方法是获取到Map集合的所有的key值</span></span><br><span class="line">		ChatRoomServer client=<span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">for</span>(String connectKey:connectMap.keySet()) &#123;</span><br><span class="line">			client=(ChatRoomServer) connectMap.get(connectKey);</span><br><span class="line">			<span class="comment">//给对应的web端发送一个文本信息</span></span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				client.session.getBasicRemote().sendText(message);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">				<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 渲染页面，把信息构造好标签再发送</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">htmlMessage</span><span class="params">(String userName,String message)</span> </span>&#123;</span><br><span class="line">		StringBuffer stringBuffer=<span class="keyword">new</span> StringBuffer();</span><br><span class="line">		SimpleDateFormat sf=<span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line">		stringBuffer.append(<span class="string">&quot;&lt;article&gt;&quot;</span>);</span><br><span class="line">		stringBuffer.append(<span class="string">&quot;&lt;span&gt;&quot;</span>+sf.format(<span class="keyword">new</span> Date())+<span class="string">&quot;&lt;/span&gt;&quot;</span>);</span><br><span class="line">		stringBuffer.append(<span class="string">&quot;&lt;div class=&#x27;avatar&#x27;&gt;&quot;</span>);</span><br><span class="line">		stringBuffer.append(<span class="string">&quot;&lt;h3&gt;&quot;</span>+userName+<span class="string">&quot;&lt;/h3&gt;&quot;</span>);</span><br><span class="line">		stringBuffer.append(<span class="string">&quot;&lt;/div&gt;&quot;</span>);</span><br><span class="line">		stringBuffer.append(<span class="string">&quot;&lt;div class=&#x27;msg&#x27;&gt;&quot;</span>);</span><br><span class="line">		stringBuffer.append(<span class="string">&quot;&lt;div class=&#x27;tri&#x27;&gt;&lt;/div&gt;&quot;</span>);</span><br><span class="line">		stringBuffer.append(<span class="string">&quot;&lt;div class=&#x27;msg_inner&#x27;&gt;&quot;</span>+message+<span class="string">&quot;&lt;/div&gt;&quot;</span>);</span><br><span class="line">		stringBuffer.append(<span class="string">&quot;&lt;/div&gt;&quot;</span>);</span><br><span class="line">		stringBuffer.append(<span class="string">&quot;&lt;/article&gt;&quot;</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> stringBuffer.toString();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>然后聊天室就完工啦！</p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://github.com/fantongxue666" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 樊同学</li>
+      <li><a href="https://github.com/fantongxue666">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
