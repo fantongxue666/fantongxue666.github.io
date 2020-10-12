@@ -1,187 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>
-    java开发3-5年工作经验面试题 | 欢迎来到LZ的直播间
-  </title>
-  <meta name="description" content="">
-  
-  <meta name="keywords" content="
-  冷知识
-  ">
-  
-  <meta name="author" content="樊同学">
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-  <meta http-equiv="Cache-Control" content="no-transform"/>
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <meta name="theme-color" content="#1e2327">
-  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+{% block page_class %}page-post-detail{% endblock %}
 
-  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  
 
-  
+{% block content %}
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
 
-<body id="replica-app">
-
-<nav class="navbar-wrapper">
-  <div class="navbar">
-    <div class="container clearfix">
-      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
-
-      <div class="navbar-search float-left desktop-only">
-        <div class="navbar-search-form">
-          <label for="gsc-i-id1">This website</label>
-          <div id="google-search">
-            <gcse:search></gcse:search>
-          </div>
-        </div>
-      </div>
-
-      <ul class="navbar-nav float-left">
-        
-        <li><a href="/archives">Archives</a></li>
-        
-        
-        <li><a href="/categories">Categories</a></li>
-        
-        
-        <li><a href="/tags">Tags</a></li>
-        
-        
-        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
-        
-      </ul>
-
-      <ul class="navbar-nav user-nav float-right desktop-only">
-        <li class="user-nav-notification">
-          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
-        </li>
-        <li>
-          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
-        </li>
-        <li class="user-nav-logo">
-          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
-        </li>
-      </ul>
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
   </div>
-</nav>
 
-<div class="main-container">
-  <header class="header-wrapper desktop-only">
-  <div class="container header-site-detail">
-    <ul class="header-toolbar">
-      <li class="clearfix">
-        <a href="/archives" class="header-toolbar-left"><i
-                  class="fa fa-file-text"></i> Posts </a>
-        <a href="/archives"
-           class="header-toolbar-right"> 62 </a>
-      </li>
-      <li>
-        <a href="/tags" class="header-toolbar-left"><i
-                  class="fa fa-tags"></i> Tags </a>
-        <a href="/tags"
-           class="header-toolbar-right"> 50 </a>
-      </li>
-      <li>
-        <a href="/categories" class="header-toolbar-left"><i
-                  class="fa fa-folder-open"></i> Categories </a>
-        <a href="/categories"
-           class="header-toolbar-right"> 27 </a>
-      </li>
-    </ul>
-    <h2 class="header-title">
-      <i class="fa fa-book text-muted"></i>
-      <a href="/">欢迎来到LZ的直播间</a>
-      
-      
-    </h2>
-  </div>
+{% endblock %}
 
-  <div class="container">
-    <div class="header-tab-wrapper clearfix">
-      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
-      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
-      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
-      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
-      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
-    </div>
-  </div>
-</header>
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-
-<div class="post-container container">
-  <h3>
-    <i class="fa fa-user-o"></i>
-    樊同学
-
-    <span class="post-date float-right" title="{{moment(1595668855000).format('MMM DD, YYYY, h:mm:ss A')}}">
-      
-          <i class="fa fa-pencil-square-o"></i>
-      
-      {{moment(1595668855000).fromNow()}}
-    </span>
-  </h3>
-
-  <article class="post-content">
-    <h1>java开发3-5年工作经验面试题</h1>
-    <h2 id="java开发3-5年工作经验面试题"><a href="#java开发3-5年工作经验面试题" class="headerlink" title="java开发3~5年工作经验面试题"></a>java开发3~5年工作经验面试题</h2><h3 id="关于java基础"><a href="#关于java基础" class="headerlink" title="关于java基础"></a>关于java基础</h3><p><a target="_blank" rel="noopener" href="https://www.dazhuanlan.com/2019/12/10/5dee8a4bace57/">String,StringBuilder,StringBuffer区别是什么？底层数据结构是什么？分别是如何实现的？</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/blacktal/article/details/81257255">HashSet的底层实现是什么？它与HashMap有什么关系？</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yuxiaole/p/9570850.html">Java 如何重写对象的 equals 方法和 hashCode 方法？为什么需要重写？</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/GaoYan__Ze/article/details/81674079?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.edu_weight&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.edu_weight">使用HashSet存储自定义类对象时为什么要重写equals和hashCode方法？</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/79507868">HashMap的底层原理（数组+链表+红黑树）面试必考题</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Wordlichengbei/article/details/84451889">ArrayList和LinkedList底层实现原理、性能差异</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/swpu_ocean/article/details/88917958">JDK1.7和JDK1.8中HashMap为什么是线程不安全的？</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/ToBe_Coder/article/details/86996665">ConcurrentHashMap的底层实现原理与源码剖析</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/rzbwyj/p/12511976.html"> JDK1.7和JDK1.8中ConcurrentHashMap底层实现的区别</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ca1ab5ddfe39">并发编程的锁机制 synchronize和lock的区别</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41170102/article/details/104829383">什么是CAS？</a><br><a target="_blank" rel="noopener" href="https://www.imooc.com/article/details/id/23015">hashMap和hashTable底层原理的区别？hashTable的put()做了哪些事？</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/x_i_y_u_e/article/details/50728602">volatile关键字的理解；用在哪些场景?</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/dreamer_8399/article/details/77839648">线程的两种实现方式，以及区别</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010031673/article/details/51755075">NIO与IO的区别</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/swisszhang/p/9892992.html">static关键字的场景和意义</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40864915/article/details/88304007">什么是事务，怎么理解事务？</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44001965/article/details/94572136">动态代理的两种实现方式</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34337272/article/details/81072874">面试必备之乐观锁与悲观锁</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/lchlaughing/article/details/88207648">xml文件有几种定义形式？解析方式?</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44062339/article/details/100491744">彻底搞清分库分表</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xxoome/p/10081741.html">MySQL–事务隔离级别及传播机制</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pony1223/p/7608955.html">JAVA设计模式总结之23种设计模式</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/java-chen-hao/p/10688617.html">Servlet底层原理、Servlet实现方式、Servlet生命周期</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/huangdabing/p/9231948.html">Java对象的序列化和反序列化</a><br><a target="_blank" rel="noopener" href="http://www.voidcn.com/article/p-rtgtllxj-zw.html">java反射中，Class.forName和classloader的区别</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yufeng218/p/9911368.html">session和cookie的区别和联系，session的生命周期，多个服务部署时session管理</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yufeng218/p/9926465.html">Java中的队列都有哪些，有什么区别</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaojianting/article/details/80338273">Java7、Java8的新特性</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xingzc/p/9138256.html">spring中BeanFactory和FactoryBean的区别</a></p>
-<h3 id="高并发【多线程】"><a href="#高并发【多线程】" class="headerlink" title="高并发【多线程】"></a>高并发【多线程】</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/karrya/p/10960294.html">Volatile与synchronize的区别</a><br><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/4630.html">springboot与spring相比优势是什么？</a><br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1529634">Java线程池的四种用法与使用场景</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/shenhaiyushitiaoyu/article/details/85050153">线程等待wait()和通知notify()的详细使用</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013332124/article/details/79587436">Java线程池实现原理</a></p>
-<h3 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h3><p><a target="_blank" rel="noopener" href="https://manyhf6.gitbooks.io/interviewbook/content/chapter_04/0029.html">怎么理解http是无状态通信，http的请求方式有哪些，可以自己定义新的请求方式么？</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38328091/article/details/96479914">TCP 三次握手，为什么是三次？两次可以吗？</a></p>
-<h3 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangcongyi420/article/details/89419715">springIOC的理解和实现原理</a><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000013039377">spring是如何通过xml配置或者注解配置生成实例对象的？</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f01b662fc1c4">Spring AOP底层实现的基本原理</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/bug_moving/article/details/53071470">Spring MVC 中 如何解析视图及视图解析的详细流程</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaheng100/article/details/81741693">Spring常用注解</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/panyuxin_/article/details/80814488">代码中事务是如何控制的？</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_25594727/article/details/91949354">spring框架中需要引用那些jar包，以及这些jar包的用途</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/b9x__/article/details/80268408">Spring中的BeanFactory和ApplicationContext之间的区别和联系</a></p>
-<h3 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yangbaggio/article/details/89764997">MyBatis体系结构与工作原理</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jeecg158/p/11102632.html">Mybatis处理多个参数的几种方式？</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_34122324/article/details/85135211">Mybatis占位符有几种？区别是什么？</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yunianzeng/p/11826449.html">mybatis的缓存机制：一级缓存和二级缓存的区别</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/style6666/article/details/87659008">MyBatis 类型转换器</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fantongxue/p/12788358.html">mybatis接口没有实现类,他是如何操作数据库的?</a></p>
-<h3 id="中科软外包企业面试题"><a href="#中科软外包企业面试题" class="headerlink" title="中科软外包企业面试题"></a>中科软外包企业面试题</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/it-tsz/p/11441910.html">JAVA关于静态static的面试题</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/luxd/p/9916677.html">数据库行锁和表锁，存储过程，函数</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yinchh/p/12749138.html">springboot自动装配原理</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/huangsxj/p/7728123.html">springboot启动类都做了些什么</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/linlf03/p/12371373.html">Spring Boot启动类加载器</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/yongwan5637/article/details/84234520">http协议的状态码</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/capacity-yang/p/13141627.html">TCP三次握手、四次挥手的理解</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/yong_zi/article/details/81285049">Java中静态变量和实例变量的区别</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010541670/article/details/91890649">BIO、NIO和AIO的区别</a></p>
-
-  </article>
-</div>
-
-
-    
-
-
-
-
-</div>
-
-<div class="footer-wrapper container">
-  <footer class="footer clearfix">
-    <div class="clearfix">
-    <a href="https://github.com/fantongxue666" class="footer-logo">
-      <i class="fa fa-github"></i>
-    </a>
-    <ul class="footer-social-link">
-      <li>© 2019 樊同学</li>
-      <li><a href="https://github.com/fantongxue666">Home</a></li>
-      
-    </ul>
-    <div class="footer-theme-info">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-    </div>
-    
-  </footer>
-</div>
-
-
-
-
-<script src="/js/main.js"></script>
-
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}

@@ -1,285 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>
-    springboot集成solr实现全局搜索系列 | 欢迎来到LZ的直播间
-  </title>
-  <meta name="description" content="">
-  
-  <meta name="keywords" content="
-  solr
-  ">
-  
-  <meta name="author" content="樊同学">
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-  <meta http-equiv="Cache-Control" content="no-transform"/>
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <meta name="theme-color" content="#1e2327">
-  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+{% block page_class %}page-post-detail{% endblock %}
 
-  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  
 
-  
+{% block content %}
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
 
-<body id="replica-app">
-
-<nav class="navbar-wrapper">
-  <div class="navbar">
-    <div class="container clearfix">
-      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
-
-      <div class="navbar-search float-left desktop-only">
-        <div class="navbar-search-form">
-          <label for="gsc-i-id1">This website</label>
-          <div id="google-search">
-            <gcse:search></gcse:search>
-          </div>
-        </div>
-      </div>
-
-      <ul class="navbar-nav float-left">
-        
-        <li><a href="/archives">Archives</a></li>
-        
-        
-        <li><a href="/categories">Categories</a></li>
-        
-        
-        <li><a href="/tags">Tags</a></li>
-        
-        
-        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
-        
-      </ul>
-
-      <ul class="navbar-nav user-nav float-right desktop-only">
-        <li class="user-nav-notification">
-          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
-        </li>
-        <li>
-          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
-        </li>
-        <li class="user-nav-logo">
-          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
-        </li>
-      </ul>
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
   </div>
-</nav>
 
-<div class="main-container">
-  <header class="header-wrapper desktop-only">
-  <div class="container header-site-detail">
-    <ul class="header-toolbar">
-      <li class="clearfix">
-        <a href="/archives" class="header-toolbar-left"><i
-                  class="fa fa-file-text"></i> Posts </a>
-        <a href="/archives"
-           class="header-toolbar-right"> 62 </a>
-      </li>
-      <li>
-        <a href="/tags" class="header-toolbar-left"><i
-                  class="fa fa-tags"></i> Tags </a>
-        <a href="/tags"
-           class="header-toolbar-right"> 50 </a>
-      </li>
-      <li>
-        <a href="/categories" class="header-toolbar-left"><i
-                  class="fa fa-folder-open"></i> Categories </a>
-        <a href="/categories"
-           class="header-toolbar-right"> 27 </a>
-      </li>
-    </ul>
-    <h2 class="header-title">
-      <i class="fa fa-book text-muted"></i>
-      <a href="/">欢迎来到LZ的直播间</a>
-      
-      
-    </h2>
-  </div>
+{% endblock %}
 
-  <div class="container">
-    <div class="header-tab-wrapper clearfix">
-      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
-      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
-      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
-      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
-      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
-    </div>
-  </div>
-</header>
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-
-<div class="post-container container">
-  <h3>
-    <i class="fa fa-user-o"></i>
-    樊同学
-
-    <span class="post-date float-right" title="{{moment(1598952055000).format('MMM DD, YYYY, h:mm:ss A')}}">
-      
-          <i class="fa fa-pencil-square-o"></i>
-      
-      {{moment(1598952055000).fromNow()}}
-    </span>
-  </h3>
-
-  <article class="post-content">
-    <h1>springboot集成solr实现全局搜索系列</h1>
-    <h2 id="1-Solr介绍"><a href="#1-Solr介绍" class="headerlink" title="1    Solr介绍"></a>1    Solr介绍</h2><h3 id="1-1-什么是solr？"><a href="#1-1-什么是solr？" class="headerlink" title="1.1 什么是solr？"></a>1.1 什么是solr？</h3><p><code>Solr</code>是一个独立的企业级搜索应用服务器，它对外提供类似于Web-service的API接口。用户可以通过http请求，向搜索引擎服务器提交一定格式的XML文件，生成索引；也可以通过Http Get操作提出查找请求，并得到XML格式的返回结果。</p>
-<p><code>Solr</code>是<code>apache</code>的顶级开源项目，它是使用java开发 ，基于<code>lucene</code>的全文检索服务器。</p>
-<p><code>Solr</code>比<code>lucene</code>提供了更多的查询语句，而且它可扩展、可配置，同时它对<code>lucene</code>的性能进行了优化。</p>
-<p><code>Solr</code>是如何实现全文检索的呢？</p>
-<blockquote>
-<p>1，索引流程：solr客户端（浏览器、java程序）可以向solr服务端发送POST请求，请求内容是包含Field等信息的一个xml文档，通过该文档，solr实现对索引的维护（增删改）</p>
-<p>2，搜索流程：solr客户端（浏览器、java程序）可以向solr服务端发送GET请求，solr服务器返回一个xml/json文档。</p>
-</blockquote>
-<h3 id="1-2-Solr和lucene的区别"><a href="#1-2-Solr和lucene的区别" class="headerlink" title="1.2    Solr和lucene的区别"></a>1.2    Solr和lucene的区别</h3><p><code>Lucene</code>是一个全文检索引擎工具包，它只是一个jar包，不能独立运行，对外提供服务。</p>
-<p><code>Solr</code>是一个全文检索服务器，它可以单独运行在<code>servlet</code>容器，可以单独对外提供搜索和索引功能。<code>Solr</code>比<code>lucene</code>在开发全文检索功能时，更快捷、更方便。<br><img src="https://img-blog.csdnimg.cn/20200415124722751.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="2-Solr安装配置"><a href="#2-Solr安装配置" class="headerlink" title="2    Solr安装配置"></a>2    Solr安装配置</h2><h3 id="2-1-下载solr"><a href="#2-1-下载solr" class="headerlink" title="2.1    下载solr"></a>2.1    下载solr</h3><p><code>Solr</code>和<code>lucene</code>的版本是同步更新的，最新的版本是<code>8.1.0/  </code></p>
-<p>本课程使用的版本：7.1.0</p>
-<p>下载地址：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/apache/lucene/solr/">https://mirrors.tuna.tsinghua.edu.cn/apache/lucene/solr/</a><br>下载版本：7.1.0<br><img src="https://img-blog.csdnimg.cn/20200415124841170.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ol>
-<li>src.tgz：带src表示是带源码文件的压缩包，无src是已经编译过的压缩包 </li>
-<li>.tgz：Linux相关操作系统使用的压缩包 </li>
-<li>.zip：Windows操作系统使用的压缩包<br><img src="https://img-blog.csdnimg.cn/2020041512490532.png" alt="在这里插入图片描述"><br><code>Jetty </code>是一个开源的servlet容器，它为基于<code>Java</code>的<code>web</code>容器，例如<code>JSP</code>和<code>servlet</code>提供运行环境。Jetty是使用<code>Java</code>语言编写的，它的API以一组JAR包的形式发布。开发人员可以将<code>Jetty</code>容器实例化成一个对象，可以迅速为一些独立运行<code>（stand-alone）</code>的<code>Java</code>应用提供网络和web连接。<h3 id="2-2-启动Solr"><a href="#2-2-启动Solr" class="headerlink" title="2.2    启动Solr"></a>2.2    启动Solr</h3><img src="https://img-blog.csdnimg.cn/20200415124928891.png" alt="在这里插入图片描述"><br>solr的启动、停止、查看命令： </li>
-<li>启动：bin\solr.cmd start </li>
-<li>停止：bin\solr stop 或bin\solr stop -all </li>
-<li>查看：bin\solr status</li>
-</ol>
-<p>访问地址：<a target="_blank" rel="noopener" href="http://localhost:8983/solr/#/">http://localhost:8983/solr/#/</a><br><img src="https://img-blog.csdnimg.cn/20200415124948251.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="2-3-Tomcat安装运行环境"><a href="#2-3-Tomcat安装运行环境" class="headerlink" title="2.3    Tomcat安装运行环境"></a>2.3    Tomcat安装运行环境</h3><blockquote>
-<p>Jdk：1.8及以上<br>Solr：7.1<br>Web服务器：tomcat 8（改端口9080）</p>
-</blockquote>
-<h4 id="2-3-1-操作步骤"><a href="#2-3-1-操作步骤" class="headerlink" title="2.3.1    操作步骤"></a>2.3.1    操作步骤</h4><p>1、找到如下目录内容：<br><font color="red">D:\guoweixin\solr\solr-7.1.0\server\solr-webapp</font><br><img src="https://img-blog.csdnimg.cn/20200415125123253.png" alt="在这里插入图片描述"><br>2、复制到Tomcat下，并命令为solr<br><font color="red">D:\guoweixin\solr\apache-tomcat-solr\webapps</font><br><img src="https://img-blog.csdnimg.cn/20200415125204501.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>2、将<font color="red">solr-7.1.0\server\lib\ext</font>下的所有jar包，以及solr-7.1.0\server\lib下以metrics开头的jar、gmetric4j-1.0.7.jar复制到<font color="red">apache-tomcat-8\webapps\solr\WEB-INF\lib</font>下<br><img src="https://img-blog.csdnimg.cn/20200415125306485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>3、在<font color="red">tomcat\webapps\solr\WEB-INF</font>中，新建classes文件夹，将<em>solr-7.1.0\server\resources</em>下的<em>log4j.properties</em>文件拷贝到里面<br><img src="https://img-blog.csdnimg.cn/20200415125356147.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415125401991.png" alt="在这里插入图片描述"><br><em>创建Solr  CoreAdmin管理（Solr Home）</em><br>4、<font color="red">创建SOLR HOME目录（solr_home）</font><br><img src="https://img-blog.csdnimg.cn/20200415125453652.png" alt="在这里插入图片描述"><br>5、拷贝<font color="red">solr-7.1.0\server\solr</font>下所有文件、文件夹复制到solr_home目录下<br>6、拷贝<font color="red">solr-7.1.0 下contrib和dist</font>文件夹至solr_home目录下<br>7、在<font color="red">solr_home</font>目录下新建<font color="red">demo_core</font>文件夹；<br>并拷贝<font color="red">D:\guoweixin\solr\solr_home\configsets\sample_techproducts_configs</font>目录下conf文件夹至<font color="red">solr_home\demo_core</font>下<br><img src="https://img-blog.csdnimg.cn/20200415125658826.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415125703250.png" alt="在这里插入图片描述"><br>8(需要)、修改<font color="red">solr_home\demo_core\conf\solrconfig.xml</font>文件，如下(75行处)<br><img src="https://img-blog.csdnimg.cn/202004151257330.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>9、修改<font color="red">tomcat\webapps\solr\WEB-INF</font>中的<strong>web.xml</strong>文件<br>新增如下部分，默认是注释掉的。 (40行处)<br>其中env-entry-value值为solr_home对应值，即solr home目录<br><img src="https://img-blog.csdnimg.cn/20200415125820116.png" alt="在这里插入图片描述"><br>10、修改<font color="red">tomcat\webapps\solr\WEB-INF</font>中的<strong>web.xml</strong>文件<font color="red" size="2px">（注释如下部分内容）最下面162行</font><br><img src="https://img-blog.csdnimg.cn/20200415125937905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>11、启动Tomcat<br>启动tomcat，访问<a target="_blank" rel="noopener" href="http://localhost:8080/solr/index.html">http://localhost:8080/solr/index.html</a></p>
-<h3 id="2-4-solr界面介绍"><a href="#2-4-solr界面介绍" class="headerlink" title="2.4    solr界面介绍"></a>2.4    solr界面介绍</h3><p>启动solr服务<br><a target="_blank" rel="noopener" href="http://localhost:8080/solr/index.html">http://localhost:8080/solr/index.html</a><br><img src="https://img-blog.csdnimg.cn/20200415130051742.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="2-4-1-Dashboard"><a href="#2-4-1-Dashboard" class="headerlink" title="2.4.1    Dashboard"></a>2.4.1    Dashboard</h4><p>仪表盘，显示了该<code>Solr</code>实例开始启动运行的时间、版本、系统资源、jvm等信息。</p>
-<h4 id="2-4-2-Logging"><a href="#2-4-2-Logging" class="headerlink" title="2.4.2    Logging"></a>2.4.2    Logging</h4><p>显示solr运行出现的异常或错误</p>
-<h4 id="2-4-3-Core-Admin"><a href="#2-4-3-Core-Admin" class="headerlink" title="2.4.3    Core Admin"></a>2.4.3    Core Admin</h4><p><code>Solr Core</code>的管理界面。在这里可以添加<code>SolrCore</code>实例。<br>主要有<code>Add Core</code>(添加核心)， <code>Unload</code>（卸载核心），<code>Rename</code>（重命名核心），<code>Reload</code>(重新加载核心)，<code>Optimize</code>（优化索引库）<br><code>Add Core</code>是添加<code>core</code>：主要是在<code>instanceDir</code>对应的文件夹里生成一个<code>core.properties</code>文件 。<br><img src="https://img-blog.csdnimg.cn/20200415130148579.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>name：给core起的名字；<br>instanceDir：与我们在配置solr到tomcat里时的solr_home里新建的core文件夹名一致；<br>dataDir:确认Add Core时，会在new_core目录下生成名为data的文件夹<br>config：new_core下的conf下的config配置文件(solrconfig.xml)<br>schema: new_core下的conf下的schema文件(schema.xml) </p>
-</blockquote>
-<h4 id="2-4-4-java-properties"><a href="#2-4-4-java-properties" class="headerlink" title="2.4.4    java properties"></a>2.4.4    java properties</h4><p>Solr在JVM 运行环境中的属性信息，包括类路径、文件编码、jvm内存设置等信息。可查看到java相关的一些属性的信息。<br><img src="https://img-blog.csdnimg.cn/20200415130220688.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="2-4-5-Tread-Dump"><a href="#2-4-5-Tread-Dump" class="headerlink" title="2.4.5    Tread Dump"></a>2.4.5    Tread Dump</h4><p>显示<code>Solr Server</code>中当前活跃线程信息，同时也可以跟踪线程运行栈信息。</p>
-<h4 id="2-4-6-Core-selector（重点）"><a href="#2-4-6-Core-selector（重点）" class="headerlink" title="2.4.6    Core selector（重点）"></a>2.4.6    Core selector（重点）</h4><p>需要在<code>Core Admin</code>里添加了<code>core</code>后才有可选项。</p>
-<p>选择一个<code>SolrCore</code>进行详细操作，如下：<br><img src="https://img-blog.csdnimg.cn/20200415130304687.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="2-4-6-1-Analysis（重点）"><a href="#2-4-6-1-Analysis（重点）" class="headerlink" title="2.4.6.1    Analysis（重点）"></a>2.4.6.1    Analysis（重点）</h4><p><img src="https://img-blog.csdnimg.cn/20200415130345602.png" alt="在这里插入图片描述"><br>通过此界面可以测试索引分析器和搜索分析器的执行情况。<br>注：solr中，<font color="red">分析器是绑定在域的类型中的。</font></p>
-<h4 id="2-4-6-2-dataimport"><a href="#2-4-6-2-dataimport" class="headerlink" title="2.4.6.2    dataimport"></a>2.4.6.2    dataimport</h4><p>可以定义数据导入处理器，从关系数据库将数据导入到Solr索引库中。<br>默认没有配置，需要手工配置。</p>
-<h4 id="2-4-6-3-Document"><a href="#2-4-6-3-Document" class="headerlink" title="2.4.6.3    Document"></a>2.4.6.3    Document</h4><p>通过<code>/update</code>表示更新索引，solr默认根据id（唯一约束）域来更新Document的内容，如果根据id值搜索不到id域则会执行添加操作，如果找到则更新。<br><font color="red">通过此菜单可以创建索引、更新索引、删除索引等操作。</font></p>
-<h4 id="2-4-6-4-Query（重点）"><a href="#2-4-6-4-Query（重点）" class="headerlink" title="2.4.6.4    Query（重点）"></a>2.4.6.4    Query（重点）</h4><p>通过<code>/select</code>执行搜索索引，必须指定“q”查询条件方可搜索。<br><img src="https://img-blog.csdnimg.cn/20200415130458847.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="2-5-Solr-core的配置（创建）"><a href="#2-5-Solr-core的配置（创建）" class="headerlink" title="2.5    Solr core的配置（创建）"></a>2.5    Solr core的配置（创建）</h3><p>1、新建core(创建<font color="red">guo_core</font>文件夹)<br>新建的solrhome文件的位置为：<font color="red">D:\guoweixin\solr\solr_home\guo_core</font><br>2、<font color="red">D:\guoweixin\solr\solr_home\configsets\sample_techproducts_configs\ </font>目录下conf文件夹复制到<font color="red">solr_home\guo_core</font>下</p>
-<p>3、在<font color="red"><em><a target="_blank" rel="noopener" href="http://localhost:8080/solr/index.html">http://localhost:8080/solr/index.html</a></em></font>管理界面中添加guo_core<br>点击 add Core 按钮进行添加<br><img src="https://img-blog.csdnimg.cn/20200415130708193.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="3-Solr导入数据"><a href="#3-Solr导入数据" class="headerlink" title="3    Solr导入数据"></a>3    Solr导入数据</h2><h3 id="3-1-查看core"><a href="#3-1-查看core" class="headerlink" title="3.1    查看core"></a>3.1    查看core</h3><p><img src="https://img-blog.csdnimg.cn/2020041513072993.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><font color="red">通过此查看创建的guo_core</font>，则说明没有相关配置文件，需要添加并修改。</p>
-<h3 id="3-2-DataImport导入数据"><a href="#3-2-DataImport导入数据" class="headerlink" title="3.2    DataImport导入数据"></a>3.2    DataImport导入数据</h3><p>该功能是将数据库中数据通过Sql语句方式导入到Solr索引库中。</p>
-<h4 id="3-2-1-第一步：添加jar包"><a href="#3-2-1-第一步：添加jar包" class="headerlink" title="3.2.1    第一步：添加jar包"></a>3.2.1    第一步：添加jar包</h4><p><font color="red">D:\guoweixin\solr\solr-7.1.0\dist </font>下的jar<br><img src="https://img-blog.csdnimg.cn/20200415130850860.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>mysql jar<br><img src="https://img-blog.csdnimg.cn/20200415130908925.png" alt="在这里插入图片描述"><br>配置Solr:找到自带的中文分词器<br><font color="red">D:\guoweixin\solr\solr-7.1.0\contrib\analysis-extras\lucene-libs</font><br><img src="https://img-blog.csdnimg.cn/20200415130935543.png" alt="在这里插入图片描述"><br>以上所有jar全部复制到  <font color="red">webapps/solr/WEB-INF/lib</font>下<br><img src="https://img-blog.csdnimg.cn/20200415131005262.png" alt="在这里插入图片描述"></p>
-<h4 id="3-2-2-第二步：配置中文分词器"><a href="#3-2-2-第二步：配置中文分词器" class="headerlink" title="3.2.2    第二步：配置中文分词器"></a>3.2.2    第二步：配置中文分词器</h4><p>修改同目录下的<code>managed-schema</code>文件<br><img src="https://img-blog.csdnimg.cn/20200415131035750.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>1、在文件最后方插入中文分词器：<br><img src="https://img-blog.csdnimg.cn/20200415131054651.png" alt="在这里插入图片描述"></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ChineseAnalyzer --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">fieldType</span> <span class="attr">name</span>=<span class="string">&quot;solr_cnAnalyzer&quot;</span> <span class="attr">class</span>=<span class="string">&quot;solr.TextField&quot;</span> <span class="attr">positionIncrementGap</span>=<span class="string">&quot;100&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">analyzer</span> <span class="attr">type</span>=<span class="string">&quot;index&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tokenizer</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.lucene.analysis.cn.smart.HMMChineseTokenizerFactory&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">analyzer</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">analyzer</span> <span class="attr">type</span>=<span class="string">&quot;query&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tokenizer</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.lucene.analysis.cn.smart.HMMChineseTokenizerFactory&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">analyzer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">fieldType</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-2-3-managed-schema文件详解"><a href="#3-2-3-managed-schema文件详解" class="headerlink" title="3.2.3    managed-schema文件详解"></a>3.2.3    managed-schema文件详解</h4><p>找到<font color="red">solr_home\core_meeting\conf下managed-schema</font>文件</p>
-<p>在managed-schema.xml文件中，主要配置SolrCoe数据信息，包括：Field和FieldType的定义等信息，<font color="red">在solr中，Field和FieldType都需要先定义后使用！</font></p>
-<p><em>Field详解：</em><br>学习详细参考：<a target="_blank" rel="noopener" href="http://blog.csdn.net/mine_song/article/details/58065323">http://blog.csdn.net/mine_song/article/details/58065323</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gslblog/p/6582008.html">https://www.cnblogs.com/gslblog/p/6582008.html</a><br><img src="https://img-blog.csdnimg.cn/20200415131345112.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>name：指定域的名称(自定义) type：指定域的类型 indexed：是否索引 是：(将分好的词进行索引，索引的目的，就是为了搜索)<br>否：不索引，也就是不对该field域进行搜索。 stored：是否存储<br>是：将field域中的内容存储到文档域中。存储的目的，就是为了搜索页面显示取值用的<br>否：不将field域中的内容存储到文档域中。不存储，则搜索页面中没法获取该field域的值。 required：是否必须<br>multiValued：是否多值，比如查询数据需要关联多个字段数据，一个Field存储多个值信息，必须将multiValued设置为true。</p>
-</blockquote>
-<p><em>dynamicField详解(199行)：</em><br><img src="https://img-blog.csdnimg.cn/20200415131435992.png" alt="在这里插入图片描述"><br><code>name</code>为*_i，定义它的<code>type</code>为int，那么在使用这个字段的时候，任何以<code>_i</code>结果的字段都被认为符合这个定义。</p>
-<p><em>uniqueKey</em><br><img src="https://img-blog.csdnimg.cn/20200415131459946.png" alt="在这里插入图片描述"><br><font color="red">其中的id是在<code>Field</code>标签中已经定义好的域名，而且该域设置为<code>required</code>为<code>true</code>。<br>一个<code>managed-schema</code>文件中必须有且仅有一个唯一键</font></p>
-<p><em>copyField</em><br>复制域<br>  <font color="blue">应用场景：我们在搜索时比如输入<code>java</code>，一篇文章分为标题、简介、内容等很多字段，输入的关键字需要制定<code>solr</code>中的域进行检索，不可能从一个表中将所有字段进行索引，因为有些字段不需要索引，所以出现<code>copyField</code>域,把多个域的关键词复制到同一个域，多个域时，可以放到一个域中。就不用定义那么多域了。搜索比较方便</font><br>实例：<code>&lt;copyField source=&quot;projectName&quot; dest=&quot;keywords&quot;/&gt;</code><br><code>Source</code>:是<code>Field</code>域的名称<br><code>Dest</code>：是<code>destination</code>的缩写 目标域</p>
-<p>使用案例：<br>1、    两个普通域 ：<code>title</code>和<code>author</code><br><img src="https://img-blog.csdnimg.cn/20200415131808694.png" alt="在这里插入图片描述"><br>2、    使用复制域，将两个域进行索引检索<br><img src="https://img-blog.csdnimg.cn/20200415131818833.png" alt="在这里插入图片描述"><br>3、    该域名<code>field name=”text”</code>即是复制域<br><img src="https://img-blog.csdnimg.cn/20200415131831128.png" alt="在这里插入图片描述"><br><em>fieldType</em><br>域类型：<br><img src="https://img-blog.csdnimg.cn/20200415131850714.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415131855777.png" alt="在这里插入图片描述"><br>分词器：<br><img src="https://img-blog.csdnimg.cn/20200415131911188.png" alt="在这里插入图片描述"></p>
-<ul>
-<li>Name：指定域类型的名称 </li>
-<li>Class：指定该域类型对应的solr的类型</li>
-<li>Analyzer：指定分析器</li>
-<li>Type：index、query，分别指定搜索和索引时的分析器 </li>
-<li>Tokenizer：指定分词器</li>
-<li>Filter：指定过滤器<h4 id="3-2-4-第三步：修改-solrconfig-xml文件"><a href="#3-2-4-第三步：修改-solrconfig-xml文件" class="headerlink" title="3.2.4    第三步：修改 solrconfig.xml文件"></a>3.2.4    第三步：修改 solrconfig.xml文件</h4>找到<font color="red">D:\guoweixin\solr\solr_home\guo_core\conf</font>文件夹下的<font color="red">solrconfig.xml</font>，添加dataimport<br><img src="https://img-blog.csdnimg.cn/20200415132112576.png" alt="在这里插入图片描述"><br>首先查询是否存在<code>dataimport</code>的<code>equestHandler</code>，如果不存在，因此需要手动添加。为了以后便于维护此文件，我们就在<code>requestHandler</code>起始位置，约为720行处，添加如下内容</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">requestHandler</span> <span class="attr">name</span>=<span class="string">&quot;/dataimport&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.solr.handler.dataimport.DataImportHandler&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">lst</span> <span class="attr">name</span>=<span class="string">&quot;defaults&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">str</span> <span class="attr">name</span>=<span class="string">&quot;config&quot;</span>&gt;</span>data-config.xml<span class="tag">&lt;/<span class="name">str</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">lst</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">requestHandler</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200415132139652.png" alt="在这里插入图片描述"></p>
-<h4 id="3-2-5-第四步：创建data-config-xml"><a href="#3-2-5-第四步：创建data-config-xml" class="headerlink" title="3.2.5    第四步：创建data-config.xml"></a>3.2.5    第四步：创建data-config.xml</h4><p><font color="red"><em>data-config.xml作用：数据库连接相关信息、SQL以及查询结果映射对应域中</em></font><br>在<font color="red">solrconfig.xml</font>同级目录下，创建<font color="red">data-config.xml</font><br><img src="https://img-blog.csdnimg.cn/20200415132249896.png" alt="在这里插入图片描述"></p>
-<ul>
-<li>Query代表：查询的SQL语句 </li>
-<li>Column代表：SQL查询的列名</li>
-<li>Name代表：Solr 域Filed中的域名</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dataConfig</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;JdbcDataSource&quot;</span> </span></span><br><span class="line"><span class="tag">              <span class="attr">driver</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span> </span></span><br><span class="line"><span class="tag">              <span class="attr">url</span>=<span class="string">&quot;jdbc:mysql://localhost:3306/solr&quot;</span> </span></span><br><span class="line"><span class="tag">              <span class="attr">user</span>=<span class="string">&quot;root&quot;</span> </span></span><br><span class="line"><span class="tag">              <span class="attr">password</span>=<span class="string">&quot;root&quot;</span>/&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">document</span>&gt;</span> </span><br><span class="line">		<span class="tag">&lt;<span class="name">entity</span> <span class="attr">name</span>=<span class="string">&quot;products&quot;</span>  <span class="attr">query</span>=<span class="string">&quot;select pid,pname,catalog_name,price,description,picture from products &quot;</span>&gt;</span></span><br><span class="line">				 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">&quot;pid&quot;</span> <span class="attr">name</span>=<span class="string">&quot;id&quot;</span>/&gt;</span>  </span><br><span class="line">				 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">&quot;pname&quot;</span> <span class="attr">name</span>=<span class="string">&quot;prod_pname&quot;</span>/&gt;</span>  </span><br><span class="line">				 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">&quot;catalog_name&quot;</span> <span class="attr">name</span>=<span class="string">&quot;prod_catalog_name&quot;</span>/&gt;</span>  </span><br><span class="line">				 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">&quot;price&quot;</span> <span class="attr">name</span>=<span class="string">&quot;prod_price&quot;</span>/&gt;</span>  </span><br><span class="line">				 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">&quot;description&quot;</span> <span class="attr">name</span>=<span class="string">&quot;prod_description&quot;</span>/&gt;</span>  </span><br><span class="line">				 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">&quot;picture&quot;</span> <span class="attr">name</span>=<span class="string">&quot;prod_picture&quot;</span>/&gt;</span>  </span><br><span class="line">		<span class="tag">&lt;/<span class="name">entity</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;/<span class="name">document</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">dataConfig</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200415132340789.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415132349349.png" alt="在这里插入图片描述"></p>
-<h4 id="3-2-6-第四步：定义域"><a href="#3-2-6-第四步：定义域" class="headerlink" title="3.2.6    第四步：定义域"></a>3.2.6    第四步：定义域</h4><p>修改同目录下的<code>managed-schema</code>文件<br><img src="https://img-blog.csdnimg.cn/20200415132406894.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>1、在文件最后方插入中文分词器：<br><img src="https://img-blog.csdnimg.cn/20200415132417192.png" alt="在这里插入图片描述"><br>同时还要配置其<code>Field</code>域：来配置字段【这里的名字要与<code>data-config</code>中的域名一模一样】<br><img src="https://img-blog.csdnimg.cn/2020041513243171.png" alt="在这里插入图片描述"></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">&quot;prod_pname&quot;</span> <span class="attr">type</span>=<span class="string">&quot;solr_cnAnalyzer&quot;</span> <span class="attr">indexed</span>=<span class="string">&quot;true&quot;</span> <span class="attr">stored</span>=<span class="string">&quot;true&quot;</span> <span class="attr">required</span>=<span class="string">&quot;true&quot;</span>  /&gt;</span> </span><br><span class="line">	   <span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">&quot;prod_catalog_name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;string&quot;</span> <span class="attr">indexed</span>=<span class="string">&quot;true&quot;</span> <span class="attr">stored</span>=<span class="string">&quot;true&quot;</span> <span class="attr">required</span>=<span class="string">&quot;true&quot;</span>  /&gt;</span> </span><br><span class="line">	   <span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">&quot;prod_price&quot;</span> <span class="attr">type</span>=<span class="string">&quot;pdouble&quot;</span> <span class="attr">indexed</span>=<span class="string">&quot;true&quot;</span> <span class="attr">stored</span>=<span class="string">&quot;true&quot;</span> <span class="attr">required</span>=<span class="string">&quot;true&quot;</span>  /&gt;</span> </span><br><span class="line">       <span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">&quot;prod_description&quot;</span> <span class="attr">type</span>=<span class="string">&quot;solr_cnAnalyzer&quot;</span> <span class="attr">indexed</span>=<span class="string">&quot;true&quot;</span> <span class="attr">stored</span>=<span class="string">&quot;true&quot;</span> <span class="attr">required</span>=<span class="string">&quot;true&quot;</span>  /&gt;</span> </span><br><span class="line">       <span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">&quot;prod_picture&quot;</span> <span class="attr">type</span>=<span class="string">&quot;string&quot;</span> <span class="attr">indexed</span>=<span class="string">&quot;false&quot;</span> <span class="attr">stored</span>=<span class="string">&quot;true&quot;</span> <span class="attr">required</span>=<span class="string">&quot;true&quot;</span>  /&gt;</span></span><br></pre></td></tr></table></figure>
-<p><font color="red">其中<code>prod_pname</code>需要模糊查询（中文分词），故将其类型改为<code>solr_cnAnalyzer</code></font><br><img src="https://img-blog.csdnimg.cn/20200415132514837.png" alt="在这里插入图片描述"></p>
-<h4 id="3-2-7-第五步：启动服务"><a href="#3-2-7-第五步：启动服务" class="headerlink" title="3.2.7    第五步：启动服务"></a>3.2.7    第五步：启动服务</h4><p>1、启动<code>Tomcat</code>服务器<br>2、查看数据导入结果<br>重启<code>Tomcat</code>服务器，进入 <code>guo_core</code> ,测试中文分词器效果<br><img src="https://img-blog.csdnimg.cn/2020041513254782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>重启<code>Tomcat</code>服务器，进入<code>guo_core</code>  中 <code>DataImport</code> 执行 <code>execute</code><br><img src="https://img-blog.csdnimg.cn/20200415132558312.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200415132604461.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><em>查询描述</em></p>
-<blockquote>
-<p>1，q  查询的关键字，此参数最为重要，例如，q=id:1，默认为q=*:*，<br>2，fl  指定返回（回显）哪些字段，用逗号或空格分隔，注意：字段区分大小写，例如，fl= id,title,sort<br>3，start  返回结果的第几条记录开始，一般分页用，默认0开始<br>4，rows  指定返回结果最多有多少条记录，默认值为 10，配合start实现分页<br>5，sort  排序方式，例如id  desc 表示按照 “id” 降序<br>6，wt  (writer type)指定输出格式，有 xml, json等<br>7，fq  （filter query）过虑查询，提供一个可选的筛选器查询。返回在q查询符合结果中同时符合的fq条件的查询结果，例如：q=id:1&amp;fq=sort:[1 TO 5]，找关键字id为1 的，并且sort是1到5之间的。<br>8，df   默认的查询字段，一般默认指定。<br>9，h1  是否高亮，</p>
-</blockquote>
-<h3 id="3-3-客户端查询语法"><a href="#3-3-客户端查询语法" class="headerlink" title="3.3    客户端查询语法"></a>3.3    客户端查询语法</h3><ol>
-<li>q查询关键字，查询所有使用*:*。<br>请求的q是字符串<br><img src="https://img-blog.csdnimg.cn/20200415132746850.png" alt="在这里插入图片描述"><br>多个条件可以：之间用<code> AND</code> 或 <code>OR</code> 关联<br><img src="https://img-blog.csdnimg.cn/2020041513280134.png" alt="在这里插入图片描述"></li>
-<li><code>fq</code> （filter query）过滤查询，作用：在<code>q</code>查询符合结果中同时是<code>fq</code>查询符合的，例如：<br>请求<code>fq</code>是一个数组（多个值）<br><img src="https://img-blog.csdnimg.cn/20200415132813521.png" alt="在这里插入图片描述"><br>过滤查询价格从1到1的记录。<br>也可以在“q”查询条件中使用<code>product_price:[1 TO 20]</code>，如下：<br><img src="https://img-blog.csdnimg.cn/20200415132824962.png" alt="在这里插入图片描述"><br>也可以使用“*”表示无限，例如：<br>10以上<br><img src="https://img-blog.csdnimg.cn/20200415132903537.png" alt="在这里插入图片描述"><br>10以下<br><img src="https://img-blog.csdnimg.cn/20200415132914889.png" alt="在这里插入图片描述"></li>
-<li><code>sort </code> 排序，格式：<code>sort=&lt;field name&gt;+&lt;desc|asc&gt;[,&lt;field name&gt;+&lt;desc|asc&gt;]….</code> 示例：<br><img src="https://img-blog.csdnimg.cn/20200415133017715.png" alt="在这里插入图片描述"></li>
-<li><code>start </code>- 分页显示使用，开始记录下标，从0开始<br>5.<code>    rows</code> - 指定返回结果最多有多少条记录，配合<code>start</code>来实现分页。<br>实际开发时，知道当前页码和每页显示的个数最后求出开始下标。</li>
-<li><code>fl </code>- 指定返回那些字段内容，用逗号或空格分隔多个(回显)<br><img src="https://img-blog.csdnimg.cn/20200415133033975.png" alt="在这里插入图片描述"></li>
-<li><code>df</code>-指定一个搜索默认<code>Field</code><br><img src="https://img-blog.csdnimg.cn/20200415133054411.png" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20200415133059433.png" alt="在这里插入图片描述"></li>
-<li><code>wt</code> - (writer type)指定输出格式<br><img src="https://img-blog.csdnimg.cn/20200415133127596.png" alt="在这里插入图片描述"><br>9.<code>   hl</code>是否高亮 ,设置高亮<code>Field</code>，设置格式前缀和后缀。<br><img src="https://img-blog.csdnimg.cn/20200415133142496.png" alt="在这里插入图片描述"><br><code>hl.fl </code>指定高亮域的名称</li>
-</ol>
-<h2 id="4-springboot集成solr"><a href="#4-springboot集成solr" class="headerlink" title="4 springboot集成solr"></a>4 springboot集成solr</h2><p>配置<code>solr</code>的<code>maven</code>坐标</p>
-<h3 id="4-1-springboot整合solr的maven配置如下"><a href="#4-1-springboot整合solr的maven配置如下" class="headerlink" title="4.1 springboot整合solr的maven配置如下"></a>4.1 springboot整合solr的maven配置如下</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-solr<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="4-2-在application-yml配置文件中配置solr的Host地址"><a href="#4-2-在application-yml配置文件中配置solr的Host地址" class="headerlink" title="4.2 在application.yml配置文件中配置solr的Host地址"></a>4.2 在application.yml配置文件中配置solr的Host地址</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">data:</span></span><br><span class="line">    <span class="attr">solr:</span></span><br><span class="line">      <span class="attr">host:</span> <span class="string">http://localhost:8081/solr/demo_core</span></span><br></pre></td></tr></table></figure>
-<h3 id="4-3-准备实体类"><a href="#4-3-准备实体类" class="headerlink" title="4.3 准备实体类"></a>4.3 准备实体类</h3><p>这个实体类就是solr服务器的配置文件配置的字段。<code>@Field</code>注解是映射作用，<code>Java</code>实体类与<code>solr</code>索引的映射。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Products</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Field(&quot;id&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String pid;</span><br><span class="line">    <span class="meta">@Field(&quot;prod_pname&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String pname;</span><br><span class="line">    <span class="meta">@Field(&quot;prod_catalog_name&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String catalogName;</span><br><span class="line">    <span class="meta">@Field(&quot;prod_price&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Double price;</span><br><span class="line">    <span class="meta">@Field(&quot;prod_description&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line">    <span class="meta">@Field(&quot;prod_picture&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String picture;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="4-4-注入SolrClient对象"><a href="#4-4-注入SolrClient对象" class="headerlink" title="4.4 注入SolrClient对象"></a>4.4 注入SolrClient对象</h3><p>用法示例如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"> SolrClient solrClient;</span><br></pre></td></tr></table></figure>
-<h4 id="4-4-1-springboot添加solr索引库（给solr数据库添加数据）"><a href="#4-4-1-springboot添加solr索引库（给solr数据库添加数据）" class="headerlink" title="4.4.1 springboot添加solr索引库（给solr数据库添加数据）"></a>4.4.1 springboot添加solr索引库（给solr数据库添加数据）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addData</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">      Products products=<span class="keyword">new</span> Products();</span><br><span class="line">      products.setPid(<span class="string">&quot;557&quot;</span>);</span><br><span class="line">      products.setPname(<span class="string">&quot;可爱的胖&quot;</span>);</span><br><span class="line">      products.setCatalogName(<span class="string">&quot;京东&quot;</span>);</span><br><span class="line">      products.setPrice(<span class="number">80.90</span>);</span><br><span class="line">      products.setDescription(<span class="string">&quot;很乖的宠物&quot;</span>);</span><br><span class="line">      products.setPicture(<span class="string">&quot;test.jpg&quot;</span>);</span><br><span class="line">      UpdateResponse updateResponse = solrClient.addBean(products);</span><br><span class="line">      solrClient.commit();</span><br><span class="line">      System.out.println(<span class="string">&quot;添加成功&quot;</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="4-4-2-springboot修改和上述的添加一样，有就修改，没有就添加"><a href="#4-4-2-springboot修改和上述的添加一样，有就修改，没有就添加" class="headerlink" title="4.4.2 springboot修改和上述的添加一样，有就修改，没有就添加"></a>4.4.2 springboot修改和上述的添加一样，有就修改，没有就添加</h4><h4 id="4-4-3-springboot删除solr索引库"><a href="#4-4-3-springboot删除solr索引库" class="headerlink" title="4.4.3 springboot删除solr索引库"></a>4.4.3 springboot删除solr索引库</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delData</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">       solrClient.deleteById(<span class="string">&quot;890&quot;</span>);</span><br><span class="line">       solrClient.commit();</span><br><span class="line"><span class="comment">//       solrClient.deleteByQuery(&quot;*:*&quot;);//先查询然后删除，*:* 这里查询条件是全部，因此执行之后会清空索引库</span></span><br><span class="line">        System.out.println(<span class="string">&quot;删除成功&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="4-4-4-springboot查询solr索引库的数据"><a href="#4-4-4-springboot查询solr索引库的数据" class="headerlink" title="4.4.4 springboot查询solr索引库的数据"></a>4.4.4 springboot查询solr索引库的数据</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">select</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        SolrQuery solrQuery=<span class="keyword">new</span> SolrQuery(<span class="string">&quot;*:*&quot;</span>);<span class="comment">//查询所有</span></span><br><span class="line">        QueryResponse query = solrClient.query(solrQuery);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> numFound = query.getResults().getNumFound();</span><br><span class="line">        System.out.println(<span class="string">&quot;总记录数：&quot;</span>+numFound);</span><br><span class="line"></span><br><span class="line">        List&lt;Products&gt; beans = query.getBeans(Products.class);</span><br><span class="line">        <span class="keyword">for</span>(Products product:beans)&#123;</span><br><span class="line">            System.out.println(product.getPid()+<span class="string">&quot;  &quot;</span>+product.getPname()+<span class="string">&quot;  &quot;</span>+product.getDescription());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="4-4-5-模仿京东条件筛选搜索"><a href="#4-4-5-模仿京东条件筛选搜索" class="headerlink" title="4.4.5 模仿京东条件筛选搜索"></a>4.4.5 模仿京东条件筛选搜索</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">moreSelect</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">       SolrQuery solrQuery=<span class="keyword">new</span> SolrQuery();</span><br><span class="line">       <span class="comment">//q</span></span><br><span class="line">       solrQuery.set(<span class="string">&quot;q&quot;</span>,<span class="string">&quot;prod_pname:衣服&quot;</span>);</span><br><span class="line">       <span class="comment">//fq：过滤查询</span></span><br><span class="line">       solrQuery.setFilterQueries(<span class="string">&quot;prod_catalog_name:京东&quot;</span>);</span><br><span class="line"><span class="comment">//       多条件过滤</span></span><br><span class="line"><span class="comment">//        solrQuery.setFilterQueries(&quot;prod_catalog_name:京东 or prod_catalog_name:淘宝&quot;);</span></span><br><span class="line">        <span class="comment">//价格过滤</span></span><br><span class="line"><span class="comment">//        solrQuery.addFilterQuery(&quot;prod_price:[10 TO *]&quot;);</span></span><br><span class="line">        <span class="comment">//排序sort</span></span><br><span class="line"><span class="comment">//        solrQuery.addSort(&quot;prod_price&quot;,SolrQuery.ORDER.asc);</span></span><br><span class="line">        <span class="comment">//分页(规则和limit一样)</span></span><br><span class="line">        solrQuery.setStart(<span class="number">0</span>);</span><br><span class="line">        solrQuery.setRows(<span class="number">5</span>);</span><br><span class="line">        <span class="comment">//回显（想查出来哪几个字段）</span></span><br><span class="line"><span class="comment">//        solrQuery.setFields(&quot;prod_name&quot;,&quot;pid&quot;);</span></span><br><span class="line">        <span class="comment">//高亮配置</span></span><br><span class="line">        solrQuery.setHighlight(<span class="keyword">true</span>);<span class="comment">//启动高亮</span></span><br><span class="line">        solrQuery.addHighlightField(<span class="string">&quot;prod_pname&quot;</span>);<span class="comment">//设置域名称</span></span><br><span class="line">        solrQuery.setHighlightSimplePre(<span class="string">&quot;&lt;font color=&#x27;red&#x27;&gt;&quot;</span>);</span><br><span class="line">        solrQuery.setHighlightSimplePost(<span class="string">&quot;&lt;/font&gt;&quot;</span>);</span><br><span class="line"></span><br><span class="line">        QueryResponse query = solrClient.query(solrQuery);</span><br><span class="line">        <span class="comment">//得到高亮数据</span></span><br><span class="line">        Map&lt;String, Map&lt;String, List&lt;String&gt;&gt;&gt; highlighting = query.getHighlighting();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> numFound = query.getResults().getNumFound();</span><br><span class="line">        System.out.println(<span class="string">&quot;总记录数：&quot;</span>+numFound);</span><br><span class="line"></span><br><span class="line">        List&lt;Products&gt; beans = query.getBeans(Products.class);</span><br><span class="line">        <span class="keyword">for</span>(Products product:beans)&#123;</span><br><span class="line"></span><br><span class="line">            Map&lt;String, List&lt;String&gt;&gt; stringListMap = highlighting.get(product.getPid());</span><br><span class="line">            List&lt;String&gt; prod_pname = stringListMap.get(<span class="string">&quot;prod_pname&quot;</span>);</span><br><span class="line">            String pname = prod_pname.get(<span class="number">0</span>);</span><br><span class="line">            product.setPname(pname);<span class="comment">//把名称重新赋值为高亮样式的名称</span></span><br><span class="line">            System.out.println(product.getPid()+<span class="string">&quot;  &quot;</span>+product.getPname()+<span class="string">&quot; &quot;</span>+product.getCatalogName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>工程地址：<a href="https://github.com/fantongxue666/springboot-solr">https://github.com/fantongxue666/springboot-solr</a></p>
-
-  </article>
-</div>
-
-
-    
-
-
-
-
-</div>
-
-<div class="footer-wrapper container">
-  <footer class="footer clearfix">
-    <div class="clearfix">
-    <a href="https://github.com/fantongxue666" class="footer-logo">
-      <i class="fa fa-github"></i>
-    </a>
-    <ul class="footer-social-link">
-      <li>© 2019 樊同学</li>
-      <li><a href="https://github.com/fantongxue666">Home</a></li>
-      
-    </ul>
-    <div class="footer-theme-info">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-    </div>
-    
-  </footer>
-</div>
-
-
-
-
-<script src="/js/main.js"></script>
-
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}

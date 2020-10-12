@@ -1,196 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>
-    动手实现一个Tomcat服务器 | 欢迎来到LZ的直播间
-  </title>
-  <meta name="description" content="">
-  
-  <meta name="keywords" content="
-  socket编程
-  ">
-  
-  <meta name="author" content="樊同学">
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-  <meta http-equiv="Cache-Control" content="no-transform"/>
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <meta name="theme-color" content="#1e2327">
-  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+{% block page_class %}page-post-detail{% endblock %}
 
-  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  
 
-  
+{% block content %}
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
 
-<body id="replica-app">
-
-<nav class="navbar-wrapper">
-  <div class="navbar">
-    <div class="container clearfix">
-      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
-
-      <div class="navbar-search float-left desktop-only">
-        <div class="navbar-search-form">
-          <label for="gsc-i-id1">This website</label>
-          <div id="google-search">
-            <gcse:search></gcse:search>
-          </div>
-        </div>
-      </div>
-
-      <ul class="navbar-nav float-left">
-        
-        <li><a href="/archives">Archives</a></li>
-        
-        
-        <li><a href="/categories">Categories</a></li>
-        
-        
-        <li><a href="/tags">Tags</a></li>
-        
-        
-        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
-        
-      </ul>
-
-      <ul class="navbar-nav user-nav float-right desktop-only">
-        <li class="user-nav-notification">
-          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
-        </li>
-        <li>
-          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
-        </li>
-        <li class="user-nav-logo">
-          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
-        </li>
-      </ul>
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
   </div>
-</nav>
 
-<div class="main-container">
-  <header class="header-wrapper desktop-only">
-  <div class="container header-site-detail">
-    <ul class="header-toolbar">
-      <li class="clearfix">
-        <a href="/archives" class="header-toolbar-left"><i
-                  class="fa fa-file-text"></i> Posts </a>
-        <a href="/archives"
-           class="header-toolbar-right"> 62 </a>
-      </li>
-      <li>
-        <a href="/tags" class="header-toolbar-left"><i
-                  class="fa fa-tags"></i> Tags </a>
-        <a href="/tags"
-           class="header-toolbar-right"> 50 </a>
-      </li>
-      <li>
-        <a href="/categories" class="header-toolbar-left"><i
-                  class="fa fa-folder-open"></i> Categories </a>
-        <a href="/categories"
-           class="header-toolbar-right"> 27 </a>
-      </li>
-    </ul>
-    <h2 class="header-title">
-      <i class="fa fa-book text-muted"></i>
-      <a href="/">欢迎来到LZ的直播间</a>
-      
-      
-    </h2>
-  </div>
+{% endblock %}
 
-  <div class="container">
-    <div class="header-tab-wrapper clearfix">
-      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
-      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
-      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
-      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
-      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
-    </div>
-  </div>
-</header>
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-
-<div class="post-container container">
-  <h3>
-    <i class="fa fa-user-o"></i>
-    樊同学
-
-    <span class="post-date float-right" title="{{moment(1600420855000).format('MMM DD, YYYY, h:mm:ss A')}}">
-      
-          <i class="fa fa-pencil-square-o"></i>
-      
-      {{moment(1600420855000).fromNow()}}
-    </span>
-  </h3>
-
-  <article class="post-content">
-    <h1>动手实现一个Tomcat服务器</h1>
-    <h2 id="一，Tomcat底层原理介绍"><a href="#一，Tomcat底层原理介绍" class="headerlink" title="一，Tomcat底层原理介绍"></a>一，Tomcat底层原理介绍</h2><p>首先我们需要先了解<code>HTTP</code>协议，请求头，请求行，请求体，响应头，响应行，响应体，具体请移步百度！<br>其次，<code>Tomcat</code>的底层是<code>socket</code>编程，没有<code>socket</code>基础的同学请往右拐👇<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fantongxue/p/12443284.html">https://www.cnblogs.com/fantongxue/p/12443284.html</a><br>准备好了上面两个条件，我们就可以开始写<code>Tocmat</code>服务器了！</p>
-<h3 id="1，客户端和服务端的交互详解"><a href="#1，客户端和服务端的交互详解" class="headerlink" title="1，客户端和服务端的交互详解"></a>1，客户端和服务端的交互详解</h3><p>客户端发送一个请求，服务端监听客户端请求，并使用<code>IO</code>流读取数据以及向客户端反馈数据。<br>首先服务端使用<code>socket</code>监听某一个端口，当服务端收到该端口内的请求时，同时会得到输入流（客户端发送的内容）和输出流（返回给客户端的内容）</p>
-<h3 id="2，写一个客户端的小例子"><a href="#2，写一个客户端的小例子" class="headerlink" title="2，写一个客户端的小例子"></a>2，写一个客户端的小例子</h3><p>该测试类开启<code>socket</code>，连接<code>www.itcast.cn</code>的80端口，由<code>socket</code>得到的输入流和输出流分别是服务器的响应内容和发送给服务器的请求内容。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestClient</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        Socket socket=<span class="keyword">null</span>;</span><br><span class="line">        InputStream is=<span class="keyword">null</span>;</span><br><span class="line">        OutputStream ops=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//1，创建一个socket对象，连接itcast.cn域名的80端口</span></span><br><span class="line">            socket=<span class="keyword">new</span> Socket(<span class="string">&quot;www.itcast.cn&quot;</span>,<span class="number">80</span>);</span><br><span class="line">            <span class="comment">//2，获取输入流对象</span></span><br><span class="line">            is = socket.getInputStream();</span><br><span class="line">            <span class="comment">//3，获取输出流对象</span></span><br><span class="line">            ops=socket.getOutputStream();</span><br><span class="line">            <span class="comment">//4，将HTTP协议的请求部分发送到服务端 /subject/about/index.html</span></span><br><span class="line">            ops.write(<span class="string">&quot;GET /subject/about/index.html HTTP/1.1\n&quot;</span>.getBytes());</span><br><span class="line">            ops.write(<span class="string">&quot;HOST:www.itcast.cn\n&quot;</span>.getBytes());</span><br><span class="line">            ops.write(<span class="string">&quot;\n&quot;</span>.getBytes());</span><br><span class="line">            <span class="comment">//5，读取来自服务端的数据打印到控制台</span></span><br><span class="line">            <span class="keyword">int</span> i=is.read();</span><br><span class="line">            <span class="keyword">while</span>(i!=-<span class="number">1</span>) &#123;</span><br><span class="line">                System.out.print((<span class="keyword">char</span>)i);</span><br><span class="line">                i=is.read();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(is!=<span class="keyword">null</span>) &#123;</span><br><span class="line">                is.close();</span><br><span class="line">                is=<span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(ops!=<span class="keyword">null</span>) &#123;</span><br><span class="line">                ops.close();</span><br><span class="line">                ops=<span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(socket!=<span class="keyword">null</span>) &#123;</span><br><span class="line">                socket.close();</span><br><span class="line">                socket=<span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>打印到控制台的则是<code>itcast.cn</code>服务器响应的页面（字符串）<br><img src="https://img-blog.csdnimg.cn/20200420180737354.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="3，写一个服务端的小例子"><a href="#3，写一个服务端的小例子" class="headerlink" title="3，写一个服务端的小例子"></a>3，写一个服务端的小例子</h3><p>下面这个测试类模拟的是服务端，服务端开启<code>socket</code>监听8080端口，通过<code>socket</code>得到输入输出流，输出流写响应内容。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestServer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        ServerSocket serverSocket=<span class="keyword">null</span>;</span><br><span class="line">        Socket socket = <span class="keyword">null</span>;</span><br><span class="line">        OutputStream ops = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//1，创建ServerSocket对象，监听本机的8080端口号</span></span><br><span class="line">            serverSocket=<span class="keyword">new</span> ServerSocket(<span class="number">8080</span>);</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">                <span class="comment">//2，等待来自客户端的请求，获取和客户端对应的Socket对象</span></span><br><span class="line">                socket = serverSocket.accept();</span><br><span class="line">                <span class="comment">//3，通过获取到的socket对象获取到输出流对象</span></span><br><span class="line">                ops = socket.getOutputStream();</span><br><span class="line">                <span class="comment">//4，通过获取到的输出流对象将HTTP协议的响应部分发送到客户端</span></span><br><span class="line">                ops.write(<span class="string">&quot;HTTP/1.1 200 OK\n&quot;</span>.getBytes());</span><br><span class="line">                ops.write(<span class="string">&quot;Content-Type:text/html;charset=utf-8\n&quot;</span>.getBytes());</span><br><span class="line">                ops.write(<span class="string">&quot;Server:Apache-Coyote/1.1\n&quot;</span>.getBytes());</span><br><span class="line">                ops.write(<span class="string">&quot;\n\n&quot;</span>.getBytes());</span><br><span class="line">                StringBuffer buffer=<span class="keyword">new</span> StringBuffer();</span><br><span class="line">                buffer.append(<span class="string">&quot;&lt;html&gt;&quot;</span>);</span><br><span class="line">                buffer.append(<span class="string">&quot;&lt;head&gt;&lt;title&gt;Write Tomcat Service&lt;/title&gt;&lt;/head&gt;&quot;</span>);</span><br><span class="line">                buffer.append(<span class="string">&quot;&lt;body&gt;&quot;</span>);</span><br><span class="line">                buffer.append(<span class="string">&quot;&lt;h3&gt;Test Page&lt;/h3&gt;&quot;</span>);</span><br><span class="line">                buffer.append(<span class="string">&quot;&lt;a href=&#x27;http://www.baidu.com&#x27;&gt;baidu&lt;/a&gt;&quot;</span>);</span><br><span class="line">                buffer.append(<span class="string">&quot;&lt;/body&gt;&quot;</span>);</span><br><span class="line">                buffer.append(<span class="string">&quot;&lt;/html&gt;&quot;</span>);</span><br><span class="line">                ops.write(buffer.toString().getBytes());</span><br><span class="line">                ops.flush();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(ops!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                ops.close();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(socket!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                socket.close();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(serverSocket!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                serverSocket.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后访问<a href="http://localhost:8080会响应下面的页面">http://localhost:8080会响应下面的页面</a><br><img src="https://img-blog.csdnimg.cn/20200420181032743.png" alt="在这里插入图片描述"></p>
-<h2 id="二，Tomcat服务器实战"><a href="#二，Tomcat服务器实战" class="headerlink" title="二，Tomcat服务器实战"></a>二，Tomcat服务器实战</h2><p>可以先看一下我的目录，这是我原来的一个<code>springboot</code>工程，我把启动类给删了，然后自己写一个<code>Tomcat</code>让项目运行起来！（<code>TestServerOne</code>类）<br><img src="https://img-blog.csdnimg.cn/20200420181325879.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><code>TestServerOne</code>类（<code>Tomcat</code>类）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.Tomcat_one;</span><br><span class="line"><span class="keyword">import</span> com.example.controller.TestController;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestServerOne</span> </span>&#123;</span><br><span class="line">        <span class="comment">//定义一个变量，存放服务端静态资源文件夹目录的绝对路径（本地磁盘路径）</span></span><br><span class="line">        <span class="comment">//D:\IdeaProjects\chat-system\src\main\resources\templates</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> String property = System.getProperty(<span class="string">&quot;user.dir&quot;</span>)+<span class="string">&quot;\\&quot;</span>+<span class="string">&quot;src&quot;</span>+<span class="string">&quot;\\&quot;</span>+<span class="string">&quot;main&quot;</span>+<span class="string">&quot;\\&quot;</span>+<span class="string">&quot;resources&quot;</span>+<span class="string">&quot;\\&quot;</span>+<span class="string">&quot;templates&quot;</span>;</span><br><span class="line">        <span class="comment">//定义静态变量，用于存放本次请求的静态页面路径</span></span><br><span class="line">        <span class="keyword">private</span> String url=<span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="comment">//用于存放本次请求的静态页面名称</span></span><br><span class="line">        <span class="keyword">private</span> String title=<span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="comment">//定义一个静态类型map，存储服务端的配置文件conf.properties的配置信息（当然这里是自定义的）</span></span><br><span class="line">        <span class="keyword">static</span> Map&lt;String,String&gt; map=<span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">static</span> &#123;</span><br><span class="line">        	<span class="comment">//静态代码块的目的是该块中的内容需要在测试类启动时就先被加载</span></span><br><span class="line">            <span class="comment">//Tomcat服务器启动之前将配置文件的参数加载到map中</span></span><br><span class="line">            <span class="comment">//创建一个properties对象（加载自定义配置文件）</span></span><br><span class="line">            Properties prop=<span class="keyword">new</span> Properties();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//加载resources文件夹下的conf.properties配置文件</span></span><br><span class="line">                prop.load(<span class="keyword">new</span> FileInputStream(System.getProperty(<span class="string">&quot;user.dir&quot;</span>)+<span class="string">&quot;\\&quot;</span>+<span class="string">&quot;src&quot;</span>+<span class="string">&quot;\\&quot;</span>+<span class="string">&quot;main&quot;</span>+<span class="string">&quot;\\&quot;</span>+<span class="string">&quot;resources&quot;</span>+<span class="string">&quot;\\&quot;</span>+<span class="string">&quot;conf.properties&quot;</span>));</span><br><span class="line">                <span class="comment">//将配置文件中的数据读取到map中</span></span><br><span class="line">                Set set=prop.keySet();</span><br><span class="line">                Iterator iterator = set.iterator();</span><br><span class="line">                <span class="keyword">while</span> (iterator.hasNext())&#123;</span><br><span class="line">                    String key=(String)iterator.next();</span><br><span class="line">                    String value=prop.getProperty(key);</span><br><span class="line">                    map.put(key,value);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//Tomcat启动入口</span></span><br><span class="line">        <span class="meta">@Test</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> IOException, IllegalAccessException, InstantiationException, ClassNotFoundException </span>&#123;</span><br><span class="line">        ServerSocket serverSocket=<span class="keyword">null</span>;</span><br><span class="line">        Socket socket = <span class="keyword">null</span>;</span><br><span class="line">        InputStream is = <span class="keyword">null</span>;</span><br><span class="line">        OutputStream ops = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//1，创建serversocket，监听本机器的80端口，等待来自客户端的请求</span></span><br><span class="line">            serverSocket=<span class="keyword">new</span> ServerSocket(<span class="number">8080</span>);</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">                <span class="comment">//2，获取到客户端对应的socket</span></span><br><span class="line">                socket = serverSocket.accept();</span><br><span class="line">                <span class="comment">//3，获取到输入流对象</span></span><br><span class="line">                is = socket.getInputStream();</span><br><span class="line">                <span class="comment">//4，获取到输出流对象</span></span><br><span class="line">                ops = socket.getOutputStream();</span><br><span class="line">                <span class="comment">//5，获取HTTP协议的请求部分，截取客户端要访问的资源名称，将这个资源名称赋值给url</span></span><br><span class="line">                String titles = parse(is);</span><br><span class="line">                url=property+<span class="string">&quot;\\&quot;</span>+titles;</span><br><span class="line">                title=titles;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span>(titles.endsWith(<span class="string">&quot;.html&quot;</span>))&#123;</span><br><span class="line">                    <span class="comment">//说明客户端请求的是index.html这种静态资源</span></span><br><span class="line">                    <span class="comment">//6，发送静态资源（也就是页面）</span></span><br><span class="line">                    sendStaticResource(ops);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">//客户端请求的是/test这种路径映射（访问的class文件）</span></span><br><span class="line">                    sendDynamicResource(is,ops);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(is!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                is.close();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(ops!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                ops.close();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(socket!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                socket.close();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(serverSocket!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                serverSocket.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//客户端请求的是/test这种路径映射（访问的class文件）</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sendDynamicResource</span><span class="params">(InputStream is, OutputStream ops)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException, IllegalAccessException, InstantiationException </span>&#123;</span><br><span class="line">            <span class="comment">//将HTTP协议的响应行和响应头发送到客户端</span></span><br><span class="line">        ops.write(<span class="string">&quot;HTTP/1.1 200 ok\n&quot;</span>.getBytes());</span><br><span class="line">        ops.write(<span class="string">&quot;Server:Apache\n&quot;</span>.getBytes());</span><br><span class="line">        ops.write(<span class="string">&quot;Content-Type:text/html;chaset=utf-8\n&quot;</span>.getBytes());</span><br><span class="line">        ops.write(<span class="string">&quot;\n&quot;</span>.getBytes());</span><br><span class="line">        <span class="comment">//判断map中是否存在一个key，这个key是否和本次请求的资源路径一致</span></span><br><span class="line">        <span class="keyword">if</span>(map.containsKey(title))&#123;</span><br><span class="line">            <span class="comment">//如果包含指定的key，获取到map中的value（com.example.TestController路径）</span></span><br><span class="line">            String value = map.get(title);</span><br><span class="line">            <span class="comment">//通过反射把对应的java程序（TestController类）加载到内存</span></span><br><span class="line">            Class&lt;?&gt; aClass = Class.forName(value);</span><br><span class="line">           TestController testController=(TestController)aClass.newInstance();</span><br><span class="line">           testController.test(is,ops);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取HTTP协议的请求部分，截取客户端要访问的资源名称，将这个资源名称赋值给url</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">parse</span><span class="params">(InputStream is)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        StringBuffer content=<span class="keyword">new</span> StringBuffer(<span class="number">2048</span>);</span><br><span class="line">        <span class="keyword">byte</span>[] bytes=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2048</span>];</span><br><span class="line">        <span class="keyword">int</span> i=-<span class="number">1</span>;</span><br><span class="line">        i=is.read(bytes);</span><br><span class="line">        <span class="comment">//遍历字节数组，将数组中的数据追加到content变量中</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;i;j++)&#123;</span><br><span class="line">            content.append((<span class="keyword">char</span>)bytes[j]);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(content);</span><br><span class="line">        <span class="comment">//截取客户端要请求的资源路径demo.html，赋值给url (GET /index.html HTTP/1.1中的index.html)</span></span><br><span class="line">        <span class="keyword">if</span>(content.toString()!=<span class="string">&quot;&quot;</span>&amp;&amp;content!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> index1,index2;</span><br><span class="line">            String title=<span class="string">&quot;&quot;</span>;</span><br><span class="line">            index1=content.indexOf(<span class="string">&quot;/&quot;</span>);</span><br><span class="line">            index2=content.indexOf(<span class="string">&quot;H&quot;</span>);</span><br><span class="line">            title=content.substring(index1+<span class="number">1</span>,index2-<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">return</span> title;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//发送静态资源（也就是页面）</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendStaticResource</span><span class="params">(OutputStream ops)</span></span>&#123;</span><br><span class="line">        <span class="comment">//定义一个字节数组，用于存放本次请求的静态资源文件的内容</span></span><br><span class="line">        <span class="keyword">byte</span>[] bytes=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2048</span>];</span><br><span class="line">        <span class="comment">//定义要给输入流，用户获取静态资源文件的内容</span></span><br><span class="line">        FileInputStream fis=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//创建文件file，是本次请求的资源</span></span><br><span class="line">            File file=<span class="keyword">new</span> File(url);</span><br><span class="line">            <span class="keyword">if</span>(file.exists())&#123;</span><br><span class="line">                <span class="comment">//向客户端输出HTTP协议的响应头/响应体</span></span><br><span class="line">                ops.write(<span class="string">&quot;HTTP/1.1 200 OK\n&quot;</span>.getBytes());</span><br><span class="line">                ops.write(<span class="string">&quot;Server:apache-Coyote/1.1\n&quot;</span>.getBytes());</span><br><span class="line">                ops.write(<span class="string">&quot;Content-Type:text/html;charset=utf-8\n&quot;</span>.getBytes());</span><br><span class="line">                ops.write(<span class="string">&quot;\n&quot;</span>.getBytes());</span><br><span class="line">                <span class="comment">//获取到文件输入流对象</span></span><br><span class="line">                fis=<span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">                <span class="comment">//读取静态资源到字节数组</span></span><br><span class="line">                <span class="keyword">int</span> len=fis.read(bytes);</span><br><span class="line">                <span class="keyword">while</span> (len!=-<span class="number">1</span>)&#123;</span><br><span class="line">                    ops.write(bytes,<span class="number">0</span>,len);</span><br><span class="line">                    len=fis.read(bytes);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//如果文件不存在，向客户端响应文件不存在的消息</span></span><br><span class="line">                ops.write(<span class="string">&quot;HTTP/1.1 404 not found\n&quot;</span>.getBytes());</span><br><span class="line">                ops.write(<span class="string">&quot;Server:apache-Coyote/1.1\n&quot;</span>.getBytes());</span><br><span class="line">                ops.write(<span class="string">&quot;Content-Type:text/html;charset=utf-8\n&quot;</span>.getBytes());</span><br><span class="line">                ops.write(<span class="string">&quot;\n&quot;</span>.getBytes());</span><br><span class="line">                String errorMessage=<span class="string">&quot;file not found&quot;</span>;</span><br><span class="line">                ops.write(errorMessage.getBytes());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>conf.properties</code>配置文件内容<br><font color="red"><code>test</code>是规定访问映射路径为<code>/test</code>，后面的是文件路径（包名）</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test&#x3D;com.example.controller.TestController</span><br></pre></td></tr></table></figure>
-<p><code>TestController</code>内容</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(InputStream is, OutputStream ops)</span><span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ops.write(<span class="string">&quot;My Is TestController&#x27;s Message!&quot;</span>.getBytes());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行<code>Tomcat</code>，浏览器访问开效果<br>控制台打印的获取到的<code>http</code>协议的请求部分<br><img src="https://img-blog.csdnimg.cn/20200420183157286.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200420182244889.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200420182321296.png" alt="在这里插入图片描述"><br>完美谢幕！</p>
-
-  </article>
-</div>
-
-
-    
-
-
-
-
-</div>
-
-<div class="footer-wrapper container">
-  <footer class="footer clearfix">
-    <div class="clearfix">
-    <a href="https://github.com/fantongxue666" class="footer-logo">
-      <i class="fa fa-github"></i>
-    </a>
-    <ul class="footer-social-link">
-      <li>© 2019 樊同学</li>
-      <li><a href="https://github.com/fantongxue666">Home</a></li>
-      
-    </ul>
-    <div class="footer-theme-info">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-    </div>
-    
-  </footer>
-</div>
-
-
-
-
-<script src="/js/main.js"></script>
-
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}

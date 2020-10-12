@@ -1,217 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>
-    springboot定时任务和异步调用 | 欢迎来到LZ的直播间
-  </title>
-  <meta name="description" content="">
-  
-  <meta name="keywords" content="
-  springboot 定时任务 异步调用
-  ">
-  
-  <meta name="author" content="樊同学">
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-  <meta http-equiv="Cache-Control" content="no-transform"/>
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <meta name="theme-color" content="#1e2327">
-  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+{% block page_class %}page-post-detail{% endblock %}
 
-  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  
 
-  
+{% block content %}
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
 
-<body id="replica-app">
-
-<nav class="navbar-wrapper">
-  <div class="navbar">
-    <div class="container clearfix">
-      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
-
-      <div class="navbar-search float-left desktop-only">
-        <div class="navbar-search-form">
-          <label for="gsc-i-id1">This website</label>
-          <div id="google-search">
-            <gcse:search></gcse:search>
-          </div>
-        </div>
-      </div>
-
-      <ul class="navbar-nav float-left">
-        
-        <li><a href="/archives">Archives</a></li>
-        
-        
-        <li><a href="/categories">Categories</a></li>
-        
-        
-        <li><a href="/tags">Tags</a></li>
-        
-        
-        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
-        
-      </ul>
-
-      <ul class="navbar-nav user-nav float-right desktop-only">
-        <li class="user-nav-notification">
-          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
-        </li>
-        <li>
-          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
-        </li>
-        <li class="user-nav-logo">
-          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
-        </li>
-      </ul>
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
   </div>
-</nav>
 
-<div class="main-container">
-  <header class="header-wrapper desktop-only">
-  <div class="container header-site-detail">
-    <ul class="header-toolbar">
-      <li class="clearfix">
-        <a href="/archives" class="header-toolbar-left"><i
-                  class="fa fa-file-text"></i> Posts </a>
-        <a href="/archives"
-           class="header-toolbar-right"> 62 </a>
-      </li>
-      <li>
-        <a href="/tags" class="header-toolbar-left"><i
-                  class="fa fa-tags"></i> Tags </a>
-        <a href="/tags"
-           class="header-toolbar-right"> 50 </a>
-      </li>
-      <li>
-        <a href="/categories" class="header-toolbar-left"><i
-                  class="fa fa-folder-open"></i> Categories </a>
-        <a href="/categories"
-           class="header-toolbar-right"> 27 </a>
-      </li>
-    </ul>
-    <h2 class="header-title">
-      <i class="fa fa-book text-muted"></i>
-      <a href="/">欢迎来到LZ的直播间</a>
-      
-      
-    </h2>
-  </div>
+{% endblock %}
 
-  <div class="container">
-    <div class="header-tab-wrapper clearfix">
-      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
-      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
-      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
-      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
-      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
-    </div>
-  </div>
-</header>
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-
-<div class="post-container container">
-  <h3>
-    <i class="fa fa-user-o"></i>
-    樊同学
-
-    <span class="post-date float-right" title="{{moment(1599643255000).format('MMM DD, YYYY, h:mm:ss A')}}">
-      
-          <i class="fa fa-pencil-square-o"></i>
-      
-      {{moment(1599643255000).fromNow()}}
-    </span>
-  </h3>
-
-  <article class="post-content">
-    <h1>springboot定时任务和异步调用</h1>
-    <p><strong>springboot定时任务</strong><br>在创建好的springboot项目的启动类上加@EnableScheduling注解。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableScheduling</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@MapperScan(&quot;com.qianlong.dao&quot;)</span></span><br><span class="line"><span class="meta">@ComponentScan(value = &quot;com.qianlong&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后创建一个定时任务类，加上@Scheduled注解。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line"><span class="meta">@Scheduled(cron = &quot;0/1 * * * * ?&quot;)</span>    或者是这样的<span class="meta">@Scheduled(fixedDelay = 2000)</span>   或者是这样 <span class="meta">@Scheduled</span> (fixedRate = <span class="number">2000</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;执行定时任务的时间是:&quot;</span>+<span class="keyword">new</span> Date());</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后控制台会每隔一秒打印一次。<br><strong>Cron表达式</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>/<span class="number">30</span> * * * * * 每<span class="number">30</span>秒执行一次</span><br><span class="line"><span class="number">0</span> <span class="number">0</span>/<span class="number">5</span> * * * * 每<span class="number">5</span>分钟执行一次</span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> * * * 每天凌晨执行</span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">8</span>，<span class="number">12</span>，<span class="number">17</span> * * * 每天<span class="number">8</span>点，<span class="number">12</span>点，<span class="number">17</span>点整执行</span><br><span class="line"><span class="number">0</span> <span class="number">30</span> <span class="number">3</span>-<span class="number">5</span> * * * 每天<span class="number">3</span>到<span class="number">5</span>点，<span class="number">30</span>分时执行</span><br></pre></td></tr></table></figure>
-<p><strong>关于@scheduled 的参数有多种方式，可以根据自己的需求来进行选择。</strong><br>@Scheduled(fixedRate=1000)：上一次开始执行时间点后1秒再次执行；<br>@Scheduled(fixedDelay=1000)：上一次执行完毕时间点后1秒再次执行；<br>@Scheduled(initialDelay=1000, fixedDelay=1000)：第一次延迟1秒执行，然后在上一次执行完毕时间点后1秒再次执行；<br>@Scheduled(cron=”* * * * ?”)：根据书写的cron规则执行。</p>
-<p><strong>关于cron 表达式</strong><br>cron一共有7位，但是最后一位是年，可以留空，所以我们可以写6位： </p>
-<ul>
-<li>第一位，表示秒，取值0-59 </li>
-<li>第二位，表示分，取值0-59 </li>
-<li>第三位，表示小时，取值0-23 </li>
-<li>第四位，日期天/日，取值1-31 </li>
-<li>第五位，日期月份，取值1-12 </li>
-<li>第六位，星期，取值1-7，星期一，星期二…，注：不是第1周，第二周的意思 </li>
-<li>另外：1表示星期天，2表示星期一。 </li>
-<li>第7为，年份，可以留空，取值1970-2099 </li>
-<li>(*)星号：可以理解为每的意思，每秒，每分，每天，每月，每年… </li>
-<li>(?)问号：问号只能出现在日期和星期这两个位置，表示这个位置的值不确定，每天3点执行，所以第六位星期的位置，<br>我们是不需要关注的，就是不确定的值。同时：日期和星期是两个相互排斥的元素，通过问号来表明不指定值。<br>比如，1月10日，比如是星期1，如果在星期的位置是另指定星期二，就前后冲突矛盾了。 </li>
-<li>(-)减号：表达一个范围，如在小时字段中使用“10-12”，则表示从10到12点，即10,11,12 </li>
-<li>(,)逗号：表达一个列表值，如在星期字段中使用“1,2,4”，则表示星期一，星期二，星期四 </li>
-<li>(/)斜杠：如：x/y，x是开始值，y是步长，比如在第一位（秒） 0/15就是，从0秒开始，每15秒，最后就是0，15，30，45，60 另：* /y，等同于0/y </li>
-<li>0 0 3 * * ? 每天3点执行 </li>
-<li>0 5 3 * * ? 每天3点5分执行 </li>
-<li>0 5 3 ? * * 每天3点5分执行，与上面作用相同 </li>
-<li>0 5/10 3 * * ? 每天3点的 5分，15分，25分，35分，45分，55分这几个时间点执行</li>
-</ul>
-<p><strong>springBoot异步调用</strong><br>在创建好的springboot项目的启动类上加@EnableAsync注解。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableAsync</span>  <span class="comment">//开启异步调用</span></span><br><span class="line"><span class="meta">@EnableScheduling</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@MapperScan(&quot;com.qianlong.dao&quot;)</span></span><br><span class="line"><span class="meta">@ComponentScan(value = &quot;com.qianlong&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意在这里一定要加上@EnableAsync注解开启异步调用<br>新建一个controller</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/demo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectController</span> </span>&#123;</span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> SelectService selectService;</span><br><span class="line"><span class="meta">@RequestMapping(&quot;/async&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">as</span><span class="params">()</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;1111111111&quot;</span>);</span><br><span class="line">    selectService.add();</span><br><span class="line">    System.out.println(<span class="string">&quot;2222222222&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>再建一个service</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectService</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Async</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;333333333&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;444444444&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>先注释掉@EnableAsync和@Async两个注解，在浏览器输入localhost:8080/demo/async，看下同步调用执行的效果。执行结果如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11111111</span></span><br><span class="line"><span class="number">33333333</span></span><br><span class="line"><span class="number">44444444</span></span><br><span class="line"><span class="number">22222222</span></span><br></pre></td></tr></table></figure>
-<p>再把两个注解放开，在浏览器输入localhost:8080/demo/async，看下异步调用执行的效果。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11111111</span></span><br><span class="line"><span class="number">22222222</span></span><br><span class="line"><span class="number">33333333</span></span><br><span class="line"><span class="number">44444444</span></span><br></pre></td></tr></table></figure>
-  </article>
-</div>
-
-
-    
-
-
-
-
-</div>
-
-<div class="footer-wrapper container">
-  <footer class="footer clearfix">
-    <div class="clearfix">
-    <a href="https://github.com/fantongxue666" class="footer-logo">
-      <i class="fa fa-github"></i>
-    </a>
-    <ul class="footer-social-link">
-      <li>© 2019 樊同学</li>
-      <li><a href="https://github.com/fantongxue666">Home</a></li>
-      
-    </ul>
-    <div class="footer-theme-info">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-    </div>
-    
-  </footer>
-</div>
-
-
-
-
-<script src="/js/main.js"></script>
-
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}

@@ -1,319 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>
-    Linux搭建FastDFS文件服务器实现springboot上传文件到FastDFS服务器 | 欢迎来到LZ的直播间
-  </title>
-  <meta name="description" content="">
-  
-  <meta name="keywords" content="
-  Linux FastDFS
-  ">
-  
-  <meta name="author" content="樊同学">
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-  <meta http-equiv="Cache-Control" content="no-transform"/>
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <meta name="theme-color" content="#1e2327">
-  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+{% block page_class %}page-post-detail{% endblock %}
 
-  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  
 
-  
+{% block content %}
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
 
-<body id="replica-app">
-
-<nav class="navbar-wrapper">
-  <div class="navbar">
-    <div class="container clearfix">
-      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
-
-      <div class="navbar-search float-left desktop-only">
-        <div class="navbar-search-form">
-          <label for="gsc-i-id1">This website</label>
-          <div id="google-search">
-            <gcse:search></gcse:search>
-          </div>
-        </div>
-      </div>
-
-      <ul class="navbar-nav float-left">
-        
-        <li><a href="/archives">Archives</a></li>
-        
-        
-        <li><a href="/categories">Categories</a></li>
-        
-        
-        <li><a href="/tags">Tags</a></li>
-        
-        
-        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
-        
-      </ul>
-
-      <ul class="navbar-nav user-nav float-right desktop-only">
-        <li class="user-nav-notification">
-          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
-        </li>
-        <li>
-          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
-        </li>
-        <li class="user-nav-logo">
-          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
-        </li>
-      </ul>
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
   </div>
-</nav>
 
-<div class="main-container">
-  <header class="header-wrapper desktop-only">
-  <div class="container header-site-detail">
-    <ul class="header-toolbar">
-      <li class="clearfix">
-        <a href="/archives" class="header-toolbar-left"><i
-                  class="fa fa-file-text"></i> Posts </a>
-        <a href="/archives"
-           class="header-toolbar-right"> 62 </a>
-      </li>
-      <li>
-        <a href="/tags" class="header-toolbar-left"><i
-                  class="fa fa-tags"></i> Tags </a>
-        <a href="/tags"
-           class="header-toolbar-right"> 50 </a>
-      </li>
-      <li>
-        <a href="/categories" class="header-toolbar-left"><i
-                  class="fa fa-folder-open"></i> Categories </a>
-        <a href="/categories"
-           class="header-toolbar-right"> 27 </a>
-      </li>
-    </ul>
-    <h2 class="header-title">
-      <i class="fa fa-book text-muted"></i>
-      <a href="/">欢迎来到LZ的直播间</a>
-      
-      
-    </h2>
-  </div>
+{% endblock %}
 
-  <div class="container">
-    <div class="header-tab-wrapper clearfix">
-      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
-      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
-      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
-      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
-      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
-    </div>
-  </div>
-</header>
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-
-<div class="post-container container">
-  <h3>
-    <i class="fa fa-user-o"></i>
-    樊同学
-
-    <span class="post-date float-right" title="{{moment(1601025655000).format('MMM DD, YYYY, h:mm:ss A')}}">
-      
-          <i class="fa fa-pencil-square-o"></i>
-      
-      {{moment(1601025655000).fromNow()}}
-    </span>
-  </h3>
-
-  <article class="post-content">
-    <h1>Linux搭建FastDFS文件服务器实现springboot上传文件到FastDFS服务器</h1>
-    <h1 id="一，前言"><a href="#一，前言" class="headerlink" title="一，前言"></a>一，前言</h1><p>（1）<code>FastDFS</code>是什么</p>
-<p><code>FastDFS</code> 是用 c 语言编写的一款开源的分布式文件系统。<code>FastDFS </code>为互联网量身定制，充分考虑了冗余备份、负载均衡、线性扩容等机制，并注重高可用、高性能等指标，使用 <code>FastDFS</code>很容易搭建一套高性能的文件服务器集群提供文件上传、下载等服务。</p>
-<p>（2）<code>FastDFS</code>结构</p>
-<p><code>FastDFS</code> 架构包括 <code>Tracker server </code>和 <code>Storage server</code>。客户端请求 <code>Tracker server </code>进行文件上传、下载，通过 <code>Tracker server</code> 调度最终由 <code>Storage server</code> 完成文件上传和下载。</p>
-<p><code>Tracker server</code> 作用是负载均衡和调度，通过 <code>Tracker server</code> 在文件上传时可以根据一些策略找到 <code>Storage server</code> 提供文件上传服务。可以将<code>tracker</code>称为追踪服务器或调度服务器。</p>
-<p><code>Storage server </code>作用是文件存储，客户端上传的文件最终存储在 <code>Storage</code> 服务器上，<code>Storageserver</code> 没有实现自己的文件系统而是利用操作系统 的文件系统来管理文件。可以将<code>storage</code>称为存储服务器。</p>
-<p><img src="https://img-blog.csdnimg.cn/20190423132649388.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDczMzE4NQ==,size_16,color_FFFFFF,t_70" alt="图片加载失败"></p>
-<h1 id="二，搭建FastDFS文件服务器"><a href="#二，搭建FastDFS文件服务器" class="headerlink" title="二，搭建FastDFS文件服务器"></a>二，搭建FastDFS文件服务器</h1><p>1，首先需要安装需要的依赖</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc-c++</span><br><span class="line">yum -y install libevent</span><br></pre></td></tr></table></figure>
-
-<p>2，然后使用<code>xftp</code>把需要的压缩包上传到<code>Linux</code>服务器，在<code>/usr/local</code>文件夹中新建一个<code>fastdfs</code>文件夹。</p>
-<h1 id=""><a href="#" class="headerlink" title=""></a><img src="https://img-blog.csdnimg.cn/20191031115913260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></h1><p>3，解压<code>libfastcommon</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf libfastcommonV1.0.7.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>4，然后进行安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost fastdfs]# ls</span><br><span class="line">fastdfs-nginx-module_v1.16.tar.gz  FastDFS_v5.05.tar.gz  libfastcommon-1.0.7  libfastcommonV1.0.7.tar.gz  nginx-1.8.1.tar.gz</span><br><span class="line">[root@localhost fastdfs]# cd libfastcommon-1.0.7</span><br><span class="line">[root@localhost libfastcommon-1.0.7]# ls</span><br><span class="line">HISTORY  INSTALL  libfastcommon.spec  make.sh  README  src</span><br><span class="line">[root@localhost libfastcommon-1.0.7]# .&#x2F;make.sh</span><br><span class="line">[root@localhost libfastcommon-1.0.7]# .&#x2F;make.sh install</span><br></pre></td></tr></table></figure>
-
-<p><code>libfastcommon</code>安装好之后会自动将库文件拷贝至<code>usr/lib64</code>下，由于<code>FastDFS</code>程序引用<code>/usr/lib</code>目录，所以需要把<code>/usr/lib64</code>下的库文件拷贝至<code>/usr/lib</code>下。</p>
-<p>拷贝命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;lib64</span><br><span class="line">cp libfastcommon.so &#x2F;usr&#x2F;lib</span><br></pre></td></tr></table></figure>
-
-<p>查看<code>/usr/lib</code>目录下是否存在该文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost lib64]# find &#x2F;usr&#x2F;lib -name libfastcommon.so</span><br><span class="line">&#x2F;usr&#x2F;lib&#x2F;libfastcommon.so</span><br></pre></td></tr></table></figure>
-
-<p>5，开始安装<code>FastDFS</code></p>
-<p>进到<code>/usr/local/fastdfs</code>目录中进行解压</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf FastDFS_v5.05.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost fastdfs]# ls</span><br><span class="line">FastDFS  fastdfs-nginx-module_v1.16.tar.gz  FastDFS_v5.05.tar.gz  libfastcommon-1.0.7  libfastcommonV1.0.7.tar.gz  nginx-1.8.1.tar.gz</span><br><span class="line">[root@localhost fastdfs]# cd FastDFS</span><br><span class="line">[root@localhost FastDFS]# ls</span><br><span class="line">client  common  conf  COPYING-3_0.txt  fastdfs.spec  HISTORY  init.d  INSTALL  make.sh  php_client  README.md  restart.sh  stop.sh  storage  test  tracker</span><br><span class="line">[root@localhost FastDFS]# .&#x2F;make.sh</span><br><span class="line">[root@localhost FastDFS]# .&#x2F;make.sh install</span><br></pre></td></tr></table></figure>
-
-<p>安装成功后将安装目录下的<code>conf</code>下的文件拷贝到<code>/etc/fdfs</code>下。（nginx需要）</p>
-<p><code>conf</code>文件目录在<code>/usr/local/fastdfs/FastDFS/conf</code>，进到这个<code>conf</code>目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp * &#x2F;etc&#x2F;fdfs&#x2F;  拷贝全部文件到fdfs目录下</span><br></pre></td></tr></table></figure>
-<p>6，安装<code>tracker</code>服务（跟踪服务）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost conf]# cd &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;FastDFS&#x2F;tracker&#x2F;</span><br><span class="line">[root@localhost tracker]# pwd</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;FastDFS&#x2F;tracker   这个路径设置为base_path路径（下图）</span><br><span class="line"># 编辑tracker.conf配置文件</span><br><span class="line">[root@localhost tracker]# vim &#x2F;etc&#x2F;fdfs&#x2F;tracker.conf</span><br></pre></td></tr></table></figure>
-
-<p>修改<code>base_path</code>路径为</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031115934531.png" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-j1wJMvxW-1572494243007)(D:\文件笔记\image\1572441918745.png)]"></p>
-<p>保存退出，然后启动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 启动</span><br><span class="line">&#x2F;usr&#x2F;bin&#x2F;fdfs_trackerd &#x2F;etc&#x2F;fdfs&#x2F;tracker.conf</span><br><span class="line"># 重启的话是restart</span><br><span class="line">&#x2F;usr&#x2F;bin&#x2F;fdfs_trackerd &#x2F;etc&#x2F;fdfs&#x2F;tracker.conf restart</span><br></pre></td></tr></table></figure>
-
-<p>7，安装<code>storage</code>服务（存储服务）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost storage]# pwd</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;FastDFS&#x2F;storage  这个路径设置为base_path路径（下图）</span><br><span class="line">[root@localhost storage]# vim &#x2F;etc&#x2F;fdfs&#x2F;storage.conf</span><br></pre></td></tr></table></figure>
-
-<p>修改<code>base_path</code>路径</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031115959442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>启动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;bin&#x2F;fdfs_storaged &#x2F;etc&#x2F;fdfs&#x2F;storage.conf</span><br></pre></td></tr></table></figure>
-
-<p>8，到此为止，两个服务都安装完成了，现在测试是否安装成功。</p>
-<p>将<code>/usr/local/fastdfs/FastDFS/client</code>里面的<code>libfdfsclient.so</code>拷贝到<code>/usr/lib</code>下，<font color="red">这一步非常重要</font>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;FastDFS&#x2F;client&#x2F;</span><br><span class="line">cp libfdfsclient.so &#x2F;usr&#x2F;lib</span><br></pre></td></tr></table></figure>
-
-<p>修改配置文件</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031120015873.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-tTEpChXG-1572494243009)(D:\文件笔记\image\1572443620894.png)]"></p>
-<p>新建一个在<code>root</code>根目录创建一个<code>html</code>文件，内容为<code>hi,fastdfs!</code>。</p>
-<p>测试上传</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;bin&#x2F;fdfs_test &#x2F;etc&#x2F;fdfs&#x2F;client.conf upload &#x2F;root&#x2F;hi.html</span><br></pre></td></tr></table></figure>
-
-<p>出现下面的情况就是安装成功了，并且文件上传成功。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031120029345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-wkFWaHlm-1572494243010)(D:\文件笔记\image\1572444079589.png)]"></p>
-<p>文件存在了哪里呢？这里</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost 00]# pwd</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;FastDFS&#x2F;storage&#x2F;data&#x2F;00&#x2F;00</span><br><span class="line">[root@localhost 00]# ll</span><br><span class="line">total 16</span><br><span class="line">-rw-r--r--. 1 root root 12 Oct 30 09:57 wKi6gV25lreAJiwIAAAADP8d-tA34_big.html</span><br><span class="line">-rw-r--r--. 1 root root 49 Oct 30 09:57 wKi6gV25lreAJiwIAAAADP8d-tA34_big.html-m</span><br><span class="line">-rw-r--r--. 1 root root 12 Oct 30 09:57 wKi6gV25lreAJiwIAAAADP8d-tA34.html</span><br><span class="line">-rw-r--r--. 1 root root 49 Oct 30 09:57 wKi6gV25lreAJiwIAAAADP8d-tA34.html-m</span><br><span class="line">[root@localhost 00]# </span><br></pre></td></tr></table></figure>
-
-<p>其实到这一步，这个上传的文件的路径已经出来了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.186.129&#x2F;group1&#x2F;M00&#x2F;00&#x2F;00&#x2F;wKi6gV25lreAJiwIAAAADP8d-tA34_big.html</span><br></pre></td></tr></table></figure>
-
-<p>但是在浏览器中还不能够直接访问文件。</p>
-<h1 id="三，安装nginx及插件实现资源的访问"><a href="#三，安装nginx及插件实现资源的访问" class="headerlink" title="三，安装nginx及插件实现资源的访问"></a>三，安装nginx及插件实现资源的访问</h1><p>为什么需要<code>nginx</code>呢？</p>
-<p>因为<code>FastDFS</code>本身并不具有处理<code>http</code>协议的能力，而客户端正是通过<code>http</code>协议访问的，因此在浏览器中不能够直接访问文件就讲得通了。</p>
-<p>如何处理？</p>
-<p>说白了，需要<code>nginx</code>服务器作为中间件，因为<code>nginx</code>具有处理<code>http</code>协议的能力，然后安装<code>nginx+fastDFS</code>的插件，目的是建立<code>nginx</code>和<code>FastDFS</code>服务器的联系以供访问。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031120059348.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">1，安装<code>nginx</code>及<code>nginx</code>插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc-c++ (前面已经安装过)</span><br><span class="line">yum install -y pcre pcre-devel</span><br><span class="line">yum install -y zlib zlib-devel</span><br><span class="line">yum install -y openssl openssl-devel</span><br></pre></td></tr></table></figure>
-
-<p>2，进到<code>/usr/local/fastdfs</code>目录下，解压<code>nginx-fastDFS</code>插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf fastdfs-nginx-module_v1.16.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>3，进到<code>/usr/local/fastdfs/fastdfs-nginx-module/src</code>下，修改<code>config</code>配置文件</p>
-<p>把路径上的<code>local</code>全部去掉，并保存退出。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031120117497.png" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-CPSnf4Lk-1572494243011)(D:\文件笔记\image\1572484739277.png)]"></p>
-<p>4，把<code>/usr/local/fastdfs/fastdfs-nginx-module/src</code>下的<code>mod_fastdfs.conf</code>文件复制到<code>/etc/fdfs</code>目录下，并编辑该文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@192 src]# cp mod_fastdfs.conf &#x2F;etc&#x2F;fdfs&#x2F;</span><br><span class="line">[root@192 src]# vim &#x2F;etc&#x2F;fdfs&#x2F;mod_fastdfs.conf </span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/20191031120132831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>5，安装<code>nginx</code></p>
-<p>进到<code>/usr/local/fastdfs</code>压缩包目录，解压<code>nginx</code>压缩包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf nginx-1.8.1.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>关联<code>nginx</code>和<code>nginx</code>的插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@192 fastdfs]# cd nginx-1.8.1&#x2F;</span><br><span class="line"># 关联操作</span><br><span class="line">[root@192 nginx-1.8.1]# .&#x2F;configure --add-module&#x3D;&#x2F;usr&#x2F;local&#x2F;fastdfs&#x2F;fastdfs-nginx-module&#x2F;src</span><br><span class="line">[root@192 nginx-1.8.1]# make  编译</span><br><span class="line">[root@192 nginx-1.8.1]# make install  安装</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，<code>nginx</code>被安装到了<code>/usr/local</code>目录下</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031120147788.png" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-OTdTvIax-1572494243013)(D:\文件笔记\image\1572486117626.png)]"></p>
-<p>到<code>/usr/local/nginx/conf</code>目录下，修改<code>nginx</code>的配置文件<code>nginx.conf</code>，保存退出。</p>
-<p><img src="https://img-blog.csdnimg.cn/2019103112015843.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-SpO9V1NB-1572494243013)(D:\文件笔记\image\1572486540981.png)]"></p>
-<p>启动<code>nginx</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@192 sbin]# pwd</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin</span><br><span class="line">[root@192 sbin]# .&#x2F;nginx</span><br></pre></td></tr></table></figure>
-
-<p>然后现在就可以在浏览器访问刚才那个文件的路径了。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031120211719.png" alt="在这里插入图片描述"></p>
-<h1 id="四，springboot访问FastDFS实现文件上传"><a href="#四，springboot访问FastDFS实现文件上传" class="headerlink" title="四，springboot访问FastDFS实现文件上传"></a>四，springboot访问FastDFS实现文件上传</h1><p>1，添加依赖</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.tobato<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastdfs-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.26.1-RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>2，在启动类上添加注解引入配置文件类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Import(FdfsClientConfig.class)</span></span><br></pre></td></tr></table></figure>
-
-<p>3，在<code>application.properties</code>加入<code>FastDFS</code>的相关配置</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 超时时间</span></span><br><span class="line"><span class="meta">fdfs.so-timeout</span>=<span class="string">1500</span></span><br><span class="line"><span class="comment"># 连接的超时时间</span></span><br><span class="line"><span class="meta">fdfs.connect-timeout</span>=<span class="string">600</span></span><br><span class="line"><span class="comment"># 连接池</span></span><br><span class="line"><span class="meta">fdfs.pool.jmx-enabled</span>=<span class="string">false</span></span><br><span class="line"><span class="comment"># 缩略图尺寸</span></span><br><span class="line"><span class="meta">fdfs.thumb-image.height</span>=<span class="string">100</span></span><br><span class="line"><span class="meta">fdfs.thumb-image.width</span>=<span class="string">100</span></span><br><span class="line"><span class="comment"># tracker服务跟踪器的地址</span></span><br><span class="line"><span class="meta">fdfs.tracker-list</span>=<span class="string">192.168.186.129:22122</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>这里插一句，提前先把linux的防火墙设置为22122端口和23000端口放行，否则后续的测试会因为连不上跟踪器报错。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">FastFileStorageClient fastFileStorageClient;<span class="comment">//直接引入</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/fastdfs&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">fastdfs</span><span class="params">()</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">    File file=<span class="keyword">new</span> File(<span class="string">&quot;D://文件笔记//image//1571884758247.png&quot;</span>);</span><br><span class="line">    <span class="comment">//文件名</span></span><br><span class="line">    String fileName=file.getName();</span><br><span class="line">    <span class="comment">//后缀名</span></span><br><span class="line">    String extName=fileName.substring(fileName.lastIndexOf(<span class="string">&quot;.&quot;</span>)+<span class="number">1</span>);</span><br><span class="line">    <span class="comment">//创建流</span></span><br><span class="line">    FileInputStream fileInputStream=<span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">    <span class="comment">//四个参数（输入流，文件大小，后缀名，null）,返回一个路径</span></span><br><span class="line">    StorePath storePath = fastFileStorageClient.uploadFile(fileInputStream, file.length(), extName, <span class="keyword">null</span>);</span><br><span class="line">    <span class="comment">//不同路径</span></span><br><span class="line">    System.out.println(storePath.getFullPath());</span><br><span class="line">    System.out.println(storePath.getPath());</span><br><span class="line">    System.out.println(storePath.getGroup());</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;图片上传成功，并调皮的给您返回一个路径&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>分别看浏览器和控制台</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031120230293.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>然后在浏览器输入访问路径（nginx的ip地址和端口加上<code>storePath.getFullPath()</code>的路径），例如</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="http://192.168.186.129/group1/M00/00/00/wKi6gV26SV6ALJu6AAB5lQx82SU564.png">http://192.168.186.129:80/group1/M00/00/00/wKi6gV26SV6ALJu6AAB5lQx82SU564.png</a></p>
-</blockquote>
-<p>然后就可以访问刚才上传的图片了</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031120249669.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="五，改造成业务代码"><a href="#五，改造成业务代码" class="headerlink" title="五，改造成业务代码"></a>五，改造成业务代码</h1><p><code>html</code>表单项</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/demo/fastdfs&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></span><br><span class="line">	fastDFS测试：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;test&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;测试上传&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>controller</code>上传业务代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">  FastFileStorageClient fastFileStorageClient;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   *fastDFS服务器测试文件上传</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="meta">@RequestMapping(&quot;/fastdfs&quot;)</span></span><br><span class="line">  <span class="meta">@ResponseBody</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">fastdfs</span><span class="params">(<span class="meta">@RequestParam(value = &quot;test&quot;)</span> MultipartFile test)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="comment">//文件名</span></span><br><span class="line">      String fileName=test.getOriginalFilename();</span><br><span class="line">      <span class="comment">//后缀名</span></span><br><span class="line">      String extName=fileName.substring(fileName.lastIndexOf(<span class="string">&quot;.&quot;</span>)+<span class="number">1</span>);</span><br><span class="line">      <span class="comment">//四个参数（输入流，文件大小，后缀名，null）,返回一个路径</span></span><br><span class="line">      StorePath storePath = fastFileStorageClient.uploadFile(test.getInputStream(),test.getSize(), extName, <span class="keyword">null</span>);</span><br><span class="line">      <span class="comment">//不同路径</span></span><br><span class="line">      System.out.println(storePath.getFullPath());</span><br><span class="line">      System.out.println(storePath.getPath());</span><br><span class="line">      System.out.println(storePath.getGroup());</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;图片上传成功，并调皮的给您返回一个路径&quot;</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>控制台打印</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031120303566.png" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-FjUqMhh8-1572494243015)(D:\文件笔记\image\1572491669585.png)]"></p>
-<p>把第一条路径，也就是<code>storePath.getFullPath()</code>这样得到的路径拼接到<code>nginx</code>的ip地址和端口后面，在浏览器进行访问，可以访问到上传的图片。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031120315118.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-mFT2LoC2-1572494243016)(D:\文件笔记\image\1572491793124.png)]"></p>
-<p><font color="red">说明：如果上传的是一个文件，这里比如上传一个<code>docx</code>格式的<code>word</code>文档，那么上传成功之后返回的那个路径，<code>group1/M00/00/00/wKi6gV26VG2AG36RAAeqJLEbOEY03.docx</code>，拼接路径之后<code>http://192.168.186.129/group1/M00/00/00/wKi6gV26VG2AG36RAAeqJLEbOEY03.docx</code>，在浏览器直接访问这个路径的话会直接把这个<code>word</code>文档下载下来，图片的话就只是查看。</font></p>
-<p><font color="blue">原因是什么？是因为浏览器的缘故，如果文件格式可以被浏览器解析的话，浏览器会展示该文件，不会下载，解析不了的文件才可以下载，为什么是这样我也不太清楚。</font></p>
-<p><img src="https://img-blog.csdnimg.cn/20191031120328794.png" alt="在这里插入图片描述"></p>
-<p><code>FastDFS</code>服务器和<code>nginx</code>的部署以及<code>springboot</code>项目上传文件到<code>FastDFS</code>服务器圆满结束！</p>
-
-  </article>
-</div>
-
-
-    
-
-
-
-
-</div>
-
-<div class="footer-wrapper container">
-  <footer class="footer clearfix">
-    <div class="clearfix">
-    <a href="https://github.com/fantongxue666" class="footer-logo">
-      <i class="fa fa-github"></i>
-    </a>
-    <ul class="footer-social-link">
-      <li>© 2019 樊同学</li>
-      <li><a href="https://github.com/fantongxue666">Home</a></li>
-      
-    </ul>
-    <div class="footer-theme-info">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-    </div>
-    
-  </footer>
-</div>
-
-
-
-
-<script src="/js/main.js"></script>
-
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}

@@ -1,211 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>
-    手写spring之ioc基于xml动态创建对象 | 欢迎来到LZ的直播间
-  </title>
-  <meta name="description" content="">
-  
-  <meta name="keywords" content="
-  spring springioc
-  ">
-  
-  <meta name="author" content="樊同学">
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-  <meta http-equiv="Cache-Control" content="no-transform"/>
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <meta name="theme-color" content="#1e2327">
-  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+{% block page_class %}page-post-detail{% endblock %}
 
-  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  
 
-  
+{% block content %}
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
 
-<body id="replica-app">
-
-<nav class="navbar-wrapper">
-  <div class="navbar">
-    <div class="container clearfix">
-      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
-
-      <div class="navbar-search float-left desktop-only">
-        <div class="navbar-search-form">
-          <label for="gsc-i-id1">This website</label>
-          <div id="google-search">
-            <gcse:search></gcse:search>
-          </div>
-        </div>
-      </div>
-
-      <ul class="navbar-nav float-left">
-        
-        <li><a href="/archives">Archives</a></li>
-        
-        
-        <li><a href="/categories">Categories</a></li>
-        
-        
-        <li><a href="/tags">Tags</a></li>
-        
-        
-        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
-        
-      </ul>
-
-      <ul class="navbar-nav user-nav float-right desktop-only">
-        <li class="user-nav-notification">
-          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
-        </li>
-        <li>
-          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
-        </li>
-        <li class="user-nav-logo">
-          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
-        </li>
-      </ul>
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
   </div>
-</nav>
 
-<div class="main-container">
-  <header class="header-wrapper desktop-only">
-  <div class="container header-site-detail">
-    <ul class="header-toolbar">
-      <li class="clearfix">
-        <a href="/archives" class="header-toolbar-left"><i
-                  class="fa fa-file-text"></i> Posts </a>
-        <a href="/archives"
-           class="header-toolbar-right"> 62 </a>
-      </li>
-      <li>
-        <a href="/tags" class="header-toolbar-left"><i
-                  class="fa fa-tags"></i> Tags </a>
-        <a href="/tags"
-           class="header-toolbar-right"> 50 </a>
-      </li>
-      <li>
-        <a href="/categories" class="header-toolbar-left"><i
-                  class="fa fa-folder-open"></i> Categories </a>
-        <a href="/categories"
-           class="header-toolbar-right"> 27 </a>
-      </li>
-    </ul>
-    <h2 class="header-title">
-      <i class="fa fa-book text-muted"></i>
-      <a href="/">欢迎来到LZ的直播间</a>
-      
-      
-    </h2>
-  </div>
+{% endblock %}
 
-  <div class="container">
-    <div class="header-tab-wrapper clearfix">
-      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
-      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
-      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
-      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
-      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
-    </div>
-  </div>
-</header>
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-
-<div class="post-container container">
-  <h3>
-    <i class="fa fa-user-o"></i>
-    樊同学
-
-    <span class="post-date float-right" title="{{moment(1600334455000).format('MMM DD, YYYY, h:mm:ss A')}}">
-      
-          <i class="fa fa-pencil-square-o"></i>
-      
-      {{moment(1600334455000).fromNow()}}
-    </span>
-  </h3>
-
-  <article class="post-content">
-    <h1>手写spring之ioc基于xml动态创建对象</h1>
-    <p><code>Spring</code>作为<code>Java Web</code>最为流行的框架之一，其功能之强大，封装细节之全面不用过多赘述。使用<code>Spring</code>的方式很简单，不需要关注细节，把对象的创建和对象之间的关系都交给框架来管理，仅仅做好配置文件和实现具体的业务逻辑即可。可以说<code>Spring</code>为我们在编写<code>Java Web</code>应用时省去了大量重复的代码，并且可以降低对象与对象之间的耦合度。但若只是知其然，而不知其所以然，在编程时也难免会遇到各种问题，个人的水平也难以有所长进。</p>
-<p>因此这篇文章的目的是分享本人对于<code>SpringIOC</code>如何实现控制反转，以及如何在运行过程中动态创建对象的理解，算是在漫长的学习过程中的一个小小的标的。废话不多说，直接上干货！</p>
-<p>在手写<code>Spring</code>容器之前，需要做一些前期的准备工作：</p>
-<p>首先是创建项目，在这里我为了后期下载jar包方便，创建的是<code>maven</code>工程，是在<code>JDK1.7</code>的环境下。当然你也可以创建普通的<code>Java</code>工程，在需要使用第三方的jar包时手动导入。<br>在<code>pom.xml</code>文件中添加jar包依赖路径，下载所需要的第三方API，本次需要使用<code>dom4j</code>去解析<code>xml</code>配置文件。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>dom4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dom4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.6.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span>  </span><br></pre></td></tr></table></figure>
-<h3 id="1，创建xml配置文件，为了后面使用方便，在这里我起名为：user-xml，放在根目录下"><a href="#1，创建xml配置文件，为了后面使用方便，在这里我起名为：user-xml，放在根目录下" class="headerlink" title="1，创建xml配置文件，为了后面使用方便，在这里我起名为：user.xml，放在根目录下"></a>1，创建xml配置文件，为了后面使用方便，在这里我起名为：<code>user.xml</code>，放在根目录下</h3><p><img src="https://img-blog.csdnimg.cn/20200730153322485.png" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-asrQNKXN-1596094008347)(https://img2020.cnblogs.com/blog/1923677/202007/1923677-20200730152543066-1597355428.png)]"></p>
-<p>配置文件内容如下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span>   </span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;user1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;entity.User&quot;</span> <span class="attr">scope</span>=<span class="string">&quot;singleton&quot;</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;id&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;张三&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;12456&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;user2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;entity.User&quot;</span> <span class="attr">scope</span>=<span class="string">&quot;prototype&quot;</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;id&quot;</span> <span class="attr">value</span>=<span class="string">&quot;2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;李四&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;654321&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="2，然后根据xml配置文件中的class路径创建对应的POJO实体类：User"><a href="#2，然后根据xml配置文件中的class路径创建对应的POJO实体类：User" class="headerlink" title="2，然后根据xml配置文件中的class路径创建对应的POJO实体类：User"></a>2，然后根据<code>xml</code>配置文件中的<code>class</code>路径创建对应的<code>POJO</code>实体类：<code>User</code></h3><p><img src="https://img-blog.csdnimg.cn/20200730152722948.png" alt="在这里插入图片描述"></p>
-<p><code>User</code>类中内容如下(为了节省篇幅，省略<code>setter</code>和<code>getter</code>方法)：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> Integer id;  </span><br><span class="line">    <span class="keyword">private</span> String name;  </span><br><span class="line">    <span class="keyword">private</span> String password;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;无参构造方法执行&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//setters和getters...  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>主角登场…</p>
-<h3 id="3，创建ClassPathXmlApplicationContext类"><a href="#3，创建ClassPathXmlApplicationContext类" class="headerlink" title="3，创建ClassPathXmlApplicationContext类"></a>3，创建<code>ClassPathXmlApplicationContext</code>类</h3><p><img src="https://img-blog.csdnimg.cn/20200730152758331.png" alt="在这里插入图片描述"><br>先定义几个后面要用到的容器，这里我使用的是<code>Map</code>来存储对象</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> applicationContext;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassPathXmlApplicationContext</span> </span>&#123;  </span><br><span class="line">    <span class="comment">/**存储单例对象容器*/</span>  </span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, Object&gt; singletonBeanFactory;  </span><br><span class="line">    <span class="comment">/**存储创建类定义对象的容器*/</span>  </span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, Class&lt;?&gt;&gt; beanDefinationFactory;  </span><br><span class="line">    <span class="comment">/**存储beanElement对象容器*/</span>  </span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, Element&gt; beanEleMap;  </span><br><span class="line">    <span class="comment">/**存储bean的scope属性容器*/</span>  </span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, String&gt; beanScopeMap;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
-<h3 id="4，定义有参的构造方法，在构造方法中初始化容器，并调用初始化方法"><a href="#4，定义有参的构造方法，在构造方法中初始化容器，并调用初始化方法" class="headerlink" title="4，定义有参的构造方法，在构造方法中初始化容器，并调用初始化方法"></a>4，定义有参的构造方法，在构造方法中初始化容器，并调用初始化方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**有参的构造方法，在创建此类实例时需要指定xml文件路径*/</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ClassPathXmlApplicationContext</span><span class="params">(String xmlPath)</span> </span>&#123;  </span><br><span class="line">    <span class="comment">//初始化容器  </span></span><br><span class="line">    singletonBeanFactory = <span class="keyword">new</span> ConcurrentHashMap&lt;String, Object&gt;();  </span><br><span class="line">    beanDefinationFactory = <span class="keyword">new</span> ConcurrentHashMap&lt;String, Class&lt;?&gt;&gt;();  </span><br><span class="line">    beanEleMap = <span class="keyword">new</span> ConcurrentHashMap&lt;String, Element&gt;();  </span><br><span class="line">    beanScopeMap = <span class="keyword">new</span> ConcurrentHashMap&lt;String, String&gt;();  </span><br><span class="line">    <span class="comment">//调用初始化方法  </span></span><br><span class="line">    init(xmlPath);  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
-<p><code>init</code>初始化方法内容如下，每一行我都加了详细的注释，请直接看代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * 初始化方法，在创建ClassPathXmlApplicationContext对象时初始化容器， </span></span><br><span class="line"><span class="comment"> * 并解析xml配置文件，获取bean元素，在运行时动态创建对象，并为对象的属性赋值， </span></span><br><span class="line"><span class="comment"> * 最后把对象存放在容器中以供获取 </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> xmlPath 配置文件路径 </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(String xmlPath)</span> </span>&#123;  </span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">     * 使用dom4j技术读取xml文档 </span></span><br><span class="line"><span class="comment">     * 首先创建SAXReader对象 </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    SAXReader reader = <span class="keyword">new</span> SAXReader();  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">        <span class="comment">//获取读取xml配置文件的输入流  </span></span><br><span class="line">        InputStream is = getClass().getClassLoader().getResourceAsStream(xmlPath);  </span><br><span class="line">        <span class="comment">//读取xml，该操作会返回一个Document对象  </span></span><br><span class="line">        Document document = reader.read(is);  </span><br><span class="line">        <span class="comment">//获取文档的根元素  </span></span><br><span class="line">        Element rootElement = document.getRootElement();  </span><br><span class="line">        <span class="comment">//获取根元素下所有的bean元素，elements方法会返回元素的集合  </span></span><br><span class="line">        List&lt;Element&gt; beanElements = rootElement.elements(<span class="string">&quot;bean&quot;</span>);  </span><br><span class="line">        <span class="comment">//遍历元素集合  </span></span><br><span class="line">        <span class="keyword">for</span> (Element beanEle : beanElements) &#123;  </span><br><span class="line">            <span class="comment">//获取bean的id值，该值用于作为key存储于Map集合中  </span></span><br><span class="line">            String beanId = beanEle.attributeValue(<span class="string">&quot;id&quot;</span>);  </span><br><span class="line">            <span class="comment">//将beanElement对象存入map中，为对象设置属性值时使用  </span></span><br><span class="line">            beanEleMap.put(beanId, beanEle);  </span><br><span class="line">            <span class="comment">//获取bean的scope值  </span></span><br><span class="line">            String beanScope = beanEle.attributeValue(<span class="string">&quot;scope&quot;</span>);  </span><br><span class="line">            <span class="comment">//如果beanScope不等于null，将bean的scope值存入map中方便后续使用  </span></span><br><span class="line">            <span class="keyword">if</span>(beanScope!=<span class="keyword">null</span>)&#123;  </span><br><span class="line">                beanScopeMap.put(beanId, beanScope);  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="comment">//获取bean的class路径  </span></span><br><span class="line">            String beanClassPath = beanEle.attributeValue(<span class="string">&quot;class&quot;</span>);  </span><br><span class="line">            <span class="comment">//利用反射技术根据获得的beanClass路径得到类定义对象  </span></span><br><span class="line">            Class&lt;?&gt; cls = Class.forName(beanClassPath);  </span><br><span class="line">            <span class="comment">//如果反射获取的类定义对象不为null，则放入工厂中方便创建其实例对象  </span></span><br><span class="line">            <span class="keyword">if</span>(cls!=<span class="keyword">null</span>)&#123;  </span><br><span class="line">                beanDefinationFactory.put(beanId, cls);  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">        e.printStackTrace();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>以上为创建<code>ClassPathXmlApplicationContext</code>对象时自动启用的初始化方法，要想获取对象则需要使用<code>getBean</code>方法，代码如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * 根据传入的bean的id值获取容器中的对象，类型为Object </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getBean</span><span class="params">(String beanId)</span></span>&#123;  </span><br><span class="line">    <span class="comment">//根据传入beanId获取类对象  </span></span><br><span class="line">    Class&lt;?&gt; cls = beanDefinationFactory.get(beanId);  </span><br><span class="line">    <span class="comment">//根据id获取该bean对象的element元素对象  </span></span><br><span class="line">    Element beanEle = beanEleMap.get(beanId);  </span><br><span class="line">    <span class="comment">//获取存在map中的bean元素的scope属性值  </span></span><br><span class="line">    String scope = beanScopeMap.get(beanId);  </span><br><span class="line">    Object obj = <span class="keyword">null</span>;  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">        <span class="comment">//如果scope等于singleton,创建单例对象  </span></span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;singleton&quot;</span>.equals(scope) || <span class="keyword">null</span> == scope)&#123;  </span><br><span class="line">            <span class="comment">//判断容器中是否已有该对象的实例,如果没有,创建一个实例对象放到容器中  </span></span><br><span class="line">            <span class="keyword">if</span>(singletonBeanFactory.get(beanId)==<span class="keyword">null</span>)&#123;  </span><br><span class="line">                Object instance = cls.newInstance();  </span><br><span class="line">                singletonBeanFactory.put(beanId,instance);  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="comment">//根据beanId获取对象  </span></span><br><span class="line">            obj = singletonBeanFactory.get(beanId);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="comment">//如果scope等于prototype,则创建并返回多例对象  </span></span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;prototype&quot;</span>.equals(scope))&#123;  </span><br><span class="line">            obj = cls.newInstance();  </span><br><span class="line">        &#125;  </span><br><span class="line">        setFieldValues(beanId, beanEle, scope, cls, obj);  </span><br><span class="line">        <span class="keyword">return</span> obj;  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (InstantiationException e) &#123;  </span><br><span class="line">        e.printStackTrace();  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;  </span><br><span class="line">        e.printStackTrace();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//暂不支持其它类型，若不是以上两种类型或遭遇异常，返回null  </span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * 此为重载方法，在根据传入的bean的id值获取容器中的对象的同时，还可以自动转换类型， </span></span><br><span class="line"><span class="comment"> * 返回指定的类型，在调用该方法时省去强转的步骤，传入时第二个参数为指定的类型， </span></span><br><span class="line"><span class="comment"> * 方法实现同上一个方法，只是在返回对象前加了类型强转 </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">public</span> &lt;T&gt;<span class="function">T <span class="title">getBean</span><span class="params">(String beanId,Class&lt;T&gt; c)</span></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> (T)getBean(beanId);  </span><br><span class="line">      </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在以上的<code>getBean</code>方法中，调用了<code>setFieldValues</code>方法，该方法代码如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * 该方法用于为对象设置成员属性值 </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> beanEle bean所对应的element对象 </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> beanId bean元素的id属性 </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> beanScope bean元素的scope属性 </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> cls 类对象 </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> obj 要为其成员属性赋值的实例对象 </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setFieldValues</span><span class="params">(String beanId,Element beanEle,String beanScope,Class&lt;?&gt; cls,Object obj)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">        <span class="comment">//获取每个bean元素下的所有property元素，该元素用于给属性赋值  </span></span><br><span class="line">        List&lt;Element&gt; propEles = beanEle.elements(<span class="string">&quot;property&quot;</span>);  </span><br><span class="line">        <span class="comment">//如果property元素集合为null，调用putInMap方法将对象放进Map中  </span></span><br><span class="line">        <span class="keyword">if</span>(propEles==<span class="keyword">null</span>)&#123;  </span><br><span class="line">            <span class="keyword">return</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="comment">//遍历property元素集合  </span></span><br><span class="line">        <span class="keyword">for</span> (Element propEle : propEles) &#123;  </span><br><span class="line">            <span class="comment">//获取每个元素的name属性值和value属性值  </span></span><br><span class="line">            String fieldName = propEle.attributeValue(<span class="string">&quot;name&quot;</span>);  </span><br><span class="line">            String fieldValue = propEle.attributeValue(<span class="string">&quot;value&quot;</span>);  </span><br><span class="line">            <span class="comment">//利用反射技术根据name属性值获得类的成员属性  </span></span><br><span class="line">            Field field = cls.getDeclaredField(fieldName);  </span><br><span class="line">            <span class="comment">//将该属性设置为可访问(防止成员属性被私有化导致访问失败)  </span></span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);  </span><br><span class="line">            <span class="comment">//获取成员属性的类型名称，若非字符串类型，则需要做相应转换  </span></span><br><span class="line">            String fieldTypeName = field.getType().getName();  </span><br><span class="line">            <span class="comment">//判断该成员属性是否为int或Integer类型  </span></span><br><span class="line">            <span class="keyword">if</span>(<span class="string">&quot;int&quot;</span>.equals(fieldTypeName) || <span class="string">&quot;java.lang.Integer&quot;</span>.equals(fieldTypeName))&#123;  </span><br><span class="line">                <span class="comment">//转换为int类型并为该成员属性赋值  </span></span><br><span class="line">                <span class="keyword">int</span> intFieldValue = Integer.parseInt(fieldValue);  </span><br><span class="line">                field.set(obj, intFieldValue);  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="comment">//判断该成员属性是否为String类型  </span></span><br><span class="line">            <span class="keyword">if</span>(<span class="string">&quot;java.lang.String&quot;</span>.equals(fieldTypeName))&#123;  </span><br><span class="line">                <span class="comment">//为该成员属性赋值  </span></span><br><span class="line">                field.set(obj, fieldValue);  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="comment">//此处省略其它类型的判断......道理相同！  </span></span><br><span class="line">        &#125;  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">        e.printStackTrace();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上是获取单例或多例对象时需要调用的<code>getBean</code>方法的全部内容。当调用者使用完容器之后，自然还需要关闭容器释放资源，因此还需要有一个<code>destroy</code>方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * 销毁方法，用于释放资源 </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span></span>&#123;  </span><br><span class="line">    singletonBeanFactory.clear();  </span><br><span class="line">    singletonBeanFactory = <span class="keyword">null</span>;  </span><br><span class="line">      </span><br><span class="line">    beanDefinationFactory.clear();  </span><br><span class="line">    beanDefinationFactory = <span class="keyword">null</span>;  </span><br><span class="line">      </span><br><span class="line">    beanEleMap.clear();  </span><br><span class="line">    beanEleMap = <span class="keyword">null</span>;  </span><br><span class="line">      </span><br><span class="line">    beanScopeMap.clear();  </span><br><span class="line">    beanScopeMap = <span class="keyword">null</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>至此，<code>ClassPathXmlApplicationContext</code>类中的内容全部完成，可以写测试类进行测试<br><img src="https://img-blog.csdnimg.cn/20200730153005509.png" alt="在这里插入图片描述"><br>测试类内容如下，这里我就简单写<code>main</code>方法进行测试</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">springIocTest</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        <span class="comment">//创建ClassPathXmlApplicationContext对象  </span></span><br><span class="line">        ClassPathXmlApplicationContext ctx = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">&quot;user.xml&quot;</span>);  </span><br><span class="line">        <span class="comment">//使用手动强转的方式获取单例的User对象  </span></span><br><span class="line">        User user1_1 = (User) ctx.getBean(<span class="string">&quot;user1&quot;</span>);  </span><br><span class="line">        System.out.println(<span class="string">&quot;单例user1_1:&quot;</span>+user1_1);  </span><br><span class="line">        <span class="comment">//使用传入类对象的方式获取单例的User对象  </span></span><br><span class="line">        User user1_2 = ctx.getBean(<span class="string">&quot;user1&quot;</span>,User.class);  </span><br><span class="line">        System.out.println(<span class="string">&quot;单例user1_2:&quot;</span>+user1_2);  </span><br><span class="line">        <span class="comment">//使用手动强转的方式获取多例的User对象  </span></span><br><span class="line">        User user2_1 = (User)ctx.getBean(<span class="string">&quot;user2&quot;</span>);  </span><br><span class="line">        System.out.println(<span class="string">&quot;多例user2_1:&quot;</span>+user2_1);  </span><br><span class="line">        <span class="comment">//使用传入类对象的方式获取多例的User对象  </span></span><br><span class="line">        User user2_2 = ctx.getBean(<span class="string">&quot;user2&quot;</span>,User.class);  </span><br><span class="line">        System.out.println(<span class="string">&quot;多例user2_2:&quot;</span>+user2_2);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<p>控制台打印输出结果<br><img src="https://img-blog.csdnimg.cn/20200730153041267.png" alt="在这里插入图片描述"><br>从控制台输出的结果中可以看到，获取到了4个对象，其中前两个为单例对象，后两个为多例对象，两个单例对象在默认调用<code>Object</code>类中的<code>toString</code>方法是其地址值的<code>hashCode</code>十六进制的映射，其映射值完全一致，可以说明是同一个对象。而且创建了4个对象，其无参的构造方法只执行了三次。</p>
-<p>如果在<code>User</code>类型加入<code>toString</code>方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;User [id=&quot;</span> + id + <span class="string">&quot;, name=&quot;</span> + name + <span class="string">&quot;, password=&quot;</span> + password + <span class="string">&quot;]&quot;</span>;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
-<p>再次运行程序，控制台输出结果如下<br><img src="https://img-blog.csdnimg.cn/20200730153126573.png" alt="在这里插入图片描述"><br>可以看到对象所定义的属性值也在创建时成功赋值了。</p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000013039377">转自大佬：https://segmentfault.com/a/1190000013039377</a></p>
-
-  </article>
-</div>
-
-
-    
-
-
-
-
-</div>
-
-<div class="footer-wrapper container">
-  <footer class="footer clearfix">
-    <div class="clearfix">
-    <a href="https://github.com/fantongxue666" class="footer-logo">
-      <i class="fa fa-github"></i>
-    </a>
-    <ul class="footer-social-link">
-      <li>© 2019 樊同学</li>
-      <li><a href="https://github.com/fantongxue666">Home</a></li>
-      
-    </ul>
-    <div class="footer-theme-info">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-    </div>
-    
-  </footer>
-</div>
-
-
-
-
-<script src="/js/main.js"></script>
-
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}

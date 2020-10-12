@@ -1,305 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>
-    Nginx配置反向代理和负载均衡 | 欢迎来到LZ的直播间
-  </title>
-  <meta name="description" content="">
-  
-  <meta name="keywords" content="
-  Linux Nginx
-  ">
-  
-  <meta name="author" content="樊同学">
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-  <meta http-equiv="Cache-Control" content="no-transform"/>
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <meta name="theme-color" content="#1e2327">
-  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+{% block page_class %}page-post-detail{% endblock %}
 
-  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  
 
-  
+{% block content %}
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
 
-<body id="replica-app">
-
-<nav class="navbar-wrapper">
-  <div class="navbar">
-    <div class="container clearfix">
-      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
-
-      <div class="navbar-search float-left desktop-only">
-        <div class="navbar-search-form">
-          <label for="gsc-i-id1">This website</label>
-          <div id="google-search">
-            <gcse:search></gcse:search>
-          </div>
-        </div>
-      </div>
-
-      <ul class="navbar-nav float-left">
-        
-        <li><a href="/archives">Archives</a></li>
-        
-        
-        <li><a href="/categories">Categories</a></li>
-        
-        
-        <li><a href="/tags">Tags</a></li>
-        
-        
-        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
-        
-      </ul>
-
-      <ul class="navbar-nav user-nav float-right desktop-only">
-        <li class="user-nav-notification">
-          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
-        </li>
-        <li>
-          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
-        </li>
-        <li class="user-nav-logo">
-          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
-        </li>
-      </ul>
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
   </div>
-</nav>
 
-<div class="main-container">
-  <header class="header-wrapper desktop-only">
-  <div class="container header-site-detail">
-    <ul class="header-toolbar">
-      <li class="clearfix">
-        <a href="/archives" class="header-toolbar-left"><i
-                  class="fa fa-file-text"></i> Posts </a>
-        <a href="/archives"
-           class="header-toolbar-right"> 62 </a>
-      </li>
-      <li>
-        <a href="/tags" class="header-toolbar-left"><i
-                  class="fa fa-tags"></i> Tags </a>
-        <a href="/tags"
-           class="header-toolbar-right"> 50 </a>
-      </li>
-      <li>
-        <a href="/categories" class="header-toolbar-left"><i
-                  class="fa fa-folder-open"></i> Categories </a>
-        <a href="/categories"
-           class="header-toolbar-right"> 27 </a>
-      </li>
-    </ul>
-    <h2 class="header-title">
-      <i class="fa fa-book text-muted"></i>
-      <a href="/">欢迎来到LZ的直播间</a>
-      
-      
-    </h2>
-  </div>
+{% endblock %}
 
-  <div class="container">
-    <div class="header-tab-wrapper clearfix">
-      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
-      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
-      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
-      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
-      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
-    </div>
-  </div>
-</header>
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-
-<div class="post-container container">
-  <h3>
-    <i class="fa fa-user-o"></i>
-    樊同学
-
-    <span class="post-date float-right" title="{{moment(1601112055000).format('MMM DD, YYYY, h:mm:ss A')}}">
-      
-          <i class="fa fa-pencil-square-o"></i>
-      
-      {{moment(1601112055000).fromNow()}}
-    </span>
-  </h3>
-
-  <article class="post-content">
-    <h1>Nginx配置反向代理和负载均衡</h1>
-    <h1 id="一，nginx操作的常用命令"><a href="#一，nginx操作的常用命令" class="headerlink" title="一，nginx操作的常用命令"></a>一，nginx操作的常用命令</h1><p>使用<code>nginx</code>操作命令的前提条件：必须进入<code>nginx</code>的目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin</span><br><span class="line"># 查看nginx版本号</span><br><span class="line">.&#x2F;nginx -v</span><br><span class="line"># 关闭nginx</span><br><span class="line">.&#x2F;nginx -s stop</span><br><span class="line"># 开启nginx</span><br><span class="line">.&#x2F;nginx</span><br><span class="line"># 重新加载nginx</span><br><span class="line">.&#x2F;nginx -s reload</span><br></pre></td></tr></table></figure>
-
-<h2 id="nginx配置文件"><a href="#nginx配置文件" class="headerlink" title="nginx配置文件"></a>nginx配置文件</h2><p><code>nginx</code>配置文件的位置</p>
-<p><img src="https://img-blog.csdnimg.cn/20191028141208263.png" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-UpyTH3xR-1572243075130)(D:\文件笔记\image\1572228997480.png)]"></p>
-<p><code>nginx</code>配置文件由三部分组成</p>
-<ul>
-<li><p>第一部分，全局块</p>
-<ul>
-<li>从配置文件开始到<code>events</code>块之间的内容，主要会设置一些影响<code>nginx</code>服务器整体运行的配置指令。</li>
-<li>比如<code> word_processes 1</code>；值越大，可以支持的并发处理量也越多。</li>
-</ul>
-</li>
-<li><p>第二部分，<code>events</code>块</p>
-<ul>
-<li><code>events</code>块设计的指令主要影响<code>nginx</code>服务器与用户的网络连接，</li>
-<li>比如 <code>worker_connections  1024</code>；支持的最大连接数。</li>
-</ul>
-</li>
-<li><p>第三部分，<code>http</code>块</p>
-<ul>
-<li><code>nginx</code>服务器配置中最频繁的部分</li>
-<li><code>http</code>块也包括<code>http</code>全局块、<code>server</code>块。</li>
-</ul>
-</li>
-</ul>
-<h1 id="二，nginx配置反向代理（1）"><a href="#二，nginx配置反向代理（1）" class="headerlink" title="二，nginx配置反向代理（1）"></a>二，nginx配置反向代理（1）</h1><p><font color="red">反向代理的本质目的：当<code>window</code>浏览器访问<code>192.168.186.128</code>并且端口是80时，nginx会转发到<a href="http://127.0.0.1:8080的地址。">http://127.0.0.1:8080的地址。</a></font></p>
-<p>首先启动<code>linux</code>虚拟机中的<code>tomcat</code>（进入<code>tomcat</code>的<code>bin</code>目录中，执行<code>./startup.sh</code>文件开启<code>tomcat</code>）</p>
-<p>可以访问到</p>
-<p><img src="https://img-blog.csdnimg.cn/20191028141225145.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-jtc3qkCN-1572243075131)(D:\文件笔记\image\1572230412392.png)]"></p>
-<p>进入<code>nginx</code>的配置文件中，修改<code>server_name</code>为<code>linux</code>本机的<code>ip</code>地址。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191028141239523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-yXemSW5i-1572243075132)(D:\文件笔记\image\1572231243805.png)]"></p>
-<p>这样子配置以后，当<code>window</code>浏览器访问<code>192.168.186.128</code>并且端口是80时，nginx会转发到<a href="http://127.0.0.1:8080的地址。">http://127.0.0.1:8080的地址。</a></p>
-<p>配置完成，还需要重新加载<code>nginx</code>才能生效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin 进入sbin目录</span><br><span class="line"># 执行命令重新加载</span><br><span class="line">.&#x2F;nginx -s reload</span><br></pre></td></tr></table></figure>
-
-<p>然后就实现了<code>nginx</code>反向代理。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191028141254237.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-qUzCekr0-1572243075133)(D:\文件笔记\image\1572232234636.png)]"></p>
-<h1 id="三，nginx配置反向代理（2）"><a href="#三，nginx配置反向代理（2）" class="headerlink" title="三，nginx配置反向代理（2）"></a>三，nginx配置反向代理（2）</h1><p><font color="red">要实现的效果：使用nginx反向代理，根据访问的路径不同跳转到不同的服务端口中。</font></p>
-<p>准备工作：准备两个tomcat服务器，一个8080端口，一个8081端口。</p>
-<p>首先把刚才的tomcat进程杀掉</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@bogon src]# ps -ef | grep tomcat</span><br><span class="line">root       8298      1  0 22:36 pts&#x2F;0    00:00:04 &#x2F;usr&#x2F;local&#x2F;java&#x2F;jdk1.8.0_231&#x2F;bin&#x2F;java -Djava.util.logging.config.file&#x3D;&#x2F;opt&#x2F;apache-tomcat-7.0.96&#x2F;conf&#x2F;logging.properties -Djava.util.logging.manager&#x3D;org.apache.juli.ClassLoaderLogManager -Djdk.tls.ephemeralDHKeySize&#x3D;2048 -Dignore.endorsed.dirs&#x3D; -classpath &#x2F;opt&#x2F;apache-tomcat-7.0.96&#x2F;bin&#x2F;bootstrap.jar:&#x2F;opt&#x2F;apache-tomcat-7.0.96&#x2F;bin&#x2F;tomcat-juli.jar -Dcatalina.base&#x3D;&#x2F;opt&#x2F;apache-tomcat-7.0.96 -Dcatalina.home&#x3D;&#x2F;opt&#x2F;apache-tomcat-7.0.96 -Djava.io.tmpdir&#x3D;&#x2F;opt&#x2F;apache-tomcat-7.0.96&#x2F;temp org.apache.catalina.startup.Bootstrap start</span><br><span class="line">root       8949   2973  0 23:17 pts&#x2F;0    00:00:00 grep --color&#x3D;auto tomcat</span><br><span class="line">[root@bogon src]# kill 8298</span><br><span class="line">[root@bogon src]# ps -ef | grep tomcat</span><br><span class="line">root       8957   2973  0 23:18 pts&#x2F;0    00:00:00 grep --color&#x3D;auto tomcat</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>然后在<code>/usr/src</code>目录下新建两个文件夹<code>tomcat8080</code>和<code>tomcat8081</code>，使用<code>xftp</code>分别给这两个文件夹传入tomcat压缩包。</p>
-<p>如果上传错误就是用命令<code>chmod 777 文件夹名</code>赋予权限就可以了。</p>
-<p>分别解压</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf apache-tomcat-7.0.96.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>启动8080端口的<code>tomcat</code></p>
-<p><img src="https://img-blog.csdnimg.cn/20191028141309741.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-p8GzNzy8-1572243075134)(D:\文件笔记\image\1572233627026.png)]"></p>
-<p>启动8081端口的<code>tomcat</code>，解压之后进入到<code>tomcat</code>的<code>conf</code>目录中，编辑<code>server.xml</code>配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@bogon tomcat8081]# ls</span><br><span class="line">apache-tomcat-7.0.96  apache-tomcat-7.0.96.tar.gz</span><br><span class="line">[root@bogon tomcat8081]# cd apache-tomcat-7.0.96&#x2F;</span><br><span class="line">[root@bogon apache-tomcat-7.0.96]# ls</span><br><span class="line">bin  BUILDING.txt  conf  CONTRIBUTING.md  lib  LICENSE  logs  NOTICE  README.md  RELEASE-NOTES  RUNNING.txt  temp  webapps  work</span><br><span class="line">[root@bogon apache-tomcat-7.0.96]# cd conf</span><br><span class="line">[root@bogon conf]# ls</span><br><span class="line">catalina.policy  catalina.properties  context.xml  logging.properties  server.xml  tomcat-users.xml  web.xml</span><br><span class="line">[root@bogon conf]# vim server.xml</span><br></pre></td></tr></table></figure>
-
-<p>首先把这个改成8015端口</p>
-<p><img src="https://img-blog.csdnimg.cn/20191028141321773.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-2UTcOCgQ-1572243075135)(D:\文件笔记\image\1572234106158.png)]"></p>
-<p>再分别改成8081端口和8019端口</p>
-<p><img src="https://img-blog.csdnimg.cn/20191028141333435.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-gzk8KkAl-1572243075137)(D:\文件笔记\image\1572234203649.png)]"></p>
-<p>然后把8081端口的tomcat也启动起来</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@bogon bin]# ls</span><br><span class="line">bootstrap.jar  catalina-tasks.xml            configtest.bat  digest.bat        setclasspath.sh  startup.bat      tomcat-native.tar.gz  version.bat</span><br><span class="line">catalina.bat   commons-daemon.jar            configtest.sh   digest.sh         shutdown.bat     startup.sh       tool-wrapper.bat      version.sh</span><br><span class="line">catalina.sh    commons-daemon-native.tar.gz  daemon.sh       setclasspath.bat  shutdown.sh      tomcat-juli.jar  tool-wrapper.sh</span><br><span class="line">[root@bogon bin]# .&#x2F;startup.sh</span><br><span class="line">Using CATALINA_BASE:   &#x2F;usr&#x2F;src&#x2F;tomcat8081&#x2F;apache-tomcat-7.0.96</span><br><span class="line">Using CATALINA_HOME:   &#x2F;usr&#x2F;src&#x2F;tomcat8081&#x2F;apache-tomcat-7.0.96</span><br><span class="line">Using CATALINA_TMPDIR: &#x2F;usr&#x2F;src&#x2F;tomcat8081&#x2F;apache-tomcat-7.0.96&#x2F;temp</span><br><span class="line">Using JRE_HOME:        &#x2F;usr&#x2F;local&#x2F;java&#x2F;jdk1.8.0_231</span><br><span class="line">Using CLASSPATH:       &#x2F;usr&#x2F;src&#x2F;tomcat8081&#x2F;apache-tomcat-7.0.96&#x2F;bin&#x2F;bootstrap.jar:&#x2F;usr&#x2F;src&#x2F;tomcat8081&#x2F;apache-tomcat-7.0.96&#x2F;bin&#x2F;tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br></pre></td></tr></table></figure>
-
-<p>创建文件夹和测试页面，做测试的准备工作。</p>
-<p>分别在两个<code>tomcat</code>的<code>webapps</code>文件夹中新建文件夹;</p>
-<p>在8080端口的<code>tomcat</code>的<code>webapps</code>中新建文件夹<code>edu</code>，在<code>edu</code>中新建<code>html</code>文件<code>&lt;h1&gt;8080端口&lt;/h1&gt;</code>;</p>
-<p>在8081端口的<code>tomcat</code>的<code>webapps</code>中新建文件夹<code>vod</code>，在<code>vod</code>中新建<code>html</code>文件<code>&lt;h1&gt;8081!!&lt;/h1&gt;</code>;</p>
-<p>然后分别在<code>windows</code>浏览器访问</p>
-<p><img src="https://img-blog.csdnimg.cn/20191028141401566.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="找到nginx配置文件，进行反向代理的配置"><a href="#找到nginx配置文件，进行反向代理的配置" class="headerlink" title="找到nginx配置文件，进行反向代理的配置"></a>找到nginx配置文件，进行反向代理的配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@bogon vod]# cd &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf</span><br><span class="line">[root@bogon conf]# ls</span><br><span class="line">fastcgi.conf          fastcgi_params          koi-utf  mime.types          nginx.conf          scgi_params          uwsgi_params          win-utf</span><br><span class="line">fastcgi.conf.default  fastcgi_params.default  koi-win  mime.types.default  nginx.conf.default  scgi_params.default  uwsgi_params.default</span><br><span class="line">[root@bogon conf]# vim nginx.conf</span><br></pre></td></tr></table></figure>
-
-<p>添加一下配置</p>
-<p>说明：监听<code>192.168.186.128:9001</code>地址，如果后面路径是<code>edu</code>，转发到<a href="http://127.0.0.1:8080地址；如果后面地址`vod`，则转发到http://127.0.0.1:8081地址。">http://127.0.0.1:8080地址；如果后面地址`vod`，则转发到http://127.0.0.1:8081地址。</a></p>
-<p><img src="https://img-blog.csdnimg.cn/201910281414371.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-PVLth4pP-1572243075139)(D:\文件笔记\image\1572239640330.png)]"></p>
-<p>然后重新加载nginx，进到<code>/usr/local/nginx/sbin</code>目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 先关掉nginx</span><br><span class="line">.&#x2F;nginx -s stop</span><br><span class="line"># 再开启nginx</span><br><span class="line">.&#x2F;nginx</span><br></pre></td></tr></table></figure>
-
-<p>测试：在windows浏览器中访问</p>
-<p><img src="https://img-blog.csdnimg.cn/20191028141501993.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>nginx反向代理就完成了。</p>
-<h1 id="四，nginx配置负载均衡"><a href="#四，nginx配置负载均衡" class="headerlink" title="四，nginx配置负载均衡"></a>四，nginx配置负载均衡</h1><p><font color="red">实现效果：浏览器地址栏输入<a target="_blank" rel="noopener" href="http://192.168.186.128/edu/a.html%EF%BC%8C%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%95%88%E6%9E%9C%EF%BC%8C%E5%B9%B3%E5%9D%87%E5%88%B08080%E7%AB%AF%E5%8F%A3%E5%92%8C8081%E7%AB%AF%E5%8F%A3%E4%B8%AD%E3%80%82">http://192.168.186.128/edu/a.html，负载均衡效果，平均到8080端口和8081端口中。</a></font></p>
-<p>准备工作：</p>
-<ul>
-<li>两台tomcat服务器，一个8080端口，一个8081端口，上面已经准备过了。</li>
-<li>在两台<code>tomcat</code>的<code>webapps</code>目录中分别都创建<code>edu</code>文件夹，在<code>edu</code>文件夹中新建<code>a.html</code>文件</li>
-<li>在nginx的配置文件中进行负载均衡的配置</li>
-</ul>
-<p><em>负载均衡配置</em></p>
-<p>在下面的位置添加以下配置。</p>
-<p><img src="https://img-blog.csdnimg.cn/201910281415168.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-eaAiJtbc-1572243075140)(D:\文件笔记\image\1572241230817.png)]"></p>
-<p>在server{}中再加入以下规则</p>
-<p><img src="https://img-blog.csdnimg.cn/20191028141527453.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-7LgV8V7n-1572243075140)(D:\文件笔记\image\1572241450715.png)]"></p>
-<p>测试：在window浏览器进行访问</p>
-<p><img src="https://img-blog.csdnimg.cn/20191028141540154.png" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-VmH0Jeom-1572243075141)(D:\文件笔记\image\1572241732938.png)]"></p>
-<p>刷新以下浏览器，会访问8081端口的tomcat，一直刷新一直在切换。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191028141549721.png" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-F3IESd8w-1572243075142)(D:\文件笔记\image\1572241755411.png)]"></p>
-<p>这说明nginx把多次请求平均分摊到不同的服务器中，实现了负载均衡。</p>
-<h2 id="nginx负载均衡的分配服务器策略"><a href="#nginx负载均衡的分配服务器策略" class="headerlink" title="nginx负载均衡的分配服务器策略"></a>nginx负载均衡的分配服务器策略</h2><blockquote>
-<p>第一种：轮询</p>
-<p>每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。</p>
-</blockquote>
-<blockquote>
-<p>第二种：weight权重</p>
-<p>weight代表权重，默认是1，权重越高被分配的客户端越多。</p>
-<p>upstream myserver {</p>
-<p>server   192.168.186.128:8080 weight=5;</p>
-<p>server   192.168.186.128:8080 weight=10;</p>
-<p>}</p>
-</blockquote>
-<blockquote>
-<p>第三种：ip_hash</p>
-<p>每个请求按访问ip的hash结果分配，这样每个访客固定访问要给后端服务器，可以解决session共享的问题（单点登录会遇到这个问题）。</p>
-<p>upstream myserver {</p>
-<p>ip_hash;</p>
-<p>server   192.168.186.128:8080;</p>
-<p>server   192.168.186.128:8080 ;</p>
-<p>}</p>
-</blockquote>
-<blockquote>
-<p>第四种：fair（第三方）</p>
-<p>按后端服务器的响应时间来分配请求，响应时间短的优先分配。</p>
-<p>upstream myserver {</p>
-<p>server   192.168.186.128:8080;</p>
-<p>server   192.168.186.128:8080 ;</p>
-<p>fair;</p>
-<p>}</p>
-</blockquote>
-
-  </article>
-</div>
-
-
-    
-
-
-
-
-</div>
-
-<div class="footer-wrapper container">
-  <footer class="footer clearfix">
-    <div class="clearfix">
-    <a href="https://github.com/fantongxue666" class="footer-logo">
-      <i class="fa fa-github"></i>
-    </a>
-    <ul class="footer-social-link">
-      <li>© 2019 樊同学</li>
-      <li><a href="https://github.com/fantongxue666">Home</a></li>
-      
-    </ul>
-    <div class="footer-theme-info">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-    </div>
-    
-  </footer>
-</div>
-
-
-
-
-<script src="/js/main.js"></script>
-
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}

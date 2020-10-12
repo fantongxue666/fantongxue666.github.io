@@ -1,211 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>
-    动手做一个文件服务器 | 欢迎来到LZ的直播间
-  </title>
-  <meta name="description" content="">
-  
-  <meta name="keywords" content="
-  冷知识
-  ">
-  
-  <meta name="author" content="樊同学">
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-  <meta http-equiv="Cache-Control" content="no-transform"/>
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <meta name="theme-color" content="#1e2327">
-  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+{% block page_class %}page-post-detail{% endblock %}
 
-  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  
 
-  
+{% block content %}
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
 
-<body id="replica-app">
-
-<nav class="navbar-wrapper">
-  <div class="navbar">
-    <div class="container clearfix">
-      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
-
-      <div class="navbar-search float-left desktop-only">
-        <div class="navbar-search-form">
-          <label for="gsc-i-id1">This website</label>
-          <div id="google-search">
-            <gcse:search></gcse:search>
-          </div>
-        </div>
-      </div>
-
-      <ul class="navbar-nav float-left">
-        
-        <li><a href="/archives">Archives</a></li>
-        
-        
-        <li><a href="/categories">Categories</a></li>
-        
-        
-        <li><a href="/tags">Tags</a></li>
-        
-        
-        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
-        
-      </ul>
-
-      <ul class="navbar-nav user-nav float-right desktop-only">
-        <li class="user-nav-notification">
-          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
-        </li>
-        <li>
-          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
-        </li>
-        <li class="user-nav-logo">
-          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
-        </li>
-      </ul>
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
   </div>
-</nav>
 
-<div class="main-container">
-  <header class="header-wrapper desktop-only">
-  <div class="container header-site-detail">
-    <ul class="header-toolbar">
-      <li class="clearfix">
-        <a href="/archives" class="header-toolbar-left"><i
-                  class="fa fa-file-text"></i> Posts </a>
-        <a href="/archives"
-           class="header-toolbar-right"> 62 </a>
-      </li>
-      <li>
-        <a href="/tags" class="header-toolbar-left"><i
-                  class="fa fa-tags"></i> Tags </a>
-        <a href="/tags"
-           class="header-toolbar-right"> 50 </a>
-      </li>
-      <li>
-        <a href="/categories" class="header-toolbar-left"><i
-                  class="fa fa-folder-open"></i> Categories </a>
-        <a href="/categories"
-           class="header-toolbar-right"> 27 </a>
-      </li>
-    </ul>
-    <h2 class="header-title">
-      <i class="fa fa-book text-muted"></i>
-      <a href="/">欢迎来到LZ的直播间</a>
-      
-      
-    </h2>
-  </div>
+{% endblock %}
 
-  <div class="container">
-    <div class="header-tab-wrapper clearfix">
-      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
-      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
-      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
-      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
-      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
-    </div>
-  </div>
-</header>
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-
-<div class="post-container container">
-  <h3>
-    <i class="fa fa-user-o"></i>
-    樊同学
-
-    <span class="post-date float-right" title="{{moment(1596100855000).format('MMM DD, YYYY, h:mm:ss A')}}">
-      
-          <i class="fa fa-pencil-square-o"></i>
-      
-      {{moment(1596100855000).fromNow()}}
-    </span>
-  </h3>
-
-  <article class="post-content">
-    <h1>动手做一个文件服务器</h1>
-    <p>[TOC]</p>
-<p>当我们在做项目时难免都要上传附件，这时我们会用到市面上开源的文件服务器，例如<code>FastDFS</code>，<code>ServU</code>，<code>HDFS</code>等文件服务器，我想我可不可以做一个简易版本的小型文件服务器系统呢？</p>
-<h2 id="一，文件服务器的主要工作内容是什么？"><a href="#一，文件服务器的主要工作内容是什么？" class="headerlink" title="一，文件服务器的主要工作内容是什么？"></a>一，文件服务器的主要工作内容是什么？</h2><ol>
-<li><p>向外界提供上传附件的接口</p>
-</li>
-<li><p>向外界提供附件在线预览地址的接口</p>
-</li>
-<li><p>服务器本身在硬盘上对所有的附件作统一管理</p>
-<h2 id="二，文件服务器的原理是什么？"><a href="#二，文件服务器的原理是什么？" class="headerlink" title="二，文件服务器的原理是什么？"></a>二，文件服务器的原理是什么？</h2><p>文件服务器作为服务端，自然要接收客户端发送来的文件并将文件写入本地磁盘，然后做一些处理可以预览附件，那么这一句话就够用了，下面开始动手写一个简易的文件服务器。</p>
-</li>
-</ol>
-<h2 id="三，动手写文件服务器"><a href="#三，动手写文件服务器" class="headerlink" title="三，动手写文件服务器"></a>三，动手写文件服务器</h2><p><font color="red">写这个服务器没有用到数据库，全都是文件流的操作，仅此而已！</font><br><img src="https://img-blog.csdnimg.cn/20200703154505709.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200703154542756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwMTk2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="1，服务端接收上传文件的接口"><a href="#1，服务端接收上传文件的接口" class="headerlink" title="1，服务端接收上传文件的接口"></a>1，服务端接收上传文件的接口</h3><p>写对外开放的为客户端上传附件的接口，参数为<code>MultipartFile</code>对象，客户端只需要直接将文件<code>MultipartFile</code>参数传过来即可。<br>其中文件上传到了<code>Tomcat/webapps/</code>中的一个文件夹，同时<code>Tomcat</code>要开启状态，因为拼接上域名和文件路径以及文件名就可以直接下载了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/rest&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CreateFileController</span> </span>&#123;</span><br><span class="line">    <span class="comment">//硬盘文件地址（存储文件地址）</span></span><br><span class="line"><span class="comment">//    private static final String dirPath=&quot;D:\\suibian\\test\\&quot;;</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String dirPath=<span class="string">&quot;/usr/local/share/apache-tomcat-8.5.40/webapps/files/&quot;</span>;</span><br><span class="line">    <span class="comment">//Tomcat域名，拼接上文件名可直接下载</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String tomcatUrl=<span class="string">&quot;https://www.tiger2.cn/files/&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//客户端向本服务端上传文件的开放接口</span></span><br><span class="line">    <span class="meta">@PostMapping(&quot;createFile&quot;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">createFile</span><span class="params">(MultipartFile uploadFile, String uploader)</span> </span>&#123;</span><br><span class="line">        String message = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">boolean</span> success = <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">//构建新的文件名并进行存储，存储到云服务的文件夹中</span></span><br><span class="line">        String originalFilename = uploadFile.getOriginalFilename();</span><br><span class="line">        String suffix=originalFilename.substring(originalFilename.lastIndexOf(<span class="string">&quot;.&quot;</span>));</span><br><span class="line">        <span class="keyword">long</span> time=<span class="keyword">new</span> Date().getTime();</span><br><span class="line">        String newFileName=originalFilename.substring(<span class="number">0</span>,originalFilename.lastIndexOf(<span class="string">&quot;.&quot;</span>))+String.valueOf(time)+suffix;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//FileUtils.copyInputStreamToFile是commons-io包下的方法，可以直接将输入流转为一个新的文件（前提是指定好路径和要生成的文件名）</span></span><br><span class="line">            FileUtils.copyInputStreamToFile(uploadFile.getInputStream(),</span><br><span class="line">                    <span class="keyword">new</span> File(dirPath + newFileName));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            message = e.getMessage();</span><br><span class="line">            success = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Map&lt;String, Object&gt; result = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        result.put(<span class="string">&quot;message&quot;</span>, message);</span><br><span class="line">        result.put(<span class="string">&quot;success&quot;</span>, success);</span><br><span class="line">        result.put(<span class="string">&quot;newFileName&quot;</span>,newFileName); <span class="comment">//返回一个新的文件名</span></span><br><span class="line">        result.put(<span class="string">&quot;downLoadUrl&quot;</span>,tomcatUrl+newFileName);<span class="comment">//返回文件下载地址</span></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    LoginController loginController;</span><br><span class="line">    <span class="comment">//根据文件名创建在线预览地址</span></span><br><span class="line">    <span class="meta">@GetMapping(value = &quot;createPreviewUrl&quot;, produces = MediaType.APPLICATION_JSON_VALUE)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">createPreviewUrl</span><span class="params">(String fileName)</span></span>&#123;</span><br><span class="line">        String previewUrl = loginController.createPreviewUrl(fileName);</span><br><span class="line">        <span class="keyword">return</span> previewUrl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2，服务端生成附件在线预览地址"><a href="#2，服务端生成附件在线预览地址" class="headerlink" title="2，服务端生成附件在线预览地址"></a>2，服务端生成附件在线预览地址</h3><p>上面生成附件在线预览地址的方法不用细看了，这里使用了永中云转换服务，只需要把下载地址作为参数给它们，它们会直接给你生成预览地址，不过免费的局限性很大。</p>
-<p><a target="_blank" rel="noopener" href="http://api.yozocloud.cn/">点我到永中云转换服务</a></p>
-<h3 id="3，服务端文件下载（将输入流-输出到浏览器进行下载）"><a href="#3，服务端文件下载（将输入流-输出到浏览器进行下载）" class="headerlink" title="3，服务端文件下载（将输入流 输出到浏览器进行下载）"></a>3，服务端文件下载（将输入流 输出到浏览器进行下载）</h3><p>获取到要下载的文件<code>File</code>对象，得到输入流之后，将输入流写入到响应请求<code>response</code>的输出流中，在浏览器端进行下载。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据文件名称下载文件输出到浏览器</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/download&quot;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">download</span><span class="params">(String fileName, HttpServletResponse response)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">//windows分隔符是\\  Linux分隔符是/</span></span><br><span class="line">        String fileName1=dirPath+<span class="string">&quot;/&quot;</span>+fileName;</span><br><span class="line">        <span class="comment">//获取要下载的文件输入流</span></span><br><span class="line">        FileInputStream is=<span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(fileName1));</span><br><span class="line">        <span class="comment">//设置content-disposition响应头控制浏览器以下载的形式打开文件</span></span><br><span class="line">        response.setHeader(<span class="string">&quot;content-disposition&quot;</span>, <span class="string">&quot;attachment;filename=&quot;</span>+ URLEncoder.encode(fileName, <span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">        OutputStream out = response.getOutputStream();</span><br><span class="line">        <span class="keyword">byte</span>[] bytes=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="keyword">int</span> len;</span><br><span class="line">        <span class="keyword">while</span> ((len=is.read(bytes))&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            out.write(bytes,<span class="number">0</span>,len);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//关闭输入流</span></span><br><span class="line">        is.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="4，服务端上传附件到云服务器本身的硬盘中"><a href="#4，服务端上传附件到云服务器本身的硬盘中" class="headerlink" title="4，服务端上传附件到云服务器本身的硬盘中"></a>4，服务端上传附件到云服务器本身的硬盘中</h3><p><code>FileUtils.copyInputStreamToFile</code>是<code>commons-io</code>包下的方法，可以直接将输入流转为一个新的文件（前提是指定好路径和要生成的文件名）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//服务器本身上传图片到服务器本地硬盘</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/upload&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">upload</span><span class="params">(MultipartFile file,Model model)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> checkFileSize = checkFileSize(file, <span class="number">5</span>, <span class="string">&quot;M&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">            String originalFilename = file.getOriginalFilename();</span><br><span class="line">            <span class="keyword">long</span> time=<span class="keyword">new</span> Date().getTime();</span><br><span class="line">            String suffix=originalFilename.substring(originalFilename.lastIndexOf(<span class="string">&quot;.&quot;</span>));</span><br><span class="line">            String name=originalFilename.substring(<span class="number">0</span>,originalFilename.lastIndexOf(<span class="string">&quot;.&quot;</span>));</span><br><span class="line">            FileUtils.copyInputStreamToFile(file.getInputStream(),<span class="keyword">new</span> File(dirPath+<span class="string">&quot;/&quot;</span>+name+String.valueOf(time)+suffix));</span><br><span class="line">            model.addAttribute(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;The File Was Uploaded Successlly!&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;forward:index&quot;</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            model.addAttribute(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;Sorry, The File Was Uploaded Error!The File Size Should Not Exceed 5MB!&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;forward:index&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="5，服务端判断文件大小"><a href="#5，服务端判断文件大小" class="headerlink" title="5，服务端判断文件大小"></a>5，服务端判断文件大小</h3><p>参数分别是文件，数字，单位（B,K,M,G）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkFileSize</span><span class="params">( MultipartFile multipartFile, <span class="keyword">int</span> size, String unit)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> len = multipartFile.getSize();<span class="comment">//上传文件的大小, 单位为字节.</span></span><br><span class="line">        <span class="comment">//准备接收换算后文件大小的容器</span></span><br><span class="line">        <span class="keyword">double</span> fileSize = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;B&quot;</span>.equals(unit.toUpperCase())) &#123;</span><br><span class="line">            fileSize = (<span class="keyword">double</span>) len;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&quot;K&quot;</span>.equals(unit.toUpperCase())) &#123;</span><br><span class="line">            fileSize = (<span class="keyword">double</span>) len / <span class="number">1024</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&quot;M&quot;</span>.equals(unit.toUpperCase())) &#123;</span><br><span class="line">            fileSize = (<span class="keyword">double</span>) len / <span class="number">1048576</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&quot;G&quot;</span>.equals(unit.toUpperCase())) &#123;</span><br><span class="line">            fileSize = (<span class="keyword">double</span>) len / <span class="number">1073741824</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果上传文件大于限定的容量</span></span><br><span class="line">        <span class="keyword">if</span> (fileSize &gt; size) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="6，服务端将文件列表按时间排序"><a href="#6，服务端将文件列表按时间排序" class="headerlink" title="6，服务端将文件列表按时间排序"></a>6，服务端将文件列表按时间排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//按时间排序</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> File[] orderByDate(String fliePath) &#123;</span><br><span class="line">       File file = <span class="keyword">new</span> File(fliePath);</span><br><span class="line">       File[] fs = file.listFiles();</span><br><span class="line">       Arrays.sort(fs, <span class="keyword">new</span> Comparator&lt;File&gt;() &#123;</span><br><span class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(File f1, File f2)</span> </span>&#123;</span><br><span class="line">               <span class="keyword">long</span> diff = f1.lastModified() - f2.lastModified();</span><br><span class="line">               <span class="keyword">if</span> (diff &gt; <span class="number">0</span>)</span><br><span class="line">                   <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">               <span class="keyword">else</span> <span class="keyword">if</span> (diff == <span class="number">0</span>)</span><br><span class="line">                   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">               <span class="keyword">else</span></span><br><span class="line">                   <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       <span class="keyword">return</span> fs;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">index</span><span class="params">()</span></span>&#123;</span><br><span class="line">       File[] files = orderByDate(dirPath);</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = files.length - <span class="number">1</span>; i &gt; -<span class="number">1</span>; i--) &#123;</span><br><span class="line">           <span class="comment">//对文件排序后的列表进行处理</span></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="7，客户端上传附件表单"><a href="#7，客户端上传附件表单" class="headerlink" title="7，客户端上传附件表单"></a>7，客户端上传附件表单</h3><p>准备一个表单，提交附件</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/upload/tiger2&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></span><br><span class="line">    选择文件：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;uploadFile&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;上传&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="8，客户端远程调用服务端上传附件"><a href="#8，客户端远程调用服务端上传附件" class="headerlink" title="8，客户端远程调用服务端上传附件"></a>8，客户端远程调用服务端上传附件</h3><p>使用<code>RestTemplate</code>把文件从客户端发送至服务端的接收文件的接口。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/tiger2&quot;)</span></span><br><span class="line">   <span class="meta">@ResponseBody</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Map <span class="title">uploadFile</span><span class="params">(MultipartFile uploadFile)</span></span>&#123;</span><br><span class="line">       FileServerManager fileServerManager=<span class="keyword">new</span> FileServerManager();</span><br><span class="line">       Map result = fileServerManager.uploadFileToTiger2Server(uploadFile);</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line"><span class="function"><span class="keyword">public</span> Map <span class="title">uploadFileToTiger2Server</span><span class="params">(MultipartFile uploadFile)</span> </span>&#123;</span><br><span class="line">       RestTemplate restTemplate = <span class="keyword">new</span> RestTemplate();</span><br><span class="line">       MultiValueMap&lt;String, Object&gt; multiValueMap = <span class="keyword">new</span> LinkedMultiValueMap();</span><br><span class="line">       HttpHeaders header = <span class="keyword">new</span> HttpHeaders();</span><br><span class="line">       header.setContentType(MediaType.MULTIPART_FORM_DATA);</span><br><span class="line">       HttpHeaders fileHeader = <span class="keyword">new</span> HttpHeaders();</span><br><span class="line">       fileHeader.setContentType(MediaType.parseMediaType(uploadFile.getContentType()));</span><br><span class="line">       fileHeader.setContentDispositionFormData(<span class="string">&quot;uploadFile&quot;</span>, uploadFile.getOriginalFilename());</span><br><span class="line">       Map result = <span class="keyword">null</span>;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           HttpEntity&lt;ByteArrayResource&gt; fileEntity = <span class="keyword">new</span> HttpEntity(<span class="keyword">new</span> ByteArrayResource(uploadFile.getBytes()), fileHeader);</span><br><span class="line">           multiValueMap.add(<span class="string">&quot;uploadFile&quot;</span>, fileEntity);</span><br><span class="line">           String url = <span class="string">&quot;http://fileserver.tiger2.cn/rest/createFile&quot;</span>;</span><br><span class="line">           HttpEntity&lt;MultiValueMap&lt;String, Object&gt;&gt; httpEntity = <span class="keyword">new</span> HttpEntity(multiValueMap, header);</span><br><span class="line">           ResponseEntity&lt;Map&gt; postForEntity = restTemplate.postForEntity(url, httpEntity, Map.class, <span class="keyword">new</span> Object[<span class="number">0</span>]);</span><br><span class="line">           result = (Map)postForEntity.getBody();</span><br><span class="line">       &#125; <span class="keyword">catch</span> (Exception var11) &#123;</span><br><span class="line">           ;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="9，客户端远程调用服务端生成附件在线预览地址"><a href="#9，客户端远程调用服务端生成附件在线预览地址" class="headerlink" title="9，客户端远程调用服务端生成附件在线预览地址"></a>9，客户端远程调用服务端生成附件在线预览地址</h3><p>都是<code>RestTemplate</code>的基本操作，这个就不说了吧！</p>
-<p>完美谢幕！</p>
-
-  </article>
-</div>
-
-
-    
-
-
-
-
-</div>
-
-<div class="footer-wrapper container">
-  <footer class="footer clearfix">
-    <div class="clearfix">
-    <a href="https://github.com/fantongxue666" class="footer-logo">
-      <i class="fa fa-github"></i>
-    </a>
-    <ul class="footer-social-link">
-      <li>© 2019 樊同学</li>
-      <li><a href="https://github.com/fantongxue666">Home</a></li>
-      
-    </ul>
-    <div class="footer-theme-info">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-    </div>
-    
-  </footer>
-</div>
-
-
-
-
-<script src="/js/main.js"></script>
-
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}

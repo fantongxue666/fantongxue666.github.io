@@ -1,175 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends '_layout.swig' %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
+  {% block title %}{#
+  #}{% set page_title_suffix = ' | ' + config.title %}{#
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>
-    tags | 欢迎来到LZ的直播间
-  </title>
-  <meta name="description" content="">
-  
-  <meta name="author" content="樊同学">
+  #}{% if page.type === "categories" and not page.title %}{#
+    #}{{ __('title.category') + page_title_suffix }}{#
+  #}{% elif page.type === "tags" and not page.title %}{#
+    #}{{ __('title.tag') + page_title_suffix }}{#
+  #}{% else %}{#
+    #}{{ page.title + page_title_suffix }}{#
+  #}{% endif %}{#
+#}{% endblock %}
 
-  <meta http-equiv="Cache-Control" content="no-transform"/>
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <meta name="theme-color" content="#1e2327">
-  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+{% block page_class %}page-post-detail{% endblock %}
 
-  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+{% block content %}
 
-  
-
-  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
-
-<body id="replica-app">
-
-<nav class="navbar-wrapper">
-  <div class="navbar">
-    <div class="container clearfix">
-      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
-
-      <div class="navbar-search float-left desktop-only">
-        <div class="navbar-search-form">
-          <label for="gsc-i-id1">This website</label>
-          <div id="google-search">
-            <gcse:search></gcse:search>
+  <div id="posts" class="posts-expand">
+    {##################}
+    {### PAGE BLOCK ###}
+    {##################}
+    <div class="post-block page">
+      {% include '_partials/page-header.swig' %}
+      {#################}
+      {### PAGE BODY ###}
+      {#################}
+      <div class="post-body{% if theme.han %} han-init-context{% endif %}{% if page.direction && page.direction.toLowerCase() === 'rtl' %} rtl{% endif %}">
+        {# tagcloud page support #}
+        {% if page.type === "tags" %}
+          <div class="tag-cloud">
+            <div class="tag-cloud-title">
+                {{ _p('counter.tag_cloud', site.tags.length) }}
+            </div>
+            <div class="tag-cloud-tags">
+              {{ tagcloud({min_font: 12, max_font: 30, amount: 300, color: true, start_color: '#ccc', end_color: '#111'}) }}
+            </div>
           </div>
-        </div>
+        {% elif page.type === 'categories' %}
+          <div class="category-all-page">
+            <div class="category-all-title">
+                {{ _p('counter.categories', site.categories.length) }}
+            </div>
+            <div class="category-all">
+              {{ list_categories() }}
+            </div>
+          </div>
+        {% else %}
+          {{ page.content }}
+        {% endif %}
       </div>
-
-      <ul class="navbar-nav float-left">
-        
-        <li><a href="/archives">Archives</a></li>
-        
-        
-        <li><a href="/categories">Categories</a></li>
-        
-        
-        <li><a href="/tags">Tags</a></li>
-        
-        
-        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
-        
-      </ul>
-
-      <ul class="navbar-nav user-nav float-right desktop-only">
-        <li class="user-nav-notification">
-          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
-        </li>
-        <li>
-          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
-        </li>
-        <li class="user-nav-logo">
-          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
-        </li>
-      </ul>
+      {#####################}
+      {### END PAGE BODY ###}
+      {#####################}
     </div>
-  </div>
-</nav>
-
-<div class="main-container">
-  <div class="container-lg">
-  
-
-<div class="blog-intro">
-  <div class="blog-intro-user">
-    <img class="avatar" src="https://octodex.github.com/images/baracktocat.jpg">
-    <div class="user-name">
-      <div class="blog-title"></div>
-      <div class="blog-author"></div>
-        <ul class="user-detail mobile-only">
-    
-    <li>
-      <i class="fa fa-link"></i>
-      <a href="https://github.com/fantongxue666">https://github.com/fantongxue666</a>
-    </li>
-  </ul>
-    </div>
-    <div class="blog-description">
-      
-    </div>
+    {######################}
+    {### END PAGE BLOCK ###}
+    {######################}
   </div>
 
-  <ul class="user-detail desktop-only">
-    
-    <li>
-      <i class="fa fa-link"></i>
-      <a href="https://github.com/fantongxue666">https://github.com/fantongxue666</a>
-    </li>
-  </ul>
+{% endblock %}
 
-  <div class="social-media desktop-only">
-    <h4>Social Media</h4>
-    <ul>
-      
-    </ul>
-  </div>
-</div>
+{% block sidebar %}
+  {{ sidebar_template.render(false) }}
+{% endblock %}
 
-
-  <div class="blog-detail">
-    
-<nav class="blog-detail-nav desktop-only">
-  <ul class="clearfix">
-    <li class="">
-      <a href="/">Overview</a></li>
-    <li class="">
-      <a href="/archives">Posts <span class="counter">62</span></a>
-    </li>
-    <li class="">
-      <a href="/categories">Categories <span
-                class="counter">27</span></a></li>
-    <li class="selected">
-      <a href="/tags">Tags <span class="counter">50</span></a></li>
-  </ul>
-</nav>
-
-    <div class="body-secondary">
-
-      
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BDP%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1/" rel="tag">BDP数据库事务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-FastDFS/" rel="tag">Linux FastDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Gitlab-Gogs/" rel="tag">Linux Gitlab Gogs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Nexus/" rel="tag">Linux Nexus</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Nginx/" rel="tag">Linux Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis-PageHelper/" rel="tag">Mybatis PageHelper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis-%E6%89%8B%E5%86%99%E6%A1%86%E6%9E%B6/" rel="tag">Mybatis 手写框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/activiti%E5%B7%A5%E4%BD%9C%E6%B5%81/" rel="tag">activiti工作流</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c3p0%E8%BF%9E%E6%8E%A5%E6%B1%A0/" rel="tag">c3p0连接池</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cache/" rel="tag">cache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freemarker/" rel="tag">freemarker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpclient/" rel="tag">httpclient</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/io%E6%B5%81-%E4%B8%8A%E4%BC%A0-%E4%B8%8B%E8%BD%BD/" rel="tag">io流 上传 下载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E7%88%AC%E8%99%AB/" rel="tag">java爬虫</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jndi%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90-springboot/" rel="tag">jndi多数据源 springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jwt-token%E7%99%BB%E5%BD%95/" rel="tag">jwt token登录</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-tomcat-mysql-nginx/" rel="tag">linux tomcat mysql nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql%E5%87%BD%E6%95%B0/" rel="tag">mysql函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oracle-gbase/" rel="tag">oracle gbase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oracle%E5%87%BD%E6%95%B0/" rel="tag">oracle函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/poi%E7%BC%96%E7%A8%8B/" rel="tag">poi编程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/restTemplate/" rel="tag">restTemplate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket%E7%BC%96%E7%A8%8B/" rel="tag">socket编程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/solr/" rel="tag">solr</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-springioc/" rel="tag">spring springioc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/" rel="tag">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot-aop/" rel="tag">springboot aop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot-druid-oracle-mybatis-thymeleaf-log/" rel="tag">springboot druid oracle mybatis thymeleaf log</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot-es/" rel="tag">springboot es</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot-log4j/" rel="tag">springboot log4j</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot-rabbitmq/" rel="tag">springboot rabbitmq</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot-starter/" rel="tag">springboot starter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot-trueLicense/" rel="tag">springboot trueLicense</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot-%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/" rel="tag">springboot 全局异常 多数据源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot-%E5%A4%9A%E4%BA%8B%E5%8A%A1/" rel="tag">springboot 多事务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1-%E5%BC%82%E6%AD%A5%E8%B0%83%E7%94%A8/" rel="tag">springboot 定时任务 异步调用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springcloud/" rel="tag">springcloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springmvc-%E6%89%8B%E5%86%99%E6%A1%86%E6%9E%B6/" rel="tag">springmvc 手写框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sso/" rel="tag">sso</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thymeleaf/" rel="tag">thymeleaf</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-cli%E8%84%9A%E6%89%8B%E6%9E%B6/" rel="tag">vue-cli脚手架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websocket%E7%BC%96%E7%A8%8B/" rel="tag">websocket编程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%8A%E4%BC%A0-%E4%B8%8B%E8%BD%BD/" rel="tag">上传 下载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" rel="tag">代理模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B7%E7%9F%A5%E8%AF%86/" rel="tag">冷知识</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E9%A1%B5/" rel="tag">分页</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AE%89%E5%85%A8/" rel="tag">加密与安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%8E%A5%E5%8F%A3/" rel="tag">第三方接口</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AD%E7%89%A9%E8%BD%A6-session/" rel="tag">购物车 session</a><span class="tag-list-count">1</span></li></ul>
-      
-      
-    </div>
-  </div>
-</div>
-</div>
-
-<div class="footer-wrapper container">
-  <footer class="footer clearfix">
-    <div class="clearfix">
-    <a href="https://github.com/fantongxue666" class="footer-logo">
-      <i class="fa fa-github"></i>
-    </a>
-    <ul class="footer-social-link">
-      <li>© 2019 樊同学</li>
-      <li><a href="https://github.com/fantongxue666">Home</a></li>
-      
-    </ul>
-    <div class="footer-theme-info">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-    </div>
-    
-  </footer>
-</div>
-
-
-
-
-<script src="/js/main.js"></script>
-
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}
