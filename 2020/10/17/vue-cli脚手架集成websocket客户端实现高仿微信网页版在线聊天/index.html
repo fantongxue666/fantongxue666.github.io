@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>欢迎来到LZ的直播间</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="欢迎来到LZ的直播间">
+  <title>vue-cli脚手架集成websocket客户端实现高仿微信网页版在线聊天 | 欢迎来到LZ的直播间</title>
+  <meta name="keywords" content=" websocket vue-cli脚手架 ">
+  <meta name="description" content="vue-cli脚手架集成websocket客户端实现高仿微信网页版在线聊天 | 欢迎来到LZ的直播间">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="page">
@@ -54,7 +54,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -1213,12 +1213,58 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-vue-cli脚手架集成websocket客户端实现高仿微信网页版在线聊天" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%8D%9A%E5%AE%A2%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">对博客的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99"><span class="toc-text">关于本站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">vue-cli脚手架集成websocket客户端实现高仿微信网页版在线聊天</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="前端框架">前端框架</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">websocket vue-cli脚手架</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2020-10-17 10:30:28'>2020-10-17 09:44</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E6%AC%A1%E9%9C%80%E6%B1%82"><span class="toc-text">本次需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%94%AF%E6%8C%81"><span class="toc-text">技术支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%95%88%E6%9E%9C"><span class="toc-text">实现效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="toc-text">实现过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-cli%E8%84%9A%E6%89%8B%E6%9E%B6%E9%9C%80%E8%A6%81%E5%81%9A%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="toc-text">vue-cli脚手架需要做的工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#springboot%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%9C%80%E8%A6%81%E5%81%9A%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="toc-text">springboot服务端需要做的工作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GitHub%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80"><span class="toc-text">GitHub项目地址</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1231,37 +1277,74 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="对博客的理解"><a href="#对博客的理解" class="headerlink" title="对博客的理解"></a>对博客的理解</h2><p>喜欢写Blog的人，会经历三个阶段。</p>
-<blockquote>
-<p>第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E6%AC%A1%E9%9C%80%E6%B1%82"><span class="toc-text">本次需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%94%AF%E6%8C%81"><span class="toc-text">技术支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%95%88%E6%9E%9C"><span class="toc-text">实现效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="toc-text">实现过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-cli%E8%84%9A%E6%89%8B%E6%9E%B6%E9%9C%80%E8%A6%81%E5%81%9A%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="toc-text">vue-cli脚手架需要做的工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#springboot%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%9C%80%E8%A6%81%E5%81%9A%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="toc-text">springboot服务端需要做的工作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GitHub%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80"><span class="toc-text">GitHub项目地址</span></a></li></ol></div></p>
+<h2 id="本次需求"><a href="#本次需求" class="headerlink" title="本次需求"></a><em>本次需求</em></h2><blockquote>
+<p>做一个高仿微信网页版在线聊天系统，好友相互之间进行单聊</p>
 </blockquote>
-<blockquote>
-<p>第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。</p>
+<h2 id="技术支持"><a href="#技术支持" class="headerlink" title="技术支持"></a><em>技术支持</em></h2><blockquote>
+<p>springboot服务端提供websocket服务端连接</p>
+<p>vue-cli提供websocket客户端与后端进行连接</p>
 </blockquote>
-<blockquote>
-<p>第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。</p>
-</blockquote>
-<p>我们每个人的在网络上产生的数据越来越多，这些信息是我们在互联网上存在过的痕迹，值得我们认真对待。但是它们被分散分布在各个网站上。很多时候我们很难将它们聚合在一起，而且各个网站的信息排布方式也没有办法自由控制，所以我们需要一个可以由自己主宰的空间——博客。</p>
-<p>通过博客，我们可以记录自己的生活和成长的轨迹。它不像 Twitter 那样碎片化，也不像 Facebook 那样关系化，它是私人的空间。</p>
-<h2 id="关于本站"><a href="#关于本站" class="headerlink" title="关于本站"></a>关于本站</h2><p>本站是樊同学的个人站。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 生成，部署在 <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a>主题 <a href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> 已经在github上开源</p>
-<p><code>3-hexo</code> 主题使用交流可以加 Q群: <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=e8cf083cc097141eaf323396f1766809b8e90ff00c67bb441898f672892f6904"><img data-ignore border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="3-hexo使用交流" title="3-hexo使用交流"></a></p>
-<p>主要功能：</p>
-<ul>
-<li>搜索支持文章标题、标签(#标签)、作者(@作者)</li>
-<li>pad/手机等移动端适配</li>
-<li>页面全局快捷键 <a target="_blank" rel="noopener" href='http://yelog.org/2017/03/24/3-hexo-shortcuts/'>3-hexo快捷键说明</a></li>
-</ul>
+<h2 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a><em>实现效果</em></h2><p><img src="https://img-blog.csdnimg.cn/20201017095908205.png"></p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a><em>实现过程</em></h2><h3 id="vue-cli脚手架需要做的工作"><a href="#vue-cli脚手架需要做的工作" class="headerlink" title="vue-cli脚手架需要做的工作"></a>vue-cli脚手架需要做的工作</h3><p>首先在data中定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">websock: null,</span><br><span class="line">message: &quot;&quot;, &#x2F;&#x2F;要发送的消息</span><br><span class="line">receiveAccount: &quot;&quot;, &#x2F;&#x2F;接收人的账号</span><br><span class="line">msgList: [], 聊天消息列表展示</span><br><span class="line">currentTab:&quot;&quot;  &#x2F;&#x2F;当前窗口是在和哪个账号聊天 在点击选择好友时触发的方法中要初始化这个变量，把接收者的账号赋值给它</span><br></pre></td></tr></table></figure>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+<p>其次在methods中添加方法，以供连接websocket服务端</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">initWebSocket() &#123;</span><br><span class="line">      <span class="built_in">this</span>.websock = <span class="literal">null</span>;</span><br><span class="line">      <span class="comment">//判断当前浏览器是否支持WebSocket</span></span><br><span class="line">      <span class="keyword">var</span> wsUrl = <span class="string">&quot;ws://vue.tiger2.cn:8082/charRoomServer&quot;</span>;</span><br><span class="line">      <span class="comment">//带上自己的账号（发送人账号） 参数</span></span><br><span class="line">      <span class="keyword">var</span> allUrl = wsUrl + <span class="string">&quot;/&quot;</span> + <span class="built_in">window</span>.localStorage.getItem(<span class="string">&quot;account&quot;</span>);</span><br><span class="line">      <span class="keyword">if</span> (<span class="string">&quot;WebSocket&quot;</span> <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">        <span class="comment">//初始化weosocket(必须)</span></span><br><span class="line">        <span class="built_in">this</span>.websock = <span class="keyword">new</span> WebSocket(allUrl); <span class="comment">//新建一个webstock对象</span></span><br><span class="line">        <span class="built_in">this</span>.websock.onopen = <span class="built_in">this</span>.websocketonopen;</span><br><span class="line">        <span class="built_in">this</span>.websock.onmessage = <span class="built_in">this</span>.websocketonmessage;</span><br><span class="line">        <span class="built_in">this</span>.websock.onerror = <span class="built_in">this</span>.websocketonerror;</span><br><span class="line">        <span class="built_in">this</span>.websock.onclose = <span class="built_in">this</span>.websocketclose;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        alert(<span class="string">&quot;当前浏览器 Not support websocket&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    websocketonopen() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;---连接建立成功---&quot;</span>);</span><br><span class="line">      <span class="comment">//websocket连接后发送数据(send发送)</span></span><br><span class="line">        <span class="comment">//第一次建立成功之后发送接收人账号，在后端接收并存储</span></span><br><span class="line">      <span class="keyword">let</span> actions = <span class="built_in">this</span>.receiveAccount; </span><br><span class="line">      <span class="built_in">this</span>.websocketsend(actions);</span><br><span class="line">    &#125;,</span><br><span class="line">    websocketonerror() &#123;</span><br><span class="line">      <span class="comment">//连接建立失败重连</span></span><br><span class="line">      <span class="built_in">this</span>.initWebSocket();</span><br><span class="line">    &#125;,</span><br><span class="line">    websocketonmessage(e) &#123;</span><br><span class="line">      <span class="comment">//数据接收</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;-----websocket接收到的发送的数据-----&quot;</span>);</span><br><span class="line">      <span class="keyword">let</span> str = e.data;</span><br><span class="line">      <span class="keyword">let</span> index = str.lastIndexOf(<span class="string">&quot;:&quot;</span>);</span><br><span class="line">      <span class="keyword">let</span> sendUserAccount = str.substring(<span class="number">0</span>, index);</span><br><span class="line">      <span class="keyword">let</span> sendMessage = str.substring(index + <span class="number">1</span>, str.length);</span><br><span class="line">      <span class="built_in">console</span>.log(</span><br><span class="line">        <span class="string">&quot;发送人：&quot;</span> + sendUserAccount + <span class="string">&quot;----------发送信息：&quot;</span> + sendMessage</span><br><span class="line">      );</span><br><span class="line">      <span class="keyword">let</span> account = <span class="built_in">window</span>.localStorage.getItem(<span class="string">&quot;account&quot;</span>);<span class="comment">//自己的账号</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果当前聊天的人是消息发送者  或者  发送者是自己</span></span><br><span class="line">        <span class="comment">//【那么就把消息发送到当前聊天窗口，否则只传到后端存储到数据库中，给好友未读提示即可，不可以发送到当前聊天窗口】</span></span><br><span class="line">      <span class="keyword">if</span>(<span class="built_in">this</span>.currentTab==sendUserAccount||account==sendUserAccount)&#123;</span><br><span class="line">        <span class="keyword">if</span> (account == sendUserAccount) &#123;</span><br><span class="line">        <span class="comment">//发送人是自己</span></span><br><span class="line">        <span class="built_in">this</span>.msgList.push(&#123;</span><br><span class="line">          type: <span class="literal">true</span>,	<span class="comment">//type:true或者false  标记消息是我发送的还是对方发送的，我发送的消息右边排队，对方发送的则左边排队</span></span><br><span class="line">          time: <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">          content: sendMessage</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//发送人是对方</span></span><br><span class="line">        <span class="built_in">this</span>.msgList.push(&#123;</span><br><span class="line">          type: <span class="literal">false</span>,</span><br><span class="line">          time: <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">          content: sendMessage</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">    &#125;,</span><br><span class="line">    websocketsend(Data) &#123;</span><br><span class="line">      <span class="comment">//数据发送</span></span><br><span class="line">      <span class="built_in">this</span>.websock.send(Data);</span><br><span class="line">    &#125;,</span><br><span class="line">    websocketclose(e) &#123;</span><br><span class="line">      <span class="comment">//关闭</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;断开连接&quot;</span>, e);</span><br><span class="line">    &#125;,</span><br><span class="line">    send() &#123;</span><br><span class="line">      <span class="built_in">this</span>.websocketsend(<span class="built_in">this</span>.message);</span><br><span class="line">      <span class="built_in">this</span>.message = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>发送按钮触发的方法，进行发送消息，并将文本框置空</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">send() &#123;</span><br><span class="line">      <span class="built_in">this</span>.websocketsend(<span class="built_in">this</span>.message);</span><br><span class="line">      <span class="built_in">this</span>.message = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在（选择好友）点击好友列表的触发方法中进行初始化websocket连接，在触发方法中调用连接方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">toChat(e) &#123;</span><br><span class="line">      <span class="built_in">this</span>.currentTab=e.account;<span class="comment">//当前窗口是在和哪个账号聊天 赋值</span></span><br><span class="line">      <span class="built_in">this</span>.currentChatUser = <span class="string">&quot;正在和&quot;</span> + e.username + <span class="string">&quot;对话中&quot;</span>;</span><br><span class="line">      <span class="built_in">this</span>.initWebSocket(); <span class="comment">//连接websocket</span></span><br><span class="line">      <span class="built_in">this</span>.receiveAccount = e.account; <span class="comment">//接收者账号 好像和currentTab有点像哈  先不管了，都能用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="springboot服务端需要做的工作"><a href="#springboot服务端需要做的工作" class="headerlink" title="springboot服务端需要做的工作"></a><em>springboot服务端需要做的工作</em></h3><p><font color="red">需要保证内置Tomcat版本在8以上！不过多解释！</font></p>
+<p>首先添加websocket依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-websocket<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>添加WebsocketConfig配置类</p>
+<blockquote>
+<p>该配置类的作用</p>
+<p>（1）配置了如下的ServerEndpointExporter之后，websocket客户端连接才会认识并连接在后端被@ServerEndpoint注解标注类（也就是websocket服务端）</p>
+<p>（2）注入MainMapper，因为被 SpringBoot WebSocket 对每个客户端连接都会创建一个 WebSocketServer（@ServerEndpoint 注解对应的对象，Bean 注入操作会被直接略过，因而手动注入一个全局变量</p>
+<p>（3）为什么需要在WebSocketServer中注入Mapper接口？因为要存储聊天记录嘛！</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebsocketConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerEndpointExporter <span class="title">serverEndpointExporter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ServerEndpointExporter();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSelectService</span><span class="params">(MainMapper mainMapper)</span> </span>&#123;</span><br><span class="line">        ChatServerController.mainMapper = mainMapper;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>WebSocketServer服务端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ServerEndpoint(value = &quot;/charRoomServer/&#123;param&#125;&quot;)</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChatServerController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> MainMapper mainMapper;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Session session;</span><br><span class="line">    <span class="comment">//发送人account</span></span><br><span class="line">    <span class="keyword">private</span> String sendUserAccount;</span><br><span class="line">    <span class="keyword">private</span> String receiveUserAccount;</span><br><span class="line">    <span class="comment">//是否第一次进入</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isFirst=<span class="keyword">true</span>;</span><br><span class="line">    <span class="comment">//key代表此次客户端的userId，value代表此次连接对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> HashMap&lt;String, Object&gt; connectMap=<span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">    <span class="comment">//key是session的id，value是用户account</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> HashMap&lt;String, String&gt; userMap=<span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//服务端收到客户端的连接请求，连接成功后会执行此方法</span></span><br><span class="line">    <span class="meta">@OnOpen</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(<span class="meta">@PathParam(value = &quot;param&quot;)</span> String param, Session session)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;websocket传来的参数（发送人account）：&quot;</span>+param);</span><br><span class="line">        <span class="keyword">this</span>.session=session;</span><br><span class="line">        <span class="keyword">this</span>.sendUserAccount=param; <span class="comment">//接收参数</span></span><br><span class="line">        connectMap.put(param,<span class="keyword">this</span>);</span><br><span class="line">        userMap.put(session.getId(),param);<span class="comment">//保存在线的所有用户</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//客户端发来的信息，服务端接收</span></span><br><span class="line">    <span class="meta">@OnMessage</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">chat</span><span class="params">(String clientMessage,Session session)</span> </span>&#123;</span><br><span class="line">        ChatServerController client=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(isFirst)&#123;</span><br><span class="line">            <span class="comment">//第一次进入，收到接收人account</span></span><br><span class="line">            System.out.println(<span class="string">&quot;接收人account已保存:&quot;</span>+clientMessage);</span><br><span class="line">            receiveUserAccount=clientMessage;</span><br><span class="line">            isFirst=<span class="keyword">false</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;### 接收人已被初始化，开始通信，发送消息 ###&quot;</span>);</span><br><span class="line">            <span class="comment">//给接收人窗口发送消息</span></span><br><span class="line">            client=(ChatServerController)connectMap.get(receiveUserAccount);</span><br><span class="line">            <span class="keyword">if</span>(client!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    client.session.getBasicRemote().sendText(sendUserAccount+<span class="string">&quot;:&quot;</span>+clientMessage);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;### 发送信息异常，发送失败 ###&quot;</span>);</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//给发送人窗口发消息</span></span><br><span class="line">            client=(ChatServerController)connectMap.get(sendUserAccount);</span><br><span class="line">            <span class="keyword">if</span>(client!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    client.session.getBasicRemote().sendText(sendUserAccount+<span class="string">&quot;:&quot;</span>+clientMessage);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;### 发送信息异常，发送失败 ###&quot;</span>);</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//查询所有的聊天记录的总条数，如果&gt;500条，删除所有记录，并开始保存新的记录，这里是为了降低服务器的消耗，没办法，服务器太差劲（太便宜）</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//保存聊天记录</span></span><br><span class="line">            Map map=<span class="keyword">new</span> HashMap();</span><br><span class="line">            map.put(<span class="string">&quot;id&quot;</span>, UUIDutil.getUUID());</span><br><span class="line">            map.put(<span class="string">&quot;message&quot;</span>,clientMessage);</span><br><span class="line">            map.put(<span class="string">&quot;status&quot;</span>,<span class="string">&quot;1&quot;</span>);<span class="comment">//未读</span></span><br><span class="line">            map.put(<span class="string">&quot;time&quot;</span>,<span class="keyword">new</span> Date());</span><br><span class="line">            map.put(<span class="string">&quot;senduser&quot;</span>,sendUserAccount);</span><br><span class="line">            map.put(<span class="string">&quot;receiveuser&quot;</span>,receiveUserAccount);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                mainMapper.insertMessages(map);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;### 保存聊天记录异常，服务器错误 ###&quot;</span>);</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//前台js的ws.close事件，会触发后台的标注onClose的方法</span></span><br><span class="line">    <span class="meta">@OnClose</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        userMap.remove(session.getId());</span><br><span class="line">        connectMap.remove(sendUserAccount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@OnError</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Session session,Throwable throwable)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;发生错误！&quot;</span>);</span><br><span class="line">        throwable.printStackTrace();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>核心过程就已经完了，聊天网页模板是直接下载的，可以自行去查找下载。</p>
+<p>选择好友并点击之后显示聊天记录的操作以及消息未读提示这里也不详细说明了，很简单！</p>
+<h2 id="GitHub项目地址"><a href="#GitHub项目地址" class="headerlink" title="GitHub项目地址"></a><em>GitHub项目地址</em></h2><blockquote>
+<p>vue-cli脚手架地址：<a href="https://github.com/fantongxue666/vuecli-lifespace.git">https://github.com/fantongxue666/vuecli-lifespace.git</a></p>
+<p>springboot后端地址：<a href="https://github.com/fantongxue666/vuecli-lifespace-interface.git">https://github.com/fantongxue666/vuecli-lifespace-interface.git</a></p>
+</blockquote>
+<p>如果你觉得不错，就留个Star吧，创作不易，感谢同志们的鼓励和支持！</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 fantongxue666@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -1270,11 +1353,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>
