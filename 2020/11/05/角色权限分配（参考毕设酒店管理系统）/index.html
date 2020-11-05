@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>角色权限分配（参考毕设酒店管理系统） | 欢迎来到LZ的直播间</title>
+  <meta name="keywords" content=" 权限分配 ">
+  <meta name="description" content="角色权限分配（参考毕设酒店管理系统） | 欢迎来到LZ的直播间">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="欢迎来到LZ的直播间">
+<meta property="og:url" content="https://github.com/fantongxue666/archives/index.html">
+<meta property="og:site_name" content="欢迎来到LZ的直播间">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="樊同学">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>樊同学</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="facebook" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-facebook"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="instagram" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-instagram"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-reddit"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="weibo" href="http://weibo.com/u/2307534817" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/ff56736de7cf" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/jaytp/activities" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="oschina" href="https://my.oschina.net/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-oschina"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=88151013" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active" data-rel="All">All<small>(68)</small></div></li>
+    
+        
+            
+            <li><div data-rel="数据库">数据库<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="activiti工作流">activiti工作流<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="cache">cache<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="java爬虫">java爬虫<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="linux">linux<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Mybatis">Mybatis<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="poi编程">poi编程<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="rabbitmq">rabbitmq<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="socket编程">socket编程<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="spring">spring<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="springboot">springboot<small>(15)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="springmvc">springmvc<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="sso">sso<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="websocket编程">websocket编程<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="代理模式">代理模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="冷知识">冷知识<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="前端框架">前端框架<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="加密与安全">加密与安全<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="图片上传和下载">图片上传和下载<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="微服务">微服务<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="数据源">数据源<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="日志">日志<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="权限">权限<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="模板引擎">模板引擎<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="第三方接口">第三方接口<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="购物车">购物车<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="远程调用">远程调用<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="连接池">连接池<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">About</a><a style="width: 50%"  class="friends">Friends</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="68">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://github.com/fantongxue666">Github</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" />
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>activiti工作流</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>BDP数据库事务</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>c3p0连接池</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cache</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>dateway</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>freemarker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>httpclient</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>io流 上传 下载</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java爬虫</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>jndi多数据源 springboot</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>jwt token登录</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Linux FastDFS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Linux Gitlab Gogs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Linux Nexus</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Linux Nginx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>linux tomcat mysql nginx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mybatis PageHelper</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mybatis 手写框架</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mysql函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>oracle gbase</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>oracle函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>poi编程</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>redis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>restTemplate</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>shiro框架</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>socket编程</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>solr</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>spring springioc</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot aop</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot druid oracle mybatis thymeleaf log</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot es</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot log4j</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot rabbitmq</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot starter</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot trueLicense</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot 全局异常 多数据源</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot 多事务</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springboot 定时任务 异步调用</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springcloud</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>springmvc 手写框架</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>sso</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>thymeleaf</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vue-cli脚手架</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>websocket vue-cli脚手架</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>websocket编程</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>上传 下载</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>代理模式</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>冷知识</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分页</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>加密与安全</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>日志</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>权限分配</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>第三方接口</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>购物车 session</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="All 权限 "
+           href="/2020/11/05/%E8%A7%92%E8%89%B2%E6%9D%83%E9%99%90%E5%88%86%E9%85%8D%EF%BC%88%E5%8F%82%E8%80%83%E6%AF%95%E8%AE%BE%E9%85%92%E5%BA%97%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%89/"
+           data-tag="权限分配"
+           data-author="" >
+            <span class="post-title" title="角色权限分配（参考毕设酒店管理系统）">角色权限分配（参考毕设酒店管理系统）</span>
+            <span class="post-date" title="2020-11-05 15:36:48">2020/11/05</span>
+        </a>
+        
+        <a  class="All 权限 "
+           href="/2020/11/05/%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E4%BC%81%E4%B8%9A%E7%BA%A7%E7%9A%84%E6%9D%83%E9%99%90%E5%88%86%E9%85%8DDEMO/"
+           data-tag="权限分配"
+           data-author="" >
+            <span class="post-title" title="动手实现一个企业级的权限分配DEMO">动手实现一个企业级的权限分配DEMO</span>
+            <span class="post-date" title="2020-11-05 15:34:06">2020/11/05</span>
+        </a>
+        
+        <a  class="All 权限 "
+           href="/2020/11/05/shiro%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/"
+           data-tag="shiro框架"
+           data-author="" >
+            <span class="post-title" title="shiro安全框架">shiro安全框架</span>
+            <span class="post-date" title="2020-11-05 15:31:41">2020/11/05</span>
+        </a>
+        
+        <a  class="All 日志 "
+           href="/2020/10/21/springboot%E6%95%B4%E5%90%88log4j2%E6%97%A5%E5%BF%97%E5%85%A8%E8%A7%A3/"
+           data-tag="日志"
+           data-author="" >
+            <span class="post-title" title="springboot整合log4j2日志全解">springboot整合log4j2日志全解</span>
+            <span class="post-date" title="2020-10-21 10:00:14">2020/10/21</span>
+        </a>
+        
+        <a  class="All 冷知识 "
+           href="/2020/10/17/dateway%E6%95%B0%E6%8D%AE%E6%8E%A5%E5%8F%A3%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1/"
+           data-tag="dateway"
+           data-author="" >
+            <span class="post-title" title="dateway数据接口配置服务">dateway数据接口配置服务</span>
+            <span class="post-date" title="2020-10-17 11:24:15">2020/10/17</span>
+        </a>
+        
+        <a  class="All 前端框架 "
+           href="/2020/10/17/vue-cli%E8%84%9A%E6%89%8B%E6%9E%B6%E9%9B%86%E6%88%90websocket%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%9E%E7%8E%B0%E9%AB%98%E4%BB%BF%E5%BE%AE%E4%BF%A1%E7%BD%91%E9%A1%B5%E7%89%88%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9/"
+           data-tag="websocket vue-cli脚手架"
+           data-author="" >
+            <span class="post-title" title="vue-cli脚手架集成websocket客户端实现高仿微信网页版在线聊天">vue-cli脚手架集成websocket客户端实现高仿微信网页版在线聊天</span>
+            <span class="post-date" title="2020-10-17 09:44:04">2020/10/17</span>
+        </a>
+        
+        <a  class="All 数据源 "
+           href="/2020/09/28/springboot%E5%86%85%E7%BD%AEtomcat%E9%9B%86%E6%88%90jndi%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/"
+           data-tag="jndi多数据源 springboot"
+           data-author="" >
+            <span class="post-title" title="springboot内置tomcat集成jndi多数据源">springboot内置tomcat集成jndi多数据源</span>
+            <span class="post-date" title="2020-09-28 17:20:55">2020/09/28</span>
+        </a>
+        
+        <a  class="All Mybatis "
+           href="/2020/09/26/PageHelper%E5%88%86%E9%A1%B5/"
+           data-tag="Mybatis PageHelper"
+           data-author="" >
+            <span class="post-title" title="PageHelper分页">PageHelper分页</span>
+            <span class="post-date" title="2020-09-26 17:20:55">2020/09/26</span>
+        </a>
+        
+        <a  class="All Linux "
+           href="/2020/09/26/nginx%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%AE%8C%E7%BB%93%E7%AF%87/"
+           data-tag="Linux Nginx"
+           data-author="" >
+            <span class="post-title" title="Nginx配置反向代理和负载均衡">Nginx配置反向代理和负载均衡</span>
+            <span class="post-date" title="2020-09-26 17:20:55">2020/09/26</span>
+        </a>
+        
+        <a  class="All Mybatis "
+           href="/2020/09/26/%E6%89%8B%E5%86%99Mybatis%E6%A1%86%E6%9E%B6%EF%BC%8C%E5%89%96%E6%9E%90%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84%E5%8E%9F%E7%90%86/"
+           data-tag="Mybatis 手写框架"
+           data-author="" >
+            <span class="post-title" title="手写mybatis框架，剖析底层结构原理">手写mybatis框架，剖析底层结构原理</span>
+            <span class="post-date" title="2020-09-26 17:20:55">2020/09/26</span>
+        </a>
+        
+        <a  class="All Linux "
+           href="/2020/09/25/Linux%E6%90%AD%E5%BB%BAFastDFS%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E5%AE%9E%E7%8E%B0springboot%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%88%B0FastDFS%E6%9C%8D%E5%8A%A1%E5%99%A8/"
+           data-tag="Linux FastDFS"
+           data-author="" >
+            <span class="post-title" title="Linux搭建FastDFS文件服务器实现springboot上传文件到FastDFS服务器">Linux搭建FastDFS文件服务器实现springboot上传文件到FastDFS服务器</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All Linux "
+           href="/2020/09/25/Linux%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90GitLab%E5%92%8CGogs%E7%A7%81%E4%BA%BA%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E5%B9%B3%E5%8F%B0/"
+           data-tag="Linux Gitlab Gogs"
+           data-author="" >
+            <span class="post-title" title="Linux持续集成GitLab和Gogs私人代码托管平台">Linux持续集成GitLab和Gogs私人代码托管平台</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All Linux "
+           href="/2020/09/25/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85Nexus%E6%9E%84%E5%BB%BAmaven%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%EF%BC%88maven%E7%A7%81%E6%9C%8D%EF%BC%89/"
+           data-tag="Linux Nexus"
+           data-author="" >
+            <span class="post-title" title="Linux安装Nexus构建maven私有仓库">Linux安装Nexus构建maven私有仓库</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All 图片上传和下载 "
+           href="/2020/09/25/SpringBoot%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%92%8CIO%E6%B5%81%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"
+           data-tag="io流 上传 下载"
+           data-author="" >
+            <span class="post-title" title="springboot上传图片和IO流的基本操作">springboot上传图片和IO流的基本操作</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All java爬虫 "
+           href="/2020/09/25/WebMagic%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6%EF%BC%88%E7%88%AC%E5%8F%96%E5%89%8D%E7%A8%8B%E6%97%A0%E5%BF%A7%E7%BD%91%E7%AB%99%E7%9A%84%E6%8B%9B%E8%81%98%E4%BF%A1%E6%81%AF%E4%BF%9D%E5%AD%98%E5%88%B0mysql%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%89/"
+           data-tag="java爬虫"
+           data-author="" >
+            <span class="post-title" title="webmagic爬虫框架及其实战">webmagic爬虫框架及其实战</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All linux "
+           href="/2020/09/25/Xshell%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5Linux%E9%85%8D%E7%BD%AEjdk%E3%80%81tomcat%E3%80%81mysql%E3%80%81redis%E5%92%8Cnginx%EF%BC%88%E5%8F%AA%E7%AE%A1%E9%85%8D%E7%BD%AE%EF%BC%89/"
+           data-tag="linux tomcat mysql nginx"
+           data-author="" >
+            <span class="post-title" title="Linux配置jdk、tomcat、mysql、nginx">Linux配置jdk、tomcat、mysql、nginx</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All 图片上传和下载 "
+           href="/2020/09/25/javaWeb%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%92%8C%E4%B8%8B%E8%BD%BD/"
+           data-tag="上传 下载"
+           data-author="" >
+            <span class="post-title" title="JavaWeb文件上传和下载">JavaWeb文件上传和下载</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All java爬虫 "
+           href="/2020/09/25/Java%E7%88%AC%E8%99%AB%E7%9A%84%E5%BA%95%E5%B1%82%E5%8F%8A%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%EF%BC%88%E5%8F%AF%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E7%88%AC%E5%8F%96%E4%BA%AC%E4%B8%9C%E5%AE%98%E7%BD%91%E7%9A%84%E5%95%86%E5%93%81%E4%BF%A1%E6%81%AF%E6%95%B0%E6%8D%AE%E5%B9%B6%E4%BF%9D%E5%AD%98%E5%88%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%EF%BC%89/"
+           data-tag="java爬虫"
+           data-author="" >
+            <span class="post-title" title="Java爬虫的底层及实现过程">Java爬虫的底层及实现过程</span>
+            <span class="post-date" title="2020-09-25 17:20:55">2020/09/25</span>
+        </a>
+        
+        <a  class="All poi编程 "
+           href="/2020/09/24/POI%E5%AF%BC%E5%87%BAExcel%E8%A1%A8%E6%A0%BC/"
+           data-tag="poi编程"
+           data-author="" >
+            <span class="post-title" title="poi导出excel表格">poi导出excel表格</span>
+            <span class="post-date" title="2020-09-24 17:20:55">2020/09/24</span>
+        </a>
+        
+        <a  class="All poi编程 "
+           href="/2020/09/23/poi%E6%A0%B9%E6%8D%AEword%E5%92%8Cexcel%E6%A8%A1%E6%9D%BF%EF%BC%88%E4%B9%A6%E7%AD%BE%EF%BC%89%E5%88%9B%E5%BB%BA%E5%AF%BC%E5%87%BAword%E5%92%8Cexcel%E6%96%87%E6%A1%A3/"
+           data-tag="poi编程"
+           data-author="" >
+            <span class="post-title" title="poi根据word和excel模板创建导出word和excel">poi根据word和excel模板创建导出word和excel</span>
+            <span class="post-date" title="2020-09-23 17:20:55">2020/09/23</span>
+        </a>
+        
+        <a  class="All poi编程 "
+           href="/2020/09/22/POI%E8%A7%A3%E6%9E%90Excel%E8%A1%A8%E6%A0%BC/"
+           data-tag="poi编程"
+           data-author="" >
+            <span class="post-title" title="poi解析excel表格">poi解析excel表格</span>
+            <span class="post-date" title="2020-09-22 17:20:55">2020/09/22</span>
+        </a>
+        
+        <a  class="All socket编程 "
+           href="/2020/09/20/Socket%E7%BC%96%E7%A8%8B%EF%BC%88%E5%9C%A8%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%A8%A1%E6%8B%9F%E8%81%8A%E5%A4%A9%E5%8A%9F%E8%83%BD%EF%BC%89/"
+           data-tag="socket编程"
+           data-author="" >
+            <span class="post-title" title="socket编程">socket编程</span>
+            <span class="post-date" title="2020-09-20 17:20:55">2020/09/20</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/18/springboot---%E6%95%B4%E5%90%88druid%E8%BF%9E%E6%8E%A5%E6%B1%A0---%E8%BF%9E%E6%8E%A5oracle%E6%95%B0%E6%8D%AE%E5%BA%93---%E6%95%B4%E5%90%88mybatis---%E6%95%B4%E5%90%88thymeleaf---%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/"
+           data-tag="springboot druid oracle mybatis thymeleaf log"
+           data-author="" >
+            <span class="post-title" title="springboot集成druid、oracle、mybatis、thymeleaf、log">springboot集成druid、oracle、mybatis、thymeleaf、log</span>
+            <span class="post-date" title="2020-09-18 17:20:55">2020/09/18</span>
+        </a>
+        
+        <a  class="All socket编程 "
+           href="/2020/09/18/%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AATomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E7%AE%80%E6%98%93%E7%89%88%EF%BC%89/"
+           data-tag="socket编程"
+           data-author="" >
+            <span class="post-title" title="动手实现一个Tomcat服务器">动手实现一个Tomcat服务器</span>
+            <span class="post-date" title="2020-09-18 17:20:55">2020/09/18</span>
+        </a>
+        
+        <a  class="All 购物车 "
+           href="/2020/09/17/%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE%E8%B4%AD%E7%89%A9%E8%BD%A6%E7%9A%84%E5%AE%9E%E7%8E%B0/"
+           data-tag="购物车 session"
+           data-author="" >
+            <span class="post-title" title="商城项目购物车的实现">商城项目购物车的实现</span>
+            <span class="post-date" title="2020-09-17 17:20:55">2020/09/17</span>
+        </a>
+        
+        <a  class="All spring "
+           href="/2020/09/17/%E6%89%8B%E5%86%99Spring%E4%B9%8Bioc%E5%9F%BA%E4%BA%8Exml%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1/"
+           data-tag="spring springioc"
+           data-author="" >
+            <span class="post-title" title="手写spring之ioc基于xml动态创建对象">手写spring之ioc基于xml动态创建对象</span>
+            <span class="post-date" title="2020-09-17 17:20:55">2020/09/17</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/15/%E6%89%8B%E5%86%99springboot%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84starter%E6%BA%90%E7%A0%81/"
+           data-tag="springboot starter"
+           data-author="" >
+            <span class="post-title" title="手写springboot属于自己的starter源码">手写springboot属于自己的starter源码</span>
+            <span class="post-date" title="2020-09-15 17:20:55">2020/09/15</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/14/Spring%20Boot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8%20TrueLicense%20%E7%94%9F%E6%88%90%E5%92%8C%E9%AA%8C%E8%AF%81License%EF%BC%88%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%B8%E5%8F%AF%EF%BC%89/"
+           data-tag="springboot trueLicense"
+           data-author="" >
+            <span class="post-title" title="springboot集成trueLicense生成和验证license（服务器许可）">springboot集成trueLicense生成和验证license（服务器许可）</span>
+            <span class="post-date" title="2020-09-14 17:20:55">2020/09/14</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/11/springboot%E6%8D%95%E8%8E%B7%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%92%8C%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/"
+           data-tag="springboot 全局异常 多数据源"
+           data-author="" >
+            <span class="post-title" title="springboot捕获全局异常和配置多数据源">springboot捕获全局异常和配置多数据源</span>
+            <span class="post-date" title="2020-09-11 17:20:55">2020/09/11</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/09/springBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BC%82%E6%AD%A5%E8%B0%83%E7%94%A8/"
+           data-tag="springboot 定时任务 异步调用"
+           data-author="" >
+            <span class="post-title" title="springboot定时任务和异步调用">springboot定时任务和异步调用</span>
+            <span class="post-date" title="2020-09-09 17:20:55">2020/09/09</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/08/springboot%E5%A4%9A%E4%B8%AA%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/"
+           data-tag="springboot 多事务"
+           data-author="" >
+            <span class="post-title" title="springboot多个事务管理">springboot多个事务管理</span>
+            <span class="post-date" title="2020-09-08 17:20:55">2020/09/08</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/07/SpringBoot%E5%B7%A5%E7%A8%8B%E9%9B%86%E6%88%90Redis%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="springboot工程集成redis缓存机制">springboot工程集成redis缓存机制</span>
+            <span class="post-date" title="2020-09-07 17:20:55">2020/09/07</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/05/springboot%E9%9B%86%E6%88%90FreeMarker%E4%B8%80%E9%94%AE%E5%BC%8F%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E4%BB%A3%E7%A0%81/"
+           data-tag="freemarker"
+           data-author="" >
+            <span class="post-title" title="springboot集成freemarker一键式自动生成代码">springboot集成freemarker一键式自动生成代码</span>
+            <span class="post-date" title="2020-09-05 17:20:55">2020/09/05</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/03/springboot%E9%9B%86%E6%88%90jwt%E4%BB%A4%E7%89%8C%E3%80%90%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F%E3%80%91/"
+           data-tag="jwt token登录"
+           data-author="" >
+            <span class="post-title" title="springboot集成jwt令牌">springboot集成jwt令牌</span>
+            <span class="post-date" title="2020-09-03 17:20:55">2020/09/03</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/09/01/springboot%E9%9B%86%E6%88%90solr%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2%E7%B3%BB%E5%88%97/"
+           data-tag="solr"
+           data-author="" >
+            <span class="post-title" title="springboot集成solr实现全局搜索系列">springboot集成solr实现全局搜索系列</span>
+            <span class="post-date" title="2020-09-01 17:20:55">2020/09/01</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/08/30/springboot%E9%85%8D%E7%BD%AELog4j%E6%97%A5%E5%BF%97/"
+           data-tag="springboot log4j"
+           data-author="" >
+            <span class="post-title" title="springboot配置log4j日志">springboot配置log4j日志</span>
+            <span class="post-date" title="2020-08-30 17:20:55">2020/08/30</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/08/30/SpringBoot%E6%A1%86%E6%9E%B6%E7%94%A8%E6%B3%95%E8%A7%A3%E6%9E%90%E5%A4%A7%E5%85%A8/"
+           data-tag="springboot"
+           data-author="" >
+            <span class="post-title" title="springboot框架用法解析大全">springboot框架用法解析大全</span>
+            <span class="post-date" title="2020-08-30 17:20:55">2020/08/30</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/08/29/springboot%E5%AE%9E%E7%8E%B0%E5%88%86%E9%A1%B5/"
+           data-tag="分页"
+           data-author="" >
+            <span class="post-title" title="springboot实现分页">springboot实现分页</span>
+            <span class="post-date" title="2020-08-29 17:20:55">2020/08/29</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/08/27/springboot%E6%B7%BB%E5%8A%A0AOP%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/"
+           data-tag="springboot aop"
+           data-author="" >
+            <span class="post-title" title="springboot添加aop日志配置">springboot添加aop日志配置</span>
+            <span class="post-date" title="2020-08-27 17:20:55">2020/08/27</span>
+        </a>
+        
+        <a  class="All springboot "
+           href="/2020/08/25/SpringBoot%E6%95%B4%E5%90%88Elasticsearch+IK+Kibana/"
+           data-tag="springboot es"
+           data-author="" >
+            <span class="post-title" title="springboot集成elasticsearch、ik、kibana">springboot集成elasticsearch、ik、kibana</span>
+            <span class="post-date" title="2020-08-25 17:20:55">2020/08/25</span>
+        </a>
+        
+        <a  class="All springmvc "
+           href="/2020/08/25/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E5%B1%B1%E5%AF%A8%E7%89%88%E7%9A%84springmvc%E6%A1%86%E6%9E%B6/"
+           data-tag="springmvc 手写框架"
+           data-author="" >
+            <span class="post-title" title="手写一个山寨版的springmvc框架">手写一个山寨版的springmvc框架</span>
+            <span class="post-date" title="2020-08-25 17:20:55">2020/08/25</span>
+        </a>
+        
+        <a  class="All websocket编程 "
+           href="/2020/08/23/WebSocket%E5%AE%9E%E7%8E%B0%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%8A%9F%E8%83%BD/"
+           data-tag="websocket编程"
+           data-author="" >
+            <span class="post-title" title="websocket实现多人在线聊天功能">websocket实现多人在线聊天功能</span>
+            <span class="post-date" title="2020-08-23 17:20:55">2020/08/23</span>
+        </a>
+        
+        <a  class="All websocket编程 "
+           href="/2020/08/21/WebSocket%E5%AE%9E%E7%8E%B0%E5%AE%A2%E6%9C%8D%E5%9C%A8%E7%BA%BF%E5%AE%9E%E6%97%B6%E8%81%8A%E5%A4%A9%EF%BC%88%E5%8D%95%E8%81%8A%E6%A8%A1%E5%BC%8F%EF%BC%89/"
+           data-tag="websocket编程"
+           data-author="" >
+            <span class="post-title" title="websocket实现客服在线实时聊天">websocket实现客服在线实时聊天</span>
+            <span class="post-date" title="2020-08-21 17:20:55">2020/08/21</span>
+        </a>
+        
+        <a  class="All 代理模式 "
+           href="/2020/08/20/%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8C%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"
+           data-tag="代理模式"
+           data-author="" >
+            <span class="post-title" title="静态代理和动态代理的实现原理">静态代理和动态代理的实现原理</span>
+            <span class="post-date" title="2020-08-20 17:20:55">2020/08/20</span>
+        </a>
+        
+        <a  class="All sso "
+           href="/2020/08/17/%E6%89%8B%E5%86%99SSO%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/"
+           data-tag="sso"
+           data-author="" >
+            <span class="post-title" title="手写sso单点登录">手写sso单点登录</span>
+            <span class="post-date" title="2020-08-17 17:20:55">2020/08/17</span>
+        </a>
+        
+        <a  class="All 第三方接口 "
+           href="/2020/08/15/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E6%8E%A5%E5%8F%A3/"
+           data-tag="第三方接口"
+           data-author="" >
+            <span class="post-title" title="第三方短信验证接口">第三方短信验证接口</span>
+            <span class="post-date" title="2020-08-15 17:20:55">2020/08/15</span>
+        </a>
+        
+        <a  class="All 第三方接口 "
+           href="/2020/08/13/%E6%94%AF%E4%BB%98%E5%AE%9D%E5%9C%A8%E7%BA%BF%E6%94%AF%E4%BB%98%E6%8E%A5%E5%85%A5/"
+           data-tag="第三方接口"
+           data-author="" >
+            <span class="post-title" title="支付宝在线支付接入">支付宝在线支付接入</span>
+            <span class="post-date" title="2020-08-13 17:20:55">2020/08/13</span>
+        </a>
+        
+        <a  class="All activiti工作流 "
+           href="/2020/08/10/Activiti%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/"
+           data-tag="activiti工作流"
+           data-author="" >
+            <span class="post-title" title="activiti工作流的正确打开方式">activiti工作流的正确打开方式</span>
+            <span class="post-date" title="2020-08-10 17:20:55">2020/08/10</span>
+        </a>
+        
+        <a  class="All cache "
+           href="/2020/08/09/Cache%E7%BC%93%E5%AD%98%E5%AD%97%E5%85%B8%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0/"
+           data-tag="cache"
+           data-author="" >
+            <span class="post-title" title="cache缓存字典的原理和实现">cache缓存字典的原理和实现</span>
+            <span class="post-date" title="2020-08-09 17:20:55">2020/08/09</span>
+        </a>
+        
+        <a  class="All 加密与安全 "
+           href="/2020/08/01/%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AE%89%E5%85%A8/"
+           data-tag="加密与安全"
+           data-author="" >
+            <span class="post-title" title="加密与安全">加密与安全</span>
+            <span class="post-date" title="2020-08-01 17:20:55">2020/08/01</span>
+        </a>
+        
+        <a  class="All 冷知识 "
+           href="/2020/07/31/%EF%BC%88Java%EF%BC%89%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/"
+           data-tag="冷知识"
+           data-author="" >
+            <span class="post-title" title="java链接生成二维码">java链接生成二维码</span>
+            <span class="post-date" title="2020-07-31 17:20:55">2020/07/31</span>
+        </a>
+        
+        <a  class="All 冷知识 "
+           href="/2020/07/30/%E5%8A%A8%E6%89%8B%E5%81%9A%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/"
+           data-tag="冷知识"
+           data-author="" >
+            <span class="post-title" title="动手做一个文件服务器">动手做一个文件服务器</span>
+            <span class="post-date" title="2020-07-30 17:20:55">2020/07/30</span>
+        </a>
+        
+        <a  class="All 冷知识 "
+           href="/2020/07/29/%E4%BB%BFQQ%E5%BC%82%E5%9C%B0%E7%99%BB%E5%BD%95%E8%A2%AB%E8%BF%AB%E4%B8%8B%E7%BA%BF%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0/"
+           data-tag="冷知识"
+           data-author="" >
+            <span class="post-title" title="仿qq异地登录被迫下线功能的实现">仿qq异地登录被迫下线功能的实现</span>
+            <span class="post-date" title="2020-07-29 17:20:55">2020/07/29</span>
+        </a>
+        
+        <a  class="All 冷知识 "
+           href="/2020/07/28/%E5%9B%BE%E7%89%87%E5%9C%A8%E7%BA%BF%E9%A2%84%E8%A7%88%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/"
+           data-tag="冷知识"
+           data-author="" >
+            <span class="post-title" title="图片在线预览的简单实现">图片在线预览的简单实现</span>
+            <span class="post-date" title="2020-07-28 17:20:55">2020/07/28</span>
+        </a>
+        
+        <a  class="All 冷知识 "
+           href="/2020/07/25/java%E5%BC%80%E5%8F%913~5%E5%B9%B4%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%AF%8F%E6%97%A5%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/"
+           data-tag="冷知识"
+           data-author="" >
+            <span class="post-title" title="java开发3-5年工作经验面试题">java开发3-5年工作经验面试题</span>
+            <span class="post-date" title="2020-07-25 17:20:55">2020/07/25</span>
+        </a>
+        
+        <a  class="All 冷知识 "
+           href="/2020/07/24/JavaEmail%E5%8F%91%E9%80%81%E7%BD%91%E6%98%93163%E9%82%AE%E7%AE%B1%E5%92%8CQQ%E9%82%AE%E7%AE%B1/"
+           data-tag="冷知识"
+           data-author="" >
+            <span class="post-title" title="JavaEmail发送网易163邮箱和qq邮箱">JavaEmail发送网易163邮箱和qq邮箱</span>
+            <span class="post-date" title="2020-07-24 17:20:55">2020/07/24</span>
+        </a>
+        
+        <a  class="All 连接池 "
+           href="/2020/07/23/c3p0%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%95%B4%E5%90%88jdbc/"
+           data-tag="c3p0连接池"
+           data-author="" >
+            <span class="post-title" title="c3p0连接池集成jdbc">c3p0连接池集成jdbc</span>
+            <span class="post-date" title="2020-07-23 17:20:55">2020/07/23</span>
+        </a>
+        
+        <a  class="All 前端框架 "
+           href="/2020/07/23/vue-cli%E8%84%9A%E6%89%8B%E6%9E%B6%E6%95%99%E7%A8%8B/"
+           data-tag="vue-cli脚手架"
+           data-author="" >
+            <span class="post-title" title="vue-cli脚手架教程">vue-cli脚手架教程</span>
+            <span class="post-date" title="2020-07-23 17:20:55">2020/07/23</span>
+        </a>
+        
+        <a  class="All 模板引擎 "
+           href="/2020/07/17/thymeleaf%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/"
+           data-tag="thymeleaf"
+           data-author="" >
+            <span class="post-title" title="thymeleaf模板引擎">thymeleaf模板引擎</span>
+            <span class="post-date" title="2020-07-17 17:20:55">2020/07/17</span>
+        </a>
+        
+        <a  class="All 数据库 "
+           href="/2020/07/13/%E9%A1%B9%E7%9B%AE%E4%BB%8EOracle%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E5%88%B0GBase%E6%95%B0%E6%8D%AE%E5%BA%93%E6%97%B6%E8%A7%A3%E5%86%B3%E9%80%82%E9%85%8D%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"
+           data-tag="oracle gbase"
+           data-author="" >
+            <span class="post-title" title="项目从oracle数据库迁移到gbase数据库时解决适配遇到的问题">项目从oracle数据库迁移到gbase数据库时解决适配遇到的问题</span>
+            <span class="post-date" title="2020-07-13 17:20:55">2020/07/13</span>
+        </a>
+        
+        <a  class="All 数据库 "
+           href="/2020/07/05/BDP%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E4%BD%BF%E7%94%A8/"
+           data-tag="BDP数据库事务"
+           data-author="" >
+            <span class="post-title" title="BDP数据库事务的使用">BDP数据库事务的使用</span>
+            <span class="post-date" title="2020-07-05 17:20:55">2020/07/05</span>
+        </a>
+        
+        <a  class="All 数据库 "
+           href="/2020/07/04/Mysql%E5%87%BD%E6%95%B0/"
+           data-tag="mysql函数"
+           data-author="" >
+            <span class="post-title" title="mysql函数">mysql函数</span>
+            <span class="post-date" title="2020-07-04 17:20:55">2020/07/04</span>
+        </a>
+        
+        <a  class="All 数据库 "
+           href="/2020/07/03/Oracle%E5%87%BD%E6%95%B0/"
+           data-tag="oracle函数"
+           data-author="" >
+            <span class="post-title" title="oracle函数">oracle函数</span>
+            <span class="post-date" title="2020-07-03 17:20:55">2020/07/03</span>
+        </a>
+        
+        <a  class="All 微服务 "
+           href="/2020/07/01/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/"
+           data-tag="springcloud"
+           data-author="" >
+            <span class="post-title" title="深入学习springcloud微服务">深入学习springcloud微服务</span>
+            <span class="post-date" title="2020-07-01 17:20:55">2020/07/01</span>
+        </a>
+        
+        <a  class="All rabbitmq "
+           href="/2020/06/28/springboot%E9%9B%86%E6%88%90rabbitmq%E5%95%86%E5%93%81%E7%A7%92%E6%9D%80%E4%B8%9A%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E6%B5%81%E9%87%8F%E5%89%8A%E5%B3%B0%EF%BC%89/"
+           data-tag="springboot rabbitmq"
+           data-author="" >
+            <span class="post-title" title="springboot集成rabbitmq商品秒杀业务实战">springboot集成rabbitmq商品秒杀业务实战</span>
+            <span class="post-date" title="2020-06-28 17:20:55">2020/06/28</span>
+        </a>
+        
+        <a  class="All rabbitmq "
+           href="/2020/06/24/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0SpringBoot%E9%9B%86%E6%88%90%E6%B6%88%E6%81%AF%E6%9C%8D%E5%8A%A1%E4%B8%AD%E9%97%B4%E4%BB%B6RabbitMQ/"
+           data-tag="springboot rabbitmq"
+           data-author="" >
+            <span class="post-title" title="手把手教你springboot集成消息服务中间件">手把手教你springboot集成消息服务中间件</span>
+            <span class="post-date" title="2020-06-24 17:20:55">2020/06/24</span>
+        </a>
+        
+        <a  class="All 远程调用 "
+           href="/2020/06/18/HttpClient%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%8E%A5%E5%8F%A3%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/"
+           data-tag="httpclient"
+           data-author="" >
+            <span class="post-title" title="httpclient远程调用另一个项目的接口查询数据">httpclient远程调用另一个项目的接口查询数据</span>
+            <span class="post-date" title="2020-06-18 17:20:55">2020/06/18</span>
+        </a>
+        
+        <a  class="All 远程调用 "
+           href="/2020/06/17/RestTemplate%E5%8F%91%E9%80%81%E8%BF%9C%E7%A8%8B%E8%AF%B7%E6%B1%82/"
+           data-tag="restTemplate"
+           data-author="" >
+            <span class="post-title" title="restTemplate发送远程请求">restTemplate发送远程请求</span>
+            <span class="post-date" title="2020-06-17 17:20:55">2020/06/17</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-角色权限分配（参考毕设酒店管理系统）" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">角色权限分配（参考毕设酒店管理系统）</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="权限">权限</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">权限分配</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2020-11-05 15:37:55'>2020-11-05 15:36</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%A4%A7%E5%9D%97-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E8%AE%BE%E8%AE%A1"><span class="toc-text">第一大块 数据库表设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#emp%E8%A1%A8"><span class="toc-text">emp表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tb-dept-power%E8%A1%A8"><span class="toc-text">tb_dept_power表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tb-power%E8%A1%A8"><span class="toc-text">tb_power表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%A4%A7%E5%9D%97-%E6%9D%83%E9%99%90%E5%88%86%E9%85%8D%EF%BC%88%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8D%E5%90%8C%E7%99%BB%E5%BD%95%E5%B1%95%E7%A4%BA%E8%8F%9C%E5%8D%95%E4%B8%8D%E5%90%8C%EF%BC%8C%E5%B9%B6%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E6%9D%83%E9%99%90%EF%BC%89"><span class="toc-text">第二大块 权限分配（用户身份不同登录展示菜单不同，并动态分配权限）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E5%86%99%E6%9D%83%E9%99%90%E8%A1%A8%E7%9A%84%E5%AE%9E%E4%BD%93%E7%B1%BBTreeNode"><span class="toc-text">先写权限表的实体类TreeNode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E5%8F%B0%E7%9A%84easyUI%E6%A0%91%EF%BC%8C%E8%B7%AF%E5%BE%84%E6%98%AFpower-tree-do"><span class="toc-text">前台的easyUI树，路径是power&#x2F;tree.do</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#controller%E5%8E%BB%E5%90%8E%E5%8F%B0%E6%8B%BF%E6%9D%83%E9%99%90%E6%A0%91%E7%9A%84%E7%BB%93%E7%82%B9%E4%BF%A1%E6%81%AF%EF%BC%8C%E5%9C%A8%E6%9D%83%E9%99%90%E8%A1%A8%E9%87%8C%E9%9D%A2"><span class="toc-text">controller去后台拿权限树的结点信息，在权限表里面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#powerService-getPowerList%E6%96%B9%E6%B3%95"><span class="toc-text">powerService.getPowerList方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E7%BB%91%E5%AE%9A%E5%AD%90%E8%8A%82%E7%82%B9%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">递归绑定子节点的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#powerDao-getPowerList%E6%96%B9%E6%B3%95"><span class="toc-text">powerDao.getPowerList方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E9%83%A8%E9%97%A8%E8%A1%A8%E4%B8%AD%E5%AF%B9%E9%83%A8%E9%97%A8%E8%BF%9B%E8%A1%8C%E6%8E%88%E6%9D%83%E6%93%8D%E4%BD%9C"><span class="toc-text">在部门表中对部门进行授权操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E4%B8%AD%E6%9F%90%E4%B8%80%E4%B8%AA%E9%83%A8%E9%97%A8%E7%9A%84%E4%B8%80%E8%A1%8C%EF%BC%8C%E7%84%B6%E5%90%8E%E8%BF%9B%E8%A1%8C%E6%B7%BB%E5%8A%A0%E6%9D%83%E9%99%90"><span class="toc-text">选中某一个部门的一行，然后进行添加权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E6%B7%BB%E5%8A%A0%E6%9D%83%E9%99%90%E6%8C%89%E9%92%AE%E5%BC%B9%E5%87%BA%E7%9A%84%E8%A1%A8%E5%8D%95%E6%A1%86%EF%BC%88%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0%E3%80%81%E6%9D%83%E9%99%90%E9%80%89%E6%8B%A9%EF%BC%89"><span class="toc-text">点击添加权限按钮弹出的表单框（部门名称、权限选择）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E6%B7%BB%E5%8A%A0%E6%9D%83%E9%99%90%E6%8C%89%E9%92%AE%E7%9A%84onclick%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">点击添加权限按钮的onclick的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5power-checkedTree%E7%9A%84controller%E6%96%B9%E6%B3%95%EF%BC%8C%E6%A0%B9%E6%8D%AE%E9%83%A8%E9%97%A8%E7%BC%96%E5%8F%B7%E7%BB%99%E6%A0%91%E6%B7%BB%E5%8A%A0url"><span class="toc-text">进入power&#x2F;checkedTree的controller方法，根据部门编号给树添加url</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#service%E5%B1%82%E7%9A%84getCheckedList%E6%96%B9%E6%B3%95"><span class="toc-text">service层的getCheckedList方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dao%E5%B1%82%E7%9A%84getCheckedList%E6%96%B9%E6%B3%95"><span class="toc-text">dao层的getCheckedList方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E5%AF%B9%E9%83%A8%E9%97%A8%E7%9A%84%E6%8E%88%E6%9D%83"><span class="toc-text">保存对部门的授权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#power-saveRoleAndPower%E4%BF%9D%E5%AD%98%E6%8E%88%E6%9D%83%E7%9A%84controller%E6%96%B9%E6%B3%95"><span class="toc-text">power&#x2F;saveRoleAndPower保存授权的controller方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#saveRoleAndPower%E4%BF%9D%E5%AD%98%E6%9D%83%E9%99%90%E7%9A%84service%E6%96%B9%E6%B3%95"><span class="toc-text">saveRoleAndPower保存权限的service方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#powerDao-deletePowersByRoleId-deptno-%EF%BC%8C%E5%88%A0%E9%99%A4%E6%89%80%E6%9C%89%E5%8E%9F%E6%9D%A5%E8%AF%A5%E8%A7%92%E8%89%B2%E5%85%B3%E8%81%94%E7%9A%84%E6%89%80%E6%9C%89%E6%9D%83%E9%99%90ID%EF%BC%8C%E8%BE%BE%E5%88%B0%E6%9B%B4%E6%96%B0%E7%9B%AE%E7%9A%84"><span class="toc-text">powerDao.deletePowersByRoleId(deptno)，删除所有原来该角色关联的所有权限ID，达到更新目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#powerDao-addRoleAndPowers-deptno-powerId-%E5%88%86%E5%89%B2%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%BE%AA%E7%8E%AF%E6%B7%BB%E5%8A%A0%E6%9D%83%E9%99%90"><span class="toc-text">powerDao.addRoleAndPowers(deptno, powerId)分割字符串，循环添加权限</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E5%A4%A7%E5%9D%97-Tree%E8%8A%82%E7%82%B9%E6%B7%BB%E5%8A%A0%EF%BC%88%E5%AF%B9%E6%A0%91%E8%8A%82%E7%82%B9%E8%BF%9B%E8%A1%8C%E6%93%8D%E4%BD%9C%EF%BC%89"><span class="toc-text">第三大块 Tree节点添加（对树节点进行操作）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%A0%91%E8%8A%82%E7%82%B9%E7%9A%84%E9%A1%B5%E9%9D%A2"><span class="toc-text">添加树节点的页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E8%8A%82%E7%82%B9%E7%9A%84input%E6%A1%86%E5%8E%BB%E5%8A%A0%E8%BD%BDtree"><span class="toc-text">父节点的input框去加载tree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#add%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9%E7%9A%84controller%E6%96%B9%E6%B3%95"><span class="toc-text">add添加节点的controller方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#add%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9%E7%9A%84service%E6%96%B9%E6%B3%95"><span class="toc-text">add添加节点的service方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#add%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9%E7%9A%84dao%E6%96%B9%E6%B3%95"><span class="toc-text">add添加节点的dao方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E5%A4%A7%E5%9D%97-Tree%E8%8A%82%E7%82%B9%E4%BF%A1%E6%81%AF%E4%BF%AE%E6%94%B9%EF%BC%88%E5%90%8C%E6%A0%B7%E4%B9%9F%E6%98%AF%E5%AF%B9%E6%A0%91%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C%EF%BC%89"><span class="toc-text">第四大块 Tree节点信息修改（同样也是对树节点操作）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%A0%91%E8%8A%82%E7%82%B9%E7%9A%84%E9%A1%B5%E9%9D%A2"><span class="toc-text">修改树节点的页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toUpdate%E4%BF%AE%E6%94%B9%E8%8A%82%E7%82%B9%E7%9A%84controller%E6%96%B9%E6%B3%95"><span class="toc-text">toUpdate修改节点的controller方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#service%E7%9A%84powerService-getListById-id-%E6%96%B9%E6%B3%95"><span class="toc-text">service的powerService.getListById(id)方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dao%E7%9A%84powerService-getListById-id-%E6%96%B9%E6%B3%95"><span class="toc-text">dao的powerService.getListById(id)方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%B3%E8%BD%AC%E5%88%B0%E6%9B%B4%E6%96%B0%E8%8A%82%E7%82%B9%E4%BF%A1%E6%81%AF%E7%9A%84%E9%A1%B5%E9%9D%A2%EF%BC%8C%E6%8A%8A%E4%BF%A1%E6%81%AF%E5%B8%A6%E8%BF%87%E5%8E%BB"><span class="toc-text">跳转到更新节点信息的页面，把信息带过去</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#js%E5%88%A4%E6%96%AD%E8%AF%A5%E8%8A%82%E7%82%B9%E4%B8%8B%E9%9D%A2%E6%98%AF%E5%90%A6%E6%9C%89%E5%AD%90%E8%8A%82%E7%82%B9"><span class="toc-text">js判断该节点下面是否有子节点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E8%AE%A4%E4%BF%AE%E6%94%B9%E8%8A%82%E7%82%B9%E4%BF%A1%E6%81%AF%EF%BC%8C%E6%8F%90%E4%BA%A4%E8%A1%A8%E5%8D%95%EF%BC%8C%E8%B7%AF%E5%BE%84power-update"><span class="toc-text">确认修改节点信息，提交表单，路径power&#x2F;update</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#service%E7%9A%84update%E6%96%B9%E6%B3%95"><span class="toc-text">service的update方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dao%E7%9A%84update%E6%96%B9%E6%B3%95"><span class="toc-text">dao的update方法</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E5%A4%A7%E5%9D%97-%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9"><span class="toc-text">第五大块 删除节点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%E7%9A%84controller%E6%96%B9%E6%B3%95"><span class="toc-text">删除节点的controller方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%E7%9A%84service%E6%96%B9%E6%B3%95"><span class="toc-text">删除节点的service方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%E7%9A%84dao%E6%96%B9%E6%B3%95"><span class="toc-text">删除节点的dao方法</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%A4%A7%E5%9D%97-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E8%AE%BE%E8%AE%A1"><span class="toc-text">第一大块 数据库表设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#emp%E8%A1%A8"><span class="toc-text">emp表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tb-dept-power%E8%A1%A8"><span class="toc-text">tb_dept_power表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tb-power%E8%A1%A8"><span class="toc-text">tb_power表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%A4%A7%E5%9D%97-%E6%9D%83%E9%99%90%E5%88%86%E9%85%8D%EF%BC%88%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8D%E5%90%8C%E7%99%BB%E5%BD%95%E5%B1%95%E7%A4%BA%E8%8F%9C%E5%8D%95%E4%B8%8D%E5%90%8C%EF%BC%8C%E5%B9%B6%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E6%9D%83%E9%99%90%EF%BC%89"><span class="toc-text">第二大块 权限分配（用户身份不同登录展示菜单不同，并动态分配权限）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E5%86%99%E6%9D%83%E9%99%90%E8%A1%A8%E7%9A%84%E5%AE%9E%E4%BD%93%E7%B1%BBTreeNode"><span class="toc-text">先写权限表的实体类TreeNode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E5%8F%B0%E7%9A%84easyUI%E6%A0%91%EF%BC%8C%E8%B7%AF%E5%BE%84%E6%98%AFpower-tree-do"><span class="toc-text">前台的easyUI树，路径是power&#x2F;tree.do</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#controller%E5%8E%BB%E5%90%8E%E5%8F%B0%E6%8B%BF%E6%9D%83%E9%99%90%E6%A0%91%E7%9A%84%E7%BB%93%E7%82%B9%E4%BF%A1%E6%81%AF%EF%BC%8C%E5%9C%A8%E6%9D%83%E9%99%90%E8%A1%A8%E9%87%8C%E9%9D%A2"><span class="toc-text">controller去后台拿权限树的结点信息，在权限表里面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#powerService-getPowerList%E6%96%B9%E6%B3%95"><span class="toc-text">powerService.getPowerList方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E7%BB%91%E5%AE%9A%E5%AD%90%E8%8A%82%E7%82%B9%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">递归绑定子节点的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#powerDao-getPowerList%E6%96%B9%E6%B3%95"><span class="toc-text">powerDao.getPowerList方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E9%83%A8%E9%97%A8%E8%A1%A8%E4%B8%AD%E5%AF%B9%E9%83%A8%E9%97%A8%E8%BF%9B%E8%A1%8C%E6%8E%88%E6%9D%83%E6%93%8D%E4%BD%9C"><span class="toc-text">在部门表中对部门进行授权操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E4%B8%AD%E6%9F%90%E4%B8%80%E4%B8%AA%E9%83%A8%E9%97%A8%E7%9A%84%E4%B8%80%E8%A1%8C%EF%BC%8C%E7%84%B6%E5%90%8E%E8%BF%9B%E8%A1%8C%E6%B7%BB%E5%8A%A0%E6%9D%83%E9%99%90"><span class="toc-text">选中某一个部门的一行，然后进行添加权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E6%B7%BB%E5%8A%A0%E6%9D%83%E9%99%90%E6%8C%89%E9%92%AE%E5%BC%B9%E5%87%BA%E7%9A%84%E8%A1%A8%E5%8D%95%E6%A1%86%EF%BC%88%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0%E3%80%81%E6%9D%83%E9%99%90%E9%80%89%E6%8B%A9%EF%BC%89"><span class="toc-text">点击添加权限按钮弹出的表单框（部门名称、权限选择）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E6%B7%BB%E5%8A%A0%E6%9D%83%E9%99%90%E6%8C%89%E9%92%AE%E7%9A%84onclick%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">点击添加权限按钮的onclick的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5power-checkedTree%E7%9A%84controller%E6%96%B9%E6%B3%95%EF%BC%8C%E6%A0%B9%E6%8D%AE%E9%83%A8%E9%97%A8%E7%BC%96%E5%8F%B7%E7%BB%99%E6%A0%91%E6%B7%BB%E5%8A%A0url"><span class="toc-text">进入power&#x2F;checkedTree的controller方法，根据部门编号给树添加url</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#service%E5%B1%82%E7%9A%84getCheckedList%E6%96%B9%E6%B3%95"><span class="toc-text">service层的getCheckedList方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dao%E5%B1%82%E7%9A%84getCheckedList%E6%96%B9%E6%B3%95"><span class="toc-text">dao层的getCheckedList方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E5%AF%B9%E9%83%A8%E9%97%A8%E7%9A%84%E6%8E%88%E6%9D%83"><span class="toc-text">保存对部门的授权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#power-saveRoleAndPower%E4%BF%9D%E5%AD%98%E6%8E%88%E6%9D%83%E7%9A%84controller%E6%96%B9%E6%B3%95"><span class="toc-text">power&#x2F;saveRoleAndPower保存授权的controller方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#saveRoleAndPower%E4%BF%9D%E5%AD%98%E6%9D%83%E9%99%90%E7%9A%84service%E6%96%B9%E6%B3%95"><span class="toc-text">saveRoleAndPower保存权限的service方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#powerDao-deletePowersByRoleId-deptno-%EF%BC%8C%E5%88%A0%E9%99%A4%E6%89%80%E6%9C%89%E5%8E%9F%E6%9D%A5%E8%AF%A5%E8%A7%92%E8%89%B2%E5%85%B3%E8%81%94%E7%9A%84%E6%89%80%E6%9C%89%E6%9D%83%E9%99%90ID%EF%BC%8C%E8%BE%BE%E5%88%B0%E6%9B%B4%E6%96%B0%E7%9B%AE%E7%9A%84"><span class="toc-text">powerDao.deletePowersByRoleId(deptno)，删除所有原来该角色关联的所有权限ID，达到更新目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#powerDao-addRoleAndPowers-deptno-powerId-%E5%88%86%E5%89%B2%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%BE%AA%E7%8E%AF%E6%B7%BB%E5%8A%A0%E6%9D%83%E9%99%90"><span class="toc-text">powerDao.addRoleAndPowers(deptno, powerId)分割字符串，循环添加权限</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E5%A4%A7%E5%9D%97-Tree%E8%8A%82%E7%82%B9%E6%B7%BB%E5%8A%A0%EF%BC%88%E5%AF%B9%E6%A0%91%E8%8A%82%E7%82%B9%E8%BF%9B%E8%A1%8C%E6%93%8D%E4%BD%9C%EF%BC%89"><span class="toc-text">第三大块 Tree节点添加（对树节点进行操作）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%A0%91%E8%8A%82%E7%82%B9%E7%9A%84%E9%A1%B5%E9%9D%A2"><span class="toc-text">添加树节点的页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E8%8A%82%E7%82%B9%E7%9A%84input%E6%A1%86%E5%8E%BB%E5%8A%A0%E8%BD%BDtree"><span class="toc-text">父节点的input框去加载tree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#add%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9%E7%9A%84controller%E6%96%B9%E6%B3%95"><span class="toc-text">add添加节点的controller方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#add%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9%E7%9A%84service%E6%96%B9%E6%B3%95"><span class="toc-text">add添加节点的service方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#add%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9%E7%9A%84dao%E6%96%B9%E6%B3%95"><span class="toc-text">add添加节点的dao方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E5%A4%A7%E5%9D%97-Tree%E8%8A%82%E7%82%B9%E4%BF%A1%E6%81%AF%E4%BF%AE%E6%94%B9%EF%BC%88%E5%90%8C%E6%A0%B7%E4%B9%9F%E6%98%AF%E5%AF%B9%E6%A0%91%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C%EF%BC%89"><span class="toc-text">第四大块 Tree节点信息修改（同样也是对树节点操作）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%A0%91%E8%8A%82%E7%82%B9%E7%9A%84%E9%A1%B5%E9%9D%A2"><span class="toc-text">修改树节点的页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toUpdate%E4%BF%AE%E6%94%B9%E8%8A%82%E7%82%B9%E7%9A%84controller%E6%96%B9%E6%B3%95"><span class="toc-text">toUpdate修改节点的controller方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#service%E7%9A%84powerService-getListById-id-%E6%96%B9%E6%B3%95"><span class="toc-text">service的powerService.getListById(id)方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dao%E7%9A%84powerService-getListById-id-%E6%96%B9%E6%B3%95"><span class="toc-text">dao的powerService.getListById(id)方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%B3%E8%BD%AC%E5%88%B0%E6%9B%B4%E6%96%B0%E8%8A%82%E7%82%B9%E4%BF%A1%E6%81%AF%E7%9A%84%E9%A1%B5%E9%9D%A2%EF%BC%8C%E6%8A%8A%E4%BF%A1%E6%81%AF%E5%B8%A6%E8%BF%87%E5%8E%BB"><span class="toc-text">跳转到更新节点信息的页面，把信息带过去</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#js%E5%88%A4%E6%96%AD%E8%AF%A5%E8%8A%82%E7%82%B9%E4%B8%8B%E9%9D%A2%E6%98%AF%E5%90%A6%E6%9C%89%E5%AD%90%E8%8A%82%E7%82%B9"><span class="toc-text">js判断该节点下面是否有子节点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E8%AE%A4%E4%BF%AE%E6%94%B9%E8%8A%82%E7%82%B9%E4%BF%A1%E6%81%AF%EF%BC%8C%E6%8F%90%E4%BA%A4%E8%A1%A8%E5%8D%95%EF%BC%8C%E8%B7%AF%E5%BE%84power-update"><span class="toc-text">确认修改节点信息，提交表单，路径power&#x2F;update</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#service%E7%9A%84update%E6%96%B9%E6%B3%95"><span class="toc-text">service的update方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dao%E7%9A%84update%E6%96%B9%E6%B3%95"><span class="toc-text">dao的update方法</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E5%A4%A7%E5%9D%97-%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9"><span class="toc-text">第五大块 删除节点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%E7%9A%84controller%E6%96%B9%E6%B3%95"><span class="toc-text">删除节点的controller方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%E7%9A%84service%E6%96%B9%E6%B3%95"><span class="toc-text">删除节点的service方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%E7%9A%84dao%E6%96%B9%E6%B3%95"><span class="toc-text">删除节点的dao方法</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div></p>
+<h1 id="第一大块-数据库表设计"><a href="#第一大块-数据库表设计" class="headerlink" title="第一大块 数据库表设计"></a>第一大块 数据库表设计</h1><p>最基本的实现权限树分配的话是需要三张表就可以了，企业级项目的实现权限树需要设计五张六张的也有，那种逻辑关系也就相当复杂了，可是要实现的话，三张足矣！</p>
+<ul>
+<li>emp表</li>
+<li>tb_dept_power部门权限关联表</li>
+<li>tb_power权限表</li>
+</ul>
+<p>查询权限的关键sql，表示查询登录的员工在权限表中所对应的权限信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">id</span>,<span class="keyword">name</span>,parentid,state,iconcls,<span class="keyword">url</span> <span class="keyword">from</span> tb_power  <span class="keyword">where</span> <span class="keyword">id</span> <span class="keyword">in</span> (<span class="keyword">select</span> powerid <span class="keyword">from</span> tb_dept_power <span class="keyword">where</span> deptno=(<span class="keyword">select</span> deptno <span class="keyword">from</span> emp <span class="keyword">where</span> empno=?))</span><br></pre></td></tr></table></figure>
+
+<p>首先是<code>emp</code>员工表,后台系统是员工进行登录，在登录之后记下员工的部门编号（每个员工），然后根据部门编号在<code>tb_dept_power</code>部门权限关联表中查询该部门拥有的权限<code>powerId</code>，再根据权限<code>powerId</code>在<code>tb_power</code>权限表中查询所对应的节点信息。</p>
+<h3 id="emp表"><a href="#emp表" class="headerlink" title="emp表"></a>emp表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`NewTable`</span> (</span><br><span class="line"><span class="string">`empid`</span>  <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">&#x27;员工序号&#x27;</span> ,</span><br><span class="line"><span class="string">`empno`</span>  <span class="built_in">varchar</span>(<span class="number">30</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;员工编号&#x27;</span> ,</span><br><span class="line"><span class="string">`empname`</span>  <span class="built_in">varchar</span>(<span class="number">25</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;员工姓名&#x27;</span> ,</span><br><span class="line"><span class="string">`empage`</span>  <span class="built_in">int</span>(<span class="number">10</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;员工年龄&#x27;</span> ,</span><br><span class="line"><span class="string">`empsex`</span>  <span class="built_in">varchar</span>(<span class="number">25</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;员工性别&#x27;</span> ,</span><br><span class="line"><span class="string">`deptno`</span>  <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;部门号&#x27;</span> ,</span><br><span class="line"><span class="string">`password`</span>  <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> ,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`empid`</span>),</span><br><span class="line"><span class="keyword">INDEX</span> <span class="string">`fk_deptid_dept_id`</span> (<span class="string">`deptno`</span>) <span class="keyword">USING</span> BTREE </span><br><span class="line">)</span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line"><span class="keyword">DEFAULT</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_general_ci</span><br><span class="line">AUTO_INCREMENT=<span class="number">45</span></span><br><span class="line">ROW_FORMAT=DYNAMIC</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+
+<h3 id="tb-dept-power表"><a href="#tb-dept-power表" class="headerlink" title="tb_dept_power表"></a>tb_dept_power表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`NewTable`</span> (</span><br><span class="line"><span class="string">`id`</span>  <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">&#x27;id&#x27;</span> ,</span><br><span class="line"><span class="string">`deptno`</span>  <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;部门编号&#x27;</span> ,</span><br><span class="line"><span class="string">`powerid`</span>  <span class="built_in">int</span>(<span class="number">15</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;权限id&#x27;</span> ,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line"><span class="keyword">DEFAULT</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_general_ci</span><br><span class="line">AUTO_INCREMENT=<span class="number">638</span></span><br><span class="line">ROW_FORMAT=DYNAMIC</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+
+<h3 id="tb-power表"><a href="#tb-power表" class="headerlink" title="tb_power表"></a>tb_power表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`NewTable`</span> (</span><br><span class="line"><span class="string">`id`</span>  <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT ,</span><br><span class="line"><span class="string">`name`</span>  <span class="built_in">varchar</span>(<span class="number">30</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;权限菜单名称&#x27;</span> ,</span><br><span class="line"><span class="string">`parentid`</span>  <span class="built_in">int</span>(<span class="number">11</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;父节点ID&#x27;</span> ,</span><br><span class="line"><span class="string">`state`</span>  <span class="built_in">varchar</span>(<span class="number">20</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;状态（打开或者关闭）&#x27;</span> ,</span><br><span class="line"><span class="string">`iconcls`</span>  <span class="built_in">varchar</span>(<span class="number">20</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;节点图标&#x27;</span> ,</span><br><span class="line"><span class="string">`url`</span>  <span class="built_in">varchar</span>(<span class="number">200</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;请求地址&#x27;</span> ,</span><br><span class="line"><span class="string">`addtime`</span>  <span class="built_in">date</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;添加时间&#x27;</span> ,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line"><span class="keyword">DEFAULT</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_general_ci</span><br><span class="line">AUTO_INCREMENT=<span class="number">85</span></span><br><span class="line">ROW_FORMAT=DYNAMIC</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+
+<h1 id="第二大块-权限分配（用户身份不同登录展示菜单不同，并动态分配权限）"><a href="#第二大块-权限分配（用户身份不同登录展示菜单不同，并动态分配权限）" class="headerlink" title="第二大块 权限分配（用户身份不同登录展示菜单不同，并动态分配权限）"></a>第二大块 权限分配（用户身份不同登录展示菜单不同，并动态分配权限）</h1><h2 id="先写权限表的实体类TreeNode"><a href="#先写权限表的实体类TreeNode" class="headerlink" title="先写权限表的实体类TreeNode"></a>先写权限表的实体类TreeNode</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	 <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">	 <span class="keyword">private</span> String text;</span><br><span class="line">	 <span class="keyword">private</span> <span class="keyword">int</span> parentId;</span><br><span class="line">	 <span class="keyword">private</span> String state;</span><br><span class="line">	 <span class="keyword">private</span> String iconCls;</span><br><span class="line">	 <span class="keyword">private</span> String url;</span><br><span class="line">	 <span class="keyword">private</span> String checked;</span><br><span class="line">	 <span class="comment">/**</span></span><br><span class="line"><span class="comment">	  * 带参构造</span></span><br><span class="line"><span class="comment">	  * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">	  * <span class="doctag">@param</span> text</span></span><br><span class="line"><span class="comment">	  * <span class="doctag">@param</span> parentId</span></span><br><span class="line"><span class="comment">	  * <span class="doctag">@param</span> state</span></span><br><span class="line"><span class="comment">	  * <span class="doctag">@param</span> iconCls</span></span><br><span class="line"><span class="comment">	  * <span class="doctag">@param</span> url</span></span><br><span class="line"><span class="comment">	  */</span></span><br><span class="line">	 <span class="function"><span class="keyword">public</span> <span class="title">TreeNode</span><span class="params">(<span class="keyword">int</span> id, String text, <span class="keyword">int</span> parentId, String state,</span></span></span><br><span class="line"><span class="function"><span class="params">			String iconCls, String url)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">		<span class="keyword">this</span>.text = text;</span><br><span class="line">		<span class="keyword">this</span>.parentId = parentId;</span><br><span class="line">		<span class="keyword">this</span>.state = state;</span><br><span class="line">		<span class="keyword">this</span>.iconCls = iconCls;</span><br><span class="line">		<span class="keyword">this</span>.url = url;</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">	 </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">TreeNode</span><span class="params">(<span class="keyword">int</span> id, String text, <span class="keyword">int</span> parentId, String state,</span></span></span><br><span class="line"><span class="function"><span class="params">			String iconCls, String url, String checked)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">		<span class="keyword">this</span>.text = text;</span><br><span class="line">		<span class="keyword">this</span>.parentId = parentId;</span><br><span class="line">		<span class="keyword">this</span>.state = state;</span><br><span class="line">		<span class="keyword">this</span>.iconCls = iconCls;</span><br><span class="line">		<span class="keyword">this</span>.url = url;</span><br><span class="line">		<span class="keyword">this</span>.checked = checked;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getChecked</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> checked;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setChecked</span><span class="params">(String checked)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.checked = checked;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">TreeNode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> List&lt;TreeNode&gt; children;</span><br><span class="line">	 </span><br><span class="line">	 </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getText</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> text;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setText</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.text = text;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getParentId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> parentId;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setParentId</span><span class="params">(<span class="keyword">int</span> parentId)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.parentId = parentId;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> state;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(String state)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.state = state;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getIconCls</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> iconCls;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIconCls</span><span class="params">(String iconCls)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.iconCls = iconCls;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getUrl</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> url;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUrl</span><span class="params">(String url)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.url = url;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> List&lt;TreeNode&gt; <span class="title">getChildren</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> children;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setChildren</span><span class="params">(List&lt;TreeNode&gt; children)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.children = children;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="前台的easyUI树，路径是power-tree-do"><a href="#前台的easyUI树，路径是power-tree-do" class="headerlink" title="前台的easyUI树，路径是power/tree.do"></a>前台的easyUI树，路径是power/tree.do</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;easyui-panel&quot;</span> <span class="attr">style</span>=<span class="string">&quot;padding:5px&quot;</span>&gt;</span></span><br><span class="line">		  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;tree&quot;</span> <span class="attr">class</span>=<span class="string">&quot;easyui-tree&quot;</span> <span class="attr">data-options</span>=<span class="string">&quot;url:&#x27;power/tree.do&#x27;,method:&#x27;get&#x27;,animate:true&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">	 	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="controller去后台拿权限树的结点信息，在权限表里面"><a href="#controller去后台拿权限树的结点信息，在权限表里面" class="headerlink" title="controller去后台拿权限树的结点信息，在权限表里面"></a>controller去后台拿权限树的结点信息，在权限表里面</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*权限树json数据<span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">*(根据登陆不同，展示权限菜单不同)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;power/tree&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">powerTree</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">return</span> powerService.getPowerList();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="powerService-getPowerList方法"><a href="#powerService-getPowerList方法" class="headerlink" title="powerService.getPowerList方法"></a>powerService.getPowerList方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;TreeNode&gt; <span class="title">getPowerList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		List&lt;TreeNode&gt; powerAllList = powerDao.getPowerList();</span><br><span class="line">		<span class="comment">//临时的powerList</span></span><br><span class="line">		List&lt;TreeNode&gt; powerTempList = <span class="keyword">new</span> ArrayList&lt;TreeNode&gt;();</span><br><span class="line">		<span class="comment">//判断是否为空</span></span><br><span class="line">		<span class="keyword">if</span>(powerAllList!=<span class="keyword">null</span>&amp;&amp;powerAllList.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			<span class="keyword">for</span>(TreeNode ptreeNode:powerAllList)&#123;</span><br><span class="line">				<span class="keyword">if</span>(ptreeNode.getParentId()==<span class="number">0</span>)&#123;<span class="comment">//如果等于0,说明是一级节点</span></span><br><span class="line">					powerTempList.add(ptreeNode);</span><br><span class="line">					<span class="comment">//递归绑定子节点</span></span><br><span class="line">					bindChirldren(ptreeNode,powerAllList);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> powerTempList;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="递归绑定子节点的方法"><a href="#递归绑定子节点的方法" class="headerlink" title="递归绑定子节点的方法"></a>递归绑定子节点的方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 递归绑定所有子节点</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> parentTreeNode</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> powerAllList</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span>  <span class="keyword">void</span> <span class="title">bindChirldren</span><span class="params">(TreeNode parentTreeNode,List&lt;TreeNode&gt; powerAllList )</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(TreeNode chirldrenTreeNode:powerAllList)&#123;</span><br><span class="line">			<span class="keyword">if</span>(parentTreeNode.getId()==chirldrenTreeNode.getParentId())&#123;</span><br><span class="line">				<span class="comment">//获取当前节点的所有子节点集合</span></span><br><span class="line">				List&lt;TreeNode&gt; children = parentTreeNode.getChildren();</span><br><span class="line">				<span class="keyword">if</span>(children==<span class="keyword">null</span>)&#123;<span class="comment">//如果孩子节点为空,</span></span><br><span class="line">					List&lt;TreeNode&gt; childrenTempList = <span class="keyword">new</span> ArrayList&lt;TreeNode&gt;();<span class="comment">//实例化孩子集合</span></span><br><span class="line">					childrenTempList.add(chirldrenTreeNode);<span class="comment">//添加子节点到集合里面</span></span><br><span class="line">					parentTreeNode.setChildren(childrenTempList);<span class="comment">//设置孩子集合</span></span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;<span class="comment">//不空，说明设置过</span></span><br><span class="line">					children.add(chirldrenTreeNode);<span class="comment">//添加子节点到集合里面</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="comment">//自己调用自己,找孩子</span></span><br><span class="line">				bindChirldren(chirldrenTreeNode,powerAllList);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="powerDao-getPowerList方法"><a href="#powerDao-getPowerList方法" class="headerlink" title="powerDao.getPowerList方法"></a>powerDao.getPowerList方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;TreeNode&gt; <span class="title">getPowerList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    			<span class="comment">//拿到登录人的手机号</span></span><br><span class="line">				Map map = (Map)session.getAttribute(<span class="string">&quot;emptel&quot;</span>);</span><br><span class="line">				Object empno =<span class="keyword">null</span>;</span><br><span class="line">				<span class="keyword">if</span>(map!=<span class="keyword">null</span>&amp;&amp;!map.isEmpty()) &#123;</span><br><span class="line">                    <span class="comment">//拿到员工号</span></span><br><span class="line">					 empno = map.get(<span class="string">&quot;empno&quot;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="comment">//查询数据</span></span><br><span class="line">				List&lt;Map&lt;String, Object&gt;&gt; powerMapList = BaseDao.selectMap(<span class="string">&quot;select id,name,parentid,state,iconcls,url from tb_power  where id in (select powerid from tb_dept_power where deptno=(select deptno from emp where empno=?))&quot;</span>, </span><br><span class="line">						<span class="keyword">new</span> Object[]&#123;empno&#125;);</span><br><span class="line">				<span class="comment">//定义返回列表，一个空的集合</span></span><br><span class="line">				List&lt;TreeNode&gt; powerList = <span class="keyword">new</span> ArrayList&lt;TreeNode&gt;();</span><br><span class="line">				<span class="comment">//判断是否为空</span></span><br><span class="line">				 <span class="keyword">if</span>(powerMapList!=<span class="keyword">null</span>&amp;&amp;powerMapList.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">					 TreeNode treeNode = <span class="keyword">null</span>;</span><br><span class="line">					 <span class="comment">//循环遍历，构造TreeNode对象，加入powerList</span></span><br><span class="line">					 <span class="keyword">for</span>(Map powerMap:powerMapList)&#123;</span><br><span class="line">						</span><br><span class="line">		 treeNode = <span class="keyword">new</span> TreeNode(Integer.valueOf(powerMap.get(<span class="string">&quot;id&quot;</span>)+<span class="string">&quot;&quot;</span>), powerMap.get(<span class="string">&quot;name&quot;</span>)+<span class="string">&quot;&quot;</span>,</span><br><span class="line">								 Integer.valueOf(powerMap.get(<span class="string">&quot;parentid&quot;</span>)+<span class="string">&quot;&quot;</span>), powerMap.get(<span class="string">&quot;state&quot;</span>)+<span class="string">&quot;&quot;</span></span><br><span class="line">								 , powerMap.get(<span class="string">&quot;iconcls&quot;</span>)+<span class="string">&quot;&quot;</span>, powerMap.get(<span class="string">&quot;url&quot;</span>)+<span class="string">&quot;&quot;</span>);</span><br><span class="line">						 powerList.add(treeNode);</span><br><span class="line">					 &#125;</span><br><span class="line">				 &#125;</span><br><span class="line">    <span class="comment">//返回权限树信息</span></span><br><span class="line">				<span class="keyword">return</span> powerList;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在部门表中对部门进行授权操作"><a href="#在部门表中对部门进行授权操作" class="headerlink" title="在部门表中对部门进行授权操作"></a>在部门表中对部门进行授权操作</h2><h3 id="选中某一个部门的一行，然后进行添加权限"><a href="#选中某一个部门的一行，然后进行添加权限" class="headerlink" title="选中某一个部门的一行，然后进行添加权限"></a>选中某一个部门的一行，然后进行添加权限</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span>   <span class="attr">class</span>=<span class="string">&quot;easyui-linkbutton&quot;</span> <span class="attr">iconCls</span>=<span class="string">&quot;icon-add&quot;</span> <span class="attr">plain</span>=<span class="string">&quot;true&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;givePower()&quot;</span>&gt;</span>权限添加<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="点击添加权限按钮弹出的表单框（部门名称、权限选择）"><a href="#点击添加权限按钮弹出的表单框（部门名称、权限选择）" class="headerlink" title="点击添加权限按钮弹出的表单框（部门名称、权限选择）"></a>点击添加权限按钮弹出的表单框（部门名称、权限选择）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;dlga&quot;</span> <span class="attr">class</span>=<span class="string">&quot;easyui-dialog&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width:400px;height:680px;padding:10px 20px;top:50px;&quot;</span></span></span><br><span class="line"><span class="tag">			<span class="attr">closed</span>=<span class="string">&quot;true&quot;</span>  <span class="attr">buttons</span>=<span class="string">&quot;#dlg-buttonsa&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">&quot;fma&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;fitem&quot;</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">label</span>&gt;</span>部门名称:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;deptname&quot;</span> <span class="attr">class</span>=<span class="string">&quot;easyui-validatebox&quot;</span> <span class="attr">required</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">					 <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;deptno&quot;</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--这个是隐藏的该部门对应的powerId，这里不是一个powerId，而是很多个powerId以逗号分隔符分割的字符串放到了这个input框里，例如1,13,14,15--&gt;</span></span><br><span class="line">					 <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;powerIds&quot;</span> <span class="attr">name</span>=<span class="string">&quot;powerIds&quot;</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;fitem&quot;</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">label</span>&gt;</span>权限选择:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--权限选择也是一个tree树--&gt;</span></span><br><span class="line">				  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;easyui-panel&quot;</span> <span class="attr">style</span>=<span class="string">&quot;padding:5px&quot;</span>&gt;</span></span><br><span class="line">					  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;ttree&quot;</span> <span class="attr">class</span>=<span class="string">&quot;easyui-tree&quot;</span> <span class="attr">data-options</span>=<span class="string">&quot;method:&#x27;get&#x27;,animate:true,checkbox:true&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">				  <span class="tag">&lt;/<span class="name">div</span>&gt;</span>			 </span><br><span class="line">				<span class="tag">&lt;/<span class="name">div</span>&gt;</span>			</span><br><span class="line">			<span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="点击添加权限按钮的onclick的方法"><a href="#点击添加权限按钮的onclick的方法" class="headerlink" title="点击添加权限按钮的onclick的方法"></a>点击添加权限按钮的onclick的方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">givePower</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    	<span class="comment">//easyUI框架的用法，可以获取到选中的哪一行，row.deptno可以获取到deptno部门编号</span></span><br><span class="line">		  <span class="keyword">var</span> row = $(<span class="string">&#x27;#tt&#x27;</span>).datagrid(<span class="string">&#x27;getSelected&#x27;</span>);</span><br><span class="line">			<span class="keyword">if</span> (row)&#123;</span><br><span class="line">		          <span class="comment">//动态给树添加url</span></span><br><span class="line">				  $(<span class="string">&quot;#ttree&quot;</span>).tree(&#123;</span><br><span class="line">				      url:<span class="string">&#x27;power/checkedTree.do?deptno=&#x27;</span>+row.deptno</span><br><span class="line">				  &#125;);</span><br><span class="line">			  	<span class="comment">//清空form表单 </span></span><br><span class="line">                <span class="comment">//fma是权限添加的form表单的id</span></span><br><span class="line">			 	$(<span class="string">&#x27;#fma&#x27;</span>).form(<span class="string">&#x27;clear&#x27;</span>);</span><br><span class="line">                <span class="comment">//弹框</span></span><br><span class="line">			   	$(<span class="string">&#x27;#dlga&#x27;</span>).dialog(<span class="string">&#x27;open&#x27;</span>).dialog(<span class="string">&#x27;setTitle&#x27;</span>,<span class="string">&#x27;授权&#x27;</span>);</span><br><span class="line">			   	$(<span class="string">&#x27;#fma&#x27;</span>).form(<span class="string">&#x27;load&#x27;</span>,row);</span><br><span class="line">		   	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		   	   $.messager.show(&#123;<span class="comment">//easyui封装的浏览器右下角弹框</span></span><br><span class="line">							title: <span class="string">&#x27;信息提示&#x27;</span>,<span class="comment">//弹框标题</span></span><br><span class="line">							msg: <span class="string">&#x27;请至少选中一行！！！&#x27;</span><span class="comment">//提示信息</span></span><br><span class="line">				 &#125;);</span><br><span class="line">		   	&#125;</span><br><span class="line">		 &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="进入power-checkedTree的controller方法，根据部门编号给树添加url"><a href="#进入power-checkedTree的controller方法，根据部门编号给树添加url" class="headerlink" title="进入power/checkedTree的controller方法，根据部门编号给树添加url"></a>进入power/checkedTree的controller方法，根据部门编号给树添加url</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 权限树json数据(选择)</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@ResponseBody</span></span><br><span class="line">	<span class="meta">@RequestMapping(&quot;/checkedTree&quot;)</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">checkedTree</span><span class="params">(String deptno)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> powerService.getCheckedList(deptno);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="service层的getCheckedList方法"><a href="#service层的getCheckedList方法" class="headerlink" title="service层的getCheckedList方法"></a>service层的getCheckedList方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;TreeNode&gt; <span class="title">getCheckedList</span><span class="params">(String roleId)</span> </span>&#123;</span><br><span class="line">				List&lt;TreeNode&gt; powerAllList = powerDao.getCheckedList(roleId);</span><br><span class="line">				<span class="comment">//临时的powerList</span></span><br><span class="line">				List&lt;TreeNode&gt; powerTempList = <span class="keyword">new</span> ArrayList&lt;TreeNode&gt;();</span><br><span class="line">				<span class="comment">//判断是否为空</span></span><br><span class="line">				<span class="keyword">if</span>(powerAllList!=<span class="keyword">null</span>&amp;&amp;powerAllList.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">					<span class="keyword">for</span>(TreeNode ptreeNode:powerAllList)&#123;</span><br><span class="line">						<span class="keyword">if</span>(ptreeNode.getParentId()==<span class="number">0</span>)&#123;<span class="comment">//如果等于0,说明是一级节点</span></span><br><span class="line">							powerTempList.add(ptreeNode);</span><br><span class="line">							<span class="comment">//递归绑定子节点</span></span><br><span class="line">							bindChirldren(ptreeNode,powerAllList);</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;		</span><br><span class="line">				<span class="keyword">return</span> powerTempList;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="dao层的getCheckedList方法"><a href="#dao层的getCheckedList方法" class="headerlink" title="dao层的getCheckedList方法"></a>dao层的getCheckedList方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;TreeNode&gt; <span class="title">getCheckedList</span><span class="params">(String deptno)</span> </span>&#123;</span><br><span class="line">		        <span class="comment">//查询数据</span></span><br><span class="line">				List&lt;Map&lt;String, Object&gt;&gt; powerMapList = BaseDao.selectMap(<span class="string">&quot;select id,name,parentid,state,iconcls,url from tb_power&quot;</span>, <span class="keyword">null</span>);</span><br><span class="line">				<span class="comment">//查询该角色拥有的所有权限</span></span><br><span class="line">				List&lt;Map&lt;String, Object&gt;&gt; powersByRoleId = BaseDao.selectMap(<span class="string">&quot;select powerid from tb_dept_power where deptno=?&quot;</span>, <span class="keyword">new</span> Object[]&#123;deptno&#125;);</span><br><span class="line">				<span class="comment">//定义返回列表,空的集合</span></span><br><span class="line">				List&lt;TreeNode&gt; powerList = <span class="keyword">new</span> ArrayList&lt;TreeNode&gt;();</span><br><span class="line">				<span class="comment">//判断是否为空</span></span><br><span class="line">				 <span class="keyword">if</span>(powerMapList!=<span class="keyword">null</span>&amp;&amp;powerMapList.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">					 TreeNode treeNode = <span class="keyword">null</span>;</span><br><span class="line">					 <span class="comment">//循环遍历，构造TreeNode对象，加入powerList</span></span><br><span class="line">					 <span class="keyword">for</span>(Map powerMap:powerMapList)&#123;</span><br><span class="line">						 <span class="comment">//判断是否为空</span></span><br><span class="line">						 <span class="keyword">if</span>(powersByRoleId!=<span class="keyword">null</span>&amp;&amp;powersByRoleId.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">							 <span class="keyword">for</span>(Map powers:powersByRoleId)&#123;</span><br><span class="line">								 <span class="comment">//如果用户该全选，让节点checked=true</span></span><br><span class="line">								 <span class="keyword">if</span>(powers.get(<span class="string">&quot;powerid&quot;</span>).toString().equals(powerMap.get(<span class="string">&quot;id&quot;</span>).toString()))&#123;</span><br><span class="line">									 powerMap.put(<span class="string">&quot;checked&quot;</span>,<span class="keyword">true</span>);</span><br><span class="line">									 <span class="keyword">break</span>;</span><br><span class="line">								 &#125;</span><br><span class="line">							 &#125;   </span><br><span class="line">						 &#125;</span><br><span class="line">						<span class="comment">// treeNode = new TreeNode(id, text, parentId, state, iconCls, url);</span></span><br><span class="line">						 treeNode = <span class="keyword">new</span> TreeNode(Integer.valueOf(powerMap.get(<span class="string">&quot;id&quot;</span>)+<span class="string">&quot;&quot;</span>), powerMap.get(<span class="string">&quot;name&quot;</span>)+<span class="string">&quot;&quot;</span>,</span><br><span class="line">								 Integer.valueOf(powerMap.get(<span class="string">&quot;parentid&quot;</span>)+<span class="string">&quot;&quot;</span>), <span class="string">&quot;open&quot;</span></span><br><span class="line">								 , powerMap.get(<span class="string">&quot;iconcls&quot;</span>)+<span class="string">&quot;&quot;</span>, powerMap.get(<span class="string">&quot;url&quot;</span>)+<span class="string">&quot;&quot;</span>,powerMap.get(<span class="string">&quot;checked&quot;</span>)==<span class="keyword">null</span>?<span class="keyword">null</span>:powerMap.get(<span class="string">&quot;checked&quot;</span>)+<span class="string">&quot;&quot;</span>);</span><br><span class="line">						 powerList.add(treeNode);</span><br><span class="line">					 &#125;</span><br><span class="line">				 &#125;</span><br><span class="line">			<span class="keyword">return</span> powerList;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="保存对部门的授权"><a href="#保存对部门的授权" class="headerlink" title="保存对部门的授权"></a>保存对部门的授权</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;dlg-buttonsa&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">a</span>   <span class="attr">class</span>=<span class="string">&quot;easyui-linkbutton&quot;</span> <span class="attr">iconCls</span>=<span class="string">&quot;icon-ok&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;saveRoleAndPowers()&quot;</span>&gt;</span> 保存<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">a</span>   <span class="attr">class</span>=<span class="string">&quot;easyui-linkbutton&quot;</span> <span class="attr">iconCls</span>=<span class="string">&quot;icon-cancel&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;javascript:$(&#x27;#dlga&#x27;).dialog(&#x27;close&#x27;)&quot;</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//保存授权</span></span><br><span class="line">	 <span class="function"><span class="keyword">function</span> <span class="title">saveRoleAndPowers</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	        <span class="comment">//获取选中的所有节点</span></span><br><span class="line">		    <span class="keyword">var</span> nodes = $(<span class="string">&#x27;#ttree&#x27;</span>).tree(<span class="string">&#x27;getChecked&#x27;</span>);</span><br><span class="line">			<span class="keyword">var</span> s = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">			<span class="comment">//循环每一个节点</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;nodes.length; i++)&#123;</span><br><span class="line">				<span class="keyword">if</span> (s != <span class="string">&#x27;&#x27;</span>) s += <span class="string">&#x27;,&#x27;</span>;</span><br><span class="line">				s += nodes[i].id;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//赋值，目的向服务器传送数据</span></span><br><span class="line">			$(<span class="string">&quot;#powerIds&quot;</span>).val(s);</span><br><span class="line">			<span class="comment">//提交form表单</span></span><br><span class="line">			$(<span class="string">&#x27;#fma&#x27;</span>).form(<span class="string">&#x27;submit&#x27;</span>,&#123;<span class="comment">//给form表单绑定submit事件</span></span><br><span class="line">					url: <span class="string">&quot;power/saveRoleAndPower.do&quot;</span>,<span class="comment">//请求的url地址</span></span><br><span class="line">					onSubmit: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//对form表单校验</span></span><br><span class="line">						<span class="keyword">return</span> $(<span class="built_in">this</span>).form(<span class="string">&#x27;validate&#x27;</span>);</span><br><span class="line">					&#125;,</span><br><span class="line">					success: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;<span class="comment">//数据保存后的回调函数</span></span><br><span class="line">						<span class="keyword">var</span> result = <span class="built_in">eval</span>(<span class="string">&#x27;(&#x27;</span>+result+<span class="string">&#x27;)&#x27;</span>);<span class="comment">//eval把json字符串转换为json对象  &#123;&#x27;errorMsg&#x27;:&#x27;添加失败&#x27;&#125;</span></span><br><span class="line">						 <span class="comment">//alert(result.errorMsg);</span></span><br><span class="line">						<span class="comment">//if (result.errorMsg)&#123;//判断，如果错误信息不为空  js非null 非0 即true</span></span><br><span class="line">							$.messager.show(&#123;<span class="comment">//easyui封装的浏览器右下角弹框</span></span><br><span class="line">								title: <span class="string">&#x27;信息提示&#x27;</span>,<span class="comment">//弹框标题</span></span><br><span class="line">								msg: result.showInfo<span class="comment">//提示信息</span></span><br><span class="line">							&#125;);</span><br><span class="line">						<span class="comment">//&#125; else &#123;</span></span><br><span class="line">						   <span class="keyword">if</span>(result.suc==<span class="string">&#x27;true&#x27;</span>)&#123;</span><br><span class="line">								$(<span class="string">&#x27;#dlga&#x27;</span>).dialog(<span class="string">&#x27;close&#x27;</span>);		<span class="comment">// 关闭弹出框</span></span><br><span class="line">								$(<span class="string">&#x27;#tt&#x27;</span>).datagrid(<span class="string">&#x27;reload&#x27;</span>);	<span class="comment">// 刷新父窗口</span></span><br><span class="line">							&#125;</span><br><span class="line">						<span class="comment">//&#125;</span></span><br><span class="line">					&#125;</span><br><span class="line">		    &#125;);</span><br><span class="line">	 &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="power-saveRoleAndPower保存授权的controller方法"><a href="#power-saveRoleAndPower保存授权的controller方法" class="headerlink" title="power/saveRoleAndPower保存授权的controller方法"></a>power/saveRoleAndPower保存授权的controller方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 保存角色权限关联</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> paramMap</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@ResponseBody</span></span><br><span class="line">	<span class="meta">@RequestMapping(&quot;/saveRoleAndPower&quot;)</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">saveRoleAndPower</span><span class="params">(<span class="meta">@RequestParam</span> Map paramMap)</span></span>&#123;</span><br><span class="line">		<span class="comment">//保存</span></span><br><span class="line">		<span class="keyword">int</span> rs = powerService.saveRoleAndPower(paramMap);</span><br><span class="line">		Map map = <span class="keyword">new</span> HashMap();</span><br><span class="line">		<span class="keyword">if</span>(rs==<span class="number">0</span>)&#123;</span><br><span class="line">		     map.put(<span class="string">&quot;showInfo&quot;</span>, <span class="string">&quot;添加失败&quot;</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			  map.put(<span class="string">&quot;suc&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line">			  map.put(<span class="string">&quot;showInfo&quot;</span>, <span class="string">&quot;添加成功&quot;</span>);</span><br><span class="line">		&#125; </span><br><span class="line">		<span class="keyword">return</span> map;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="saveRoleAndPower保存权限的service方法"><a href="#saveRoleAndPower保存权限的service方法" class="headerlink" title="saveRoleAndPower保存权限的service方法"></a>saveRoleAndPower保存权限的service方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">saveRoleAndPower</span><span class="params">(Map map)</span> </span>&#123;</span><br><span class="line">		String deptno = map.get(<span class="string">&quot;deptno&quot;</span>)+<span class="string">&quot;&quot;</span>;<span class="comment">//1</span></span><br><span class="line">		String powerIds = map.get(<span class="string">&quot;powerIds&quot;</span>)+<span class="string">&quot;&quot;</span>;<span class="comment">//1,2,3,11</span></span><br><span class="line">		<span class="comment">//添加之前，删除所有原来该角色关联的所有权限ID  ，达到更新目的</span></span><br><span class="line">		powerDao.deletePowersByRoleId(deptno);</span><br><span class="line">		<span class="comment">//分割字符串，循环添加</span></span><br><span class="line">		String[] powerArr = powerIds.split(<span class="string">&quot;,&quot;</span>);<span class="comment">//[1,2,3,11]</span></span><br><span class="line">		<span class="keyword">boolean</span> isSuc=<span class="keyword">true</span>;</span><br><span class="line">		<span class="keyword">for</span>(String powerId:powerArr)&#123;</span><br><span class="line">			<span class="keyword">int</span> rs = powerDao.addRoleAndPowers(deptno, powerId);</span><br><span class="line">			<span class="keyword">if</span>(rs==<span class="number">0</span>)&#123;</span><br><span class="line">				isSuc=<span class="keyword">false</span>; </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(isSuc)</span><br><span class="line">		 <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">	     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="powerDao-deletePowersByRoleId-deptno-，删除所有原来该角色关联的所有权限ID，达到更新目的"><a href="#powerDao-deletePowersByRoleId-deptno-，删除所有原来该角色关联的所有权限ID，达到更新目的" class="headerlink" title="powerDao.deletePowersByRoleId(deptno)，删除所有原来该角色关联的所有权限ID，达到更新目的"></a>powerDao.deletePowersByRoleId(deptno)，删除所有原来该角色关联的所有权限ID，达到更新目的</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">deletePowersByRoleId</span><span class="params">(String deptno)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> BaseDao.insertAndUpdateAndDelete(<span class="string">&quot;delete from tb_dept_power where deptno=?&quot;</span>, </span><br><span class="line">				<span class="keyword">new</span> Object[]&#123;deptno&#125;);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="powerDao-addRoleAndPowers-deptno-powerId-分割字符串，循环添加权限"><a href="#powerDao-addRoleAndPowers-deptno-powerId-分割字符串，循环添加权限" class="headerlink" title="powerDao.addRoleAndPowers(deptno, powerId)分割字符串，循环添加权限"></a>powerDao.addRoleAndPowers(deptno, powerId)分割字符串，循环添加权限</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">addRoleAndPowers</span><span class="params">(String deptno, String powerId)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> BaseDao.insertAndUpdateAndDelete(<span class="string">&quot;insert into tb_dept_power(deptno,powerid) values(?,?)&quot;</span>, </span><br><span class="line">				<span class="keyword">new</span> Object[]&#123;deptno,powerId&#125;);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="第三大块-Tree节点添加（对树节点进行操作）"><a href="#第三大块-Tree节点添加（对树节点进行操作）" class="headerlink" title="第三大块 Tree节点添加（对树节点进行操作）"></a>第三大块 Tree节点添加（对树节点进行操作）</h1><h3 id="添加树节点的页面"><a href="#添加树节点的页面" class="headerlink" title="添加树节点的页面"></a>添加树节点的页面</h3><p>在父节点的input处为什么能拿到权限树节点对应的id</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;power/add.do&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">&quot;1&quot;</span> <span class="attr">width</span>=<span class="string">&quot;800px&quot;</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>  <span class="attr">style</span>=<span class="string">&#x27;font-family:楷体;font-size:20px&#x27;</span>  <span class="attr">class</span>=<span class="string">&quot;table table-hover&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">tr</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">class</span>=<span class="string">&quot;warning&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span> &gt;</span>名称<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;id&quot;</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">tr</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">class</span>=<span class="string">&quot;success&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span>父节点<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;easyui-combotree&quot;</span> <span class="attr">name</span>=<span class="string">&quot;parentid&quot;</span>  <span class="attr">data-options</span>=<span class="string">&quot;url:&#x27;power/tree.do&#x27;,method:&#x27;get&#x27;,required:true&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width:210px&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">tr</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">class</span>=<span class="string">&quot;danger&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span>状态<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;state&quot;</span> <span class="attr">value</span>=<span class="string">&quot;open&quot;</span> <span class="attr">checked</span>=<span class="string">&quot;checked&quot;</span>&gt;</span>打开</span><br><span class="line">					<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;state&quot;</span> <span class="attr">value</span>=<span class="string">&quot;closed&quot;</span>&gt;</span>关闭</span><br><span class="line">				<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">tr</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">class</span>=<span class="string">&quot;warning&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span>图标<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;iconcls&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">tr</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>  <span class="attr">class</span>=<span class="string">&quot;active&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span>链接<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">tr</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">class</span>=<span class="string">&quot;success&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">&quot;2&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-success&quot;</span> <span class="attr">value</span>=<span class="string">&quot;添加&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="父节点的input框去加载tree"><a href="#父节点的input框去加载tree" class="headerlink" title="父节点的input框去加载tree"></a>父节点的input框去加载tree</h3><p>路径还是权限树的数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 权限树json数据(根据登陆不同，展示权限菜单不同)</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@ResponseBody</span> <span class="comment">//返回json格式数据</span></span><br><span class="line">	<span class="meta">@RequestMapping(&quot;/powerTree&quot;)</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">powerListTree</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> powerService.getPowerList();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>dao和service上面已经说过了！</p>
+<p>然后写好节点信息之后提交表单，路径power/add</p>
+<h3 id="add添加节点的controller方法"><a href="#add添加节点的controller方法" class="headerlink" title="add添加节点的controller方法"></a>add添加节点的controller方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 添加权限</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> map</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@RequestMapping(&quot;/add&quot;)</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="meta">@RequestParam</span> Map map,HttpServletResponse response)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> add = powerService.add(map);</span><br><span class="line">		response.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">		response.setContentType(<span class="string">&quot;text/html&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span>(add==<span class="number">0</span>)&#123;</span><br><span class="line">			response.getWriter().print(<span class="string">&quot;添加失败&quot;</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			response.getWriter().print(<span class="string">&quot;&lt;script&gt; window.parent.parent.location.href=window.parent.parent.location.href  &lt;/script&gt;&quot;</span>);</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="add添加节点的service方法"><a href="#add添加节点的service方法" class="headerlink" title="add添加节点的service方法"></a>add添加节点的service方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(Map map)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> powerDao.add(map);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="add添加节点的dao方法"><a href="#add添加节点的dao方法" class="headerlink" title="add添加节点的dao方法"></a>add添加节点的dao方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(Map map)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> BaseDao.insertAndUpdateAndDelete(<span class="string">&quot;insert into tb_power (name,parentid,state,iconcls,url) values(?,?,?,?,?)&quot;</span>, </span><br><span class="line">				<span class="keyword">new</span> Object[]&#123;map.get(<span class="string">&quot;name&quot;</span>),<span class="string">&quot;&quot;</span>.equals(map.get(<span class="string">&quot;parentid&quot;</span>))?<span class="number">0</span>:map.get(<span class="string">&quot;parentid&quot;</span>),map.get(<span class="string">&quot;state&quot;</span>),map.get(<span class="string">&quot;iconcls&quot;</span>),map.get(<span class="string">&quot;url&quot;</span>)&#125;);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="第四大块-Tree节点信息修改（同样也是对树节点操作）"><a href="#第四大块-Tree节点信息修改（同样也是对树节点操作）" class="headerlink" title="第四大块 Tree节点信息修改（同样也是对树节点操作）"></a>第四大块 Tree节点信息修改（同样也是对树节点操作）</h1><h3 id="修改树节点的页面"><a href="#修改树节点的页面" class="headerlink" title="修改树节点的页面"></a>修改树节点的页面</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">//动态添加页签，先加载一棵树</span></span></span><br><span class="line"><span class="javascript">		$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  	  </span></span><br><span class="line"><span class="javascript">			$(<span class="string">&#x27;#tr&#x27;</span>).tree(&#123;</span></span><br><span class="line"><span class="javascript">                <span class="comment">//easyUI用法，点击树节点时触发此方法，node参数是被点击的节点的所有信息</span></span></span><br><span class="line"><span class="javascript">			    onClick:<span class="function"><span class="keyword">function</span>(<span class="params">node</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">			        $(<span class="built_in">this</span>).tree(node.state === <span class="string">&#x27;closed&#x27;</span> ? <span class="string">&#x27;expand&#x27;</span> : <span class="string">&#x27;collapse&#x27;</span>, node.target);  </span></span><br><span class="line"><span class="javascript">		           	 node.state = node.state === <span class="string">&#x27;closed&#x27;</span> ? <span class="string">&#x27;open&#x27;</span> : <span class="string">&#x27;closed&#x27;</span>;  </span></span><br><span class="line"><span class="javascript">                    <span class="comment">//当选中一个节点的时候，下面的操作的iframe跳转到修改页面并把树的信息带过去</span></span></span><br><span class="line"><span class="javascript">			    	<span class="comment">//如果不选择节点，那iframe就默认指向添加节点的页面</span></span></span><br><span class="line"><span class="javascript">                    $(<span class="string">&quot;#ifm&quot;</span>).attr(<span class="string">&quot;src&quot;</span>,<span class="string">&quot;power/toUpdate.do?id=&quot;</span>+node.id);</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;); </span><br><span class="line">	 	&#125;);		</span><br><span class="line">  	<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span> <span class="attr">class</span>=<span class="string">&quot;easyui-layout&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">data-options</span>=<span class="string">&quot;region:&#x27;west&#x27;,split:true,title:&#x27;功能菜单&#x27;&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width:220px;padding:10px;&quot;</span>&gt;</span></span><br><span class="line">		 <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;easyui-panel&quot;</span> <span class="attr">style</span>=<span class="string">&quot;padding:5px&quot;</span> &gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;tr&quot;</span> <span class="attr">class</span>=<span class="string">&quot;easyui-tree&quot;</span> <span class="attr">data-options</span>=<span class="string">&quot;url:&#x27;power/tree.do&#x27;,method:&#x27;post&#x27;,animate:true&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">data-options</span>=<span class="string">&quot;region:&#x27;center&#x27;,title:&#x27;显示区&#x27;&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;ta&quot;</span> <span class="attr">class</span>=<span class="string">&quot;easyui-tabs&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width:100%;height:100%;&quot;</span>&gt;</span></span><br><span class="line">			 <span class="tag">&lt;<span class="name">div</span> <span class="attr">title</span>=<span class="string">&quot;操作&quot;</span>  &gt;</span></span><br><span class="line">			 	<span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">&quot;ifm&quot;</span> <span class="attr">scrolling</span>=<span class="string">&quot;auto&quot;</span> <span class="attr">frameborder</span>=<span class="string">&quot;0&quot;</span>   <span class="attr">src</span>=<span class="string">&quot;power/addp.do&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width:100%;height:100%;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line">			 <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span>	</span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="toUpdate修改节点的controller方法"><a href="#toUpdate修改节点的controller方法" class="headerlink" title="toUpdate修改节点的controller方法"></a>toUpdate修改节点的controller方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 去更新</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> model</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@RequestMapping(&quot;/toUpdate&quot;)</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toUpdate</span><span class="params">(Integer id,Model model)</span></span>&#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = powerService.getListById(id);</span><br><span class="line">		<span class="keyword">if</span>(list!=<span class="keyword">null</span>&amp;&amp;list.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			model.addAttribute(<span class="string">&quot;map&quot;</span>, list.get(<span class="number">0</span>));</span><br><span class="line">            <span class="comment">//跳转到去更新的controller方法，该方法跳转到更新的页面</span></span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;power/update&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="service的powerService-getListById-id-方法"><a href="#service的powerService-getListById-id-方法" class="headerlink" title="service的powerService.getListById(id)方法"></a>service的powerService.getListById(id)方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;Map&lt;String, Object&gt;&gt; getListById(<span class="keyword">int</span> id) &#123;</span><br><span class="line">		<span class="keyword">return</span> powerDao.getListById(id);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="dao的powerService-getListById-id-方法"><a href="#dao的powerService-getListById-id-方法" class="headerlink" title="dao的powerService.getListById(id)方法"></a>dao的powerService.getListById(id)方法</h4><p>得到被点击的节点的信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;Map&lt;String, Object&gt;&gt; getListById(<span class="keyword">int</span> id) &#123;</span><br><span class="line">		<span class="keyword">return</span> BaseDao.selectMap(<span class="string">&quot;select id,name,parentid,state,iconcls,url from tb_power where id=?&quot;</span>, <span class="keyword">new</span> Object[]&#123;id&#125;);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="跳转到更新节点信息的页面，把信息带过去"><a href="#跳转到更新节点信息的页面，把信息带过去" class="headerlink" title="跳转到更新节点信息的页面，把信息带过去"></a>跳转到更新节点信息的页面，把信息带过去</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;power/update.do&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">&quot;1&quot;</span> <span class="attr">width</span>=<span class="string">&quot;400px&quot;</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">class</span>=<span class="string">&quot;table table-hover&quot;</span> <span class="attr">style</span>=<span class="string">&#x27;font-family:楷体;font-size:20px&#x27;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">tr</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">td</span>&gt;</span>名称<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;id&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;map.id&#125;&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;map.name&#125;&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">tr</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">td</span>&gt;</span>父节点<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;easyui-combotree&quot;</span> <span class="attr">name</span>=<span class="string">&quot;parentid&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;map.parentid&#125;&quot;</span> <span class="attr">data-options</span>=<span class="string">&quot;url:&#x27;power/tree.do&#x27;,method:&#x27;get&#x27;,required:true&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">tr</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">td</span>&gt;</span>状态<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;state&quot;</span> $&#123;<span class="attr">map.state</span>==<span class="string">&#x27;open&#x27;</span>?&#x27;<span class="attr">checked</span>=<span class="string">checked</span>&#x27;<span class="attr">:</span>&#x27;&#x27; &#125; <span class="attr">value</span>=<span class="string">&quot;open&quot;</span>&gt;</span>打开</span><br><span class="line">				<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;state&quot;</span> $&#123;<span class="attr">map.state</span>==<span class="string">&#x27;closed&#x27;</span>?&#x27;<span class="attr">checked</span>=<span class="string">checked</span>&#x27;<span class="attr">:</span>&#x27;&#x27; &#125; <span class="attr">value</span>=<span class="string">&quot;closed&quot;</span>&gt;</span>关闭</span><br><span class="line">			<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">tr</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">td</span>&gt;</span>图标<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;iconcls&quot;</span> <span class="attr">vlaue</span>=<span class="string">&quot;$&#123;map.iconcls&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">tr</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">td</span>&gt;</span>链接<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;map.url&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">tr</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">&quot;2&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;修改&quot;</span> <span class="attr">class</span>=<span class="string">&#x27;btn btn-success&#x27;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;del(&#x27;$&#123;map.id&#125;&#x27;,&#x27;$&#123;map.url&#125;&#x27;)&quot;</span> <span class="attr">value</span>=<span class="string">&quot;删除&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-danger&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="js判断该节点下面是否有子节点"><a href="#js判断该节点下面是否有子节点" class="headerlink" title="js判断该节点下面是否有子节点"></a>js判断该节点下面是否有子节点</h4><p>如果选中的该节点的url是空的话就是有子节点，这里是通过这样子判断的，具体判断由权限表的设计决定。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">    	<span class="function"><span class="keyword">function</span> <span class="title">del</span>(<span class="params">id,url</span>)</span>&#123;</span><br><span class="line">    		<span class="keyword">if</span>(url==<span class="literal">null</span>||url==<span class="string">&#x27;&#x27;</span>||url==<span class="string">&#x27;null&#x27;</span>)&#123;</span><br><span class="line">    			$.messager.show(&#123;</span><br><span class="line">						title: <span class="string">&#x27;错误信息&#x27;</span>,</span><br><span class="line">						msg: <span class="string">&#x27;当前节点有子节点，请删除子节点后重试！&#x27;</span></span><br><span class="line">					&#125;);</span><br><span class="line">    		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    			$.messager.confirm(<span class="string">&#x27;Confirm&#x27;</span>,<span class="string">&#x27;确认删除吗 ?&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">r</span>)</span>&#123;</span><br><span class="line">				<span class="keyword">if</span> (r)&#123;</span><br><span class="line">					location.href=<span class="string">&#x27;power/del.do?id=&#x27;</span>+id;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);				</span><br><span class="line">    		&#125;</span><br><span class="line">    	&#125;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="确认修改节点信息，提交表单，路径power-update"><a href="#确认修改节点信息，提交表单，路径power-update" class="headerlink" title="确认修改节点信息，提交表单，路径power/update"></a>确认修改节点信息，提交表单，路径power/update</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 更新权限 并刷新</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> map</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@RequestMapping(&quot;/update&quot;)</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="meta">@RequestParam</span> Map map,HttpServletResponse response)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> update = powerService.update(map);</span><br><span class="line">		response.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">		response.setContentType(<span class="string">&quot;text/html&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span>(update==<span class="number">0</span>)&#123;</span><br><span class="line">			response.getWriter().print(<span class="string">&quot;更新失败&quot;</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			response.getWriter().print(<span class="string">&quot;&lt;script&gt; window.parent.parent.location.href=window.parent.parent.location.href  &lt;/script&gt;&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="service的update方法"><a href="#service的update方法" class="headerlink" title="service的update方法"></a>service的update方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(Map map)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> powerDao.update(map);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="dao的update方法"><a href="#dao的update方法" class="headerlink" title="dao的update方法"></a>dao的update方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(Map map)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> BaseDao.insertAndUpdateAndDelete(<span class="string">&quot;update tb_power  set name=?,parentid=?,state=?,iconcls=?,url=? where id=?&quot;</span>, </span><br><span class="line">				<span class="keyword">new</span> Object[]&#123;map.get(<span class="string">&quot;name&quot;</span>),map.get(<span class="string">&quot;parentid&quot;</span>),map.get(<span class="string">&quot;state&quot;</span>),map.get(<span class="string">&quot;iconcls&quot;</span>),map.get(<span class="string">&quot;url&quot;</span>),map.get(<span class="string">&quot;id&quot;</span>)&#125;);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="第五大块-删除节点"><a href="#第五大块-删除节点" class="headerlink" title="第五大块 删除节点"></a>第五大块 删除节点</h1><p>在上面js判断在删除时该节点下面是否有子节点的时候已经说明了删除了路径<code>location.href=&#39;power/del.do?id=&#39;+id;</code></p>
+<h4 id="删除节点的controller方法"><a href="#删除节点的controller方法" class="headerlink" title="删除节点的controller方法"></a>删除节点的controller方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 删除权限树节点 </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@RequestMapping(&quot;/del&quot;)</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">del</span><span class="params">(Integer id,HttpServletResponse response)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> del = powerService.del(id);</span><br><span class="line">		response.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">		response.setContentType(<span class="string">&quot;text/html&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span>(del==<span class="number">0</span>)&#123;</span><br><span class="line">			response.getWriter().print(<span class="string">&quot;删除失败&quot;</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			response.getWriter().print(<span class="string">&quot;&lt;script&gt; window.parent.parent.location.href=window.parent.parent.location.href  &lt;/script&gt;&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除节点的service方法"><a href="#删除节点的service方法" class="headerlink" title="删除节点的service方法"></a>删除节点的service方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">		powerDao.del2(id);</span><br><span class="line">		<span class="keyword">return</span> powerDao.del(id);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除节点的dao方法"><a href="#删除节点的dao方法" class="headerlink" title="删除节点的dao方法"></a>删除节点的dao方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> BaseDao.insertAndUpdateAndDelete(<span class="string">&quot;delete from tb_power where id=?&quot;</span>,  <span class="keyword">new</span> Object[]&#123;id&#125;);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>权限树的实现，还是需要靠一些Tree的组件才行，比如<code>z-tree</code>，<code>easyUI</code>和<code>layUI</code>等这些前台框架也都有自己的<code>Tree</code>树的组件，建议在学习权限树分配之前先熟悉一款Tree的组件并学习它的使用，诸如节点操作的<code>js</code>方法！</p>
+<p>这里我用的是<code>easyUI</code>的组件。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 fantongxue666@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2020 樊同学
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
